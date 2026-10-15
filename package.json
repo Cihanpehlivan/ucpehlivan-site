@@ -1,0 +1,18 @@
+{
+  "name": "ucpehlivan-site",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "npm run build:js && npm run build:pages",
+    "build:js": "esbuild admin/src/main.js --bundle --format=esm --minify --target=es2020 --outfile=public/admin/admin.js && esbuild web/hydrate.js --bundle --format=esm --minify --target=es2020 --outfile=public/assets/app.js && cp admin/admin.css public/admin/admin.css",
+    "build:pages": "node scripts/build-static.mjs",
+    "publish": "node scripts/publish.mjs && firebase deploy --only hosting",
+    "dev": "node scripts/dev-server.mjs"
+  },
+  "dependencies": {
+    "firebase": "12.19.0"
+  },
+  "devDependencies": {
+    "esbuild": "0.28.2"
+  }
+}

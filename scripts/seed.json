@@ -1,0 +1,542 @@
+{
+ "settings": {
+  "name": "Umut Cihan Pehlivan",
+  "role": "Project Manager",
+  "location": "İstanbul, Maltepe",
+  "email": "pehlivan.uc@gmail.com",
+  "phone": "+90 554 942 24 68",
+  "linkedin": "https://www.linkedin.com/in/umutcihanpehlivan/",
+  "cvUrl": "/cv.pdf",
+  "seoTitle": "Umut Cihan Pehlivan, Project Manager",
+  "seoDescription": "Umut Cihan Pehlivan. 10+ kurumsal markanın web, e-ticaret ve mobil projelerini eş zamanlı yöneten Project Manager.",
+  "gaId": "G-F4YXVC6CYG",
+  "headerCta": "Birlikte çalışalım",
+  "footerTagline": "Karmaşayı plana çeviririm. Web, e-ticaret ve mobil projelerde fikirden canlıya.",
+  "footerNote": "Planlandı, test edildi, zamanında yayına alındı."
+ },
+ "home": {
+  "hero": {
+   "badge": "Project Manager, İstanbul",
+   "lines": [
+    {
+     "before": "MERHABA",
+     "pill": "check",
+     "after": "BEN CİHAN"
+    },
+    {
+     "before": "",
+     "pill": "gantt",
+     "after": "PROJE YÖNETİCİSİYİM"
+    },
+    {
+     "before": "KARMAŞAYI",
+     "pill": "chart",
+     "after": "PLANA ÇEVİRİRİM"
+    }
+   ],
+   "ariaLabel": "Merhaba, ben Cihan. Proje yöneticisiyim. Karmaşayı plana çeviririm.",
+   "text": "4+ yıldır dijital projeler yönetiyorum. Bugün ajans tarafında 10+ kurumsal markanın web, e-ticaret ve mobil projelerini eş zamanlı yürütüyorum. Agile ekip ritmi ve AI destekli iş akışları ile çalışırım.",
+   "cvLabel": "CV'yi indir",
+   "projectsLabel": "Projeleri gör",
+   "badgeText": "İLETİŞİME GEÇ ✦ İLETİŞİME GEÇ ✦ "
+  },
+  "brands": {
+   "label": "Birlikte çalıştığım markalar",
+   "items": [
+    "Komili Zeytinyağı",
+    "Hektaş",
+    "OtoSOR",
+    "Doyuyo!",
+    "Evam",
+    "Masdaf",
+    "Sanal İletişim",
+    "Sertrans",
+    "ODE Yalıtım",
+    "Louur",
+    "Puffy"
+   ]
+  },
+  "stats": {
+   "kicker": "Rakamlarla",
+   "title": "Ölçülen,\ngerçek sonuçlar",
+   "intro": "Bir projenin değerini teslimden sonraki rakamlar gösterir. Trafik ve lead verileri, yenilenen kurumsal sitelerde 12 aylık dönemi kapsar.",
+   "tiles": [
+    {
+     "label": "Bir sprint haftası nasıl ilerler",
+     "visual": "board",
+     "size": "tall",
+     "theme": "default"
+    },
+    {
+     "label": "OtoSOR, organik trafik artışı",
+     "value": "%43",
+     "countTo": 43,
+     "prefix": "%",
+     "suffix": "",
+     "visual": "sparkline",
+     "size": "wide",
+     "theme": "default"
+    },
+    {
+     "label": "eş zamanlı yönetilen kurumsal müşteri",
+     "value": "10+",
+     "countTo": 10,
+     "prefix": "",
+     "suffix": "+",
+     "visual": "none",
+     "size": "normal",
+     "theme": "default"
+    },
+    {
+     "label": "OtoSOR, lead toplama artışı",
+     "value": "%17",
+     "countTo": 17,
+     "prefix": "%",
+     "suffix": "",
+     "visual": "bars",
+     "size": "normal",
+     "theme": "accent"
+    },
+    {
+     "title": "İstanbul Marketing Awards",
+     "label": "\"Yenilenen Web Sitesi\" ödülü. Komili Zeytinyağı projesini uçtan uca yönettim.",
+     "visual": "trophy",
+     "size": "wide",
+     "theme": "ink"
+    },
+    {
+     "label": "yıl dijital proje yönetimi deneyimi",
+     "value": "4+",
+     "countTo": 4,
+     "prefix": "",
+     "suffix": "+",
+     "visual": "none",
+     "size": "normal",
+     "theme": "default"
+    },
+    {
+     "label": "destekli PM iş akışları: Claude, ChatGPT, ClickUp otomasyonları",
+     "value": "AI",
+     "visual": "none",
+     "size": "normal",
+     "theme": "default"
+    },
+    {
+     "label": "Scrum ve Kanban ile yönetilen sprint döngüleri",
+     "value": "Agile",
+     "visual": "none",
+     "size": "normal",
+     "theme": "default"
+    },
+    {
+     "label": "yönetilen web, e-ticaret ve mobil proje",
+     "value": "20+",
+     "countTo": 20,
+     "prefix": "",
+     "suffix": "+",
+     "visual": "none",
+     "size": "normal",
+     "theme": "default"
+    }
+   ]
+  },
+  "services": {
+   "kicker": "Ne yaparım",
+   "title": "Fikirden canlıya, her aşamada",
+   "intro": "Tasarım, yazılım ve içerik ekiplerini aynı plana bağlarım. İş analizi ile ihtiyacı netleştiririm ve gereksinimleri ekibin uygulayabileceği görevlere dönüştürürüm.",
+   "buttonLabel": "İletişime geç",
+   "items": [
+    {
+     "icon": "document",
+     "title": "Uçtan uca proje yönetimi",
+     "text": "Kapsamı netleştiririm, yol haritasını çıkarırım ve projeyi takvimde canlıya alırım.",
+     "tags": []
+    },
+    {
+     "icon": "team",
+     "title": "Agile ekip koordinasyonu",
+     "text": "Sprint planning, daily standup ve retrospektif ile 6 kişilik ekibe teslimat ritmi veririm.",
+     "tags": []
+    },
+    {
+     "icon": "trend",
+     "title": "SEO odaklı proje yönetimi",
+     "text": "Site yenilemelerinde SEO eksiklerini erken tespit ederim. URL yönlendirme, meta veri ve schema gibi maddeleri proje planına eklerim ve uygulanmasını takip ederim.",
+     "tags": []
+    },
+    {
+     "icon": "shield",
+     "title": "Kalite güvencesi ve canlıya geçiş",
+     "text": "Her teslimden önce tasarım, içerik ve fonksiyon testlerini yönetirim. Figma tasarımı ile test ortamını karşılaştırırım, hataları önceliklendiririm ve canlıya geçişi kontrol listesiyle riske karşı korurum.",
+     "tags": [
+      "Tasarım uyumu",
+      "Fonksiyon testi",
+      "Hata önceliklendirme",
+      "Canlıya geçiş listesi"
+     ]
+    },
+    {
+     "icon": "sparkle",
+     "title": "AI destekli iş akışları",
+     "text": "Claude, ChatGPT ve ClickUp otomasyonları ile tekrarlayan işleri azaltırım.",
+     "tags": []
+    }
+   ]
+  },
+  "work": {
+   "kicker": "Portföy",
+   "title": "Öne çıkan işlerim",
+   "intro": "Ödül alan bir yenilemeden çok dilli kurumsal sitelere kadar, her proje farklı bir ekip, takvim ve hedefle geldi. Hepsinde ortak olan tek şey: zamanında ve ölçülebilir teslim.",
+   "otherTitle": "Diğer projeler",
+   "other": [
+    {
+     "name": "OtoSOR App",
+     "type": "Mobil uygulama"
+    },
+    {
+     "name": "Masdaf",
+     "type": "Kurumsal web, ürün kataloğu"
+    },
+    {
+     "name": "Sanal İletişim",
+     "type": "Shopify e-ticaret"
+    },
+    {
+     "name": "ODE Yalıtım",
+     "type": "Kurumsal web, doküman sistemi"
+    },
+    {
+     "name": "Sertrans Lojistik",
+     "type": "Kurumsal web, teklif formu"
+    },
+    {
+     "name": "Louur Limited",
+     "type": "Shopify mağaza kurulumu"
+    },
+    {
+     "name": "Puffy Technotherm",
+     "type": "Mobil app UI/UX"
+    },
+    {
+     "name": "KBGAP, MEB iş birliği",
+     "type": "Landing page"
+    },
+    {
+     "name": "Komili Enstitüsü",
+     "type": "Landing page"
+    }
+   ]
+  },
+  "process": {
+   "kicker": "Çalışma şeklim",
+   "title": "Her projede\n4 aşama",
+   "intro": "Retrospektif bulguları bir sonraki sprintin planına girer. Bu sayede her döngüde süreç iyileşir.",
+   "steps": [
+    {
+     "title": "Keşif ve analiz",
+     "text": "Paydaş görüşmeleri, ihtiyaç analizi ve rakip araştırması ile kapsamı netleştiririm."
+    },
+    {
+     "title": "Planlama",
+     "text": "Yol haritası, sprint planı, görev dağılımı ve risk değerlendirmesi hazırlarım."
+    },
+    {
+     "title": "Uygulama ve takip",
+     "text": "Sprintleri, daily standup'ları ve QA sürecini yönetirim. Paydaşlara düzenli rapor veririm."
+    },
+    {
+     "title": "Teslim ve retrospektif",
+     "text": "Projeyi canlıya alırım, performansı ölçerim ve iyileştirmeleri belirlerim."
+    }
+   ],
+   "loopNote": "04 bitince döngü 02'ye geri döner."
+  },
+  "about": {
+   "kicker": "Hakkımda",
+   "title": "Teknik dili konuşan proje yöneticisi",
+   "photo": "/img/pp.jpeg",
+   "paragraphs": [
+    "Marmara Üniversitesi Yönetim Bilişim Sistemleri mezunuyum. Kariyerime Path'te Shopify uygulama projeleriyle başladım. Mart 2023'ten bu yana RED&GREY'de kurumsal markaların web, e-ticaret ve mobil projelerini yönetiyorum.",
+    "Teknik ve tasarım tarafını bilen bir proje yöneticisiyim. Bu sayede geliştirici ve tasarımcı ile aynı dili konuşurum, riskleri erken görürüm."
+   ],
+   "timeline": [
+    {
+     "org": "RED&GREY",
+     "period": "Mart 2023 – bugün",
+     "current": true,
+     "role": "Project Manager",
+     "bullets": [
+      "**10+ kurumsal müşterinin** projelerini ortalama 4 aylık teslim süresiyle eş zamanlı yönetiyorum.",
+      "**6 kişilik ekipte** sprint planning, daily standup ve retrospektif döngülerini kurdum.",
+      "ClickUp'ta ekip genelinde proje yönetim altyapısını kurdum ve raporlamayı standart hale getirdim.",
+      "**Claude** destekli iş akışları ile tekrarlayan işleri otomatik hale getirdim."
+     ]
+    },
+    {
+     "org": "Path",
+     "period": "Ağustos 2022 – Ocak 2023",
+     "current": false,
+     "role": "Project Management Intern",
+     "bullets": [
+      "Shopify uygulama projeleri için rakip analizi ve yol haritaları hazırladım.",
+      "Figma'da wireframe çalışmalarını yürüttüm. QA test sürecini yönettim."
+     ]
+    },
+    {
+     "org": "Marmara Üniversitesi",
+     "period": "Eylül 2018 – Ocak 2023",
+     "current": false,
+     "role": "Yönetim Bilişim Sistemleri",
+     "bullets": [
+      "Yazılım/BT proje yöneticiliği alanı. GPA 3.2 / 4.0"
+     ]
+    }
+   ]
+  },
+  "skills": {
+   "row1": [
+    "Agile ve Scrum",
+    "Sprint planning",
+    "Kanban",
+    "Retrospektif",
+    "Risk analizi",
+    "Kapsam yönetimi",
+    "Paydaş yönetimi",
+    "Vendor yönetimi",
+    "Teknik SEO",
+    "CRO"
+   ],
+   "row2": [
+    "ClickUp",
+    "Jira",
+    "Figma",
+    "Miro",
+    "Slack",
+    "Shopify",
+    "WordPress",
+    "Google Analytics",
+    "Claude",
+    "ChatGPT",
+    "Prompt engineering",
+    "Google Workspace"
+   ]
+  },
+  "blog": {
+   "kicker": "Blog",
+   "title": "Son yazılar",
+   "intro": "Proje yönetimi, site yenileme, SEO ve AI destekli iş akışları üzerine notlar.",
+   "count": 3,
+   "pageTitle": "Proje yönetimi notları",
+   "pageIntro": "Ajans tarafında 10+ markanın projesini yönetirken öğrendiklerim: planlama, site yenileme, SEO ve AI destekli iş akışları."
+  },
+  "contact": {
+   "kicker": "İletişim",
+   "title": "Bir sonraki projeyi birlikte planlayalım",
+   "paths": [
+    {
+     "title": "İşe alım",
+     "text": "Tam zamanlı Project Manager rolleri için CV'mi ve LinkedIn profilimi inceleyebilirsiniz.",
+     "primaryLabel": "CV'yi indir",
+     "primaryUrl": "/cv.pdf",
+     "secondaryLabel": "LinkedIn",
+     "secondaryUrl": "https://www.linkedin.com/in/umutcihanpehlivan/"
+    },
+    {
+     "title": "Yazılım çözümleri",
+     "text": "Web sitesi, e-ticaret, mobil uygulama veya özel yazılım ihtiyacınız için fikirden canlıya uçtan uca çözüm sunuyorum.",
+     "primaryLabel": "E-posta gönder",
+     "primaryUrl": "mailto:pehlivan.uc@gmail.com?subject=Proje%20g%C3%B6r%C3%BC%C5%9Fmesi",
+     "secondaryLabel": "Telefon",
+     "secondaryUrl": "tel:+905549422468"
+    }
+   ]
+  }
+ },
+ "cases": [
+  {
+   "name": "Komili Zeytinyağı",
+   "color": "#27310F",
+   "highlight": "#D6E07A",
+   "tags": [
+    "Kurumsal web",
+    "CMS",
+    "SEO"
+   ],
+   "headline": "Komili Zeytinyağı'na ödül getiren yenileme",
+   "description": "148 yıllık marka mirasını dijitale taşıdık. Ürün kataloğu, tarif arşivi ve CMS entegrasyonu ile kurumsal siteyi baştan kurduk.",
+   "kpis": [
+    {
+     "value": "1",
+     "label": "İstanbul Marketing Awards ödülü"
+    },
+    {
+     "value": "Uçtan uca",
+     "label": "tasarım, yazılım, içerik"
+    }
+   ],
+   "barStrong": "Yenilenen Web Sitesi",
+   "barText": "kategorisinde ödül",
+   "screenshot": "/img/case-komili.jpg",
+   "order": 1,
+   "visible": true
+  },
+  {
+   "name": "Hektaş",
+   "color": "#0B3A1E",
+   "highlight": "#7EDC94",
+   "tags": [
+    "Kurumsal web",
+    "Çok dilli",
+    "SEO"
+   ],
+   "headline": "Hektaş için çok dilli kurumsal web sitesi",
+   "description": "Tarım ve sağlık alanlarında faaliyet gösteren Hektaş'ın kurumsal web sitesinin geliştirme sürecini yönettim. Ürün arama, yatırımcı ilişkileri ve blog bölümleri tek yapıda çalışır.",
+   "kpis": [
+    {
+     "value": "4",
+     "label": "dil: TR, EN, AR, RU"
+    },
+    {
+     "value": "2",
+     "label": "sektör: tarım ve sağlık"
+    }
+   ],
+   "barStrong": "Ürün arama",
+   "barText": "ve yatırımcı ilişkileri modülleri",
+   "screenshot": "/img/case-hektas.jpg",
+   "order": 2,
+   "visible": true
+  },
+  {
+   "name": "OtoSOR",
+   "color": "#0E2742",
+   "highlight": "#7CC3FF",
+   "tags": [
+    "Platform",
+    "UX",
+    "Performans"
+   ],
+   "headline": "OtoSOR'da 12 ayda daha fazla trafik ve lead",
+   "description": "Taksitli ikinci el araç satış platformunun bakım, geliştirme ve dönüşüm optimizasyonunu sprint bazlı yönettim. Mobil uygulamanın yayın sürecini de yürüttüm.",
+   "kpis": [
+    {
+     "value": "%43",
+     "label": "organik trafik artışı"
+    },
+    {
+     "value": "%17",
+     "label": "lead toplama artışı"
+    }
+   ],
+   "barStrong": "Web ve mobil uygulama",
+   "barText": "tek yol haritasında",
+   "screenshot": "/img/case-otosor.jpg",
+   "order": 3,
+   "visible": true
+  },
+  {
+   "name": "Evam",
+   "color": "#251845",
+   "highlight": "#C2AEFF",
+   "tags": [
+    "Kurumsal web",
+    "SEO",
+    "UX"
+   ],
+   "headline": "Evam'ın sitesini lead toplayan bir kanala çevirdik",
+   "description": "Martech şirketinin sitesindeki UX zayıflıklarını ve form yönlendirme sorunlarını tespit ettim. Tasarım ve yazılım ekibiyle yapısal düzenlemeleri uyguladık.",
+   "kpis": [
+    {
+     "value": "%37",
+     "label": "organik trafik artışı"
+    },
+    {
+     "value": "%13",
+     "label": "lead toplama artışı"
+    }
+   ],
+   "barStrong": "Ziyaretçiden lead'e",
+   "barText": "giden yol kısaldı",
+   "screenshot": "/img/case-evam.jpg",
+   "order": 4,
+   "visible": true
+  },
+  {
+   "name": "Doyuyo!",
+   "color": "#3A1C06",
+   "highlight": "#FFB21E",
+   "tags": [
+    "Web tasarım",
+    "Altyapı",
+    "SEO"
+   ],
+   "headline": "Doyuyo! için marka dünyasına uyumlu yeni site",
+   "description": "Web sitesinin tasarımını ve tüm altyapısını baştan yeniledik. Hedef, markanın enerjik dünyasını yansıtan yaratıcı bir arayüzdü. Süreci ve SEO maddelerini uçtan uca yönettim.",
+   "kpis": [
+    {
+     "value": "Tasarım + altyapı",
+     "label": "baştan yenilendi"
+    },
+    {
+     "value": "SEO",
+     "label": "maddelerinin yönetimi"
+    }
+   ],
+   "barStrong": "Marka dünyasına uyumlu",
+   "barText": "yaratıcı arayüz",
+   "screenshot": "/img/case-doyuyo.jpg",
+   "order": 5,
+   "visible": true
+  }
+ ],
+ "posts": [
+  {
+   "title": "Ajans tarafında 10+ projeyi aynı anda yönetmek",
+   "slug": "ajans-tarafinda-coklu-proje-yonetimi",
+   "status": "published",
+   "category": "Proje yönetimi",
+   "publishedAt": "2026-10-15",
+   "readingMinutes": 6,
+   "excerpt": "Tek kaynak, sabit haftalık ritim ve net öncelikler: birden çok markanın işini eş zamanlı yürütürken kullandığım sistem.",
+   "lede": "Ajans tarafında aynı hafta içinde bir kurumsal site yenilemesi, bir e-ticaret bakımı ve bir mobil uygulama sürümü yönetmek sıradan bir durum. 10+ markanın işini eş zamanlı yürütürken kullandığım sistemi bu yazıda paylaşıyorum.",
+   "body": "<h2>1. Her şey tek bir yerde</h2>\n<p>Projeler dağılınca kontrol de dağılır. Bu yüzden tüm işleri ClickUp'ta tek bir yapıda tutarım: her müşteri bir klasör, her proje bir liste, her iş bir görevdir. Görev durumları her projede aynıdır. Hangi projeye bakarsam bakayım, neyin nerede olduğunu birkaç saniyede görürüm.</p>\n<ul><li>Her projede aynı durum adları: Yapılacak, Yapılıyor, Kontrolde, Müşteri onayında, Bitti.</li><li>Her görevde tek bir sorumlu ve bir teslim tarihi.</li><li>Müşteriden beklenen işler için ayrı bir durum. Böylece bekleyen işin kimde olduğu tartışma konusu olmaz.</li></ul>\n<h2>2. Tahmin edilebilir bir hafta</h2>\n<p>Ekip, haftanın nasıl ilerleyeceğini bildiğinde daha az bölünür. Bu yüzden ritmi sabit tutarım:</p>\n<ul><li><b>Pazartesi:</b> haftanın planı ve öncelikler.</li><li><b>Her gün:</b> 15 dakikalık standup. Sadece engeller konuşulur.</li><li><b>Cuma:</b> müşterilere kısa durum raporu ve ekip içi retrospektif notları.</li></ul>\n<h2>3. Bakım işi ile proje işini ayırmak</h2>\n<p>Bakım talepleri küçük görünür ama sprintin dengesini bozar. Sprint kapasitesinin bir bölümünü baştan bakım işlerine ayırırım. Böylece acil bir hata geldiğinde proje takvimi kaymaz ve müşteriye verdiğim tarih değişmez.</p>\n<h2>4. Darboğaz çoğu zaman içeriktir</h2>\n<p>Deneyimime göre projeleri en çok geciktiren adım yazılım değil, müşteriden gelecek içeriktir. İçerik toplama sürecini projenin ilk haftasında başlatırım. Her sayfa için kimin neyi ne zaman vereceğini bir tabloda netleştiririm.</p>\n<blockquote>Teslim tarihini çoğu zaman kod belirlemez. En geç gelen içerik belirler.</blockquote>\n<h2>5. Her şey acilse hiçbir şey acil değildir</h2>\n<p>Aynı anda beş müşteri \"acil\" dediğinde iki soru sorarım: Bu iş müşterinin işini ne kadar etkiliyor? Beklerse ne kaybederiz? Cevaplar sırayı belirler. Sırayı müşteriyle açıkça paylaşırım, çünkü belirsizlik gecikmeden daha çok güven kaybettirir.</p>\n<h2>Sonuç</h2>\n<p>Çoklu proje yönetiminde amaç her şeyi hatırlamak değil, hatırlamak zorunda kalmamaktır. Tek kaynak, sabit ritim ve net öncelikler bu yükü kişiden alır, sisteme verir.</p>",
+   "coverStyle": "kanban",
+   "coverImage": "",
+   "coverColor": "#0E2742",
+   "coverHighlight": "#7CC3FF",
+   "seoDescription": ""
+  },
+  {
+   "title": "Site yenilemede SEO kaybını önlemek: proje yöneticisinin kontrol listesi",
+   "slug": "site-yenilemede-seo-kaybini-onlemek",
+   "status": "published",
+   "category": "SEO",
+   "publishedAt": "2026-10-15",
+   "readingMinutes": 7,
+   "excerpt": "URL envanteri, 301 haritası, schema ve canlıya geçiş günü: yenileme projelerinde trafiği korumak için adım adım liste.",
+   "lede": "Yeni bir site çoğu zaman daha iyi görünür. Ama yanlış yönetilen bir geçiş, yıllarca biriken arama trafiğini birkaç hafta içinde kaybettirebilir. Site yenileme projelerinde SEO maddelerini ayrı bir iş olarak değil, proje planının bir parçası olarak yönetirim. Bu yazı o kontrol listesinin özeti.",
+   "body": "<h2>1. Mevcut URL envanterini çıkar</h2>\n<p>Tasarım başlamadan önce eski sitenin tüm URL'lerini bir tarama aracıyla listelerim. Search Console verisiyle trafik ve dış bağlantı getiren sayfaları işaretlerim. Bu sayfalar geçişin \"kırmızı listesi\" olur.</p>\n<h2>2. 301 yönlendirme haritası hazırla</h2>\n<p>Her eski URL için yeni bir karşılık belirlerim. Karşılığı olmayan sayfayı en yakın ilgili sayfaya yönlendiririm. Tüm eski sayfaları ana sayfaya toplu yönlendirmekten kaçınırım. Harita bir tablo olarak ekip ve müşteri ile paylaşılır ve canlıya geçişten önce onaylanır.</p>\n<h2>3. Meta verileri ve içerik yapısını taşı</h2>\n<ul><li>Title ve description etiketleri.</li><li>Sayfa başına tek bir H1 ve mantıklı başlık hiyerarşisi.</li><li>Görsel alt metinleri.</li><li>Çok dilli sitelerde hreflang etiketleri.</li></ul>\n<h2>4. Yapılandırılmış veriyi plana ekle</h2>\n<p>Organization, LocalBusiness, Product ve Breadcrumb gibi schema türleri, sitenin arama sonuçlarında nasıl görüneceğini etkiler. Bu maddeleri geliştirme görevlerine baştan eklerim, sona bırakmam.</p>\n<h2>5. Test ortamı kuralları</h2>\n<p>Staging ortamı arama motorlarına kapalı olmalıdır: noindex etiketi ve şifre koruması. Canlıya geçişte en sık yapılan hata, bu noindex etiketinin canlı sitede unutulmasıdır. Bu yüzden kontrol listesinde ayrı bir madde olarak durur.</p>\n<h2>6. Canlıya geçiş günü</h2>\n<ul><li>Yönlendirme haritasındaki URL'ler tek tek test edildi.</li><li>robots.txt ve sitemap.xml güncel.</li><li>Sitemap Search Console'a gönderildi.</li><li>Analytics ve etiketler veri topluyor.</li><li>noindex etiketi canlı sitede yok.</li></ul>\n<h2>7. İlk dört hafta izleme</h2>\n<p>Geçiş canlıya alınca bitmez. İlk dört hafta 404 hatalarını, tarama sorunlarını ve trafik değişimini haftalık izlerim. Sorunlar küçükken çözülür.</p>\n<blockquote>Bu yaklaşımla yönettiğim iki kurumsal yenileme projesinde organik trafik 12 ayda %37 ve %43 arttı.</blockquote>\n<h2>Sonuç</h2>\n<p>SEO, yenileme projesinin sonunda eklenen bir katman değil, ilk günden plana giren bir kapsam maddesidir. Proje yöneticisi bu maddeleri görünür kıldığında, yeni site trafiği kaybetmez, büyütür.</p>",
+   "coverStyle": "redirect",
+   "coverImage": "",
+   "coverColor": "#0B3A1E",
+   "coverHighlight": "#7EDC94",
+   "seoDescription": ""
+  },
+  {
+   "title": "Proje yöneticisi olarak Claude ile çalışmak",
+   "slug": "proje-yoneticisi-olarak-claude-ile-calismak",
+   "status": "published",
+   "category": "AI ve otomasyon",
+   "publishedAt": "2026-10-15",
+   "readingMinutes": 5,
+   "excerpt": "Toplantı notundan göreve, QA bulgusundan standart rapora: tekrarlayan PM işlerini AI ile nasıl hızlandırdığım ve nerede durduğum.",
+   "lede": "Proje yönetiminde zamanın büyük bölümü toplantı notu, görev yazımı, rapor ve e-posta gibi tekrarlayan işlere gider. Bu işlerin bir kısmını Claude ile hızlandırıyorum. Bu yazıda hangi işlerde kullandığımı ve nerede durduğumu paylaşıyorum.",
+   "body": "<h2>1. Toplantı notundan göreve</h2>\n<p>Toplantıdan sonra ham notları veririm ve sorumlu, teslim tarihi ve öncelik içeren bir görev listesi isterim. Listeyi kontrol ederim ve ClickUp'a aktarırım. Toplantı ile görevlerin oluşması arasındaki süre ciddi biçimde kısalır.</p>\n<h2>2. QA bulgularını standart formata çevirmek</h2>\n<p>Figma tasarımı ile test ortamı arasındaki farkları not alırken hızlı ve dağınık yazarım. Bu notları sayfa, beklenen durum, mevcut durum ve öncelik alanlarından oluşan standart bir formata çeviririm. Geliştirici görevi okuduğunda ek soru sormaz.</p>\n<h2>3. İçerik ve çeviri dosyalarını yapılandırmak</h2>\n<p>Çok dilli projelerde siteden içerikleri sayfa sayfa çıkarıp çeviri için tek bir tabloya toplarım. Marka adları, iletişim bilgileri ve sayı formatları için kuralları baştan tanımlarım. Böylece çeviriden dönen dosya doğrudan kullanılabilir.</p>\n<h2>4. SEO meta taslakları</h2>\n<p>Title ve description etiketlerinin ilk taslaklarını karakter sınırlarına uygun şekilde hazırlatırım. Son kontrolü ve marka diline uyumu ben yaparım.</p>\n<h2>5. Zor e-postaların ilk taslağı</h2>\n<p>Gecikme bildirimi, kapsam dışı talep veya bütçe konuşması gibi hassas mesajlarda farklı ton seçeneklerini görmek kararı kolaylaştırır.</p>\n<h2>Nerede duruyorum?</h2>\n<ul><li>Müşteriye ait gizli bilgileri paylaşmadan önce düşünürüm.</li><li>Rakamları ve teknik bilgileri her zaman doğrularım.</li><li>Son karar ve sorumluluk her zaman bendedir.</li></ul>\n<blockquote>Yapay zeka işi benim yerime yapmıyor. Benim asıl işime, yani insanlara ve kararlara daha fazla zaman açıyor.</blockquote>\n<h2>Sonuç</h2>\n<p>En büyük kazanç tek tek işlerde değil, tekrar eden işleri şablona dönüştürmekte. Sık kullandığım istemleri bir kütüphanede topladım. Yeni bir projeye başlarken artık sıfırdan değil, hazır bir sistemden başlıyorum.</p>",
+   "coverStyle": "chat",
+   "coverImage": "",
+   "coverColor": "#251845",
+   "coverHighlight": "#C2AEFF",
+   "seoDescription": ""
+  }
+ ]
+}

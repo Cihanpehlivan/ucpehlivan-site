@@ -1,0 +1,18 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Sadece bu e-posta adresi içerik düzenleyebilir.
+    function isAdmin() {
+      return request.auth != null
+        && request.auth.token.email == 'pehlivan.uc@gmail.com'
+        && request.auth.token.email_verified == true;
+    }
+    // Sitenin okuduğu yayın paketi ve görseller herkese açık.
+    match /site/{id}    { allow read: if true; allow write: if isAdmin(); }
+    match /media/{id}   { allow read: if true; allow write: if isAdmin(); }
+    // Düzenleme verisi sadece yöneticiye açık (taslaklar dahil).
+    match /content/{id} { allow read, write: if isAdmin(); }
+    match /cases/{id}   { allow read, write: if isAdmin(); }
+    match /posts/{id}   { allow read, write: if isAdmin(); }
+  }
+}
