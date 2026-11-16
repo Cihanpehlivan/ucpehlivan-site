@@ -391,6 +391,7 @@ main > .bhero:first-child{position:relative}
 .acc{display:grid;grid-template-columns:minmax(0,1fr);gap:12px;max-width:760px;min-width:0}
 .acc-wrap.has-ill{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:56px;align-items:center}
 .acc-wrap.has-ill .acc{max-width:none}
+.acc-wrap.has-ill .head{margin-bottom:40px}
 .acc-ill svg{width:100%;height:auto;display:block;max-width:460px;margin-left:auto}
 @media (max-width:900px){.acc-wrap.has-ill{grid-template-columns:minmax(0,1fr);gap:36px}.acc-ill svg{max-width:380px;margin:0 auto}}
 .acc-row{display:flex;align-items:center;gap:18px;padding:14px 22px 14px 14px;border-radius:20px;background:var(--surface);border:1px solid var(--line);text-decoration:none;color:var(--ink);transition:transform .2s,border-color .2s}
