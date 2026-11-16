@@ -196,14 +196,11 @@ const ld = {
   datePublished: C.meta.published, inLanguage: 'tr', image: ORIGIN + C.meta.ogImage,
   author: { '@type': 'Person', name: s.name, url: ORIGIN + '/' }, mainEntityOfPage: ORIGIN + C.meta.path,
 };
-let html = layout(c, { origin: ORIGIN, path: C.meta.path, type: 'article', jsonld: ld, title: `${C.meta.title} | ${s.name}`, description: C.meta.description, body });
+let html = layout(c, { origin: ORIGIN, path: C.meta.path, type: 'article', jsonld: ld, title: `${C.meta.title} | ${s.name}`, description: C.meta.description, image: C.meta.ogImage, imageAlt: C.meta.ogImageAlt, body });
 // Sitenin içerik yenileme script'i bu sayfayı tanımaz; bu sayfada yüklenmez.
 html = html.replace(/<script type="module" src="\/assets\/app\.js[^"]*"><\/script>\n?/, '');
-const og = `<meta property="og:image" content="${ORIGIN}${C.meta.ogImage}">
-<meta property="og:image:width" content="1200">
+const og = `<meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="${esc(C.meta.ogImageAlt)}">
-<meta name="twitter:card" content="summary_large_image">
 <meta property="article:published_time" content="${esc(C.meta.published)}">
 <link rel="stylesheet" href="/assets/yazi.css?v=${v}">`;
 html = html.replace('</head>', `${og}\n</head>`);
