@@ -98,7 +98,7 @@ export function layout(c, { title, description, type = 'website', jsonld, noinde
   const secs = activeSections((c.home || {}));
   const navLink = (k) => { const [id, label] = NAV[k]; if (k === 'blog') return `<a href="${home ? '#yazilar' : '/blog/'}"${path.startsWith('/blog') ? ' aria-current="page"' : ''}>${label}</a>`; return `<a href="${p}#${id}">${label}</a>`; };
   const navs = secs.filter((k) => NAV[k]).map(navLink).join('');
-  const footPages = secs.filter((k) => NAV[k]).map((k) => (k === 'blog' ? '<a href="/blog/">Yazılar</a>' : `<a href="/#${NAV[k][0]}">${NAV[k][1]}</a>`)).join('');
+  const footPages = secs.filter((k) => NAV[k] && k !== 'accounts').map((k) => (k === 'blog' ? '<a href="/blog/">Yazılar</a>' : `<a href="/#${NAV[k][0]}">${NAV[k][1]}</a>`)).join('');
   return `<!DOCTYPE html>
 <html lang="tr">
 <head>
@@ -144,11 +144,10 @@ ${body}
   <div class="wrap">
     <div class="foot-grid">
       <div><a class="logo" href="/" style="padding:0" aria-label="${e(s.name)}, ana sayfa"><span class="wl wl-lg">${e(s.name)}<i aria-hidden="true"></i></span></a><p class="foot-tag">${e(s.footerTagline)}</p><a class="mail" href="mailto:${e(s.email)}">${e(s.email)}</a></div>
-      ${footPages ? `<div><h4>Sayfa</h4>${footPages}</div>` : ''}
+      ${footPages ? `<div><h4>Keşfet</h4>${footPages}</div>` : ''}
       ${accs.length ? `<div><h4>Hesaplar</h4>${accs.map((a) => `<a href="${e(a.url)}"${tgt(a.url)}>${e(a.name)}</a>`).join('')}</div>` : ''}
       ${s.location ? `<div><h4>Konum</h4><span>${e(s.location)}</span></div>` : ''}
     </div>
-    <div class="wordmark" aria-hidden="true"><span id="wm">${e(String(s.name || '').toLocaleUpperCase('tr-TR'))}</span></div>
     <div class="copy"><span>© <span id="yr">${new Date().getFullYear()}</span> ${e(s.name)}</span><span>${e(s.footerNote)}</span></div>
   </div>
 </footer>
