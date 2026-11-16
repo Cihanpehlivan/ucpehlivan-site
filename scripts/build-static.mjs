@@ -25,7 +25,8 @@ export function buildPages(c) {
   write('blog/index.html', renderBlogIndex(c, o));
   for (const p of c.posts) write(`blog/${p.slug}/index.html`, renderPost(c, p, o));
   // Yeni yazılar için kabuk sayfa: içerik tarayıcıda Firestore'dan çizilir.
-  write('blog/post.html', layout(c, { ...o, version: 'shell', title: c.settings.name, path: '/blog/', body: '<section class="bhero"><div class="wrap"><p class="kicker">Yükleniyor</p></div></section>' }));
+  // noindex: var olmayan /blog/... adresleri arama sonuçlarına girmesin. Gerçek yazı çizilince hydrate.js kaldırır.
+  write('blog/post.html', layout(c, { ...o, version: 'shell', noindex: true, title: c.settings.name, path: '/blog/', body: '<section class="bhero"><div class="wrap"><p class="kicker">Yükleniyor</p></div></section>' }));
   write('404.html', render404(c, o));
   write('sitemap.xml', renderSitemap(c, ORIGIN));
   console.log(`Statik sayfalar üretildi: ana sayfa, yazılar, ${c.posts.length} yazı, 404, sitemap.`);

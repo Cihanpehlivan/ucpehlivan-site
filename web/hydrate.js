@@ -49,6 +49,9 @@ async function getDoc(api, pid, path) {
       const a = document.querySelector(sel), b = doc.querySelector(sel);
       if (a && b) a.setAttribute('content', b.getAttribute('content'));
     }
+    // Kabuktaki noindex: çizilen sayfa noindex değilse (gerçek yazı) kaldırılır.
+    const robots = document.querySelector('meta[name="robots"]');
+    if (robots && !doc.querySelector('meta[name="robots"]')) robots.remove();
     document.body.innerHTML = doc.body.innerHTML;
     document.body.querySelectorAll('script').forEach((s) => s.remove());
     if (window.ucpInit) window.ucpInit();
