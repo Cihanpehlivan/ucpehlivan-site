@@ -49,7 +49,7 @@ async function siteBundle() {
   }
 }
 
-const secHead = (s, tag = 'h2') => `<div class="yz-sh"><span class="yz-num">${esc(s.num)}</span><span class="yz-mono">${esc(s.title)}</span></div>${tag ? `<${tag} class="d yz-h" id="h-${esc(s.id)}">${esc(s.title)}</${tag}>` : ''}`;
+const secHead = (s, tag = 'h2') => `<div class="yz-sh"><span class="yz-num">${esc(s.num)}</span><span class="yz-mono">${esc(s.title)}</span></div>${tag ? `<${tag} class="d yz-h" id="h-${esc(s.id)}">${esc(s.title)}</${tag}>` : ''}${tag && s.lede ? `<p class="yz-lede">${md(s.lede)}</p>` : ''}`;
 
 function flipCard({ tag, title, front, backLabel, back, why, whyLabel }) {
   return `<li><button type="button" class="yz-card" aria-pressed="false">

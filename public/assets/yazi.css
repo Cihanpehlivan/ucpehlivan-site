@@ -21,6 +21,8 @@
 .yz-sh{display:flex;align-items:center;gap:14px;margin-bottom:20px;color:var(--muted)}
 .yz-sh .yz-num{font-size:14px;padding:5px 10px;background:var(--accent);color:var(--on-accent)}
 .yz-h{font-size:clamp(40px,6vw,80px);margin-bottom:28px;max-width:16ch}
+.yz-h:has(+ .yz-lede){margin-bottom:14px}
+.yz-lede{font-size:clamp(18px,1.8vw,21px);line-height:1.45;color:var(--muted);max-width:52ch;margin-bottom:32px}
 .yz-prose{max-width:66ch}
 .yz-prose p{font-size:19px;line-height:1.7;color:var(--text);margin:0 0 20px}
 .yz-prose strong{color:var(--ink)}

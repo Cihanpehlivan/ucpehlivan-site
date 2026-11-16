@@ -83,6 +83,7 @@
       "num": "02",
       "nav": "Şablondan kalan üç alışkanlık",
       "title": "Şablondan kalan üç alışkanlık",
+      "lede": "Hazır prompt şablonlarındaki hangi alışkanlıklar yeni yapay zekâ modellerinde artık işe yaramıyor?",
       "intro": "Hazır şablonlardan bana üç alışkanlık kalmıştı. Üçü de bir zamanlar işe yarıyordu, bugün modeli yavaşlatıyor. Bir brief'i revize eder gibi üzerlerinden geçelim.",
       "fileLabel": "eski-sablon.txt",
       "reviseAll": "Hepsini revize et",
@@ -119,6 +120,7 @@
       "num": "03",
       "nav": "Tarifi değil, tabağı anlat",
       "title": "Tarifi değil, tabağı anlat",
+      "lede": "Adım adım talimat yerine hedef ve sınır yazmak neden daha iyi sonuç veriyor?",
       "intro": "Güçlü bir modele adım adım tarif yazdığında, onu kendi planının içine kapatırsın. Model senin bildiğin sırayla ilerler; daha iyi bir yol olsa bile aramaz. İşe yarayan brief üç şeyi söyler, gerisini bırakır:",
       "parts": [
         {
@@ -175,6 +177,7 @@
       "num": "04",
       "nav": "Masamdaki iki model",
       "title": "Masamdaki iki model",
+      "lede": "Claude ve GPT'ye prompt yazarken nelere dikkat ediyorum?",
       "intro": "Günlük işimde en çok Claude kullanıyorum; GPT'yi daha az, belirli işler için açıyorum. O yüzden aşağıdaki karşılaştırma bir uzman tablosu değil, kendi masamdan notlar. Model sürümleri değiştikçe bu notlar da değişebilir.",
       "tabsLabel": "Model notları",
       "rowLabels": [
@@ -212,6 +215,7 @@
       "num": "05",
       "nav": "Eski promptu brief'e çevir",
       "title": "Eski promptu brief'e çevir",
+      "lede": "Prompt şablonu: hedef, elindekiler ve sınırlarla kendi brief'ini oluştur, kontrol et ve kopyala.",
       "intro": "Şimdi sıra sende. Aşağıdaki tezgâhta eski bir promptu brief'e çeviriyorsun: bir örnek seç ya da kendi promptunu yapıştır, sonra hedefi, elindekileri ve sınırları yaz. Sağdaki kontrol listesi brief'in nerede eksik kaldığını gösteriyor.",
       "steps": [
         "Eski prompt",
@@ -383,6 +387,7 @@
       "num": "06",
       "nav": "Sonuç",
       "title": "Sonuç",
+      "lede": "Prompt yazmak neden aslında iyi bir brief yazmak?",
       "paragraphs": [
         "Prompt yazmak yeni bir meslek değil; kendini net ifade etmenin yeni adı. İyi brief yazan biri, iyi prompt yazmanın yarısını zaten biliyor."
       ],
