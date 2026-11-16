@@ -89,7 +89,7 @@ Umut Cihan Pehlivan'ın kişisel marka sitesi: **yapay zeka içeriklerinin kalı
 ```
 
 - Bölüm listesi: `SECTION_KEYS` (`shared/render.js`). Sıra ve aktif/pasif: admin › Ana sayfa › Düzen.
-- Menü ve footer linkleri aktif bölümlerden **otomatik** oluşur.
+- Menü ve footer linkleri aktif bölümlerden **otomatik** oluşur. Footer'daki "Keşfet" menüsü Hesaplarım'ı göstermez (hesaplar zaten "Hesaplar" sütununda).
 - Yeni bölüm eklemek için: `SECTION_KEYS` + `SECTIONS` içine render fonksiyonu + `admin/src/schema.js` içinde `homeSections` sekmesi + `seed.json` varsayılanı. Yeni bölüm **pasif** (`on: false`) başlar.
 
 ### İçerik türleri
@@ -145,6 +145,8 @@ firebase deploy                  # hosting + firestore kuralları
 | Bölüm adı "Arşiv" değil **"Yazılar"**. | Kas 2026 |
 | Hero başlığı: "Her gün yapay zeka kullanan birinden notlar ve tecrübeler". | Kas 2026 |
 | Hesaplar: LinkedIn (vurgulu), GitHub, E-posta. X ve YouTube hesapları **henüz yok**. | Kas 2026 |
+| Footer: büyük isim yazısı (wordmark) yok, telif satırı ortada, menü başlığı **"Keşfet"** (Yazılar, Hakkımda). | Kas 2026 |
+| Sütun çizgileri (`.guides`) sadece ana sayfanın ilk ekranında; yazı ve blog sayfalarında yok. Bölümler mor şeritli çizgiyle ayrılır. | Kas 2026 |
 
 ---
 
@@ -266,6 +268,12 @@ Her oturumun sonunda **en üste** yeni bir not ekle. Eski notları silme. 10 not
 - **Açık kalan:** …
 - **Sonraki adım:** …
 ```
+
+### 2026-11-16 — Okunurluk, ana sayfa düzeni ve footer
+- **Yapılan:** Yazı sayfası (`yazi.css`): sütun çizgileri gizlendi, bölümlere mor şeritli ayırıcı, tekrar eden bölüm etiketi gizlendi, giriş cümlesi koyulaştı, küçük etiketler büyüdü. Ana sayfa (`main.css` sonundaki "Düzen ve okunurluk" bloğu): eşit bölüm boşlukları, ayırıcılar, başlık açıklaması başlığın altında, tek yazı kartı tam genişlikte. Footer: wordmark kaldırıldı, telif ortada, "Sayfa" → "Keşfet", Hesaplarım çıkarıldı (`render.js` + derlenmiş `app.js`/`admin.js` + statik HTML'ler). Hepsi önizleme → canlı ile yayında.
+- **Karar:** §7'ye eklendi (footer, sütun çizgileri).
+- **Açık kalan:** Bu bilgisayarda Node.js yok; `app.js` ve `admin.js` elle düzenlendi (kaynak `render.js` ile aynı). Node olan bir yerde `npm run build` çalıştırıp farkın çıkmadığını doğrula. `ASSET_V` (main.css `?v=8`) artırılmadı; `/assets/**` 1 saat önbellekte. Push ve yayın `gh` (GitHub CLI) ile yapılıyor, Git kurulu değil. Workflow'daki `actions/checkout@v4` ve `setup-node@v4` Node 20 uyarısı veriyor.
+- **Sonraki adım:** Bir sonraki yazı. Fırsat olunca `npm run build` ile derlenmiş dosyaları kaynaktan yeniden üret.
 
 ### 2026-11-16 — CLAUDE.md eklendi
 - **Yapılan:** Proje rehberi (bu dosya) oluşturuldu. İnteraktif yazı süreci (§8) ve devam notu kuralı eklendi.
