@@ -1,0 +1,396 @@
+{
+  "_not": "/yazi/prompt-brief/ sayfasının bütün metni. Değiştirdikten sonra: node scripts/build-yazi.mjs  (metinlerde **kalın** kullanılabilir)",
+  "meta": {
+    "path": "/yazi/prompt-brief/",
+    "title": "Prompt Yazmak, Aslında İyi Bir Brief Yazmak",
+    "description": "Yeni modeller zeki; adım adım reçeteyle kısıtlanınca değil, hedef ve sınırla yönlendirilince iyi iş çıkarıyor. Bir proje yöneticisinin gözünden interaktif bir okuma.",
+    "ogImage": "/yazi/prompt-brief/og.png",
+    "ogImageAlt": "Prompt yazmak, aslında iyi bir brief yazmak.",
+    "published": "2026-11-16"
+  },
+  "ui": {
+    "navLabel": "Bölümler",
+    "keysHint": "j / k: sonraki / önceki bölüm",
+    "flip": "Çevir",
+    "flipBack": "Geri çevir",
+    "flipAll": "Hepsini çevir",
+    "unflipAll": "Hepsini geri çevir",
+    "copy": "Kopyala",
+    "copied": "Kopyalandı",
+    "copyFailed": "Kopyalanamadı, metni elle seç"
+  },
+  "sections": [
+    {
+      "id": "neden",
+      "num": "01",
+      "nav": "Neden bu yazı",
+      "title": "Neden bu yazı",
+      "hero": {
+        "kicker": "Bir PM masasından",
+        "title": "Prompt yazmak, aslında iyi bir brief yazmak.",
+        "claimLabel": "Tek cümlelik brief",
+        "claim": [
+          {
+            "text": "İyi bir brief adımları saymaz: "
+          },
+          {
+            "text": "nereye varılacağını söyler",
+            "key": "hedef"
+          },
+          {
+            "text": ", "
+          },
+          {
+            "text": "aşılmayacak çizgiyi belirler",
+            "key": "sinir"
+          },
+          {
+            "text": ", "
+          },
+          {
+            "text": "yolu bulmayı uzmanına bırakır",
+            "key": "serbest"
+          },
+          {
+            "text": "."
+          }
+        ],
+        "pillarsHint": "Bir parçaya dokun, cümlede yerini gör.",
+        "pillars": [
+          {
+            "key": "hedef",
+            "label": "Hedef",
+            "text": "İş hangi hâlde teslim edilmiş sayılır?"
+          },
+          {
+            "key": "sinir",
+            "label": "Sınır",
+            "text": "Neye dokunulmayacak, hangi karar sende?"
+          },
+          {
+            "key": "serbest",
+            "label": "Serbestlik",
+            "text": "Geri kalan her seçim modelin."
+          }
+        ]
+      },
+      "paragraphs": [
+        "İyi bir prompt da iyi bir proje brief'i gibi çalışır: nereye varılacağını ve neyin dışına çıkılmayacağını söyler, yolu bulmayı uzmanına bırakır.",
+        "Bir yıl önce ben de hazır prompt şablonlarıyla çalışıyordum: modele bir rol ver, adımları sırala, çıktının formatını dikte et. O dönem işe yarıyordu, çünkü modeller elinden tutulmadan yolu bulamıyordu. Bugünün modelleri farklı. Akıl yürütüyor, bağlamı okuyor, bazen benim aklıma gelmeyen bir yolu öneriyor. Onları eski şablonlarla adım adım yönlendirmek, zeki bir uzmanı kendi planımın sınırına hapsetmek demek. Adımları bırakıp sadece hedefi ve sınırları verdiğimde aynı model daha iyi iş çıkarıyor."
+      ]
+    },
+    {
+      "id": "inanclar",
+      "num": "02",
+      "nav": "Şablondan kalan üç alışkanlık",
+      "title": "Şablondan kalan üç alışkanlık",
+      "intro": "Hazır şablonlardan bana üç alışkanlık kalmıştı. Üçü de bir zamanlar işe yarıyordu, bugün modeli yavaşlatıyor. Bir brief'i revize eder gibi üzerlerinden geçelim.",
+      "fileLabel": "eski-sablon.txt",
+      "reviseAll": "Hepsini revize et",
+      "undoAll": "Hepsini geri al",
+      "revise": "Revize et",
+      "undo": "Geri al",
+      "noteLabel": "Neden",
+      "habits": [
+        {
+          "name": "Modele unvan takmak",
+          "old": "Sen ödüllü bir metin yazarısın. Bu kampanya için slogan yaz.",
+          "new": "Beğendiğimiz iki eski slogan ve marka sesi notu ekte. Bu kampanya için 5 slogan öner; her biri en fazla 6 kelime olsun.",
+          "why": "Modele unvan vermek, yeni gelen birine kartvizit bastırmak gibi; kimse bu yüzden daha iyi yazmaz. Farkı, eline koyduğun somut malzeme ve neyin iyi sayılacağını söyleyen ölçü yaratıyor."
+        },
+        {
+          "name": "Brief'i romana çevirmek",
+          "old": "[Projenin bütün geçmişi, üç kez tekrarlanan aynı uyarı, \"belki lazım olur\" diye eklenmiş notlar…]",
+          "new": "Bu iş için gereken üç bilgi, bir hedef, iki sınır.",
+          "why": "Uzun bir brief'i insan okumaz; model okur ama asıl önemli satırı kalabalığın içinde kaçırır. Ne kadar az ve net yazarsan, o kadar az yanlış anlaşılırsın."
+        },
+        {
+          "name": "Her şeyi tek mesaja sığdırmak",
+          "old": "Marka kurallarını, renk kodlarını ve geçen ayki geri bildirimleri aşağıya yapıştırıyorum…",
+          "new": "Güncel marka kılavuzu ve Figma dosyası projede bağlı. Bu haftaki iş: kampanya sayfasının mobil versiyonu.",
+          "why": "Yazdığın mesaj, modelin önündeki masanın sadece bir köşesi. Masanın geri kalanında proje dosyaları, bağlı uygulamalar, kayıtlı talimatlar ve önceki konuşmalar duruyor. Masayı bir kez düzenlemek, her seferinde uzun mesaj yazmaktan daha çok işe yarıyor."
+        }
+      ],
+      "after": [
+        "Üçüncüsü en sık atlananı. Her konuşmaya aynı açıklamaları yeniden yapıştırmak yerine, onları modelin her seferinde bulacağı yere koymak gerekiyor: proje dosyaları, kayıtlı talimatlar, bağlı uygulamalar. Mesaj kısalıyor, sonuç her seferinde aynı çizgide kalıyor. Prompt tek başına yetmiyor; masa da hazır olmalı."
+      ]
+    },
+    {
+      "id": "sinir",
+      "num": "03",
+      "nav": "Tarifi değil, tabağı anlat",
+      "title": "Tarifi değil, tabağı anlat",
+      "intro": "Güçlü bir modele adım adım tarif yazdığında, onu kendi planının içine kapatırsın. Model senin bildiğin sırayla ilerler; daha iyi bir yol olsa bile aramaz. İşe yarayan brief üç şeyi söyler, gerisini bırakır:",
+      "parts": [
+        {
+          "label": "Hedef:",
+          "text": "İş hangi hâlde teslim edilmiş sayılır?"
+        },
+        {
+          "label": "Sınır:",
+          "text": "Neye dokunulmayacak, hangi karar sende kalıyor?"
+        },
+        {
+          "label": "Serbestlik:",
+          "text": "Bu ikisinin dışında kalan her seçim modelin."
+        }
+      ],
+      "switch": {
+        "label": "Brief nasıl yazılsın?",
+        "caption": "Tarif modeli senin planına bağlar; sınır çizilmiş bir alanda ise kendi çözümünü kurar.",
+        "options": [
+          {
+            "key": "recete",
+            "label": "Adım adım tarif",
+            "tag": "tarif: her adımı sen yazarsın",
+            "flow": [
+              "Adım adım tarif",
+              "Model talimatı satır satır uygular",
+              "Senin planın kadar bir sonuç"
+            ],
+            "exampleLabel": "Örnek prompt",
+            "example": "Önce metni oku. Sonra başlıkları çıkar. Her başlığın altına üç madde yaz. En sonda hepsini bir tabloya dök."
+          },
+          {
+            "key": "hedef",
+            "label": "Hedef + sınır",
+            "tag": "brief: sonucu ve sınırı sen tanımlarsın",
+            "flow": [
+              "Hedef + sınır + serbestlik",
+              "Model kendi çözümünü kurar",
+              "Planının ötesine geçen sonuç"
+            ],
+            "exampleLabel": "Örnek prompt",
+            "example": "Hedef: yöneticinin iki dakikada okuyacağı bir özet. Sınırlar: metinde olmayan bilgi ekleme; beş maddeyi geçme."
+          }
+        ]
+      },
+      "paragraphs": [
+        "Tarif yazdığında modelden sadece uygulayıcı olmasını istemiş olursun. Senin planından iyi bir fikri varsa onu hiç duymazsın; planında bir hata varsa onu da harfiyen uygular.",
+        "Bunu restoranda zaten yapıyoruz. Şefe \"soğanı önce kavur, sonra domatesi ekle\" demeyiz. \"Acısız olsun, fıstık alerjim var, yirmi dakikada gelsin\" deriz. Tabağın nasıl yapılacağı onun işi.",
+        "Tek istisna: işin her adımını gerçekten biliyorsan ve sonucun birebir senin istediğin gibi olması gerekiyorsa, tarifi yaz. Bilmediğin bir alanda adım saymak ise modeli senin tahminlerinin peşine takar."
+      ]
+    },
+    {
+      "id": "modeller",
+      "num": "04",
+      "nav": "Masamdaki iki model",
+      "title": "Masamdaki iki model",
+      "intro": "Günlük işimde en çok Claude kullanıyorum; GPT'yi daha az, belirli işler için açıyorum. O yüzden aşağıdaki karşılaştırma bir uzman tablosu değil, kendi masamdan notlar. Model sürümleri değiştikçe bu notlar da değişebilir.",
+      "tabsLabel": "Model notları",
+      "rowLabels": [
+        "Ne gördüm",
+        "Dikkat ettiğim",
+        "Nasıl yazıyorum"
+      ],
+      "tabs": [
+        {
+          "key": "claude",
+          "label": "Claude · her gün",
+          "rows": [
+            "Ne istediğimi anlamaya çalışıyor; açık bıraktığım yeri kendi yorumuyla dolduruyor.",
+            "Bazen onun \"tamam\" dediği iş, benim kafamdaki tamamdan önce bitiyor ya da istemediğim bir ekleme geliyor.",
+            "Amacı, kabul ölçüsünü ve dokunulmayacak yerleri yazıyorum; gerisini ona bırakıyorum."
+          ]
+        },
+        {
+          "key": "gpt",
+          "label": "GPT · ara sıra",
+          "rows": [
+            "Daha az kullandığım için gözlemim sınırlı; verdiğim talimata daha sadık kalıyor gibi.",
+            "Talimatımda bir eksik ya da hata varsa onu da olduğu gibi uygulayabiliyor.",
+            "Talimatı daha açık, sınırları daha net yazıyorum; bir hata görürse önce söylemesini ayrıca istiyorum."
+          ]
+        }
+      ],
+      "paragraphs": [
+        "Bu bana ekip yönetimini hatırlatıyor. Bazı insanlar yazılanı birebir uygular, bazıları önce amacı sorar ve başka bir yol önerir. İkisine de aynı brief'i yazmazsın.",
+        "Benim için pratik sonuç şu: hangi modelle çalışırsam çalışayım önce amacı yazıyorum. Talimata sadık bir modelde sınırları daha net çiziyorum; niyeti okumaya çalışan bir modelde ise işin ne zaman bitmiş sayılacağını."
+      ]
+    },
+    {
+      "id": "sablon",
+      "num": "05",
+      "nav": "Eski promptu brief'e çevir",
+      "title": "Eski promptu brief'e çevir",
+      "intro": "Şimdi sıra sende. Aşağıdaki tezgâhta eski bir promptu brief'e çeviriyorsun: bir örnek seç ya da kendi promptunu yapıştır, sonra hedefi, elindekileri ve sınırları yaz. Sağdaki kontrol listesi brief'in nerede eksik kaldığını gösteriyor.",
+      "steps": [
+        "Eski prompt",
+        "Brief'i yaz",
+        "Kontrol et, kopyala"
+      ],
+      "pickLabel": "Bir örnek seç",
+      "oldLabel": "Eski prompt",
+      "oldPlaceholder": "Ya da eskiden yazdığın bir promptu buraya yapıştır…",
+      "whyLabel": "Neden zayıf",
+      "fillFromPick": "Seçili örnekten doldur",
+      "examples": [
+        {
+          "title": "Toplantı notundan görev",
+          "old": "Bu notlardan görev çıkar.",
+          "why": "Belirsiz istek, belirsiz görev üretir.",
+          "goal": "ClickUp'a girilecek görevleri çıkar",
+          "inputs": "[toplantı notlarının tamamı]",
+          "limits": "süre tahmini ekleme\nher görev tek bir iş olsun\nsahibi belli olmayanları ayrı listele",
+          "measure": ""
+        },
+        {
+          "title": "Kızgın bir maile cevap",
+          "old": "Karşı taraf gecikmeye kızmış, özetle böyle. Cevap yaz.",
+          "why": "Senin özetin tonu ve asıl derdi kaybettirir.",
+          "goal": "sakin ve çözüm odaklı bir cevap taslağı",
+          "inputs": "[mailin tamamı]",
+          "limits": "tarih sözü verme\nsuçu kimseye atma",
+          "measure": ""
+        },
+        {
+          "title": "Figma QA",
+          "old": "Tasarımı kontrol et.",
+          "why": "\"Kontrol et\" bir hedef değil.",
+          "goal": "mobil ve masaüstü ekranlar arasındaki tutarsızlıkları bul",
+          "inputs": "[ekran görüntüleri]",
+          "limits": "sadece listele, çözüm önerme\nher maddeye ekran adını yaz",
+          "measure": ""
+        },
+        {
+          "title": "SEO meta açıklaması",
+          "old": "Bu sayfa için SEO uyumlu bir açıklama yaz.",
+          "why": "\"SEO uyumlu\" bir his, karakter sınırı bir ölçü.",
+          "goal": "arama sonucunda tıklatan 3 meta açıklama önerisi",
+          "inputs": "[sayfa metni, hedef anahtar kelime]",
+          "limits": "en fazla 155 karakter\nabartılı vaat yok\nmarka adı sonda",
+          "measure": ""
+        },
+        {
+          "title": "Çeviri dosyası",
+          "old": "Bu Excel'i İngilizceye çevir.",
+          "why": "İstemediğini söylemezsen model her şeyi çevirir.",
+          "goal": "marka sesine uygun, doğal bir çeviri",
+          "inputs": "[dosya, marka ses notu]",
+          "limits": "anahtar sütununa dokunma\nürün adlarını çevirme\nsatır sayısını değiştirme",
+          "measure": ""
+        },
+        {
+          "title": "Haftalık durum raporu",
+          "old": "Bu haftanın durum raporunu yaz.",
+          "why": "Okuyucuyu ve süreyi tanımlarsan uzunluk kendiliğinden belirlenir.",
+          "goal": "yöneticinin 1 dakikada okuyacağı haftalık rapor",
+          "inputs": "[ClickUp görev listesi]",
+          "limits": "teknik terim yok\nen fazla 5 madde\nriskleri ayrı başlıkta yaz",
+          "measure": ""
+        }
+      ],
+      "fields": {
+        "goal": {
+          "label": "Hedef",
+          "required": "zorunlu",
+          "placeholder": "İş hangi hâlde teslim edilmiş sayılır?"
+        },
+        "inputs": {
+          "label": "Elindekiler",
+          "placeholder": "Ham malzeme; özetleme, olduğu gibi yapıştır"
+        },
+        "limits": {
+          "label": "Sınırlar",
+          "hint": "her satır bir madde",
+          "placeholder": "neye dokunmasın\nneyi asla yapmasın"
+        },
+        "measure": {
+          "label": "Ölçü",
+          "hint": "isteğe bağlı",
+          "placeholder": "İşin bittiğini neyle ölçeceksin?"
+        }
+      },
+      "beforeLabel": "Önce",
+      "afterLabel": "Brief",
+      "templateLabel": "Boş şablon",
+      "wordsUnit": "kelime",
+      "template": "Hedef: [iş hangi hâlde teslim edilmiş sayılır]\nElindekiler: [ham malzeme; özetleme, olduğu gibi yapıştır]\nSınırlar: [neye dokunmasın, neyi asla yapmasın]\nGerisi sende. Talimatımda bir hata görürsen önce bana söyle.",
+      "checkTitle": "Brief kontrolü",
+      "scoreSuffix": "tamam",
+      "checks": [
+        {
+          "key": "goal",
+          "label": "Hedef yazıldı",
+          "hint": "İş hangi hâlde teslim edilmiş sayılır?"
+        },
+        {
+          "key": "inputs",
+          "label": "Ham malzeme eklendi",
+          "hint": "Özetleme, olduğu gibi yapıştır."
+        },
+        {
+          "key": "limit",
+          "label": "En az bir sınır var",
+          "hint": "Neye dokunulmayacak?"
+        },
+        {
+          "key": "negative",
+          "label": "İstemediğini de yazdın",
+          "hint": "Model, boş bıraktığın her alanı en sıradan seçenekle doldurur."
+        },
+        {
+          "key": "measure",
+          "label": "Ölçülebilir bir şey var",
+          "hint": "Bir sayı, bir süre ya da bir kabul ölçüsü."
+        },
+        {
+          "key": "noRole",
+          "label": "Unvan yok",
+          "hint": "Rol cümlesi yerine malzeme ver."
+        },
+        {
+          "key": "noSteps",
+          "label": "Adım adım tarif yok",
+          "hint": "Sırayı model kursun."
+        }
+      ],
+      "detect": {
+        "role": [
+          "sen bir",
+          "uzmanısın",
+          "uzmansın",
+          "yazarısın",
+          "gibi davran",
+          "olarak davran",
+          "rolünde",
+          "rolüne"
+        ],
+        "steps": [
+          "önce ",
+          "sonra ",
+          "ardından",
+          "ilk olarak",
+          "en son",
+          "adım ",
+          "1.",
+          "2."
+        ],
+        "negative": [
+          "yok",
+          "asla",
+          "olmasın",
+          "değil",
+          "hariç"
+        ]
+      },
+      "goalError": "Kopyalamak için önce hedefi yaz.",
+      "fillExample": "Örnekle doldur",
+      "outputHint": "Brief'i kopyalayıp kullandığın modele yapıştır.",
+      "closingLine": "Gerisi sende. Talimatımda bir hata görürsen önce bana söyle."
+    },
+    {
+      "id": "sonuc",
+      "num": "06",
+      "nav": "Sonuç",
+      "title": "Sonuç",
+      "paragraphs": [
+        "Prompt yazmak yeni bir meslek değil; kendini net ifade etmenin yeni adı. İyi brief yazan biri, iyi prompt yazmanın yarısını zaten biliyor."
+      ],
+      "linkedin": {
+        "label": "LinkedIn'de takip et",
+        "href": "https://www.linkedin.com/in/umutcihanpehlivan/"
+      }
+    }
+  ]
+}
