@@ -99,7 +99,19 @@ Umut Cihan Pehlivan'ın kişisel marka sitesi: **yapay zeka içeriklerinin kalı
 | Normal yazı | Admin › Yazılar. Adres: `/blog/<slug>/` |
 | İnteraktif yazı | `content/<ad>.json` yaz → `node scripts/build-yazi.mjs` → admin'de yazının **Özel sayfa adresi** alanına `/yazi/<ad>/` yaz. Kart ve `/blog/` adresi oraya gider. |
 
+> Yeni interaktif yazıda: `firebase.json` › `redirects` içine `/blog/<slug>` → `/yazi/<ad>/` için **301** kaydı ekle. İçerik dosyasının `meta` alanında `updated`, `readingMinutes`, `summaryLabel` ve 3 maddelik `summary` (Kısaca kutusu) olsun.
+
 > Bilinen sınır: `build-yazi.mjs` şu an tek bir dosyayı (`content/prompt-yazisi.json`) okur. İkinci interaktif yazıda scripti, `content/` klasöründeki tüm JSON dosyalarını işleyecek şekilde genelleştir.
+
+### SEO ve GEO
+
+| Parça | Nerede | Not |
+|---|---|---|
+| Yapılandırılmış veri | `identityLd`, `articleLd` (`shared/render.js`) | Her sayfada WebSite + Person (`/#website`, `/#person`); blogda Blog, yazıda BlogPosting. Kişi verisine işveren adı **yazılmaz** (§2). |
+| Site adı | `og:site_name` (`layout`) | |
+| llms.txt | `renderLlms` → `build-static.mjs` | Yayında Firestore'dan üretilir. |
+| Site haritası | `renderSitemap` | Ana sayfa ve blog tarihi = en yeni yazının tarihi. |
+| Yazı sayfası | `build-yazi.mjs` | Görünür yazar satırı (`.yz-byline`) ve Kısaca kutusu (`.yz-tldr`). |
 
 ### Kategoriler ve filtre
 
@@ -268,6 +280,12 @@ Her oturumun sonunda **en üste** yeni bir not ekle. Eski notları silme. 10 not
 - **Açık kalan:** …
 - **Sonraki adım:** …
 ```
+
+### 2026-11-16 — SEO ve GEO
+- **Yapılan:** Tarama yapıldı, 12 madde çıktı; 1–9 uygulandı ve canlıda: yazıda görünür yazar/tarih satırı ve "Kısaca" kutusu, `/llms.txt`, `/blog/prompt-yazmak-brief/` için 301 (`firebase.json`), tüm sayfalarda `og:site_name` + WebSite/Person verisi, BlogPosting tamamlandı (dateModified, yayıncı, @id bağları), blogda Blog verisi, site haritasında ana sayfa/blog tarihleri. Kod `render.js`, `build-static.mjs`, `build-yazi.mjs`; yazı HTML'i elle güncellendi (Node yok). `render.js` tarayıcıda gerçek Firestore içeriğiyle test edildi.
+- **Karar:** Kısaca kutusu metni Claude taslağıdır; sahibi onayladı. Kişi verisinde işveren yok.
+- **Açık kalan (sahibinde):** Google Search Console (URL öneki + HTML etiketi + sitemap gönderimi), Bing Webmaster Tools (Search Console'dan içe aktar), kendi alan adı kararı.
+- **Sonraki adım:** Search Console doğrulama etiketi gelince `layout` head'ine ekle ve yayınla.
 
 ### 2026-11-16 — Okunurluk, ana sayfa düzeni ve footer
 - **Yapılan:** Yazı sayfası (`yazi.css`): sütun çizgileri gizlendi, bölümlere mor şeritli ayırıcı, tekrar eden bölüm etiketi gizlendi, giriş cümlesi koyulaştı, küçük etiketler büyüdü. Ana sayfa (`main.css` sonundaki "Düzen ve okunurluk" bloğu): eşit bölüm boşlukları, ayırıcılar, başlık açıklaması başlığın altında, tek yazı kartı tam genişlikte. Footer: wordmark kaldırıldı, telif ortada, "Sayfa" → "Keşfet", Hesaplarım çıkarıldı (`render.js` + derlenmiş `app.js`/`admin.js` + statik HTML'ler). Hepsi önizleme → canlı ile yayında.
