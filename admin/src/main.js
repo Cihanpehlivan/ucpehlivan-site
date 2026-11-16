@@ -115,7 +115,7 @@ function postsList() {
     h('a', { class: 'row-t', href: `#/posts/${p.id}` }, h('b', {}, p.title || '(başlıksız)'), h('small', {}, [p.category, p.publishedAt].filter(Boolean).join(', '))),
     h('span', { class: 'chip ' + (p.status === 'published' ? 'ok' : 'muted') }, p.status === 'published' ? 'Yayında' : 'Taslak'),
     h('div', { class: 'row-a' }, p.status === 'published' ? h('a', { class: 'btn-s ghost', href: `/blog/${p.slug}/`, target: '_blank', rel: 'noopener' }, 'Sitede gör') : null, h('a', { class: 'btn-s', href: `#/posts/${p.id}` }, 'Düzenle'))));
-  const add = h('button', { type: 'button', class: 'btn primary', onclick: async () => { const p = newPost(categories()[0] || ''); const id = await store.saveItem('posts', p); data.posts.push({ ...p, id }); location.hash = `#/posts/${id}`; } }, '+ Yeni yazı');
+  const add = h('button', { type: 'button', class: 'btn primary', onclick: async () => { const p = newPost(''); const id = await store.saveItem('posts', p); data.posts.push({ ...p, id }); location.hash = `#/posts/${id}`; } }, '+ Yeni yazı');
   shell('posts', 'Yazılar', h('section', { class: 'card' }, h('p', { class: 'lead-t' }, 'Yayındaki yazılar kaydedince sitede hemen görünür. LinkedIn paylaşım önizlemesi için bilgisayarında "npm run publish" komutunu çalıştır.'), rows.length ? h('div', { class: 'rows' }, rows) : h('p', { class: 'empty' }, 'Henüz yazı yok. "+ Yeni yazı" ile başla.')), { actions: [add], preview: () => ({ html: renderBlogIndex(siteContent()), anchor: null }) });
 }
 

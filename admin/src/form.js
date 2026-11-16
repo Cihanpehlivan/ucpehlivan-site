@@ -38,7 +38,12 @@ function field(f, obj, ctx) {
   switch (f.type) {
     case 'heading': return h('h3', { class: 'fld-head' }, f.title);
     case 'note': return h('p', { class: 'fld-note' }, f.title);
-    case 'text': { const i = h('input', { type: 'text', value: v ?? '', oninput: () => set(i.value) }); return labelled(f, i, counter(f, i)); }
+    case 'text': {
+      // suggest: serbest metin + öneri listesi (örn. kategori)
+      const dl = f.suggest?.length ? h('datalist', { id: `dl-${f.key}-${Math.random().toString(36).slice(2, 8)}` }, f.suggest.map((x) => h('option', { value: x }))) : null;
+      const i = h('input', { type: 'text', value: v ?? '', list: dl ? dl.id : null, autocomplete: dl ? 'off' : null, oninput: () => set(i.value) });
+      return labelled(f, dl ? h('div', {}, i, dl) : i, counter(f, i));
+    }
     case 'textarea': { const i = h('textarea', { rows: f.rows || 3, oninput: () => set(i.value) }); i.value = v ?? ''; return labelled(f, i, counter(f, i)); }
     case 'number': { const i = h('input', { type: 'number', value: v ?? '', oninput: () => set(i.value === '' ? null : Number(i.value)) }); return labelled(f, i); }
     case 'date': { const i = h('input', { type: 'date', value: v ?? '', oninput: () => set(i.value) }); return labelled(f, i); }

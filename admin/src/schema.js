@@ -64,13 +64,12 @@ export const homeSections = [
 ];
 
 export function postSchema(categories = []) {
-  const cats = (categories.length ? categories : ['Genel']).map((c) => [c, c]);
   return [
     t('title', 'Başlık', { required: true }),
     { key: 'slug', title: 'Adres (slug)', type: 'slug', source: 'title', required: true, help: 'Sadece küçük harf, rakam ve tire. Yayından sonra değiştirme.' },
     t('pageUrl', 'Özel sayfa adresi', { help: 'İsteğe bağlı. Yazının interaktif bir sayfası varsa adresini yaz (örn: /yazi/prompt-brief/). Doluysa yazı kartı oraya gider; /blog/ adresi de oraya yönlenir.' }),
     sel('status', 'Durum', [['draft', 'Taslak'], ['published', 'Yayında']]),
-    sel('category', 'Kategori', cats, { help: 'Yeni kategori için: Ana sayfa > Yazılar > Kategori listesi.' }),
+    t('category', 'Kategori', { suggest: categories, help: 'Elle yaz ya da listeden seç. Öneriler: Ana sayfa > Yazılar > Kategori listesi.' }),
     { key: 'publishedAt', title: 'Yayın tarihi', type: 'date' },
     { key: 'readingMinutes', title: 'Okuma süresi (dakika)', type: 'number', help: 'Boş bırakırsan kayıtta otomatik hesaplanır.' },
     ta('excerpt', 'Kısa özet (kartlarda görünür)', 3, { max: 220 }), ta('lede', 'Giriş paragrafı', 4),
