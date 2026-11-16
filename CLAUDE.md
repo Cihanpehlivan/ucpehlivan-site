@@ -101,7 +101,7 @@ Umut Cihan Pehlivan'ın kişisel marka sitesi: **yapay zeka içeriklerinin kalı
 | Normal yazı | Admin › Yazılar. Adres: `/blog/<slug>/` |
 | İnteraktif yazı | `content/<ad>.json` yaz → `node scripts/build-yazi.mjs` → admin'de yazının **Özel sayfa adresi** alanına `/yazi/<ad>/` yaz. Kart ve `/blog/` adresi oraya gider. |
 
-> Yeni interaktif yazıda: `firebase.json` › `redirects` içine `/blog/<slug>` → `/yazi/<ad>/` için **301** kaydı ekle. İçerik dosyasının `meta` alanında `updated`, `readingMinutes`, `summaryLabel` ve 3 maddelik `summary` (Kısaca kutusu) olsun.
+> Yeni interaktif yazıda: `firebase.json` › `redirects` içine `/blog/<slug>` → `/yazi/<ad>/` için **301** kaydı ekle. İçerik dosyasının `meta` alanında `updated`, `readingMinutes`, `summaryLabel` ve 3 maddelik `summary` (Özet alanı, `summaryLabel: "Özet"`) olsun.
 
 > Bilinen sınır: `build-yazi.mjs` şu an tek bir dosyayı (`content/prompt-yazisi.json`) okur. İkinci interaktif yazıda scripti, `content/` klasöründeki tüm JSON dosyalarını işleyecek şekilde genelleştir.
 
@@ -113,7 +113,7 @@ Umut Cihan Pehlivan'ın kişisel marka sitesi: **yapay zeka içeriklerinin kalı
 | Site adı | `og:site_name` (`layout`) | |
 | llms.txt | `renderLlms` → `build-static.mjs` | Yayında Firestore'dan üretilir. |
 | Site haritası | `renderSitemap` | Ana sayfa ve blog tarihi = en yeni yazının tarihi. |
-| Yazı sayfası | `build-yazi.mjs` | Görünür yazar satırı (`.yz-byline`) ve Kısaca kutusu (`.yz-tldr`). |
+| Yazı sayfası | `build-yazi.mjs` | Görünür yazar satırı (`.yz-byline`) ve Özet alanı (`.yz-tldr`). |
 
 ### Kategoriler ve filtre
 
@@ -300,6 +300,12 @@ Her oturumun sonunda **en üste** yeni bir not ekle. Eski notları silme. 10 not
 - **Açık kalan:** …
 - **Sonraki adım:** …
 ```
+
+### 2026-11-16 — Yazı özeti yeniden tasarlandı
+- **Yapılan:** Yazı başındaki özet kutusu ("AI slop" görünüyordu: beyaz kart + kalın mor sol şerit + tireli liste) yeniden yapıldı: kenarsız, hafif gri tonlu (`surface-2` %60) alan; üstte mor nokta + "ÖZET" etiketi ve çizgi; 3 kolon madde, aralarında ince çizgi, mor `01–03` numaralar; mobilde alt alta. Etiket "Kısaca" → **"Özet"** (`content/prompt-yazisi.json` › `summaryLabel`). Özet ile yazının başı arasında 56px (mobil 40px) boşluk; yazı beyaz, gölgeli iddia kutusuyla başlar. `ui-kit/components.json` › `Box/TLDR` her adımda aynı commit'te güncellendi (§6.1). Canlıda.
+- **Karar:** Özet "yazının dışındaki not" gibi düz ve tonlu kalır; yazının içeriği beyaz/gölgeli kartlarla başlar. Ayrım yeni öğeyle değil ton farkı + boşlukla yapılır.
+- **Açık kalan:** Yok.
+- **Sonraki adım:** Yeni interaktif yazıda aynı özet yapısını kullan (`meta.summary`, 3 madde).
 
 ### 2026-11-16 — Design system (ui-kit)
 - **Yapılan:** `ui-kit/` kuruldu: `UI-00-Kit.html` (tek board, 3 kolon, bileşenleri `public/` sayfalarından canlı okur), `tokens.json`, `components.json`, `README.md`. 24 atom · 19 molekül · 13 organizma · 5 şablon. ~90 kullanılmayan seçici `dropped_selectors`'a ayrıldı. Yazı başlığı rahatlatıldı (96px, lh 1.02, ls -.03em).
