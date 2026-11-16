@@ -76,7 +76,7 @@ export function postSchema(categories = []) {
     ta('excerpt', 'Kısa özet (kartlarda görünür)', 3, { max: 220 }), ta('lede', 'Giriş paragrafı', 4),
     { key: 'body', title: 'Yazı metni', type: 'richtext' },
     { type: 'heading', title: 'Kapak' },
-    sel('coverStyle', 'Kapak tipi', [['kanban', 'Kanban çizimi'], ['redirect', 'Yönlendirme (301) çizimi'], ['chat', 'Sohbet çizimi'], ['chart', 'Grafik çizimi'], ['image', 'Görsel yükle']]),
+    sel('coverStyle', 'Kapak tipi', [['brief', 'Brief çizimi'], ['kanban', 'Kanban çizimi'], ['redirect', 'Yönlendirme (301) çizimi'], ['chat', 'Sohbet çizimi'], ['chart', 'Grafik çizimi'], ['image', 'Görsel yükle']]),
     { key: 'coverImage', title: 'Kapak görseli', type: 'image', showIf: (v) => v.coverStyle === 'image' },
     { key: 'coverColor', title: 'Kapak arka plan rengi', type: 'color' },
     { key: 'coverHighlight', title: 'Kapak çizim rengi', type: 'color', showIf: (v) => v.coverStyle !== 'image' },
