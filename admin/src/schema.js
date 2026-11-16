@@ -59,6 +59,7 @@ export const homeSections = [
       { key: 'highlight', title: 'Vurgulu göster (ana hesap)', type: 'bool', help: 'Vurgulu hesap, yazı sayfalarındaki "Takip et" butonunda da kullanılır.' },
       { key: 'visible', title: 'Sitede göster', type: 'bool' },
     ], { itemTitle: (x) => x.name, itemSub: (x) => [x.visible === false ? 'Gizli' : '', x.highlight ? 'Vurgulu' : '', x.sub].filter(Boolean).join(' · '), defaults: { name: '', sub: '', url: '', icon: 'link', highlight: false, visible: true }, help: 'Yeni hesap açınca buraya ekle. Sıra, sitedeki sıradır.' }),
+    { key: 'illustration', title: 'Çizimi göster', type: 'bool', defaultOn: true },
   ] },
 ];
 

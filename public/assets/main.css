@@ -7,9 +7,6 @@
   --wrap:1180px;--r:22px;
   box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
 }
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
-  --bg:#0C0D10;--surface:#16171B;--surface-2:#1E2025;--ink:#F2F3F5;--text:#C8CAD0;--muted:#8B8F99;
-  --line:rgba(255,255,255,.08);--accent:#8C86FF;--on-accent:#0C0D10;--go:#3DDC84;color-scheme:dark}}
 :root[data-theme="dark"]{
   --bg:#0C0D10;--surface:#16171B;--surface-2:#1E2025;--ink:#F2F3F5;--text:#C8CAD0;--muted:#8B8F99;
   --line:rgba(255,255,255,.08);--accent:#8C86FF;--on-accent:#0C0D10;--go:#3DDC84;color-scheme:dark}
@@ -381,7 +378,7 @@ main > .bhero:first-child{position:relative}
 .about-facts span{font-size:13px;font-weight:600;padding:7px 13px;border-radius:999px;border:1px solid var(--line);background:var(--surface);color:var(--ink)}
 @media (max-width:900px){.about.about2{grid-template-columns:1fr}.about2 .about-ill{order:0;max-width:420px}}
 @media (prefers-reduced-motion:no-preference){
-.ill-float{animation:illf 5s ease-in-out infinite}
+.ill-float{animation:illf 5s ease-in-out infinite}.ill-float.f2{animation-delay:-1.7s}.ill-float.f3{animation-delay:-3.3s}
 @keyframes illf{50%{transform:translateY(-8px)}}
 .ill-dot{animation:illd 1.2s ease-in-out infinite}.ill-dot.d2{animation-delay:.15s}.ill-dot.d3{animation-delay:.3s}
 @keyframes illd{0%,60%,100%{opacity:.35}30%{opacity:1}}
@@ -391,7 +388,11 @@ main > .bhero:first-child{position:relative}
 @keyframes illst{0%{opacity:0;transform:translateY(6px)}50%{opacity:.8}100%{opacity:0;transform:translateY(-6px)}}
 }
 /* Hesaplarım */
-.acc{display:grid;gap:12px;max-width:760px}
+.acc{display:grid;grid-template-columns:minmax(0,1fr);gap:12px;max-width:760px;min-width:0}
+.acc-wrap.has-ill{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:56px;align-items:center}
+.acc-wrap.has-ill .acc{max-width:none}
+.acc-ill svg{width:100%;height:auto;display:block;max-width:460px;margin-left:auto}
+@media (max-width:900px){.acc-wrap.has-ill{grid-template-columns:minmax(0,1fr);gap:36px}.acc-ill svg{max-width:380px;margin:0 auto}}
 .acc-row{display:flex;align-items:center;gap:18px;padding:14px 22px 14px 14px;border-radius:20px;background:var(--surface);border:1px solid var(--line);text-decoration:none;color:var(--ink);transition:transform .2s,border-color .2s}
 .acc-row:hover{transform:translateY(-2px);border-color:var(--accent)}
 .acc-row.hot{background:var(--accent);color:var(--on-accent);border-color:var(--accent);box-shadow:0 5px 0 var(--ink)}

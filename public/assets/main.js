@@ -8,7 +8,7 @@
     ctl=new AbortController(); var sig={signal:ctl.signal};
     var tb=document.getElementById('theme');
     if(tb)tb.addEventListener('click',function(){
-      var cur=root.getAttribute('data-theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');
+      var cur=root.getAttribute('data-theme')||'light';
       var n=cur==='dark'?'light':'dark';root.setAttribute('data-theme',n);try{localStorage.setItem('ucp-theme',n);}catch(e){}
     },sig);
     // Kategori filtresi (admin'de açıksa sayfada bulunur)
