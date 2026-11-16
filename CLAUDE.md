@@ -41,6 +41,7 @@ Umut Cihan Pehlivan'ın kişisel marka sitesi: **yapay zeka içeriklerinin kalı
 | **Sadece Firebase ücretsiz Spark planı.** Cloud Functions, Storage, Blaze ve ücretli servis **eklenmez**. | Sahibinin kararı. |
 | Gizli anahtar, token, servis hesabı JSON'u repoya **yazılmaz**. | Repo herkese açık. |
 | Bir şeyi **silmeden, push yapmadan, deploy etmeden önce** kısaca ne yapacağını söyle ve onay al. | |
+| Önyüzde görsel bir değişiklik design system'i (`ui-kit/`) etkiliyorsa **push'tan önce uyar** ve kiti aynı commit'te güncelle (§6.1). | Kit ile site ayrışmasın. |
 
 ---
 
@@ -80,6 +81,7 @@ Umut Cihan Pehlivan'ın kişisel marka sitesi: **yapay zeka içeriklerinin kalı
 | Stiller | `public/assets/main.css` | Kaynak dosya budur (derleme yok). |
 | İnteraktif yazı | `content/*.json` + `scripts/build-yazi.mjs` → `public/yazi/<ad>/` | Stil: `public/assets/yazi.css`, davranış: `public/assets/yazi.js`. |
 | Başlangıç içeriği | `scripts/seed.json` = `public/admin/seed.json` | İkisi **aynı** kalmalı. |
+| Design system | `ui-kit/` | Kit board'u + tokens/components/README. Yayına girmez. Senkron kuralı §6.1. |
 | Paylaşım görseli | `scripts/build-og.mjs` → `public/og.png` | Google Chrome gerekir. |
 
 ### Ana sayfa bölümleri
@@ -145,6 +147,24 @@ firebase deploy                  # hosting + firestore kuralları
 - Header'da buton **yok** (bilinçli karar). Tek "Takip et" hero'daki dönen rozettir ve Hesaplarım'a gider.
 - Çizimler SVG, sitenin renk değişkenleriyle. Animasyonlar `prefers-reduced-motion` ile kapanır.
 - Metinde Türkçe tipografi: kesme işareti ’, tırnak “ ”.
+
+### 6.1 Design system senkronu (`ui-kit/`)
+
+```
+ Tek kaynak: public/assets/main.css + yazi.css + shared/render.js (+ build-yazi.mjs)
+        │
+        ├──► UI-00-Kit.html  ── public/ sayfalarından CANLI okur → otomatik güncellenir
+        └──► tokens.json / components.json / README.md ── ELLE güncellenir
+```
+
+| Durum | Ne yap |
+|---|---|
+| **Önyüzde değişiklik** (CSS, şablon, yeni sınıf, yeni bileşen) | Push'tan önce kontrol et: bir token değeri, bileşen ölçüsü, varyant veya durum değişti mi? Değiştiyse kullanıcıya **"Bu değişiklik design system'i etkiliyor: …"** diye listeyle uyar. `tokens.json` / `components.json` / `README.md`'yi aynı commit'te güncelle. Yeni bileşen veya varyant varsa `UI-00-Kit.html`'e öğe ekle. |
+| **Design system'de değişiklik** (ör. "buton köşesini değiştir") | Kit üretim kodu değildir. Değişikliği **önce kaynağa** (`main.css`, `yazi.css`, `render.js`) uygula, sonra `ui-kit/*.json`'u güncelle. Kit board'u kendiliğinden yenilenir. Etkilenen tüm sayfaları say ve önizlemede göster. |
+| **Kullanılmayan stil silinirse** | `components.json` › `dropped_selectors` listesinden de çıkar. |
+| **Şablonda olup ekranda olmayan yapı ekrana gelirse** | `template_only`'den çıkarıp kite öğe olarak ekle (ör. ilk normal blog yazısı, kategori filtresi). |
+
+Kontrol: `ui-kit/UI-00-Kit.html` repo kökünden yerel sunucuyla açılır (`npx serve .` → `/ui-kit/UI-00-Kit.html`).
 
 ---
 
@@ -280,6 +300,12 @@ Her oturumun sonunda **en üste** yeni bir not ekle. Eski notları silme. 10 not
 - **Açık kalan:** …
 - **Sonraki adım:** …
 ```
+
+### 2026-11-16 — Design system (ui-kit)
+- **Yapılan:** `ui-kit/` kuruldu: `UI-00-Kit.html` (tek board, 3 kolon, bileşenleri `public/` sayfalarından canlı okur), `tokens.json`, `components.json`, `README.md`. 24 atom · 19 molekül · 13 organizma · 5 şablon. ~90 kullanılmayan seçici `dropped_selectors`'a ayrıldı. Yazı başlığı rahatlatıldı (96px, lh 1.02, ls -.03em).
+- **Karar:** Kaynak her zaman CSS + render.js; kit onları yansıtır. Senkron kuralları §2 ve §6.1'de. "Design canvas" aracı olmadığı için skill'deki `canvas.json` adımı uygulanmadı.
+- **Açık kalan:** Tema butonu mobilde 36px (<44). `main.css` eski seçici temizliği. Normal blog yazısı ve kategori filtresi ekrana gelince kite eklenecek.
+- **Sonraki adım:** İstenirse `main.css` temizliği (ayrı iş, önce önizleme).
 
 ### 2026-11-16 — SEO ve GEO
 - **Yapılan:** Tarama yapıldı, 12 madde çıktı; 1–9 uygulandı ve canlıda: yazıda görünür yazar/tarih satırı ve "Kısaca" kutusu, `/llms.txt`, `/blog/prompt-yazmak-brief/` için 301 (`firebase.json`), tüm sayfalarda `og:site_name` + WebSite/Person verisi, BlogPosting tamamlandı (dateModified, yayıncı, @id bağları), blogda Blog verisi, site haritasında ana sayfa/blog tarihleri. Kod `render.js`, `build-static.mjs`, `build-yazi.mjs`; yazı HTML'i elle güncellendi (Node yok). `render.js` tarayıcıda gerçek Firestore içeriğiyle test edildi.

@@ -1,0 +1,449 @@
+<!doctype html>
+<html lang="tr" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>UI 00 · UI kit — ucpehlivan.web.app</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Geist:wght@400;500;600&display=swap" rel="stylesheet">
+<!-- Sitenin gerçek CSS'i: kitteki atom ve moleküller bu kurallarla çizilir -->
+<link rel="stylesheet" href="../public/assets/main.css">
+<link rel="stylesheet" href="../public/assets/yazi.css">
+<style>
+/* ---- Kit board'unun kendi stili (sitede yok) ---- */
+body.kit-page{overflow-x:auto;background:#D4D6DB}
+.kit{width:4740px;padding:64px 80px 80px;display:flex;flex-direction:column;gap:44px;background:var(--bg);color:var(--text);font-family:var(--body)}
+.k-mono{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+.k-head{display:flex;justify-content:space-between;align-items:flex-end;gap:48px}
+.k-head h1{font-family:var(--display);font-variation-settings:"wdth" 88;font-weight:800;font-size:76px;line-height:1;letter-spacing:-.03em;color:var(--ink)}
+.k-head p{max-width:110ch;font-size:17px;line-height:1.6;margin-top:18px}
+.k-head p code{font:600 14px ui-monospace,Menlo,monospace;color:var(--ink)}
+.k-legend{display:flex;gap:8px;justify-content:flex-end;flex-wrap:wrap}
+.k-count{font:600 15px var(--body);color:var(--muted);margin-top:14px;text-align:right}
+.k-lv{display:inline-block;font:700 11px ui-monospace,Menlo,monospace;letter-spacing:.08em;text-transform:uppercase;padding:5px 10px;border-radius:6px;white-space:nowrap}
+.lv-token{background:#0C0D10;color:#F1F2F4}
+.lv-atom{background:#4B43E0;color:#fff}
+.lv-mol{background:#DCDAFB;color:#4B43E0}
+.lv-org{background:#3A3D46;color:#fff}
+.lv-tpl,.lv-img{background:#fff;color:#0C0D10;box-shadow:inset 0 0 0 1px #0C0D10}
+.lv-sec{background:#F1F2F4;color:#6A6E79;box-shadow:inset 0 0 0 1px #6A6E79}
+.k-cols{display:flex;gap:40px;align-items:flex-start}
+.k-col{width:1500px;flex:none;display:flex;flex-direction:column;gap:40px}
+.k-sec{background:#fff;border:1px solid rgba(12,13,16,.09);padding:32px 36px 40px;display:flex;flex-direction:column;gap:26px}
+.k-sh-top{display:flex;align-items:center;gap:14px}
+.k-sh h2{font-family:var(--display);font-variation-settings:"wdth" 88;font-weight:800;font-size:34px;line-height:1.1;letter-spacing:-.02em;color:#0C0D10}
+.k-sh small{display:block;margin-top:8px;font-size:14px;color:#6A6E79}
+.k-grp{border-top:1px solid #0C0D10;padding-top:14px;display:flex;flex-direction:column;gap:18px}
+.k-grp-h{display:flex;gap:14px;align-items:baseline;flex-wrap:wrap}
+.k-grp-h b{font:700 16px var(--body);color:#0C0D10}
+.k-grp-h span{font-size:13px;color:#6A6E79}
+.k-items{display:flex;flex-wrap:wrap;gap:22px;align-items:flex-start}
+.k-item{display:flex;flex-direction:column;gap:10px;min-width:200px;max-width:100%}
+.k-stage{position:relative;padding:28px;border-radius:10px;border:1px solid var(--line);background:var(--bg);display:flex;align-items:center;justify-content:center;min-height:100px}
+.k-stage.on-surface{background:var(--surface)}
+.k-stage.wide{justify-content:flex-start}
+.k-desc{font-size:13px;line-height:1.5;color:#6A6E79;max-width:440px}
+.k-desc code{display:block;font:700 12.5px ui-monospace,Menlo,monospace;color:#0C0D10;margin-bottom:3px}
+.k-dark{--bg:#0C0D10;--surface:#16171B;--surface-2:#1E2025;--ink:#F2F3F5;--text:#C8CAD0;--muted:#8B8F99;--line:rgba(255,255,255,.08);--accent:#8C86FF;--on-accent:#0C0D10;--go:#3DDC84;color-scheme:dark;color:var(--text)}
+/* Renk */
+.k-sw{width:248px;display:flex;flex-direction:column;gap:8px}
+.k-chip{height:86px;border-radius:10px;overflow:hidden;display:flex;border:1px solid rgba(12,13,16,.12)}
+.k-chip i{flex:1;display:flex;align-items:flex-end;padding:6px 8px;font:600 10px ui-monospace,Menlo,monospace;font-style:normal}
+.k-sw b{font:700 13px ui-monospace,Menlo,monospace;color:#0C0D10}
+.k-sw span{font-size:12.5px;line-height:1.45;color:#6A6E79}
+/* Tipografi */
+.k-fam{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.k-fam div{border:1px solid rgba(12,13,16,.09);border-radius:10px;padding:18px 20px}
+.k-fam b{display:block;font-size:44px;color:#0C0D10;line-height:1.1;margin-bottom:8px}
+.k-type{display:grid;grid-template-columns:190px minmax(0,1fr) 430px;gap:24px;align-items:center;padding:16px 0;border-bottom:1px solid rgba(12,13,16,.09)}
+.k-type code{font:700 12.5px ui-monospace,Menlo,monospace;color:#0C0D10}
+.k-type .k-desc{max-width:none}
+.k-type-s{color:var(--ink);overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+/* Yerleşim */
+.k-bars{display:flex;flex-direction:column;gap:6px}
+.k-bar{display:grid;grid-template-columns:60px 1fr;align-items:center;gap:12px;font:600 12px ui-monospace,Menlo,monospace;color:#0C0D10}
+.k-bar i{display:block;height:12px;background:#4B43E0;border-radius:2px}
+.k-box{width:150px;height:96px;background:#fff;border:1px solid rgba(12,13,16,.12);display:grid;place-items:center;font:600 12px ui-monospace,Menlo,monospace;color:#0C0D10}
+.k-table{width:100%;border-collapse:collapse;font-size:14px}
+.k-table td,.k-table th{padding:10px 12px;border-bottom:1px solid rgba(12,13,16,.09);text-align:left;vertical-align:top}
+.k-table th{font:700 11px ui-monospace,Menlo,monospace;letter-spacing:.06em;text-transform:uppercase;color:#6A6E79}
+.k-table td:first-child{font:700 12.5px ui-monospace,Menlo,monospace;color:#0C0D10;white-space:nowrap}
+/* İkon */
+.k-icons{display:grid;grid-template-columns:repeat(8,1fr);gap:12px}
+.k-icon{border:1px solid rgba(12,13,16,.09);border-radius:10px;padding:18px 10px 12px;display:flex;flex-direction:column;align-items:center;gap:10px;color:#0C0D10}
+.k-icon svg{width:28px;height:28px}
+.k-icon code{font:600 11px ui-monospace,Menlo,monospace;color:#6A6E79}
+/* Organizma çerçeveleri */
+.k-frame{border:1px solid var(--line);border-radius:10px;overflow:hidden;background:var(--bg);position:relative}
+.k-frame iframe{border:0;display:block;transform:scale(.5);transform-origin:0 0;position:absolute;top:0;left:0}
+.k-pair{display:flex;gap:22px;align-items:flex-start}
+/* Şablon */
+.k-tpl{display:flex;flex-direction:column;gap:4px;width:340px}
+.k-tpl li{list-style:none;padding:9px 12px;border-radius:6px;font:600 13px var(--body)}
+.k-tpl .t-shell{background:#3A3D46;color:#fff}
+.k-tpl .t-org{background:#DCDAFB;color:#2a2490}
+.k-tpl .t-mol{background:#ECEBFD;color:#4B43E0}
+.k-tpl .t-atom{background:#4B43E0;color:#fff}
+.k-tpl .t-sec{background:#fff;color:#6A6E79;box-shadow:inset 0 0 0 1px #6A6E79}
+.k-tplnote{font-size:12.5px;color:#6A6E79;line-height:1.5;margin-top:6px}
+.k-err{padding:12px 16px;border-radius:8px;background:#fde8e8;color:#9b1c1c;font:600 13px var(--body)}
+</style>
+</head>
+<body class="kit-page">
+<div class="kit" id="kit">
+  <div class="k-head">
+    <div>
+      <h1>ucpehlivan.web.app UI kit</h1>
+      <p>Yayındaki ekranlarda (<code>/</code>, <code>/blog/</code>, <code>/yazi/prompt-brief/</code>, <code>404</code>, <code>/blog/post.html</code> kabuğu) <b>gerçekten kullanılan</b> token ve bileşenler. Kullanılmayan öğe yok; değerler <code>public/assets/main.css</code> ve <code>yazi.css</code>'ten birebir. Bileşenler sitenin kendi sayfalarından canlı alınır ve sitenin gerçek CSS'iyle çizilir. Ayrıntı: <code>ui-kit/tokens.json</code>, <code>ui-kit/components.json</code>, <code>ui-kit/README.md</code>. Referans genişlik 1440 px (mobil 375 px); organizmalar %50 ölçekte.</p>
+    </div>
+    <div>
+      <div class="k-legend"><span class="k-lv lv-token">Token</span><span class="k-lv lv-img">Görsel</span><span class="k-lv lv-atom">Atom</span><span class="k-lv lv-mol">Molekül</span><span class="k-lv lv-org">Organizma</span><span class="k-lv lv-tpl">Şablon</span></div>
+      <div class="k-count" id="k-count">…</div>
+    </div>
+  </div>
+  <div class="k-cols"><div class="k-col" id="c1"></div><div class="k-col" id="c2"></div><div class="k-col" id="c3"></div></div>
+</div>
+
+<script type="module">
+// Kit, sitenin üretilmiş sayfalarını (public/) okur ve bileşenleri oradan kopyalar.
+// Böylece kit, ekranlarla her zaman aynı kalır. Yerel sunucu gerekir (fetch file:// ile çalışmaz).
+const PUB = new URL('../public/', location.href).href;
+const PAGES = { home: 'index.html', blog: 'blog/index.html', yazi: 'yazi/prompt-brief/index.html', nf: '404.html', shell: 'blog/post.html' };
+const LV = { token: ['lv-token', 'Token'], img: ['lv-img', 'Görsel'], atom: ['lv-atom', 'Atom'], molecule: ['lv-mol', 'Molekül'], organism: ['lv-org', 'Organizma'], template: ['lv-tpl', 'Şablon'] };
+const esc = (s) => String(s ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+const h = (html) => { const t = document.createElement('template'); t.innerHTML = html.trim(); return t.content.firstElementChild; };
+const absPaths = (html) => html.replace(/(src|href)="\/(?!\/)/g, `$1="${PUB}`);
+
+let T, C, DOC = {};
+const spec = (code) => (C.components.find((x) => x.code === code) || {}).spec || '';
+const q = (page, sel) => { const el = DOC[page].querySelector(sel); if (!el) throw new Error(`${page}: ${sel} bulunamadı`); return el.cloneNode(true); };
+
+function section(col, level, title, groups) {
+  const [cls, label] = LV[level];
+  const s = h(`<section class="k-sec"><div class="k-sh"><div class="k-sh-top"><span class="k-lv ${cls}">${label}</span><h2>${esc(title)}</h2></div><small>${esc(groups.join(' · '))}</small></div></section>`);
+  document.getElementById(col).append(s);
+  return s;
+}
+function group(sec, name, rule) {
+  const g = h(`<div class="k-grp"><div class="k-grp-h"><b>${esc(name)}</b>${rule ? `<span>${esc(rule)}</span>` : ''}</div><div class="k-items"></div></div>`);
+  sec.append(g);
+  return g.querySelector('.k-items');
+}
+// Canlı öğe: node sahneye konur, altına kod + açıklama yazılır.
+function item(box, { code, variant, node, desc, stage = '', yz = false, width }) {
+  const it = h(`<div class="k-item"${width ? ` style="width:${width}px"` : ''}><div class="k-stage ${stage}"></div><p class="k-desc"><code>${esc(code)}${variant ? ` · ${esc(variant)}` : ''}</code>${esc(desc ?? spec(code))}</p></div>`);
+  const st = it.querySelector('.k-stage');
+  if (yz) { const w = h('<div class="yz" style="width:100%;display:flex;justify-content:center"></div>'); w.append(node); st.append(w); } else st.append(node);
+  box.append(it);
+  return it;
+}
+// Organizma: gerçek ekran genişliğinde iframe içinde çizilir, %50 ölçekte gösterilir.
+function frame(box, { code, variant, html, width = 1440, desc, yz = false, home = false }) {
+  const body = yz ? `<div class="yz"><div class="wrap yz-grid"><div></div><article class="yz-article">${html}</article></div></div>` : home ? `<main>${html}</main>` : html;
+  const doc = `<!doctype html><html lang="tr" data-theme="light"><head><meta charset="utf-8"><meta name="viewport" content="width=${width}">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Geist:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="${PUB}assets/main.css"><link rel="stylesheet" href="${PUB}assets/yazi.css">
+<style>html{height:auto!important}body{display:flow-root}header,.yz-nav,.yz-outbox{position:relative!important;top:0!important}.progress{position:relative}.guides{display:none!important}.yz-sec:first-child{padding-top:24px}</style></head><body>${absPaths(body)}</body></html>`;
+  const it = h(`<div class="k-item"><div class="k-frame" style="width:${width / 2}px;height:200px"><iframe width="${width}" height="400" loading="eager" title="${esc(code)}"></iframe></div><p class="k-desc" style="max-width:${width / 2}px"><code>${esc(code)}${variant ? ` · ${esc(variant)}` : ''} · ${width}px</code>${esc(desc ?? spec(code))}</p></div>`);
+  const fr = it.querySelector('iframe'), wrap = it.querySelector('.k-frame');
+  // Yükseklik: body'nin içerik yüksekliği (html, CSS'te %100 olduğu için iframe boyunu döndürür).
+  const fit = () => { try { const b = fr.contentDocument.body; const hgt = Math.ceil(b.getBoundingClientRect().height) || b.scrollHeight; fr.height = hgt; wrap.style.height = `${Math.ceil(hgt / 2)}px`; } catch {} };
+  fr.addEventListener('load', () => { fit(); setTimeout(fit, 800); setTimeout(fit, 2500); });
+  fr.srcdoc = doc;
+  box.append(it);
+  return it;
+}
+
+// ---------------- TOKEN
+function tokens() {
+  const sec = section('c1', 'token', 'Renk', ['marka', 'zemin', 'metin', 'çizgi', 'durum', 'saydam yüzeyler']);
+  const sw = (box, name, t) => {
+    const light = t.light || t.value, dark = t.dark;
+    const solid = (v) => /^#|^rgba?\(/.test(v);
+    // Yazı rengi: hex için parlaklığa bakılır; saydam değerler kendi tema zemininin üstünde çizilir.
+    const lum = (v) => { const m = /^#([0-9a-f]{6})$/i.exec(v); if (!m) return null; const n = parseInt(m[1], 16); return ((n >> 16) * 299 + ((n >> 8) & 255) * 587 + (n & 255) * 114) / 255000; };
+    const ink = (v, fallback) => { const l = lum(v); return l === null ? fallback : l > .55 ? '#0C0D10' : '#F2F3F5'; };
+    const chip = dark
+      ? `<i style="background:linear-gradient(${light},${light}),#F1F2F4;color:${ink(light, '#0C0D10')}">açık ${esc(light)}</i><i style="background:linear-gradient(${dark},${dark}),#0C0D10;color:${ink(dark, '#F2F3F5')}">koyu ${esc(dark)}</i>`
+      : solid(light) ? `<i style="background:${light};color:${ink(light, '#0C0D10')}">${esc(light)}</i>` : `<i style="background:${light}"></i>`;
+    box.append(h(`<div class="k-sw"><div class="k-chip">${chip}</div><b>${esc(t.var || name)}</b><span>${esc(solid(light) || dark ? '' : light + ' · ')}${esc(t.usage)}</span></div>`));
+  };
+  const g1 = group(sec, 'Marka', 'tek vurgu rengi · koyu temada açılır'); Object.entries(T.color).forEach(([k, v]) => sw(g1, k, v));
+  const g2 = group(sec, 'Zemin ve yüzey', 'sayfa → kart → ikinci yüzey'); Object.entries(T.surface).forEach(([k, v]) => sw(g2, k, v));
+  const g3 = group(sec, 'Metin', 'başlık ink · gövde text · ikincil muted'); Object.entries(T.text).forEach(([k, v]) => sw(g3, k, v));
+  const g4 = group(sec, 'Çizgi', '1px kenar · 2px bölüm ayırıcı'); Object.entries(T.line).forEach(([k, v]) => sw(g4, k, v));
+  const g5 = group(sec, 'Durum', 'hata yalnız yazı sayfasında · başarı = go'); Object.entries(T.status).forEach(([k, v]) => sw(g5, k, v));
+  const g6 = group(sec, 'Saydam yüzeyler', 'yapışkan şeritler arkasını bulanıklaştırır');
+  Object.entries(T.overlay).forEach(([k, v]) => g6.append(h(`<div class="k-sw"><div class="k-chip" style="background:repeating-linear-gradient(45deg,#4B43E0 0 8px,#fff 8px 16px)"><i style="background:color-mix(in srgb,#F1F2F4 82%,transparent);backdrop-filter:blur(6px)"></i></div><b>${esc(k)}</b><span>${esc(v.value)} · ${esc(v.usage)}</span></div>`)));
+
+  const ty = section('c1', 'token', 'Tipografi', ['aileler', 'başlık', 'gövde', 'arayüz', 'mono']);
+  const fam = group(ty, 'Aileler', 'Archivo başlık · Geist metin · mono yalnız yazı sayfası');
+  fam.append(h(`<div class="k-fam" style="width:100%"><div><b style="font-family:var(--display);font-weight:800;font-variation-settings:'wdth' 88">Archivo</b><p class="k-desc">display · 700/800 · wdth 76–92 · başlık, logo, kart başlığı</p></div><div><b style="font-family:var(--body);font-weight:500">Geist</b><p class="k-desc">body · 400/500/600 · metin, buton, menü, meta</p></div><div><b style="font-family:ui-monospace,Menlo,monospace;font-weight:700;font-size:36px">mono</b><p class="k-desc">sistem monospace · 600/700 · numara, etiket, çıktı</p></div></div>`));
+  const rows = group(ty, 'Stiller', 'token | canlı örnek | css + kullanım');
+  const S = {
+    'display.hero': ['HER GÜN YAPAY ZEKA', 'font-family:var(--display);font-variation-settings:"wdth" 76;font-weight:800;font-size:81px;line-height:.98;letter-spacing:-.035em'],
+    'display.page': ['Yazılar', 'font-family:var(--display);font-variation-settings:"wdth" 88;font-weight:800;font-size:112px;line-height:.95;letter-spacing:-.04em'],
+    'display.article': ['Prompt yazmak', 'font-family:var(--display);font-variation-settings:"wdth" 88;font-weight:800;font-size:96px;line-height:1.02;letter-spacing:-.03em'],
+    'display.section': ['Bu yazıların arkasındaki', 'font-family:var(--display);font-variation-settings:"wdth" 88;font-weight:800;font-size:76px;line-height:.95;letter-spacing:-.025em'],
+    'display.yz-h': ['Masamdaki iki model', 'font-family:var(--display);font-variation-settings:"wdth" 88;font-weight:800;font-size:80px;line-height:.95;letter-spacing:-.025em'],
+    'display.card': ['Prompt Yazmak, Aslında İyi Bir Brief Yazmak', 'font-family:var(--display);font-variation-settings:"wdth" 92;font-weight:800;font-size:22px;line-height:1.12;letter-spacing:-.02em'],
+    'display.item': ['Modele unvan takmak', 'font-family:var(--display);font-variation-settings:"wdth" 92;font-weight:800;font-size:28px;line-height:1.1;letter-spacing:-.015em'],
+    'display.claim': ['İyi bir brief adımları saymaz', 'font-family:var(--display);font-variation-settings:"wdth" 92;font-weight:700;font-size:36px;line-height:1.35;letter-spacing:-.01em'],
+    'logo': ['Umut Cihan Pehlivan', 'font-family:var(--display);font-variation-settings:"wdth" 82;font-weight:800;font-size:30px;line-height:1;letter-spacing:-.035em'],
+    'body.lede': ['Claude ve GPT’ye prompt yazarken nelere dikkat ediyorum?', 'font-weight:500;font-size:23px;line-height:1.45'],
+    'body.prose': ['İyi bir prompt da iyi bir proje brief’i gibi çalışır.', 'font-size:19px;line-height:1.7;color:var(--text)'],
+    'body.lead': ['Selam, ben Cihan, yapay zeka benim için bir gündem değil.', 'font-size:18px;line-height:1.6;color:var(--text)'],
+    'body.base': ['Varsayılan gövde metni.', 'font-size:16px;line-height:1.6;color:var(--text)'],
+    'body.card': ['Yeni modeller zeki; adım adım reçeteyle kısıtlanınca değil…', 'font-size:15px;line-height:1.6;color:var(--text)'],
+    'ui.button': ['Yazılara göz at', 'font-weight:600;font-size:15px'],
+    'ui.nav': ['Yazılar   Hakkımda   Hesaplarım', 'font-weight:500;font-size:14px;color:var(--muted);white-space:pre'],
+    'ui.kicker': ['[ Notlar ]', 'font-weight:600;font-size:14px;color:var(--accent)'],
+    'ui.meta': ['16 Kasım 2026 · 7 dk okuma', 'font-size:13px;color:var(--muted)'],
+    'ui.chip': ['AI', 'font-weight:600;font-size:12px'],
+    'mono.label': ['NEDEN BU YAZI', 'font-family:ui-monospace,Menlo,monospace;font-weight:600;font-size:13px;letter-spacing:.05em'],
+    'mono.num': ['01  02  03', 'font-family:ui-monospace,Menlo,monospace;font-weight:700;font-size:16px;white-space:pre'],
+    'mono.code': ['− Sen ödüllü bir metin yazarısın.', 'font-family:ui-monospace,Menlo,monospace;font-size:15px;line-height:1.55'],
+  };
+  Object.entries(T.type).forEach(([k, v]) => { const [txt, css] = S[k] || ['Örnek', '']; rows.append(h(`<div class="k-type" style="width:100%"><code>${esc(k)}</code><div class="k-type-s" style="${css}">${esc(txt)}</div><p class="k-desc"><b style="color:#0C0D10;font-weight:600">${esc(v.css)}</b><br>${esc(v.usage)}</p></div>`)); });
+
+  const ly = section('c1', 'token', 'Yerleşim, boşluk, köşe, gölge, hareket', ['kırılım ve yerleşim', 'boşluk ölçeği', 'köşe', 'gölge', 'hareket ve katman']);
+  const gl = group(ly, 'Kırılım ve yerleşim', 'container 1180 · gutter 32/20 · max-width kırılımlar');
+  gl.append(h(`<table class="k-table"><tr><th>token</th><th>değer</th><th>not</th></tr>
+<tr><td>breakpoint.lg</td><td>1020</td><td>altında header menüsü gizlenir</td></tr>
+<tr><td>breakpoint.md</td><td>900</td><td>altında yazı menüsü üstte yatay şerit; Hakkımda ve Hesaplarım tek kolon</td></tr>
+<tr><td>breakpoint.sm</td><td>640</td><td>altında tek kolon kartlar, gutter 20, rozet gizli</td></tr>
+<tr><td>layout.container</td><td>1180 px</td><td>.wrap · padding 0 32 (mobil 20)</td></tr>
+<tr><td>layout.header</td><td>72 px</td><td>yapışkan, %82 bg + blur 14</td></tr>
+<tr><td>layout.section.y</td><td>96 / 96 · mobil 64</td><td>section.block; hero 96/72 · mobil 56</td></tr>
+<tr><td>layout.yz.grid</td><td>200 + 56 + içerik</td><td>yazı sayfası: menü kolonu + boşluk; bölüm 80/96</td></tr>
+<tr><td>layout.measure</td><td>66ch · 52ch · 58ch</td><td>yazı gövdesi · lede · Hakkımda paragrafı</td></tr></table>`));
+  const gs = group(ly, 'Boşluk ölçeği', 'CSS\'te kullanılan değerler · px');
+  gs.append(h(`<div class="k-bars" style="width:100%">${T.space.map((n) => `<div class="k-bar"><span>${n}</span><i style="width:${n * 6}px"></i></div>`).join('')}</div>`));
+  const gr = group(ly, 'Köşe', '--r = 22 kart · 999 pill');
+  Object.entries(T.radius).filter(([k]) => k !== 'note').forEach(([k, v]) => gr.append(h(`<div class="k-sw" style="width:150px"><div class="k-box" style="border-radius:${Math.min(v, 48)}px">${v}</div><b>radius.${esc(k)}</b></div>`)));
+  const gg = group(ly, 'Gölge ve odak', 'gölge az: yalnız vurgulu hesap satırı ve iddia kutusu');
+  gg.append(h(`<div class="k-sw" style="width:200px"><div class="k-box" style="border-radius:20px;box-shadow:0 5px 0 #0C0D10">hot-row</div><span>0 5px 0 ink · hover 7px</span></div>`));
+  gg.append(h(`<div class="k-sw" style="width:200px"><div class="k-box" style="border-radius:22px;box-shadow:0 1px 0 rgba(12,13,16,.09),0 18px 40px -28px rgba(12,13,16,.4)">claim</div><span>iddia kutusu</span></div>`));
+  gg.append(h(`<div class="k-sw" style="width:200px"><div class="k-box" style="border-radius:6px;outline:2px solid #4B43E0;outline-offset:3px">focus</div><span>2px accent · offset 3 (yazıda 3px)</span></div>`));
+  gg.append(h(`<div class="k-sw" style="width:200px"><div class="k-box" style="border-radius:12px;border-color:#4B43E0;box-shadow:0 0 0 3px rgba(75,67,224,.22)">field.focus</div><span>accent %22 halka</span></div>`));
+  gg.append(h(`<div class="k-sw" style="width:200px"><div class="k-box" style="border-radius:12px;border-color:#D93A3A;box-shadow:0 0 0 3px rgba(217,58,58,.18)">field.error</div><span>#D93A3A %18 halka</span></div>`));
+  const gm = group(ly, 'Hareket ve katman', 'reduced-motion açıkken hepsi kapanır');
+  gm.append(h(`<table class="k-table"><tr><th>token</th><th>değer</th></tr>${Object.entries(T.motion).map(([k, v]) => `<tr><td>motion.${esc(k)}</td><td>${esc(v)}</td></tr>`).join('')}${Object.entries(T.z).map(([k, v]) => `<tr><td>z.${esc(k)}</td><td>${esc(v)}</td></tr>`).join('')}</table>`));
+
+  const ic = section('c1', 'token', 'İkonlar', ['arayüz', 'hesaplar', 'akış']);
+  const svg = (p, vb = '0 0 24 24') => `<svg viewBox="${vb}" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${p}</svg>`;
+  const gi = group(ic, 'Arayüz ve hesap ikonları', T.icon.style);
+  const grid = h('<div class="k-icons" style="width:100%"></div>');
+  Object.entries(T.icon).filter(([k]) => !['style', 'flow'].includes(k)).forEach(([k, p]) => grid.append(h(`<div class="k-icon">${svg(p)}<code>Icon/${esc(k)}</code></div>`)));
+  grid.append(h(`<div class="k-icon">${svg('<path d="M2 8h32M28 3l6 5-6 5"/>', '0 0 40 16')}<code>Icon/flow</code></div>`));
+  gi.append(grid);
+}
+
+// ---------------- GÖRSEL
+function visuals() {
+  const sec = section('c1', 'img', 'Marka görselleri', ['logo', 'hero pill', 'rozet', 'illüstrasyon', 'kapak ve paylaşım']);
+  const g1 = group(sec, 'Logo', 'yazı logosu + vurgu noktası · görsel logo yok');
+  item(g1, { code: 'Logo/Wordmark', variant: 'header 21px', node: q('home', 'header .logo'), desc: 'Header, tüm sayfalar · hover: nokta 1.4×' });
+  item(g1, { code: 'Logo/Wordmark', variant: 'footer 30px', node: q('home', 'footer .logo'), desc: 'Footer, tüm sayfalar' });
+  item(g1, { code: 'Favicon', node: h(`<img src="${PUB}favicon.svg" width="48" height="48" alt="">`), desc: '/favicon.svg' });
+  const g2 = group(sec, 'Hero pill ve rozet', 'yalnız ana sayfa hero');
+  const mega = h('<div class="d mega" style="font-size:81px;display:flex;gap:24px"></div>');
+  mega.append(...['.pill-check', '.pill-gantt', '.pill-chart'].map((s) => q('home', s)));
+  item(g2, { code: 'Pill/Hero', variant: 'check · gantt · chart', node: mega, desc: 'Başlık satırlarının içinde, satır yüksekliğinin .78\'i · animasyonlu' });
+  item(g2, { code: 'Badge/Follow', node: q('home', '.badge'), desc: '132×132 · dönen "TAKİP ET" yazısı (16s) · Hesaplarım\'a gider · 640 altında gizli' });
+  const g3 = group(sec, 'İllüstrasyon', 'satır içi SVG · site renk değişkenleriyle · temaya uyar');
+  item(g3, { code: 'Illustration/About', node: Object.assign(q('home', '.about-ill'), { style: 'width:420px' }), desc: 'Hakkımda bölümü · 480×440 viewBox' });
+  item(g3, { code: 'Illustration/Accounts', node: Object.assign(q('home', '.acc-ill'), { style: 'width:420px' }), desc: 'Hesaplarım bölümü · 480×440 viewBox' });
+  const g4 = group(sec, 'Kapak ve paylaşım görseli', 'kart kapağı 16:10 · paylaşım 1200×630');
+  item(g4, { code: 'Cover/Article', node: h(`<img src="${PUB}yazi/prompt-brief/kapak.webp" style="width:360px;border-radius:12px" alt="">`), desc: 'kapak.webp · yazı kartı' });
+  item(g4, { code: 'OG/Site', node: h(`<img src="${PUB}og.png" style="width:360px;border-radius:8px" alt="">`), desc: '/og.png · ana sayfa, blog' });
+  item(g4, { code: 'OG/Article', node: h(`<img src="${PUB}yazi/prompt-brief/og.png" style="width:360px;border-radius:8px" alt="">`), desc: '/yazi/prompt-brief/og.png' });
+}
+
+// ---------------- ATOM
+function atoms() {
+  const sec = section('c2', 'atom', 'Atomlar', ['buton', 'link', 'etiket', 'form', 'seçim', 'gösterge', 'görsel yüzey']);
+  const b = group(sec, 'Buton', 'pill · 600 · geçiş .2s · ikon hover\'da 3px kayar · disabled yalnız tezgâhta (.45)');
+  item(b, { code: 'Button/Primary', node: q('home', '.hero .btn-cv') });
+  item(b, { code: 'Button/Primary', variant: 'koyu tema', node: q('home', '.hero .btn-cv'), stage: 'k-dark', desc: 'accent #8C86FF · metin #0C0D10' });
+  item(b, { code: 'Button/Ghost', node: q('home', '#yazilar .btn-ghost') });
+  item(b, { code: 'Button/Ghost', variant: 'sm', node: q('yazi', '#yz-rev-all'), yz: true, desc: '10×18 · 14px · yazı sayfası' });
+  item(b, { code: 'Button/Ghost', variant: 'sm · disabled', node: (() => { const n = q('yazi', '#yz-fill'); n.disabled = true; return n; })(), yz: true, desc: 'opacity .45 · not-allowed · örnek seçilmeden' });
+  item(b, { code: 'Button/Ink', node: q('nf', '.btn-ink') });
+  item(b, { code: 'Button/Accent · sm', node: q('yazi', '#yz-copy'), yz: true, stage: 'k-dark' });
+  item(b, { code: 'Button/Revise', variant: 'varsayılan', node: q('yazi', '.yz-revbtn'), yz: true });
+  item(b, { code: 'Button/Revise', variant: 'revize edildi', node: (() => { const w = h('<div class="yz-habit is-rev" style="display:block;padding:0;border:0"></div>'); const n = q('yazi', '.yz-revbtn'); n.textContent = 'Geri al'; w.append(n); return w; })(), yz: true, desc: 'muted metin · line-strong kenar' });
+  item(b, { code: 'IconButton/Theme', node: q('home', '#theme'), desc: '40×40 (mobil 36) · daire · ikon 18 · aria-label' });
+
+  const l = group(sec, 'Link', 'alt çizgi yok · renk geçişi .2s');
+  item(l, { code: 'Link/Nav', node: q('home', 'header nav a[href="#hakkimda"]') });
+  item(l, { code: 'Link/Nav', variant: 'aktif sayfa', node: (() => { const n = q('blog', 'header nav a'); n.style.color = 'var(--ink)'; return n; })(), desc: 'aria-current="page" · /blog/ altında Yazılar' });
+  item(l, { code: 'Link/Footer', node: (() => { const w = h('<div class="foot-grid" style="display:block;padding:0"></div>'); w.append(q('home', 'footer .foot-grid a[href="/blog/"]')); return w; })() });
+
+  const e = group(sec, 'Etiket', 'küçük, tek satır · numaralar mono');
+  item(e, { code: 'Kicker', node: q('home', '#yazilar .kicker') });
+  item(e, { code: 'Chip/Category', node: q('home', '.bmeta .chip') });
+  item(e, { code: 'Badge/Status', node: (() => { const n = q('home', '.status'); n.style.margin = 0; return n; })() });
+  item(e, { code: 'Badge/Number', variant: 'menü', node: q('yazi', '.yz-nav li:nth-child(2) .yz-num'), yz: true });
+  item(e, { code: 'Badge/Number', variant: 'aktif / bölüm başı', node: (() => { const x = q('yazi', '#inanclar .yz-sh'); x.querySelector('.yz-mono').remove(); x.style.margin = 0; return x; })(), yz: true, desc: 'accent zemin · bölüm başında 16px' });
+  item(e, { code: 'Badge/Step', node: q('yazi', '.yz-pick .yz-step'), yz: true });
+  item(e, { code: 'Tag/Fact', node: q('home', '.about-facts span') });
+
+  const f = group(sec, 'Form', 'yalnız yazı tezgâhı · radius 12 · odak accent halka · hata #D93A3A');
+  const ta = (mod) => { const n = q('yazi', '#yz-goal'); n.id = ''; n.style.width = '320px'; mod?.(n); const w = h('<div class="yz-field"></div>'); w.append(n); return w; };
+  item(f, { code: 'Field/Textarea', variant: 'boş', node: ta() });
+  item(f, { code: 'Field/Textarea', variant: 'odak', node: ta((n) => { n.style.borderColor = 'var(--accent)'; n.style.boxShadow = '0 0 0 3px color-mix(in srgb,var(--accent) 22%,transparent)'; }), desc: ':focus · kenar accent + %22 halka' });
+  item(f, { code: 'Field/Textarea', variant: 'hata', node: ta((n) => n.setAttribute('aria-invalid', 'true')), desc: 'aria-invalid="true" · kenar ve halka #D93A3A' });
+  const chips = (checked) => { const n = q('yazi', '.yz-chips'); n.querySelectorAll('label:nth-child(n+5)').forEach((x) => x.remove()); n.querySelectorAll('input').forEach((x) => { x.name = 'k' + Math.random(); }); if (checked) n.querySelector('label:nth-of-type(2) input').checked = true; n.style.maxWidth = '460px'; return n; };
+  item(f, { code: 'Choice/Chip', variant: 'seçim yok · seçili', node: chips(true), yz: true, stage: 'on-surface', desc: 'radio · pill · seçili ink zemin' });
+  item(f, { code: 'Choice/Segment', node: (() => { const n = q('yazi', '.yz-seg'); n.querySelectorAll('input').forEach((x) => { x.name = 'seg'; }); return n; })(), yz: true, stage: 'on-surface' });
+
+  const s = group(sec, 'Seçim ve gösterge', 'sekme alt çizgisi 3px · tik 20px · ayırıcı 2px');
+  item(s, { code: 'Tab', variant: 'seçili · seçili değil', node: (() => { const n = q('yazi', '.yz-tablist'); n.style.width = '420px'; const w = h('<div class="yz-tabs" style="margin:0"></div>'); w.append(n); return w; })(), yz: true });
+  item(s, { code: 'Check/Tick', variant: 'boş · tamam', node: (() => { const w = h('<div class="yz-checks" style="border:0;padding:0;display:flex;gap:16px;background:var(--ink);padding:16px;border-radius:10px"><ul style="display:flex;gap:16px"><li style="opacity:1"><span class="yz-tick"></span></li><li class="ok"><span class="yz-tick"></span></li></ul></div>'); return w; })(), yz: true });
+  item(s, { code: 'Divider/Section', node: h('<div style="width:420px;height:2px;background:linear-gradient(to right,var(--accent) 0 72px,color-mix(in srgb,var(--ink) 18%,transparent) 72px)"></div>') });
+  item(s, { code: 'Progress/Read', variant: '%40', node: h('<div class="progress" style="position:relative;width:420px;--p:.4;background:var(--surface-2)"><i></i></div>') });
+
+  const v = group(sec, 'Görsel yüzey', 'ikon kutusu · hesap satırında');
+  item(v, { code: 'Icon/Account box', variant: 'varsayılan · hot', node: (() => { const w = h('<div style="display:flex;gap:12px"></div>'); w.append(q('home', '.acc-row:not(.hot) .acc-ic')); const hot = h('<div class="hot" style="background:var(--accent);padding:8px;border-radius:14px"></div>'); hot.append(q('home', '.acc-row.hot .acc-ic')); w.append(hot); return w; })() });
+}
+
+// ---------------- MOLEKÜL
+function molecules() {
+  const sec = section('c2', 'molecule', 'Moleküller', ['gezinme', 'bilgi satırı', 'bölüm başlığı', 'kart', 'liste', 'kutu', 'form', 'gösterim']);
+  const n = group(sec, 'Gezinme', 'menü linkleri aktif bölümlerden otomatik');
+  item(n, { code: 'Nav/Header', node: q('home', 'header nav') });
+  item(n, { code: 'Nav/Yazı item', variant: 'varsayılan · aktif', node: (() => { const ol = h('<nav class="yz-nav" style="position:static;width:260px"><ol></ol></nav>'); const a = q('yazi', '.yz-nav li:nth-child(1)'); a.querySelector('a').setAttribute('aria-current', 'true'); ol.querySelector('ol').append(a, q('yazi', '.yz-nav li:nth-child(2)'), q('yazi', '.yz-nav li:nth-child(3)')); return ol; })(), yz: true });
+  item(n, { code: 'Footer/Column', node: q('home', '.foot-grid > div:nth-child(2)') });
+
+  const i = group(sec, 'Bilgi satırı ve bölüm başlığı', 'meta 13px muted · yazar ink');
+  item(i, { code: 'Meta/Post', node: q('home', '.bmeta') });
+  item(i, { code: 'Byline/Article', node: q('yazi', '.yz-byline'), yz: true });
+  item(i, { code: 'Head/Section', node: (() => { const x = q('home', '#yazilar .head'); x.style.margin = 0; return x; })(), stage: 'wide', width: 640 });
+  item(i, { code: 'Head/Yazı', node: (() => { const w = h('<div style="width:620px"></div>'); w.append(q('yazi', '#modeller .yz-sh'), q('yazi', '#modeller .yz-h'), q('yazi', '#modeller .yz-lede')); return w; })(), yz: true, stage: 'wide', width: 680 });
+
+  const k = group(sec, 'Kart ve liste', 'kart radius 22 · satır radius 20 · hover yükselir');
+  item(k, { code: 'Card/Post', variant: 'tek yazı (yatay)', node: (() => { const g = q('home', '#yazilar .bgrid'); g.style.width = '1100px'; return g; })(), width: 1160 });
+  item(k, { code: 'Card/Post', variant: 'ızgarada', node: (() => { const c = q('blog', '.bcard'); c.style.width = '380px'; return c; })(), desc: '1 kolon içinde · kapak 16:10 · gövde 22×24' });
+  item(k, { code: 'Row/Account', variant: 'hot', node: (() => { const r = q('home', '.acc-row.hot'); r.style.width = '480px'; return r; })() });
+  item(k, { code: 'Row/Account', variant: 'varsayılan', node: (() => { const r = q('home', '.acc-row:not(.hot)'); r.style.width = '480px'; return r; })() });
+  item(k, { code: 'Facts/About', node: q('home', '.about-facts') });
+  item(k, { code: 'Row/Definition', node: (() => { const d = h('<dl style="width:620px"></dl>'); d.append(q('yazi', '#panel-claude dl > div')); const p = h('<div class="yz-panel" style="padding:0 20px;background:var(--surface);border-radius:12px"></div>'); p.append(d); return p; })(), yz: true });
+
+  const b = group(sec, 'Kutu', 'yazı sayfası · surface + line · radius 16–22');
+  item(b, { code: 'Box/TLDR', node: (() => { const x = q('yazi', '.yz-tldr'); x.style.margin = 0; x.style.width = '760px'; return x; })(), yz: true, width: 820 });
+  item(b, { code: 'Box/Claim', variant: 'varsayılan', node: (() => { const x = q('yazi', '.yz-claim'); x.style.margin = 0; x.style.width = '640px'; return x; })(), yz: true, width: 700 });
+  item(b, { code: 'Box/Claim', variant: '2. parça seçili', node: (() => { const x = q('yazi', '.yz-claim'); x.style.margin = 0; x.style.width = '640px'; x.querySelectorAll('mark')[1].classList.add('on'); return x; })(), yz: true, width: 700, desc: 'mark.on: accent zemin, on-accent metin, 3px halka' });
+  item(b, { code: 'Button/Pillar', variant: 'varsayılan · basılı', node: (() => { const x = q('yazi', '.yz-pillars'); x.style.margin = 0; x.style.width = '760px'; x.querySelector('.yz-pillar').setAttribute('aria-pressed', 'true'); return x; })(), yz: true, width: 820 });
+
+  const d = group(sec, 'Liste, form ve gösterim', 'diff: − silinen / + eklenen · hata yalnız Hedef alanında');
+  const habit = (rev) => { const ol = h('<ol class="yz-revlist" style="width:820px;background:var(--surface);border-radius:16px"></ol>'); const li = q('yazi', '.yz-habit'); if (rev) { li.classList.add('is-rev'); li.querySelector('.yz-add').hidden = false; li.querySelector('.yz-revbtn').textContent = 'Geri al'; } ol.append(li); return ol; };
+  item(d, { code: 'Diff/Habit', variant: 'varsayılan', node: habit(false), yz: true, width: 880 });
+  item(d, { code: 'Diff/Habit', variant: 'revize edildi', node: habit(true), yz: true, width: 880, desc: 'eski satırın üstü çizilir (#D93A3A), yeni satır yzIn ile gelir' });
+  item(d, { code: 'Field/Labeled', variant: 'hata', node: (() => { const x = q('yazi', '.yz-form .yz-field'); x.style.width = '420px'; x.querySelector('textarea').setAttribute('aria-invalid', 'true'); x.querySelector('.yz-err').hidden = false; return x; })(), yz: true, stage: 'on-surface' });
+  item(d, { code: 'Box/Why', node: (() => { const x = q('yazi', '#yz-why'); x.hidden = false; x.querySelector('#yz-why-t').textContent = 'Belirsiz istek, belirsiz görev üretir.'; x.style.width = '380px'; return x; })(), yz: true, stage: 'on-surface' });
+  item(d, { code: 'Check/Item', variant: 'boş · tamam', node: (() => { const ul = h('<div class="yz-checks" style="border:0;padding:16px;background:var(--ink);color:var(--bg);border-radius:12px;width:420px"><ul></ul></div>'); const a = q('yazi', '.yz-checks li:nth-child(1)'); a.classList.add('ok'); ul.querySelector('ul').append(a, q('yazi', '.yz-checks li:nth-child(2)')); return ul; })(), yz: true });
+  item(d, { code: 'Flow/Steps', variant: 'tarif', node: (() => { const x = q('yazi', '.yz-way-recete'); x.querySelector('svg.yz-draw')?.remove(); x.querySelector('.yz-small')?.remove(); x.style.width = '760px'; return x; })(), yz: true, stage: 'on-surface', width: 820 });
+  item(d, { code: 'Flow/Steps', variant: 'hedef', node: (() => { const x = q('yazi', '.yz-way-hedef'); x.hidden = false; x.querySelector('svg.yz-draw')?.remove(); x.querySelector('.yz-small')?.remove(); x.style.width = '760px'; return x; })(), yz: true, stage: 'on-surface', width: 820, desc: 'son kutu accent · sol çizgi accent' });
+}
+
+// ---------------- ORGANİZMA
+function organisms() {
+  const st = section('c3', 'organism', 'Durum bileşenleri', ['Bench/Brief: boş · hata · dolu', 'Revision/List', 'Switch/Brief', 'Tabs/Model']);
+  const bench = (mod) => { const b = q('yazi', '#olusturucu'); mod?.(b); return b.outerHTML; };
+  const filled = (b) => {
+    b.querySelectorAll('.yz-chips input')[0].setAttribute('checked', '');
+    b.querySelector('#yz-old').textContent = 'Bu notlardan görev çıkar.';
+    const why = b.querySelector('#yz-why'); why.hidden = false; why.querySelector('#yz-why-t').textContent = 'Belirsiz istek, belirsiz görev üretir.';
+    b.querySelector('#yz-fill').removeAttribute('disabled');
+    const v = { '#yz-goal': 'ClickUp\'a girilecek görevleri çıkar', '#yz-inputs': '[toplantı notlarının tamamı]', '#yz-limits': 'süre tahmini ekleme\nher görev tek bir iş olsun', '#yz-measure': 'en fazla 10 görev' };
+    Object.entries(v).forEach(([s, t]) => { b.querySelector(s).textContent = t; });
+    const out = b.querySelector('#yz-out'); out.classList.remove('is-empty'); out.textContent = 'Hedef: ClickUp\'a girilecek görevleri çıkar\nElindekiler: [toplantı notlarının tamamı]\nSınırlar:\n- süre tahmini ekleme\n- her görev tek bir iş olsun\nÖlçü: en fazla 10 görev\nGerisi sende. Talimatımda bir hata görürsen önce bana söyle.';
+    b.querySelector('#yz-out-l').textContent = 'Brief';
+    const bf = b.querySelector('#yz-before'); bf.hidden = false; b.querySelector('#yz-before-n').textContent = '4 kelime'; b.querySelector('#yz-before-t').textContent = 'Bu notlardan görev çıkar.';
+    b.querySelectorAll('.yz-checks li').forEach((li) => li.classList.add('ok'));
+    b.querySelector('#yz-score').textContent = '7/7';
+    b.querySelector('#yz-status').textContent = 'Kopyalandı';
+  };
+  const error = (b) => { b.querySelector('#yz-goal').setAttribute('aria-invalid', 'true'); b.querySelector('#yz-goal-err').hidden = false; };
+  const g1 = group(st, 'Bench/Brief', 'üç adım: örnek seç → brief yaz → kontrol et, kopyala · canlı yazı sayfasında etkileşimli');
+  const pair = (box, code, variant, html, desc) => { const p = h('<div class="k-pair"></div>'); box.append(p); frame(p, { code, variant, html, yz: true, desc }); frame(p, { code, variant: variant + ' · mobil', html, width: 375, yz: true, desc: '900 altı tek kolon, çıktı kutusu yapışkan değil' }); };
+  pair(g1, 'Bench/Brief', 'boş', bench(), 'Boş şablon görünür (opacity .55) · 0/7 · Doldur butonu pasif');
+  pair(g1, 'Bench/Brief', 'hata', bench(error), 'Hedef boşken Kopyala: alan kırmızı + "Kopyalamak için önce hedefi yaz."');
+  pair(g1, 'Bench/Brief', 'dolu', bench(filled), 'Örnek seçili, Neden zayıf kutusu, Önce satırı, 7/7 kontrol, Kopyalandı durumu');
+  const g2 = group(st, 'Revision · Switch · Tabs', 'her biri iki durumlu');
+  const rev = (on) => { const r = q('yazi', '.yz-rev'); if (on) { r.querySelectorAll('.yz-habit').forEach((x) => { x.classList.add('is-rev'); x.querySelector('.yz-add').hidden = false; x.querySelector('.yz-revbtn').textContent = 'Geri al'; }); r.querySelector('#yz-rev-all').textContent = 'Hepsini geri al'; } return r.outerHTML; };
+  const p2 = h('<div class="k-pair"></div>'); g2.append(p2);
+  frame(p2, { code: 'Revision/List', variant: 'revize edilmemiş', html: rev(false), yz: true });
+  frame(p2, { code: 'Revision/List', variant: 'hepsi revize', html: rev(true), yz: true });
+  const sw = (hedef) => { const s = q('yazi', '.yz-switchbox'); if (hedef) { s.querySelector('[value=hedef]').setAttribute('checked', ''); s.querySelector('[value=recete]').removeAttribute('checked'); s.querySelector('.yz-way-recete').hidden = true; s.querySelector('.yz-way-hedef').hidden = false; } return s.outerHTML; };
+  const p3 = h('<div class="k-pair"></div>'); g2.append(p3);
+  frame(p3, { code: 'Switch/Brief', variant: 'adım adım tarif', html: sw(false), yz: true });
+  frame(p3, { code: 'Switch/Brief', variant: 'hedef + sınır', html: sw(true), yz: true });
+  const tb = (gpt) => { const t = q('yazi', '.yz-tabs'); if (gpt) { t.querySelector('#tab-claude').setAttribute('aria-selected', 'false'); t.querySelector('#tab-gpt').setAttribute('aria-selected', 'true'); t.querySelector('#panel-claude').hidden = true; t.querySelector('#panel-gpt').hidden = false; } return t.outerHTML; };
+  const p4 = h('<div class="k-pair"></div>'); g2.append(p4);
+  frame(p4, { code: 'Tabs/Model', variant: 'Claude', html: tb(false), yz: true });
+  frame(p4, { code: 'Tabs/Model', variant: 'GPT', html: tb(true), yz: true });
+
+  const og = section('c3', 'organism', 'Organizmalar', ['global kabuk', 'hero', 'tekrar eden bölüm', 'tek amaçlı bölüm', 'yazı gezinmesi']);
+  const k = group(og, 'Global kabuk', 'tüm sayfalarda aynı · header yapışkan');
+  frame(k, { code: 'Header', html: q('home', 'header').outerHTML });
+  frame(k, { code: 'Header', variant: 'mobil', html: q('home', 'header').outerHTML, width: 375, desc: '1020 altı menü gizli · logo 17px · tema butonu 36px' });
+  frame(k, { code: 'Footer', html: q('home', 'footer').outerHTML });
+  frame(k, { code: 'Footer', variant: 'mobil', html: q('home', 'footer').outerHTML, width: 375, desc: '640 altı tek kolon' });
+  const hr = group(og, 'Hero', 'ana sayfa · sayfa · yazı');
+  frame(hr, { code: 'Hero/Home', html: q('home', '.hero').outerHTML, home: true });
+  frame(hr, { code: 'Hero/Page', variant: 'blog', html: q('blog', '.bhero').outerHTML, home: true });
+  frame(hr, { code: 'Hero/Page', variant: '404', html: q('nf', '.bhero').outerHTML, home: true });
+  frame(hr, { code: 'Hero/Yazı', html: q('yazi', '#neden').outerHTML, yz: true });
+  frame(hr, { code: 'Hero/Yazı', variant: 'mobil', html: q('yazi', '#neden').outerHTML, width: 375, yz: true });
+  const sb = group(og, 'Bölümler', 'mor şeritli ayırıcıyla başlar · 96/96');
+  frame(sb, { code: 'Section/Yazılar', html: q('home', '#yazilar').outerHTML, home: true });
+  frame(sb, { code: 'Section/Hakkımda', html: q('home', '#hakkimda').outerHTML, home: true });
+  frame(sb, { code: 'Section/Hesaplarım', html: q('home', '#iletisim').outerHTML, home: true });
+  frame(sb, { code: 'Section/Yazılar', variant: 'mobil', html: q('home', '#yazilar').outerHTML, width: 375, home: true });
+  const yn = group(og, 'Yazı gezinmesi', 'masaüstü: sol sütun, yapışkan · 900 altı: üstte yatay şerit');
+  frame(yn, { code: 'Nav/Yazı', html: `<div class="yz"><div class="wrap yz-grid" style="padding-top:24px">${q('yazi', '.yz-nav').outerHTML}<div></div></div></div>` });
+  frame(yn, { code: 'Nav/Yazı', variant: 'mobil', html: `<div class="yz"><div class="wrap yz-grid">${q('yazi', '.yz-nav').outerHTML}</div></div>`, width: 375 });
+}
+
+// ---------------- ŞABLON
+function templates() {
+  const sec = section('c3', 'template', 'Sayfa şablonları', ['Template/Home', 'Template/Blog', 'Template/Yazı', 'Template/404', 'Template/Blog kabuk']);
+  sec.append(h(`<div class="k-legend" style="justify-content:flex-start"><span class="k-lv" style="background:#3A3D46;color:#fff">global kabuk</span><span class="k-lv" style="background:#DCDAFB;color:#2a2490">organizma</span><span class="k-lv" style="background:#ECEBFD;color:#4B43E0">molekül</span><span class="k-lv" style="background:#4B43E0;color:#fff">atom</span><span class="k-lv lv-sec">sayfaya özel bölüm</span></div>`));
+  const box = group(sec, 'Bölüm sırası', 'her sayfa: başlık → içerik → footer · ilk ekran %25 ölçekte');
+  const T = [
+    ['Template/Home', '/', 'home', [['Progress/Read', 'atom'], ['Header', 'shell'], ['Hero/Home', 'org'], ['Section/Yazılar', 'org'], ['Section/Hakkımda', 'org'], ['Section/Hesaplarım', 'org'], ['Footer', 'shell']], 'Sıra ve aktiflik: admin › Ana sayfa › Düzen. Sütun çizgileri yalnız ilk ekranda.'],
+    ['Template/Blog', '/blog/', 'blog', [['Progress/Read', 'atom'], ['Header', 'shell'], ['Hero/Page', 'org'], ['Card/Post ızgarası', 'mol'], ['Takip notu', 'sec'], ['Footer', 'shell']], 'Filtre çubuğu 2+ kategoride görünür (şu an yok).'],
+    ['Template/Yazı', '/yazi/prompt-brief/', 'yazi', [['Progress/Read', 'atom'], ['Header', 'shell'], ['Nav/Yazı (sol sütun)', 'org'], ['Hero/Yazı', 'org'], ['Revision/List', 'org'], ['Switch/Brief', 'org'], ['Tabs/Model', 'org'], ['Bench/Brief', 'org'], ['Yazı sonuç', 'sec'], ['Footer', 'shell']], 'Analitik yok. app.js yüklenmez. Bölümler mor şeritle ayrılır.'],
+    ['Template/404', '/404.html', 'nf', [['Progress/Read', 'atom'], ['Header', 'shell'], ['Hero/Page + 2 buton', 'org'], ['Footer', 'shell']], 'noindex.'],
+    ['Template/Blog kabuk', '/blog/post.html', 'shell', [['Header', 'shell'], ['Hero/Page "Yükleniyor"', 'org'], ['Footer', 'shell']], 'noindex · içerik tarayıcıda Firestore\'dan çizilir.'],
+  ];
+  const cls = { shell: 't-shell', org: 't-org', mol: 't-mol', atom: 't-atom', sec: 't-sec' };
+  T.forEach(([code, url, page, rows, note]) => {
+    const it = h(`<div class="k-item" style="width:360px"><p class="k-desc"><code>${esc(code)} · ${esc(url)}</code></p><div class="k-frame" style="width:360px;height:225px"><iframe width="1440" height="900" style="transform:scale(.25)" title="${esc(code)}"></iframe></div><ul class="k-tpl" style="padding:0">${rows.map(([n, l]) => `<li class="${cls[l]}">${esc(n)}</li>`).join('')}</ul><p class="k-tplnote">${esc(note)}</p></div>`);
+    // Sayfanın kendisi (scriptsiz) ilk ekran olarak çizilir.
+    const d = DOC[page].documentElement.cloneNode(true);
+    d.querySelectorAll('script:not([type="application/ld+json"])').forEach((s) => s.remove());
+    it.querySelector('iframe').srcdoc = '<!doctype html>' + absPaths(d.outerHTML);
+    box.append(it);
+  });
+}
+
+(async () => {
+  try {
+    [T, C] = await Promise.all([fetch('tokens.json').then((r) => r.json()), fetch('components.json').then((r) => r.json())]);
+    await Promise.all(Object.entries(PAGES).map(async ([k, f]) => { DOC[k] = new DOMParser().parseFromString(await (await fetch(PUB + f)).text(), 'text/html'); }));
+    const c = C.counts;
+    document.getElementById('k-count').textContent = `${c.atom} atom · ${c.molecule} molekül · ${c.organism} organizma · ${c.template} şablon · ${C.updated}`;
+    tokens(); visuals(); atoms(); molecules(); organisms(); templates();
+  } catch (err) {
+    document.getElementById('kit').append(h(`<p class="k-err">Kit çizilemedi: ${esc(err.message)}. Bu sayfa repo kökünden bir yerel sunucuyla açılmalı (ör. /ui-kit/UI-00-Kit.html).</p>`));
+    console.error(err);
+  }
+})();
+</script>
+</body>
+</html>
