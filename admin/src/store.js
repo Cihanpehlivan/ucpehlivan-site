@@ -4,15 +4,14 @@ import { getFirestore, doc, getDoc, setDoc, collection, getDocs, addDoc, deleteD
 import { clone, fileToDataUrl } from './util.js';
 
 export const ADMIN_EMAIL = 'pehlivan.uc@gmail.com';
-export const SEED_VERSION = 'seed-1';
+export const SEED_VERSION = 'seed-2';
 const clean = (o) => JSON.parse(JSON.stringify(o, (k, v) => (v === undefined ? null : v)));
 const strip = ({ id, ...rest }) => rest;
 
 // Sitenin okuduğu tek doküman: site/public
 export function buildBundle(d, version = String(Date.now())) {
-  const cases = [...d.cases].filter((c) => c.visible !== false).sort((a, b) => (a.order ?? 999) - (b.order ?? 999)).map(strip);
   const posts = d.posts.filter((p) => p.status === 'published' && p.slug).sort((a, b) => String(b.publishedAt).localeCompare(String(a.publishedAt))).map(strip);
-  return clean({ version, settings: d.settings, home: d.home, cases, posts });
+  return clean({ version, settings: d.settings, home: d.home, posts });
 }
 
 function firebaseStore(config) {
@@ -45,7 +44,6 @@ function firebaseStore(config) {
       const b = writeBatch(db);
       b.set(doc(db, 'content/settings'), clean(data.settings));
       b.set(doc(db, 'content/home'), clean(data.home));
-      data.cases.forEach((c) => b.set(doc(collection(db, 'cases')), clean(c)));
       data.posts.forEach((p) => b.set(doc(db, 'posts', p.slug), clean(p)));
       b.set(doc(db, 'site/public'), buildBundle(data, SEED_VERSION));
       await b.commit();
@@ -66,7 +64,6 @@ function firebaseStore(config) {
 
 function mockStore(seed) {
   let data = clone(seed);
-  data.cases = data.cases.map((c, i) => ({ id: 'c' + i, ...c }));
   data.posts = data.posts.map((p) => ({ id: p.slug, ...p }));
   let user = null; const subs = []; const media = {}; let n = 0;
   const emit = () => subs.forEach((f) => f(user));

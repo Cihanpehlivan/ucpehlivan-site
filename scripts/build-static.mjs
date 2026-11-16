@@ -12,8 +12,7 @@ const ORIGIN = 'https://ucpehlivan.web.app';
 export function seedBundle() {
   const s = JSON.parse(readFileSync(join(here, 'seed.json'), 'utf8'));
   return {
-    version: 'seed-1', settings: s.settings, home: s.home,
-    cases: s.cases.filter((c) => c.visible !== false).sort((a, b) => a.order - b.order),
+    version: 'seed-2', settings: s.settings, home: s.home,
     posts: s.posts.filter((p) => p.status === 'published').sort((a, b) => b.publishedAt.localeCompare(a.publishedAt)),
   };
 }
@@ -29,7 +28,7 @@ export function buildPages(c) {
   write('blog/post.html', layout(c, { ...o, version: 'shell', title: c.settings.name, path: '/blog/', body: '<section class="bhero"><div class="wrap"><p class="kicker">Yükleniyor</p></div></section>' }));
   write('404.html', render404(c, o));
   write('sitemap.xml', renderSitemap(c, ORIGIN));
-  console.log(`Statik sayfalar üretildi: ana sayfa, blog, ${c.posts.length} yazı, 404, sitemap.`);
+  console.log(`Statik sayfalar üretildi: ana sayfa, yazılar, ${c.posts.length} yazı, 404, sitemap.`);
 }
 
 if (process.argv[1] === fileURLToPath(import.meta.url)) {

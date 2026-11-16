@@ -42,7 +42,7 @@ function field(f, obj, ctx) {
     case 'textarea': { const i = h('textarea', { rows: f.rows || 3, oninput: () => set(i.value) }); i.value = v ?? ''; return labelled(f, i, counter(f, i)); }
     case 'number': { const i = h('input', { type: 'number', value: v ?? '', oninput: () => set(i.value === '' ? null : Number(i.value)) }); return labelled(f, i); }
     case 'date': { const i = h('input', { type: 'date', value: v ?? '', oninput: () => set(i.value) }); return labelled(f, i); }
-    case 'bool': { const i = h('input', { type: 'checkbox', checked: v !== false && v != null ? true : null, onchange: () => set(i.checked) }); if (f.key === 'visible' && v == null) i.checked = true; return h('div', { class: 'fld fld-bool' }, h('label', { class: 'check' }, i, h('span', {}, f.title)), f.help ? h('p', { class: 'fld-h' }, f.help) : null); }
+    case 'bool': { const i = h('input', { type: 'checkbox', checked: v !== false && v != null ? true : null, onchange: () => set(i.checked) }); if (v == null && (f.key === 'visible' || f.defaultOn)) i.checked = true; return h('div', { class: 'fld fld-bool' }, h('label', { class: 'check' }, i, h('span', {}, f.title)), f.help ? h('p', { class: 'fld-h' }, f.help) : null); }
     case 'select': { const s = h('select', { onchange: () => set(s.value) }, f.options.map(([val, txt]) => h('option', { value: val, selected: (v ?? f.options[0][0]) === val ? true : null }, txt))); if (v == null) obj[f.key] = s.value; return labelled(f, s); }
     case 'color': {
       const txt = h('input', { type: 'text', value: v || '', placeholder: '#1E2025', class: 'hex', oninput: () => { if (/^#[0-9a-fA-F]{6}$/.test(txt.value)) pick.value = txt.value; set(txt.value); } });

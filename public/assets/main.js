@@ -11,6 +11,14 @@
       var cur=root.getAttribute('data-theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');
       var n=cur==='dark'?'light':'dark';root.setAttribute('data-theme',n);try{localStorage.setItem('ucp-theme',n);}catch(e){}
     },sig);
+    // Kategori filtresi (admin'de açıksa sayfada bulunur)
+    document.querySelectorAll('.filters').forEach(function(bar){
+      var grid=bar.parentElement.querySelector('[data-grid]');if(!grid)return;var feat=grid.classList.contains('feat');
+      bar.addEventListener('click',function(ev){var b=ev.target.closest('.fbtn');if(!b)return;var f=b.dataset.f;
+        bar.querySelectorAll('.fbtn').forEach(function(x){x.classList.toggle('on',x===b);});
+        grid.classList.toggle('feat',feat&&!f);
+        grid.querySelectorAll('.bcard').forEach(function(c){c.style.display=(!f||c.dataset.cat===f)?'':'none';});},sig);
+    });
     var yr=document.getElementById('yr');if(yr)yr.textContent=new Date().getFullYear();
     var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
     var nums=document.querySelectorAll('.num[data-to]');

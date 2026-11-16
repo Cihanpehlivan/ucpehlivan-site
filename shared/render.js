@@ -1,4 +1,4 @@
-// Sitenin tüm sayfalarını HTML olarak üretir. Hem Cloud Function hem admin önizlemesi kullanır.
+// Sitenin tüm sayfalarını HTML olarak üretir. Statik derleme, tarayıcı (hydrate) ve admin önizlemesi aynı kodu kullanır.
 export const e = (v = '') => String(v ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 export const md = (v = '') => e(v).replace(/\*\*(.+?)\*\*/g, '<b>$1</b>');
 const nl = (v = '') => e(v).replace(/\n/g, '<br>');
@@ -33,7 +33,42 @@ export function cover(p) {
   return `<div class="bcover" style="--c:${bg}" aria-hidden="true"><svg viewBox="0 0 400 250" fill="none">${svg}</svg></div>`;
 }
 export function postCard(p) {
-  return `<a class="bcard" href="/blog/${e(p.slug)}/">${cover(p)}<div class="bbody"><p class="bmeta"><span class="chip">${e(p.category)}</span><time datetime="${e(p.publishedAt)}">${trDate(p.publishedAt)}</time>${p.readingMinutes ? `<span>${e(p.readingMinutes)} dk okuma</span>` : ''}</p><h3>${e(p.title)}</h3><p class="ex">${e(p.excerpt)}</p></div></a>`;
+  return `<a class="bcard" href="/blog/${e(p.slug)}/" data-cat="${e(p.category)}">${cover(p)}<div class="bbody"><p class="bmeta">${p.category ? `<span class="chip">${e(p.category)}</span>` : ''}<time datetime="${e(p.publishedAt)}">${trDate(p.publishedAt)}</time>${p.readingMinutes ? `<span>${e(p.readingMinutes)} dk okuma</span>` : ''}</p><h3>${e(p.title)}</h3><p class="ex">${e(p.excerpt)}</p></div></a>`;
+}
+
+// ---------- Bölüm düzeni (admin: Ana sayfa > Düzen)
+export const SECTION_KEYS = [['hero', 'Hero'], ['blog', 'Yazılar'], ['about', 'Hakkımda'], ['accounts', 'Hesaplarım']];
+const DEFAULT_LAYOUT = SECTION_KEYS.map(([key]) => ({ key, on: true }));
+const NAV = { blog: ['yazilar', 'Yazılar'], about: ['hakkimda', 'Hakkımda'], accounts: ['iletisim', 'Hesaplarım'] };
+export function activeSections(h = {}) {
+  const src = Array.isArray(h.layout) && h.layout.length ? h.layout : DEFAULT_LAYOUT;
+  const seen = new Set(), out = [];
+  for (const x of src) { if (!x || !x.key || seen.has(x.key) || !SECTION_KEYS.some(([k]) => k === x.key)) continue; seen.add(x.key); if (x.on !== false) out.push(x.key); }
+  return out;
+}
+
+// ---------- Hesaplar
+export const ACCOUNT_ICONS = {
+  linkedin: '<rect x="3" y="3" width="18" height="18" rx="4"/><path d="M8 10.5V16M8 7.6v.1M12 16v-3.2a2.3 2.3 0 0 1 4.6 0V16M12 10.5V16"/>',
+  github: '<path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6 0 0 0-1.3-3.2 4.2 4.2 0 0 0-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3 0 0 0-6.2 0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2 0 0 0-.1 3.2A4.6 4.6 0 0 0 4 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"/>',
+  mail: '<rect x="3" y="5" width="18" height="14" rx="3"/><path d="M4 7l8 6 8-6"/>',
+  x: '<path d="M4 4l6.5 8.5L4 20h2l5.4-6.3L16 20h4l-6.8-9L19.5 4h-2l-5 5.8L8 4z"/>',
+  youtube: '<rect x="2.5" y="5" width="19" height="14" rx="4"/><path d="M10 9v6l5-3z"/>',
+  instagram: '<rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><path d="M17.5 6.5v.01"/>',
+  link: '<path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/>',
+};
+const accSvg = (k) => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${ACCOUNT_ICONS[k] || ACCOUNT_ICONS.link}</svg>`;
+const accounts = (c) => (((c.home || {}).accounts || {}).items || []).filter((a) => a.visible !== false && a.url);
+const mainAccount = (c) => { const l = accounts(c); return l.find((a) => a.highlight) || l[0] || null; };
+
+const ILLUSTRATION = `<div class="about-ill" aria-hidden="true"><svg viewBox="0 0 480 440" fill="none"><circle cx="250" cy="215" r="190" fill="var(--surface-2)"/><g class="ill-float"><rect x="300" y="52" width="150" height="104" rx="14" fill="var(--surface)" stroke="var(--line)"/><rect x="314" y="66" width="36" height="8" rx="4" fill="var(--muted)" opacity=".5"/><rect x="314" y="82" width="36" height="22" rx="5" fill="var(--accent)" opacity=".25"/><rect x="314" y="110" width="36" height="22" rx="5" fill="var(--accent)" opacity=".25"/><rect x="358" y="66" width="36" height="8" rx="4" fill="var(--muted)" opacity=".5"/><rect x="358" y="82" width="36" height="22" rx="5" fill="var(--accent)" opacity=".6"/><rect x="402" y="66" width="36" height="8" rx="4" fill="var(--muted)" opacity=".5"/><rect x="402" y="82" width="36" height="22" rx="5" fill="var(--go)"/><path d="M413 93l5 5 9-9" stroke="var(--surface)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><rect x="402" y="110" width="36" height="22" rx="5" fill="var(--go)" opacity=".5"/></g><rect x="40" y="352" width="400" height="10" rx="5" fill="var(--ink)" opacity=".9"/><path d="M120 352 L150 340 H350 L380 352Z" fill="var(--ink)"/><rect x="150" y="168" width="200" height="172" rx="14" fill="var(--ink)"/><rect x="162" y="180" width="176" height="148" rx="8" fill="var(--surface)"/><rect x="174" y="194" width="98" height="26" rx="12" fill="var(--surface-2)"/><rect x="184" y="203" width="62" height="8" rx="4" fill="var(--muted)" opacity=".6"/><rect x="220" y="230" width="106" height="40" rx="12" fill="var(--accent)"/><rect x="232" y="240" width="76" height="7" rx="3.5" fill="var(--on-accent)" opacity=".85"/><rect x="232" y="253" width="52" height="7" rx="3.5" fill="var(--on-accent)" opacity=".6"/><rect x="174" y="282" width="70" height="26" rx="12" fill="var(--surface-2)"/><circle class="ill-dot" cx="192" cy="295" r="4" fill="var(--muted)"/><circle class="ill-dot d2" cx="209" cy="295" r="4" fill="var(--muted)"/><circle class="ill-dot d3" cx="226" cy="295" r="4" fill="var(--muted)"/><rect x="70" y="290" width="46" height="52" rx="8" fill="var(--accent)"/><path d="M116 302h8a10 10 0 0 1 0 20h-8" stroke="var(--accent)" stroke-width="6"/><path class="ill-steam" d="M84 278c-6-8 6-12 0-22M100 278c-6-8 6-12 0-22" stroke="var(--muted)" stroke-width="3" stroke-linecap="round"/><rect x="392" y="300" width="40" height="44" rx="6" fill="var(--go)" opacity=".85" transform="rotate(-6 412 322)"/><rect x="400" y="312" width="22" height="5" rx="2.5" fill="var(--surface)" transform="rotate(-6 412 322)"/><rect x="400" y="324" width="16" height="5" rx="2.5" fill="var(--surface)" transform="rotate(-6 412 322)"/><path class="ill-spark" d="M110 120l6 16 16 6-16 6-6 16-6-16-16-6 16-6z" fill="var(--accent)"/><path class="ill-spark s2" d="M370 200l4 10 10 4-10 4-4 10-4-10-10-4 10-4z" fill="var(--accent)"/><path class="ill-spark s3" d="M190 96l3 8 8 3-8 3-3 8-3-8-8-3 8-3z" fill="var(--go)"/></svg></div>`;
+
+// Kategori filtresi: admin'de açıksa ve en az 2 farklı kategori varsa görünür.
+function filterBar(c, posts) {
+  const bl = (c.home || {}).blog || {};
+  const cats = [...new Set(posts.map((p) => p.category).filter(Boolean))];
+  if (!bl.showFilter || cats.length < 2) return '';
+  return `<div class="filters" role="toolbar" aria-label="Kategori"><button type="button" class="fbtn on" data-f="">Tümü</button>${cats.map((k) => `<button type="button" class="fbtn" data-f="${e(k)}">${e(k)}</button>`).join('')}</div>`;
 }
 
 export function layout(c, { title, description, type = 'website', jsonld, noindex = false, path = '/', home = false, origin = 'https://ucpehlivan.web.app', version = '', body }) {
@@ -42,9 +77,12 @@ export function layout(c, { title, description, type = 'website', jsonld, noinde
   const pageTitle = title || s.seoTitle || s.name;
   const desc = description || s.seoDescription || '';
   const p = home ? '' : '/';
-  const ld = jsonld || { '@context': 'https://schema.org', '@type': 'Person', name: s.name, jobTitle: s.role, url: origin + '/', email: `mailto:${s.email}`, sameAs: [s.linkedin].filter(Boolean) };
-  const cur = path.startsWith('/blog') ? ' aria-current="page"' : '';
-  const tel = String(s.phone || '').replace(/\s/g, '');
+  const accs = accounts(c);
+  const ld = jsonld || { '@context': 'https://schema.org', '@type': 'Person', name: s.name, jobTitle: s.role, url: origin + '/', email: `mailto:${s.email}`, sameAs: accs.map((a) => a.url).filter((u) => /^https?:/.test(u)) };
+  const secs = activeSections((c.home || {}));
+  const navLink = (k) => { const [id, label] = NAV[k]; if (k === 'blog') return `<a href="${home ? '#yazilar' : '/blog/'}"${path.startsWith('/blog') ? ' aria-current="page"' : ''}>${label}</a>`; return `<a href="${p}#${id}">${label}</a>`; };
+  const navs = secs.filter((k) => NAV[k]).map(navLink).join('');
+  const footPages = secs.filter((k) => NAV[k]).map((k) => (k === 'blog' ? '<a href="/blog/">Yazılar</a>' : `<a href="/#${NAV[k][0]}">${NAV[k][1]}</a>`)).join('');
   return `<!DOCTYPE html>
 <html lang="tr">
 <head>
@@ -74,10 +112,9 @@ ${s.gaId ? `<script async src="https://www.googletagmanager.com/gtag/js?id=${e(s
 <header>
   <div class="wrap bar">
     <a class="logo" href="/" aria-label="${e(s.name)}, ana sayfa"><span class="wl">${e(s.name)}<i aria-hidden="true"></i></span></a>
-    <nav aria-label="Ana menü"><a href="${p}#rakamlar">Rakamlar</a><a href="${p}#neler">Ne yaparım</a><a href="${p}#vakalar">Projeler</a><a href="${p}#hakkimda">Hakkımda</a><a href="/blog/"${cur}>Blog</a><a href="${p}#iletisim">İletişim</a></nav>
+    <nav aria-label="Ana menü">${navs}</nav>
     <div class="tools" style="display:flex;gap:10px;align-items:center">
       <button class="icon-btn" id="theme" type="button" aria-label="Açık ve koyu tema arasında geçiş yap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4.5"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></button>
-      <a class="btn btn-ink btn-sm" href="${p}#iletisim">${e(s.headerCta || 'İletişim')}</a>
     </div>
   </div>
 </header>
@@ -88,9 +125,9 @@ ${body}
   <div class="wrap">
     <div class="foot-grid">
       <div><a class="logo" href="/" style="padding:0" aria-label="${e(s.name)}, ana sayfa"><span class="wl wl-lg">${e(s.name)}<i aria-hidden="true"></i></span></a><p class="foot-tag">${e(s.footerTagline)}</p><a class="mail" href="mailto:${e(s.email)}">${e(s.email)}</a></div>
-      <div><h4>Sayfa</h4><a href="/#rakamlar">Rakamlar</a><a href="/#neler">Ne yaparım</a><a href="/#vakalar">Projeler</a></div>
-      <div><h4>Daha fazla</h4><a href="/#surec">Çalışma şeklim</a><a href="/#hakkimda">Hakkımda</a><a href="/blog/">Blog</a><a href="${e(s.cvUrl || '/cv.pdf')}" target="_blank" rel="noopener">CV</a></div>
-      <div><h4>İletişim</h4><a href="${e(s.linkedin)}" target="_blank" rel="noopener">LinkedIn</a><a href="tel:${e(tel)}">${e(s.phone)}</a><a href="/#iletisim">${e(s.location)}</a></div>
+      ${footPages ? `<div><h4>Sayfa</h4>${footPages}</div>` : ''}
+      ${accs.length ? `<div><h4>Hesaplar</h4>${accs.map((a) => `<a href="${e(a.url)}"${tgt(a.url)}>${e(a.name)}</a>`).join('')}</div>` : ''}
+      ${s.location ? `<div><h4>Konum</h4><span>${e(s.location)}</span></div>` : ''}
     </div>
     <div class="wordmark" aria-hidden="true"><span id="wm">${e(String(s.name || '').toLocaleUpperCase('tr-TR'))}</span></div>
     <div class="copy"><span>© <span id="yr">${new Date().getFullYear()}</span> ${e(s.name)}</span><span>${e(s.footerNote)}</span></div>
@@ -102,103 +139,74 @@ ${body}
 </html>`;
 }
 
-function tile(t) {
-  const cls = ['tile', t.visual === 'board' ? 't-board' : '', t.size === 'wide' ? 't-wide' : '', t.size === 'tall' && t.visual !== 'board' ? 't-tall' : '', t.theme === 'accent' ? 't-accent' : '', t.theme === 'ink' ? 't-ink' : ''].filter(Boolean).join(' ');
-  const has = t.countTo !== undefined && t.countTo !== null && t.countTo !== '';
-  const attrs = has ? ` data-to="${e(t.countTo)}" data-pre="${e(t.prefix || '')}" data-suf="${e(t.suffix || '')}"` : '';
-  const num = has ? `${e(t.prefix || '')}0${e(t.suffix || '')}` : e(t.value);
-  const lbl = `<span class="lbl">${e(t.label)}</span>`;
-  switch (t.visual) {
-    case 'board': return `<div class="${cls}">${lbl}<div class="board" aria-hidden="true"><div class="col"><b>Yapılacak <em>2</em></b><i>Kapsam toplantısı</i><i>İçerik toplama</i></div><div class="col"><b>Yapılıyor <em>2</em></b><i class="live">Figma QA</i><i class="live">CMS entegrasyonu</i></div><div class="col"><b>Bitti <em>2</em></b><i class="done">Sprint planning</i><i class="done">Canlıya alma</i></div></div></div>`;
-    case 'trophy': return `<div class="${cls}"><div class="award-row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0V4z"/><path d="M17 5h3v2a3 3 0 0 1-3 3M7 5H4v2a3 3 0 0 0 3 3"/></svg><div><h3>${e(t.title)}</h3><p>${e(t.label)}</p></div></div></div>`;
-    case 'sparkline': return `<div class="${cls}">${lbl}<div class="split"><div class="num"${attrs}>${num}</div><svg class="spark" viewBox="0 0 220 90" preserveAspectRatio="none" aria-hidden="true"><path class="a" d="M0 80 L30 74 L60 76 L90 62 L120 58 L150 40 L180 30 L220 8 L220 90 L0 90Z"/><path class="l" d="M0 80 L30 74 L60 76 L90 62 L120 58 L150 40 L180 30 L220 8"/></svg></div></div>`;
-    case 'bars': return `<div class="${cls}">${lbl}<div class="split"><div class="num sm"${attrs}>${num}</div><div class="minibars" aria-hidden="true"><i style="height:30%"></i><i style="height:45%"></i><i style="height:62%"></i><i style="height:100%"></i></div></div></div>`;
-    default: return `<div class="${cls}">${lbl}<div class="num sm"${attrs}>${num}</div></div>`;
-  }
-}
-
-export function renderHome(c, opts = {}) {
-  const s = c.settings || {}, h = c.home || {};
-  const hero = h.hero || {}, br = h.brands || {}, st = h.stats || {}, sv = h.services || {}, wk = h.work || {}, pr = h.process || {}, ab = h.about || {}, sk = h.skills || {}, bl = h.blog || {}, ct = h.contact || {};
-  const cases = (c.cases || []).filter((x) => x.visible !== false);
-  const latest = (c.posts || []).slice(0, bl.count ?? 3);
-  const twice = (arr, wrap) => [0, 1].map((k) => (arr || []).map((x) => `<span${k ? ' aria-hidden="true"' : ''}>${wrap ? `<em>${e(x)}</em>` : e(x)}</span>`).join('')).join('');
-  const body = `
-<section class="hero"><div class="wrap">
-  <p class="status"><svg class="pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>${e(hero.badge)}</p>
+const SECTIONS = {
+  hero(c) {
+    const hero = (c.home || {}).hero || {};
+    const secs = activeSections(c.home || {});
+    const main = mainAccount(c);
+    const badgeHref = secs.includes('accounts') ? '#iletisim' : main ? main.url : '';
+    return `<section class="hero"><div class="wrap">
+  ${hero.badge ? `<p class="status"><svg class="pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>${e(hero.badge)}</p>` : ''}
   <h1 class="d mega" aria-label="${e(hero.ariaLabel)}">${(hero.lines || []).map((l) => `<span class="ln" aria-hidden="true"><span>${[e(l.before), PILLS[l.pill] || '', e(l.after)].filter(Boolean).join(' ')}</span></span>`).join('')}</h1>
   <div class="hero-foot">
     <div class="hero-copy"><p>${e(hero.text)}</p>
-      <div class="cta"><a class="btn btn-cv" href="${e(s.cvUrl || '/cv.pdf')}" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg>${e(hero.cvLabel)}</a><a class="btn btn-ghost btn-lg" href="#vakalar">${e(hero.projectsLabel)}</a></div></div>
-    <a class="badge" href="mailto:${e(s.email)}" aria-label="E-posta ile iletişime geç"><svg class="ring" viewBox="0 0 132 132" aria-hidden="true"><defs><path id="circ" d="M66,66 m-52,0 a52,52 0 1,1 104,0 a52,52 0 1,1 -104,0"/></defs><text><textPath href="#circ">${e(hero.badgeText)}</textPath></text></svg><span class="core"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"/></svg></span></a>
+      ${hero.buttonLabel && secs.includes('blog') ? `<div class="cta"><a class="btn btn-cv" href="#yazilar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>${e(hero.buttonLabel)}</a></div>` : ''}</div>
+    ${badgeHref && hero.badgeText ? `<a class="badge" href="${e(badgeHref)}"${tgt(badgeHref)} aria-label="Hesaplarıma git"><svg class="ring" viewBox="0 0 132 132" aria-hidden="true"><defs><path id="circ" d="M66,66 m-52,0 a52,52 0 1,1 104,0 a52,52 0 1,1 -104,0"/></defs><text><textPath href="#circ">${e(hero.badgeText)}</textPath></text></svg><span class="core"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"/></svg></span></a>` : ''}
   </div>
-</div></section>
+</div></section>`;
+  },
+  blog(c) {
+    const bl = (c.home || {}).blog || {};
+    const latest = (c.posts || []).slice(0, bl.count ?? 6);
+    if (!latest.length) return '';
+    return `<section class="block" id="yazilar" style="padding-top:40px"><div class="wrap"><div class="head"><div>${bl.kicker ? `<span class="kicker">${e(bl.kicker)}</span>` : ''}<h2 class="d">${e(bl.title)}</h2></div>${bl.intro ? `<p>${e(bl.intro)}</p>` : ''}</div>${filterBar(c, latest)}<div class="bgrid${latest.length >= 3 ? ' feat' : ''}" data-grid>${latest.map(postCard).join('')}</div>${(c.posts || []).length > latest.length || bl.allLabel ? `<div style="margin-top:28px"><a class="btn btn-ghost" href="/blog/">${e(bl.allLabel || 'Tüm yazıları gör')}</a></div>` : ''}</div></section>`;
+  },
+  about(c) {
+    const ab = (c.home || {}).about || {};
+    const ill = ab.illustration !== false;
+    return `<section class="block" id="hakkimda" style="padding-top:40px"><div class="wrap about ${ill ? 'about2' : 'about1'}">
+  ${ill ? ILLUSTRATION : ''}
+  <div>${ab.kicker ? `<span class="kicker">${e(ab.kicker)}</span>` : ''}<h2 class="d">${e(ab.title)}</h2>${(ab.paragraphs || []).map((x) => `<p class="lead">${e(x)}</p>`).join('')}${(ab.facts || []).length ? `<div class="about-facts">${ab.facts.map((f) => `<span>${e(f)}</span>`).join('')}</div>` : ''}</div>
+</div></section>`;
+  },
+  accounts(c) {
+    const ac = (c.home || {}).accounts || {};
+    const list = accounts(c);
+    if (!list.length) return '';
+    return `<section class="block" id="iletisim" style="padding-top:40px"><div class="wrap">
+  <div class="head"><div>${ac.kicker ? `<span class="kicker">${e(ac.kicker)}</span>` : ''}<h2 class="d">${nl(ac.title)}</h2></div>${ac.intro ? `<p>${e(ac.intro)}</p>` : ''}</div>
+  <div class="acc">${list.map((a) => `<a class="acc-row${a.highlight ? ' hot' : ''}" href="${e(a.url)}"${tgt(a.url)}><span class="acc-ic">${accSvg(a.icon)}</span><span class="acc-tx"><b>${e(a.name)}</b>${a.sub ? `<small>${e(a.sub)}</small>` : ''}</span><span class="acc-go" aria-hidden="true">${/^https?:/.test(a.url) ? '↗' : '→'}</span></a>`).join('')}</div>
+</div></section>`;
+  },
+};
 
-<div class="brands"><div class="brands-label">${e(br.label)}</div><div class="marquee" style="--dur:42s"><div class="track">${twice(br.items)}</div></div></div>
-
-<section class="block" id="rakamlar"><div class="wrap">
-  <div class="head"><div><span class="kicker">${e(st.kicker)}</span><h2 class="d">${nl(st.title)}</h2></div><p>${e(st.intro)}</p></div>
-  <div class="bento">${(st.tiles || []).map(tile).join('')}</div>
-</div></section>
-
-<section class="block" id="neler" style="padding-top:40px"><div class="wrap svc">
-  <div class="svc-intro"><span class="kicker">${e(sv.kicker)}</span><h2 class="d">${e(sv.title)}</h2><p>${e(sv.intro)}</p><a class="btn btn-ink" href="#iletisim">${e(sv.buttonLabel)} ${ARROW}</a></div>
-  <div class="svc-list">${(sv.items || []).map((it) => `<div class="svc-card"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">${ICONS[it.icon] || ICONS.document}</svg></div><div><h3>${e(it.title)}</h3><p>${e(it.text)}</p>${(it.tags || []).length ? `<div class="svc-tags">${it.tags.map((g) => `<span>${e(g)}</span>`).join('')}</div>` : ''}</div></div>`).join('')}</div>
-</div></section>
-
-<section class="block" id="vakalar" style="padding-top:40px"><div class="wrap">
-  <div class="head"><div><span class="kicker">${e(wk.kicker)}</span><h2 class="d">${e(wk.title)}</h2></div><p>${e(wk.intro)}</p></div>
-  <div class="stack" id="stack">${cases.map((cs, i) => `<article class="case" style="--i:${i};--c:${color(cs.color, '#1E2025')};--hi:${color(cs.highlight, '#C2AEFF')}"><div class="case-body"><div><div class="tags">${(cs.tags || []).map((g) => `<span>${e(g)}</span>`).join('')}</div><h3>${e(cs.headline)}</h3><p>${e(cs.description)}</p></div><div class="kpis">${(cs.kpis || []).map((k) => `<div><strong${/^[%\d.,+]+$/.test(k.value || '') ? '' : ' class="txt"'}>${e(k.value)}</strong><span>${e(k.label)}</span></div>`).join('')}</div></div><div class="case-art"><div class="browser" aria-hidden="true"><span></span><span></span><span></span></div>${cs.screenshot ? `<img src="${e(cs.screenshot)}" alt="${e(cs.name)} web sitesi ana sayfası" loading="lazy">` : ''}${cs.barStrong || cs.barText ? `<div class="case-bar"><span><b>${e(cs.barStrong)}</b> ${e(cs.barText)}</span></div>` : ''}</div></article>`).join('')}</div>
-  ${(wk.other || []).length ? `<div class="more"><h3>${e(wk.otherTitle)}</h3><div class="more-grid">${wk.other.map((m) => `<div class="mi"><strong>${e(m.name)}</strong><span>${e(m.type)}</span></div>`).join('')}</div></div>` : ''}
-</div></section>
-
-<section class="block" id="surec" style="padding-top:40px"><div class="wrap">
-  <div class="head"><div><span class="kicker">${e(pr.kicker)}</span><h2 class="d">${nl(pr.title)}</h2></div><p>${e(pr.intro)}</p></div>
-  <div class="steps" id="steps"><div class="rail" aria-hidden="true"><i></i></div>${(pr.steps || []).map((x, i) => `<div class="step"><div class="n">${String(i + 1).padStart(2, '0')}</div><h3>${e(x.title)}</h3><p>${e(x.text)}</p></div>`).join('')}</div>
-  ${pr.loopNote ? `<p class="loopnote"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 0 1 15.5-6.2L21 8M21 3v5h-5M21 12a9 9 0 0 1-15.5 6.2L3 16M3 21v-5h5"/></svg>${e(pr.loopNote)}</p>` : ''}
-</div></section>
-
-<section class="block" id="hakkimda" style="padding-top:40px"><div class="wrap about">
-  <div class="about-photo">${ab.photo ? `<img src="${e(ab.photo)}" alt="${e(s.name)}" width="400" height="400" loading="lazy">` : ''}</div>
-  <div><span class="kicker">${e(ab.kicker)}</span><h2 class="d">${e(ab.title)}</h2>${(ab.paragraphs || []).map((x) => `<p class="lead">${e(x)}</p>`).join('')}
-    <div class="tl">${(ab.timeline || []).map((r) => `<div class="tl-row"><div class="tl-when"><b>${e(r.org)}</b>${e(r.period)}${r.current ? '<br><span class="tl-now">Devam ediyor</span>' : ''}</div><div class="tl-what"><h3>${e(r.role)}</h3><ul>${(r.bullets || []).map((b) => `<li>${md(b)}</li>`).join('')}</ul></div></div>`).join('')}</div>
-  </div>
-</div></section>
-
-<section class="skills" aria-label="Yetkinlikler ve araçlar">
-  <div class="marquee" style="--dur:46s"><div class="track chipline">${twice(sk.row1, true)}</div></div>
-  <div class="marquee rev" style="--dur:52s"><div class="track chipline alt">${twice(sk.row2, true)}</div></div>
-</section>
-
-${latest.length ? `<section class="block" id="yazilar" style="padding-top:40px"><div class="wrap"><div class="head"><div><span class="kicker">${e(bl.kicker)}</span><h2 class="d">${e(bl.title)}</h2></div><p>${e(bl.intro)}</p></div><div class="bgrid">${latest.map(postCard).join('')}</div><div style="margin-top:28px"><a class="btn btn-ghost" href="/blog/">Tüm yazıları gör</a></div></div></section>` : ''}
-
-<section id="iletisim" style="padding-bottom:0"><div class="wrap"><div class="cta-card">
-  <div class="cta-top"><span class="kicker">${e(ct.kicker)}</span><h2 class="d">${e(ct.title)}</h2></div>
-  <div class="paths">${(ct.paths || []).map((pt) => `<div class="path"><h3>${e(pt.title)}</h3><p>${e(pt.text)}</p><div class="path-actions">${pt.primaryLabel ? `<a class="btn btn-ink" href="${e(pt.primaryUrl)}"${tgt(pt.primaryUrl)}>${e(pt.primaryLabel)} ${ARROW}</a>` : ''}${pt.secondaryLabel ? `<a class="btn btn-ghost" href="${e(pt.secondaryUrl)}"${tgt(pt.secondaryUrl)}>${e(pt.secondaryLabel)}</a>` : ''}</div></div>`).join('')}</div>
-</div></div></section>`;
+export function renderHome(c, opts = {}) {
+  const body = activeSections(c.home || {}).map((k) => SECTIONS[k](c)).join('\n\n');
   return layout(c, { ...opts, home: true, path: '/', body });
 }
 
 export function renderBlogIndex(c, opts = {}) {
   const s = c.settings || {}, bl = (c.home || {}).blog || {}, posts = c.posts || [];
-  const body = `<section class="bhero"><div class="wrap"><span class="kicker">${e(bl.kicker)}</span><h1 class="d">${e(bl.pageTitle)}</h1><p>${e(bl.pageIntro)}</p></div></section>
-<section><div class="wrap">${posts.length ? `<div class="bgrid ${posts.length >= 3 ? 'feat' : 'two'}">${posts.map(postCard).join('')}</div>` : '<p class="bempty">Henüz yayınlanmış yazı yok.</p>'}
-<p class="bempty">Yeni yazılar yolda. Takip etmek için <a href="${e(s.linkedin)}" target="_blank" rel="noopener">LinkedIn</a> profilime göz atın.</p></div></section>`;
-  return layout(c, { ...opts, title: `Blog | ${s.name}`, description: bl.intro, path: '/blog/', body });
+  const main = mainAccount(c);
+  const body = `<section class="bhero"><div class="wrap">${bl.kicker ? `<span class="kicker">${e(bl.kicker)}</span>` : ''}<h1 class="d">${e(bl.pageTitle || bl.title)}</h1>${bl.pageIntro ? `<p>${e(bl.pageIntro)}</p>` : ''}</div></section>
+<section><div class="wrap">${posts.length ? `${filterBar(c, posts)}<div class="bgrid ${posts.length >= 3 ? 'feat' : 'two'}" data-grid>${posts.map(postCard).join('')}</div>` : '<p class="bempty">Henüz yayınlanmış yazı yok.</p>'}
+${main ? `<p class="bempty">Yeni yazılar yolda. Kaçırmamak için <a href="${e(main.url)}"${tgt(main.url)}>${e(main.name)}</a> hesabımı takip edin.</p>` : ''}</div></section>`;
+  return layout(c, { ...opts, title: `${bl.pageTitle || bl.title || 'Yazılar'} | ${s.name}`, description: bl.pageIntro || bl.intro, path: '/blog/', body });
 }
 
 export function renderPost(c, post, opts = {}) {
   const s = c.settings || {};
   const others = (c.posts || []).filter((p) => p.slug !== post.slug).slice(0, 2);
   const origin = opts.origin || 'https://ucpehlivan.web.app';
+  const main = mainAccount(c);
   const ld = { '@context': 'https://schema.org', '@type': 'BlogPosting', headline: post.title, description: post.seoDescription || post.excerpt, datePublished: post.publishedAt, inLanguage: 'tr', author: { '@type': 'Person', name: s.name, url: origin + '/' }, mainEntityOfPage: `${origin}/blog/${post.slug}/` };
   const body = `<article>
   <div class="narrow post-head"><a class="back" href="/blog/"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>Tüm yazılar</a>
-    <p class="bmeta"><span class="chip">${e(post.category)}</span><time datetime="${e(post.publishedAt)}">${trDate(post.publishedAt)}</time>${post.readingMinutes ? `<span>${e(post.readingMinutes)} dk okuma</span>` : ''}</p>
+    <p class="bmeta">${post.category ? `<span class="chip">${e(post.category)}</span>` : ''}<time datetime="${e(post.publishedAt)}">${trDate(post.publishedAt)}</time>${post.readingMinutes ? `<span>${e(post.readingMinutes)} dk okuma</span>` : ''}</p>
     <h1 class="d">${e(post.title)}</h1>${post.lede ? `<p class="lede">${e(post.lede)}</p>` : ''}</div>
   <div class="post-cover">${cover(post)}</div>
   <div class="narrow prose">${post.body || ''}
-    <div class="post-cta"><h3>Bir sonraki projeyi birlikte planlayalım</h3><div class="acts"><a class="btn btn-ink" href="mailto:${e(s.email)}?subject=Proje%20g%C3%B6r%C3%BC%C5%9Fmesi">E-posta gönder</a><a class="btn btn-ghost" href="${e(s.cvUrl || '/cv.pdf')}" target="_blank" rel="noopener">CV'yi indir</a></div></div>
+    <div class="post-cta"><h3>Yeni yazıları kaçırmayın</h3><div class="acts">${main ? `<a class="btn btn-ink" href="${e(main.url)}"${tgt(main.url)}>${e(main.name)}’de takip et</a>` : ''}<a class="btn btn-ghost" href="/blog/">Tüm yazılar</a></div></div>
   </div>
 </article>
 ${others.length ? `<section class="more-posts"><div class="wrap"><h2 class="d">Diğer yazılar</h2><div class="bgrid two">${others.map(postCard).join('')}</div></div></section>` : ''}`;
@@ -206,7 +214,7 @@ ${others.length ? `<section class="more-posts"><div class="wrap"><h2 class="d">D
 }
 
 export function render404(c, opts = {}) {
-  const body = `<section class="bhero"><div class="wrap"><span class="kicker">404</span><h1 class="d">Bu sayfa planda yok</h1><p>Aradığınız sayfa taşınmış veya hiç oluşturulmamış olabilir. Ana sayfaya dönün veya blog yazılarına göz atın.</p><div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:32px"><a class="btn btn-ink" href="/">Ana sayfaya dön</a><a class="btn btn-ghost" href="/blog/">Blog</a></div></div></section>`;
+  const body = `<section class="bhero"><div class="wrap"><span class="kicker">404</span><h1 class="d">Bu sayfa burada yok</h1><p>Aradığınız sayfa taşınmış veya hiç oluşturulmamış olabilir. Ana sayfaya dönün veya yazılara göz atın.</p><div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:32px"><a class="btn btn-ink" href="/">Ana sayfaya dön</a><a class="btn btn-ghost" href="/blog/">Yazılar</a></div></div></section>`;
   return layout(c, { ...opts, title: 'Sayfa bulunamadı', noindex: true, path: '/404', body });
 }
 

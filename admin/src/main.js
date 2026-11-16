@@ -1,7 +1,7 @@
 import { h, clone, toast, readingMinutes, slugify } from './util.js';
-import { createStore, ADMIN_EMAIL, buildBundle } from './store.js';
+import { createStore, ADMIN_EMAIL, buildBundle, SEED_VERSION } from './store.js';
 import { renderForm } from './form.js';
-import { settingsSchema, homeSections, caseSchema, postSchema, newCase, newPost } from './schema.js';
+import { settingsSchema, homeSections, postSchema, newPost } from './schema.js';
 import { renderHome as rHome, renderPost as rPost, renderBlogIndex as rBlog, collectMedia, resolveMedia } from '../../shared/render.js';
 
 const app = document.getElementById('app');
@@ -35,9 +35,9 @@ const renderPost = (c, p) => { const r = R({ ...c, __p: p }); const { __p, ...re
 const renderBlogIndex = (c) => rBlog(R(c));
 const publish = () => store.publish(buildBundle(data));
 const mediaImg = (ref) => { const i = h('img', { alt: '' }); if (!ref) return null; if (ref.startsWith('media:')) store.media(ref.slice(6)).then((u) => { i.src = u; }); else i.src = ref; return i; };
-const sortCases = (arr) => [...arr].sort((a, b) => (a.order ?? 999) - (b.order ?? 999));
 const published = () => data.posts.filter((p) => p.status === 'published' && p.slug).sort((a, b) => String(b.publishedAt).localeCompare(String(a.publishedAt)));
-const siteContent = (over = {}) => ({ settings: data.settings, home: data.home, cases: sortCases(data.cases).filter((c) => c.visible !== false), posts: published(), ...over });
+const siteContent = (over = {}) => ({ settings: data.settings, home: data.home, posts: published(), ...over });
+const categories = () => ((data.home.blog || {}).categories || []).filter(Boolean);
 
 function setDirty(v) { dirty = v; const s = document.getElementById('status'); if (s) { s.textContent = v ? 'Kaydedilmemiş değişiklik var' : 'Tüm değişiklikler kaydedildi'; s.className = 'status ' + (v ? 'warn' : 'ok'); } const b = document.getElementById('saveBtn'); if (b) b.disabled = !v; }
 addEventListener('beforeunload', (e) => { if (dirty) { e.preventDefault(); e.returnValue = ''; } });
@@ -71,7 +71,7 @@ function shell(active, title, content, { actions = [], preview = null } = {}) {
   app.replaceChildren(h('div', { class: 'shell' },
     h('aside', { class: 'side' },
       h('div', { class: 'brand' }, h('b', {}, 'UCP'), h('span', {}, 'Site yönetimi')),
-      h('nav', { 'aria-label': 'Yönetim menüsü' }, nav('home', '#/home/hero', 'Ana sayfa'), nav('cases', '#/cases', 'Öne çıkan işler'), nav('posts', '#/posts', 'Blog yazıları'), nav('settings', '#/settings', 'Site ayarları')),
+      h('nav', { 'aria-label': 'Yönetim menüsü' }, nav('home', '#/home/layout', 'Ana sayfa'), nav('posts', '#/posts', 'Yazılar'), nav('settings', '#/settings', 'Site ayarları')),
       h('div', { class: 'side-foot' },
         h('a', { class: 'nav-i', href: '/', target: '_blank', rel: 'noopener' }, h('span', { html: svg('ext') }), 'Siteyi aç'),
         h('button', { type: 'button', class: 'nav-i', onclick: () => store.signOut() }, h('span', { html: svg('out') }), 'Çıkış yap'),
@@ -94,9 +94,10 @@ async function guard(fn, okMsg = 'Kaydedildi. Site güncellendi.') {
 function homeView(sectionKey) {
   const sec = homeSections.find((s) => s.key === sectionKey) || homeSections[0];
   const work = clone(data.home);
-  work[sec.key] = work[sec.key] || {};
+  // "Düzen" sekmesi doğrudan home.layout dizisini düzenler; diğer sekmeler home[bölüm] nesnesini.
+  const target = sec.key === 'layout' ? work : (work[sec.key] = work[sec.key] || {});
   const tabs = h('div', { class: 'tabs', role: 'tablist' }, homeSections.map((s) => h('a', { href: `#/home/${s.key}`, role: 'tab', class: 'tab' + (s.key === sec.key ? ' on' : ''), 'aria-selected': String(s.key === sec.key) }, s.title)));
-  const form = renderForm(sec.fields, work[sec.key], { onChange: () => { setDirty(true); schedulePreview(); }, upload: (f) => store.upload(f), media: (id) => store.media(id) });
+  const form = renderForm(sec.fields, target, { onChange: () => { setDirty(true); schedulePreview(); }, upload: (f) => store.upload(f), media: (id) => store.media(id) });
   saveFn = () => guard(async () => { await store.saveHome(work); data.home = clone(work); });
   shell('home', 'Ana sayfa', h('div', {}, tabs, h('section', { class: 'card' }, h('h2', {}, sec.title), form)), { actions: [saveButton()], preview: () => ({ html: renderHome(siteContent({ home: work })), anchor: sec.anchor }) });
 }
@@ -105,36 +106,7 @@ function settingsView() {
   const work = clone(data.settings);
   const form = renderForm(settingsSchema, work, { onChange: () => { setDirty(true); schedulePreview(); }, upload: (f) => store.upload(f), media: (id) => store.media(id) });
   saveFn = () => guard(async () => { if (!work.name || !work.email) throw new Error('Ad soyad ve e-posta zorunlu.'); await store.saveSettings(work); data.settings = clone(work); });
-  shell('settings', 'Site ayarları', h('section', { class: 'card' }, form), { actions: [saveButton()], preview: () => ({ html: renderHome(siteContent({ settings: work })), anchor: 'iletisim' }) });
-}
-
-function casesList() {
-  const list = sortCases(data.cases);
-  const move = async (i, d) => {
-    const a = list[i], b = list[i + d]; if (!a || !b) return;
-    list.forEach((c, k) => { c.order = k + 1; });
-    [a.order, b.order] = [b.order, a.order];
-    try { await Promise.all([store.saveItem('cases', a), store.saveItem('cases', b)]); data.cases = data.cases.map((c) => (c.id === a.id ? a : c.id === b.id ? b : c)); await publish(); toast('Sıra güncellendi'); route(); } catch (err) { toast(err.message, 'err'); }
-  };
-  const rows = list.map((c, i) => h('div', { class: 'row-i' },
-    h('div', { class: 'thumb', style: `background:${c.color || '#1E2025'}` }, mediaImg(c.screenshot)),
-    h('a', { class: 'row-t', href: `#/cases/${c.id}` }, h('b', {}, c.name), h('small', {}, c.headline || '')),
-    h('span', { class: 'chip ' + (c.visible === false ? 'muted' : 'ok') }, c.visible === false ? 'Gizli' : 'Sitede'),
-    h('div', { class: 'row-a' },
-      h('button', { type: 'button', class: 'ic', 'aria-label': 'Yukarı taşı', disabled: i === 0 ? true : null, onclick: () => move(i, -1) }, '↑'),
-      h('button', { type: 'button', class: 'ic', 'aria-label': 'Aşağı taşı', disabled: i === list.length - 1 ? true : null, onclick: () => move(i, 1) }, '↓'),
-      h('a', { class: 'btn-s', href: `#/cases/${c.id}` }, 'Düzenle'))));
-  const add = h('button', { type: 'button', class: 'btn primary', onclick: async () => { const c = { ...newCase(), order: list.length + 1 }; const id = await store.saveItem('cases', c); data.cases.push({ ...c, id }); location.hash = `#/cases/${id}`; } }, '+ Yeni proje');
-  shell('cases', 'Öne çıkan işler', h('section', { class: 'card' }, h('p', { class: 'lead-t' }, 'Kartlar sitede bu sırayla görünür. Okları kullanarak sırayı değiştir.'), rows.length ? h('div', { class: 'rows' }, rows) : h('p', { class: 'empty' }, 'Henüz proje yok.')), { actions: [add], preview: () => ({ html: renderHome(siteContent()), anchor: 'vakalar' }) });
-}
-
-function caseEdit(id) {
-  const orig = data.cases.find((c) => c.id === id); if (!orig) { location.hash = '#/cases'; return; }
-  const work = clone(orig);
-  const form = renderForm(caseSchema, work, { onChange: () => { setDirty(true); schedulePreview(); }, upload: (f) => store.upload(f), media: (id) => store.media(id) });
-  saveFn = () => guard(async () => { if (!work.name) throw new Error('Marka adı zorunlu.'); await store.saveItem('cases', work); Object.assign(orig, clone(work)); });
-  const del = h('button', { type: 'button', class: 'btn danger', onclick: async () => { if (!confirm(`"${work.name}" kalıcı olarak silinsin mi?`)) return; await store.deleteItem('cases', id); data.cases = data.cases.filter((c) => c.id !== id); await publish(); setDirty(false); toast('Silindi'); location.hash = '#/cases'; } }, 'Sil');
-  shell('cases', work.name || 'Proje', h('div', {}, h('a', { class: 'back', href: '#/cases' }, '← Tüm projeler'), h('section', { class: 'card' }, form)), { actions: [del, saveButton()], preview: () => ({ html: renderHome(siteContent({ cases: sortCases(data.cases.map((c) => (c.id === id ? work : c))).filter((c) => c.visible !== false) })), anchor: 'vakalar' }) });
+  shell('settings', 'Site ayarları', h('section', { class: 'card' }, form), { actions: [saveButton()], preview: () => ({ html: renderHome(siteContent({ settings: work })), anchor: 'top' }) });
 }
 
 function postsList() {
@@ -143,14 +115,15 @@ function postsList() {
     h('a', { class: 'row-t', href: `#/posts/${p.id}` }, h('b', {}, p.title || '(başlıksız)'), h('small', {}, [p.category, p.publishedAt].filter(Boolean).join(', '))),
     h('span', { class: 'chip ' + (p.status === 'published' ? 'ok' : 'muted') }, p.status === 'published' ? 'Yayında' : 'Taslak'),
     h('div', { class: 'row-a' }, p.status === 'published' ? h('a', { class: 'btn-s ghost', href: `/blog/${p.slug}/`, target: '_blank', rel: 'noopener' }, 'Sitede gör') : null, h('a', { class: 'btn-s', href: `#/posts/${p.id}` }, 'Düzenle'))));
-  const add = h('button', { type: 'button', class: 'btn primary', onclick: async () => { const p = newPost(); const id = await store.saveItem('posts', p); data.posts.push({ ...p, id }); location.hash = `#/posts/${id}`; } }, '+ Yeni yazı');
-  shell('posts', 'Blog yazıları', h('section', { class: 'card' }, h('p', { class: 'lead-t' }, 'Yayındaki yazılar kaydedince sitede hemen görünür. LinkedIn paylaşım önizlemesi için bilgisayarında "npm run publish" komutunu çalıştır.'), rows.length ? h('div', { class: 'rows' }, rows) : h('p', { class: 'empty' }, 'Henüz yazı yok. "+ Yeni yazı" ile başla.')), { actions: [add], preview: () => ({ html: renderBlogIndex(siteContent()), anchor: null }) });
+  const add = h('button', { type: 'button', class: 'btn primary', onclick: async () => { const p = newPost(categories()[0] || ''); const id = await store.saveItem('posts', p); data.posts.push({ ...p, id }); location.hash = `#/posts/${id}`; } }, '+ Yeni yazı');
+  shell('posts', 'Yazılar', h('section', { class: 'card' }, h('p', { class: 'lead-t' }, 'Yayındaki yazılar kaydedince sitede hemen görünür. LinkedIn paylaşım önizlemesi için bilgisayarında "npm run publish" komutunu çalıştır.'), rows.length ? h('div', { class: 'rows' }, rows) : h('p', { class: 'empty' }, 'Henüz yazı yok. "+ Yeni yazı" ile başla.')), { actions: [add], preview: () => ({ html: renderBlogIndex(siteContent()), anchor: null }) });
 }
 
 function postEdit(id) {
   const orig = data.posts.find((p) => p.id === id); if (!orig) { location.hash = '#/posts'; return; }
   const work = clone(orig);
-  const form = renderForm(postSchema, work, { onChange: () => { setDirty(true); schedulePreview(); }, upload: (f) => store.upload(f), media: (id) => store.media(id) });
+  const cats = categories(); if (work.category && !cats.includes(work.category)) cats.push(work.category);
+  const form = renderForm(postSchema(cats), work, { onChange: () => { setDirty(true); schedulePreview(); }, upload: (f) => store.upload(f), media: (id) => store.media(id) });
   saveFn = () => guard(async () => {
     if (!work.title) throw new Error('Başlık zorunlu.');
     if (!work.slug) work.slug = slugify(work.title);
@@ -165,11 +138,10 @@ function postEdit(id) {
 
 function route() {
   saveFn = null; previewFn = null;
-  const [, sec, arg] = (location.hash || '#/home/hero').split('/');
-  if (sec === 'cases') return arg ? caseEdit(arg) : casesList();
+  const [, sec, arg] = (location.hash || '#/home/layout').split('/');
   if (sec === 'posts') return arg ? postEdit(arg) : postsList();
   if (sec === 'settings') return settingsView();
-  return homeView(arg || 'hero');
+  return homeView(arg || 'layout');
 }
 
 // ---------- Giriş ve kurulum
@@ -185,15 +157,33 @@ function loginView(msg) {
 function seedView() {
   app.replaceChildren(h('div', { class: 'gate' }, h('div', { class: 'gate-card' },
     h('h1', {}, 'Kurulum'),
-    h('p', {}, 'Veritabanı boş. Sitedeki mevcut içeriği (metinler, 5 proje, 3 blog yazısı) tek tıkla yükle. Sonra her şeyi buradan düzenleyebilirsin.'),
+    h('p', {}, 'Veritabanı boş. Başlangıç içeriğini (metinler, hesaplar, 3 yazı) tek tıkla yükle. Sonra her şeyi buradan düzenleyebilirsin.'),
     h('button', { type: 'button', class: 'btn primary wide', onclick: async (e) => { e.target.disabled = true; e.target.textContent = 'Yükleniyor…'; try { await store.seed(seed); toast('İçerik yüklendi'); await boot(); } catch (err) { toast(err.message, 'err'); e.target.disabled = false; e.target.textContent = 'Başlangıç içeriğini yükle'; } } }, 'Başlangıç içeriğini yükle'))));
+}
+
+function migrateView() {
+  app.replaceChildren(h('div', { class: 'gate' }, h('div', { class: 'gate-card' },
+    h('h1', {}, 'Yeni site yapısı'),
+    h('p', {}, 'Site yeni yapıya geçti: Hero, Yazılar, Hakkımda ve Hesaplarım. Veritabanındaki ana sayfa içeriği eski yapıda.'),
+    h('p', {}, 'Bu adım ana sayfa metinlerini ve site ayarlarını yeni başlangıç içeriği ile değiştirir. Yazıların silinmez ve değişmez. E-posta ve Google Analytics kimliğin korunur.'),
+    h('button', { type: 'button', class: 'btn primary wide', onclick: async (e) => {
+      e.target.disabled = true; e.target.textContent = 'Güncelleniyor…';
+      try {
+        const settings = { ...seed.settings, email: data.settings.email || seed.settings.email, gaId: data.settings.gaId || seed.settings.gaId };
+        const cats = [...new Set([...(seed.home.blog.categories || []), ...data.posts.map((p) => p.category).filter(Boolean)])];
+        const home = { ...clone(seed.home), blog: { ...clone(seed.home.blog), categories: cats } };
+        await store.saveSettings(settings); await store.saveHome(home);
+        data.settings = settings; data.home = home;
+        await publish(); toast('Yeni yapıya geçildi'); route();
+      } catch (err) { toast(err.message, 'err'); e.target.disabled = false; e.target.textContent = 'Yeni yapıya geç'; }
+    } }, 'Yeni yapıya geç'))));
 }
 
 async function boot() {
   app.replaceChildren(h('div', { class: 'gate' }, h('p', {}, 'Yükleniyor…')));
   data = await store.loadAll();
   if (!data.settings || !data.home) return seedView();
-  data.cases.forEach((c, i) => { if (c.order == null) c.order = i + 1; });
+  if (!data.home.accounts) return migrateView();
   route();
 }
 

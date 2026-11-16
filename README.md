@@ -46,14 +46,18 @@ Kurulum tamam.
 
 | Menü | Ne yönetirsin |
 |---|---|
-| **Ana sayfa** | 10 sekme: Hero, Markalar, Rakamlar, Ne yaparım, Projeler, Çalışma şekli, Hakkımda, Yetkinlikler, Blog, İletişim |
-| **Öne çıkan işler** | Vaka kartları: görsel, etiket, rakamlar, renkler, göster/gizle, sıralama |
-| **Blog yazıları** | Zengin metin editörü, görsel ekleme, taslak/yayında, kategori, tarih, kapak, SEO |
-| **Site ayarları** | İletişim bilgileri, CV (PDF), SEO, Google Analytics, header ve footer |
+| **Ana sayfa › Düzen** | Bölümlerin sırası ve aktif/pasif durumu. Pasif bölüm silinmez, sadece sitede görünmez. Menü ve footer linkleri aktif bölümlerden otomatik oluşur. |
+| **Ana sayfa › Hero** | Başlık satırları, giriş metni, buton ve dönen rozet |
+| **Ana sayfa › Yazılar** | Bölüm metinleri, **kategori listesi** ve **kategori filtresi** (açıkken ve en az 2 kategori varsa görünür) |
+| **Ana sayfa › Hakkımda** | Paragraflar, kısa bilgi etiketleri, çizimi göster/gizle |
+| **Ana sayfa › Hesaplarım** | Sosyal hesaplar: ad, alt metin, adres, simge, vurgulu, göster/gizle. Yeni hesap açınca buraya ekle. |
+| **Yazılar** | Zengin metin editörü, görsel ekleme, taslak/yayında, kategori, tarih, kapak, SEO |
+| **Site ayarları** | Ad, e-posta, konum, SEO, Google Analytics, footer metinleri |
 
 - Sağdaki **canlı önizleme**, kaydetmeden önce sonucu gösterir.
 - **Ctrl/Cmd + S** kaydeder.
 - Yüklenen görseller otomatik küçültülür ve WebP'ye çevrilir. Görseller ve PDF en fazla 700 KB olabilir (sıkıştırmadan sonra).
+- **Eski yapıdan geçiş:** Veritabanında eski ana sayfa içeriği varsa, panel ilk girişte "Yeni yapıya geç" ekranını gösterir. Bu adım yazılara dokunmaz.
 
 ### Paylaşım önizlemeleri ve SEO için (isteğe bağlı)
 
