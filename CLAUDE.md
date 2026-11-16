@@ -135,19 +135,28 @@ firebase deploy                  # hosting + firestore kuralları
 
 **Kod değişikliğinden sonra:** `npm run build` çalıştır, `npm run dev` ile kontrol et, sonra commit.
 
-### Sahibinin Windows bilgisayarında (Git yok, Node yok)
+### İki bilgisayar: Mac ve Windows — oturum başında hangisinde olduğunu kontrol et
 
-```
- Oturum başı:  repo yoksa → gh api ile ZIP indir (veya: gh api repos/Cihanpehlivan/ucpehlivan-site/zipball/main)
-               repo varsa → GitHub'daki main ile aynı mı kontrol et (son commit sha)
- Push:         powershell -ExecutionPolicy Bypass -File scripts\gh-push.ps1 -Message "…" -Files "yol/a,yol/b" -ExpectSha <sha>
- Yayın:        gh workflow run yayinla.yml -R Cihanpehlivan/ucpehlivan-site -f hedef=onizleme  →  kontrol  →  hedef=canli
- Önizleme:     https://ucpehlivan--onizleme-qg07p53h.web.app  (7 gün; yeni yayında adres değişebilir, run log'una bak)
-```
+Sahibi aynı repoda hem Mac'te hem Windows'ta çalışır. **İlk iş:** `git --version`, `node --version`, `gh --version` ile araçlara bak, sonra aşağıdaki doğru satırı izle. Araçları varsayma.
 
-- `gh` kurulu ve giriş yapılı (`C:\Program Files\GitHub CLI\gh.exe`). Git ve Node **yok**; `npm run build` çalışmaz.
-- Node yokken: `render.js` değişikliğini tarayıcıda modül olarak içe aktarıp Firestore içeriğiyle test et; derlenmiş `app.js`/`admin.js`'e aynı değişikliği elle uygula; `build-yazi.mjs` çıktısını (`public/yazi/…/index.html`) elle güncelle ve `yazi.css?v=` sürümünü (yazi.css+yazi.js SHA1'inin ilk 8 hanesi) artır.
-- Yerel önizleme: `public/` klasörünü basit bir statik sunucuyla servis et (Python yok; PowerShell `HttpListener` yeterli).
+| Adım | Mac (Git + Node olması beklenir) | Windows (Git yok, Node yok, `gh` var) |
+|---|---|---|
+| Repoyu al | `git clone` · varsa **`git pull`** | `gh api repos/Cihanpehlivan/ucpehlivan-site/zipball/main` ile ZIP indir |
+| Derle | `npm install` (bir kez) · `npm run build` | Çalışmaz. Aşağıdaki "Node yokken" kuralı. |
+| Yazı sayfası | `node scripts/build-yazi.mjs` | HTML'i elle güncelle + `yazi.css?v=` sürümünü artır |
+| Yerel önizleme | `npm run dev` → `localhost:5050` | `public/`'i PowerShell `HttpListener` ile servis et (Python yok) |
+| Push | `git add` · `git commit` · `git push` | `powershell -ExecutionPolicy Bypass -File scripts\gh-push.ps1 -Message "…" -Files "yol/a,yol/b" -ExpectSha <sha>` |
+| Yayın | `gh workflow run …` varsa onu kullan; yoksa GitHub › Actions › "Siteyi yayına al" | `gh workflow run yayinla.yml -R Cihanpehlivan/ucpehlivan-site -f hedef=onizleme` → kontrol → `hedef=canli` |
+
+**İki makine kuralları:**
+- Başlamadan önce **GitHub'daki en son hâli al.** Diğer makinede push yapılmış olabilir. Yerel kopyayla çalışmaya başlama.
+- Bir makinede bitince **her şeyi push'la**; diğer makineye push'lanmamış iş bırakma.
+- `gh` girişi makineye özeldir. Mac'te `gh` yoksa veya giriş yoksa sahibine `gh auth login`'i kendisinin yapmasını söyle.
+- **Mac'te ilk oturumda bir kez:** `npm install && npm run build` çalıştır ve `git diff` bak. Windows'ta elle düzenlenen `public/assets/app.js`, `public/admin/admin.js` ve `public/yazi/prompt-brief/index.html` kaynaktan yeniden üretilmiş olur. Fark yalnız biçimse (boşluk, sıra) commit'le; anlamlı fark varsa sahibine göster.
+
+**Node yokken (Windows):** `render.js` değişikliğini tarayıcıda modül olarak içe aktarıp Firestore içeriğiyle test et; derlenmiş `app.js`/`admin.js`'e aynı değişikliği elle uygula; `build-yazi.mjs` çıktısını elle güncelle ve `yazi.css?v=` sürümünü (yazi.css + yazi.js SHA1'inin ilk 8 hanesi) artır.
+
+Önizleme adresi: `https://ucpehlivan--onizleme-qg07p53h.web.app` (7 gün geçerli; yeni yayında değişebilir, Actions log'una bak).
 
 **Yayın:** GitHub Actions › "Siteyi yayına al" › önce `onizleme`, kontrol et, sonra `canli`. Workflow içeriği Firestore'dan alır (`scripts/publish.mjs`) ve sayfaları üretir.
 
@@ -314,6 +323,11 @@ Her oturumun sonunda **en üste** yeni bir not ekle. Eski notları silme. 10 not
 - **Açık kalan:** …
 - **Sonraki adım:** …
 ```
+
+### 2026-11-16 — Çalışma ortamı (Windows → yarın Mac)
+- **Yapılan:** Bugünkü tüm iş Windows'ta, Git/Node olmadan `gh` ile yapıldı. `scripts/gh-push.ps1` eklendi. §5'e Mac/Windows tablosu ve iki makine kuralları yazıldı.
+- **Açık kalan:** Mac'te ilk oturumda `npm install && npm run build` + `git diff` ile elle düzenlenmiş derleme dosyalarını doğrula (§5).
+- **Sonraki adım:** Sahibi yarın Mac'ten devam edebilir. Önce `git pull`, sonra §11'deki en son notları oku.
 
 ### 2026-11-16 — Yazı özeti yeniden tasarlandı
 - **Yapılan:** Yazı başındaki özet kutusu ("AI slop" görünüyordu: beyaz kart + kalın mor sol şerit + tireli liste) yeniden yapıldı: kenarsız, hafif gri tonlu (`surface-2` %60) alan; üstte mor nokta + "ÖZET" etiketi ve çizgi; 3 kolon madde, aralarında ince çizgi, mor `01–03` numaralar; mobilde alt alta. Etiket "Kısaca" → **"Özet"** (`content/prompt-yazisi.json` › `summaryLabel`). Özet ile yazının başı arasında 56px (mobil 40px) boşluk; yazı beyaz, gölgeli iddia kutusuyla başlar. `ui-kit/components.json` › `Box/TLDR` her adımda aynı commit'te güncellendi (§6.1). Canlıda.
