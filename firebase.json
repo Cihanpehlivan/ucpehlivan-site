@@ -2,6 +2,9 @@
   "hosting": {
     "public": "public",
     "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
+    "redirects": [
+      { "source": "/blog/prompt-yazmak-brief{,/,/index.html}", "destination": "/yazi/prompt-brief/", "type": 301 }
+    ],
     "rewrites": [
       { "source": "/admin", "destination": "/admin/index.html" },
       { "source": "/admin/**", "destination": "/admin/index.html" },

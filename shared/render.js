@@ -84,6 +84,35 @@ function filterBar(c, posts) {
 // Site içi yolu tam adrese çevirir; data: ve boş değerler için ''.
 const absUrl = (u, origin) => (!u || typeof u !== 'string' || u.startsWith('data:') || u.startsWith('blob:') ? '' : /^https?:/.test(u) ? u : u.startsWith('/') ? origin + u : '');
 
+// ---------- Yapılandırılmış veri (schema.org)
+// Site (WebSite) ve kişi (Person) her sayfada aynı @id ile tanımlanır; yazılar bu kimliklere bağlanır.
+// Google site adını ve yazarı, yapay zeka araçları "kim yazdı, ne konuda yazar" bilgisini buradan okur.
+const KNOWS_ABOUT = ['Yapay zeka', 'Prompt yazımı', 'Proje yönetimi', 'Dijital ürün yönetimi'];
+export function identityLd(c, origin = 'https://ucpehlivan.web.app') {
+  const s = c.settings || {};
+  const bio = (((c.home || {}).about || {}).paragraphs || [])[0];
+  const person = {
+    '@type': 'Person', '@id': `${origin}/#person`, name: s.name, url: `${origin}/`,
+    ...(s.role ? { jobTitle: s.role } : {}), ...(bio ? { description: bio } : {}),
+    ...(s.email ? { email: `mailto:${s.email}` } : {}), knowsAbout: KNOWS_ABOUT,
+    sameAs: accounts(c).map((a) => a.url).filter((u) => /^https?:/.test(u)),
+  };
+  const site = {
+    '@type': 'WebSite', '@id': `${origin}/#website`, url: `${origin}/`, name: s.name,
+    ...(s.seoDescription ? { description: s.seoDescription } : {}), inLanguage: 'tr', publisher: { '@id': `${origin}/#person` },
+  };
+  return [site, person];
+}
+export function articleLd({ url, headline, description, datePublished, dateModified, image }, origin = 'https://ucpehlivan.web.app') {
+  return {
+    '@type': 'BlogPosting', '@id': `${url}#article`, headline, ...(description ? { description } : {}),
+    datePublished, dateModified: dateModified || datePublished, inLanguage: 'tr', ...(image ? { image } : {}),
+    author: { '@id': `${origin}/#person` }, publisher: { '@id': `${origin}/#person` },
+    isPartOf: { '@id': `${origin}/#website` }, mainEntityOfPage: url,
+  };
+}
+const graph = (...items) => ({ '@context': 'https://schema.org', '@graph': items.flat() });
+
 export function layout(c, { title, description, type = 'website', jsonld, noindex = false, path = '/', home = false, origin = 'https://ucpehlivan.web.app', version = '', image = '', imageAlt = '', body }) {
   const s = c.settings || {};
   const canonical = origin + path;
@@ -94,7 +123,7 @@ export function layout(c, { title, description, type = 'website', jsonld, noinde
   const img = absUrl(image, origin) || origin + '/og.png';
   const imgAlt = imageAlt || pageTitle;
   const accs = accounts(c);
-  const ld = jsonld || { '@context': 'https://schema.org', '@type': 'Person', name: s.name, jobTitle: s.role, url: origin + '/', email: `mailto:${s.email}`, sameAs: accs.map((a) => a.url).filter((u) => /^https?:/.test(u)) };
+  const ld = jsonld || graph(identityLd(c, origin));
   const secs = activeSections((c.home || {}));
   const navLink = (k) => { const [id, label] = NAV[k]; if (k === 'blog') return `<a href="${home ? '#yazilar' : '/blog/'}"${path.startsWith('/blog') ? ' aria-current="page"' : ''}>${label}</a>`; return `<a href="${p}#${id}">${label}</a>`; };
   const navs = secs.filter((k) => NAV[k]).map(navLink).join('');
@@ -108,6 +137,7 @@ export function layout(c, { title, description, type = 'website', jsonld, noinde
 <meta name="description" content="${e(desc)}">
 <link rel="canonical" href="${e(canonical)}">
 <meta property="og:type" content="${type}">
+<meta property="og:site_name" content="${e(s.name)}">
 <meta property="og:title" content="${e(pageTitle)}">
 <meta property="og:description" content="${e(desc)}">
 <meta property="og:url" content="${e(canonical)}">
@@ -211,7 +241,14 @@ export function renderBlogIndex(c, opts = {}) {
   const body = `<section class="bhero"><div class="wrap">${bl.kicker ? `<span class="kicker">${e(bl.kicker)}</span>` : ''}<h1 class="d">${e(bl.pageTitle || bl.title)}</h1>${bl.pageIntro ? `<p>${e(bl.pageIntro)}</p>` : ''}</div></section>
 <section><div class="wrap">${posts.length ? `${filterBar(c, posts)}<div class="bgrid ${posts.length >= 3 ? 'feat' : 'two'}" data-grid>${posts.map(postCard).join('')}</div>` : '<p class="bempty">Henüz yayınlanmış yazı yok.</p>'}
 ${main ? `<p class="bempty">Yeni yazılar yolda. Kaçırmamak için <a href="${e(main.url)}"${tgt(main.url)}>${e(main.name)}</a> hesabımı takip edin.</p>` : ''}</div></section>`;
-  return layout(c, { ...opts, title: `${bl.pageTitle || bl.title || 'Yazılar'} | ${s.name}`, description: bl.pageIntro || bl.intro, path: '/blog/', body });
+  const origin = opts.origin || 'https://ucpehlivan.web.app';
+  const blogLd = {
+    '@type': 'Blog', '@id': `${origin}/blog/#blog`, url: `${origin}/blog/`, name: `${bl.pageTitle || bl.title || 'Yazılar'} | ${s.name}`,
+    ...(bl.pageIntro || bl.intro ? { description: bl.pageIntro || bl.intro } : {}), inLanguage: 'tr',
+    publisher: { '@id': `${origin}/#person` }, isPartOf: { '@id': `${origin}/#website` },
+    blogPost: posts.map((p) => ({ '@type': 'BlogPosting', headline: p.title, url: origin + postHref(p), datePublished: p.publishedAt, dateModified: p.updatedAt || p.publishedAt, author: { '@id': `${origin}/#person` } })),
+  };
+  return layout(c, { ...opts, title: `${bl.pageTitle || bl.title || 'Yazılar'} | ${s.name}`, description: bl.pageIntro || bl.intro, path: '/blog/', jsonld: graph(identityLd(c, origin), blogLd), body });
 }
 
 export function renderPost(c, post, opts = {}) {
@@ -224,7 +261,7 @@ export function renderPost(c, post, opts = {}) {
   const others = (c.posts || []).filter((p) => p.slug !== post.slug).slice(0, 2);
   const origin = opts.origin || 'https://ucpehlivan.web.app';
   const main = mainAccount(c);
-  const ld = { '@context': 'https://schema.org', '@type': 'BlogPosting', headline: post.title, description: post.seoDescription || post.excerpt, datePublished: post.publishedAt, inLanguage: 'tr', author: { '@type': 'Person', name: s.name, url: origin + '/' }, mainEntityOfPage: `${origin}/blog/${post.slug}/` };
+  const ld = graph(identityLd(c, origin), articleLd({ url: `${origin}/blog/${post.slug}/`, headline: post.title, description: post.seoDescription || post.excerpt, datePublished: post.publishedAt, dateModified: post.updatedAt, image: (post.coverStyle === 'image' && absUrl(post.coverImage, origin)) || `${origin}/og.png` }, origin));
   const body = `<article>
   <div class="narrow post-head"><a class="back" href="/blog/"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>Tüm yazılar</a>
     <p class="bmeta">${post.category ? `<span class="chip">${e(post.category)}</span>` : ''}<time datetime="${e(post.publishedAt)}">${trDate(post.publishedAt)}</time>${post.readingMinutes ? `<span>${e(post.readingMinutes)} dk okuma</span>` : ''}</p>
@@ -244,8 +281,25 @@ export function render404(c, opts = {}) {
 }
 
 export function renderSitemap(c, origin = 'https://ucpehlivan.web.app') {
-  const urls = [['/', ''], ['/blog/', '']].concat((c.posts || []).map((p) => [postHref(p), p.updatedAt || p.publishedAt]));
+  const dated = (c.posts || []).map((p) => [postHref(p), p.updatedAt || p.publishedAt]);
+  // Ana sayfa ve yazı listesi en son yazıyla değişir: tarihleri en yeni yazının tarihi.
+  const latest = dated.map(([, d]) => String(d || '').slice(0, 10)).filter(Boolean).sort().pop() || '';
+  const urls = [['/', latest], ['/blog/', latest]].concat(dated);
   return `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.map(([u, d]) => `  <url><loc>${origin}${u}</loc>${d ? `<lastmod>${String(d).slice(0, 10)}</lastmod>` : ''}</url>`).join('\n')}\n</urlset>\n`;
+}
+
+// llms.txt: yapay zeka araçlarına sitenin ne olduğunu ve önemli sayfalarını anlatan düz metin (llmstxt.org).
+export function renderLlms(c, origin = 'https://ucpehlivan.web.app') {
+  const s = c.settings || {}, bl = (c.home || {}).blog || {};
+  const one = (v) => String(v || '').replace(/\s+/g, ' ').trim();
+  const about = (((c.home || {}).about || {}).paragraphs || []).map(one).filter(Boolean);
+  const posts = (c.posts || []).map((p) => `- [${one(p.title)}](${origin}${postHref(p)}): ${one(p.seoDescription || p.excerpt)}`);
+  const accs = accounts(c).filter((a) => /^https?:/.test(a.url)).map((a) => `- [${one(a.name)}](${a.url})`);
+  return [`# ${one(s.name)}`, '', `> ${one(s.seoDescription || s.footerTagline)}`, '', ...(about.length ? [about.join(' '), ''] : []),
+    'Site Türkçedir. Yazılar, yapay zekayı her gün gerçek işte kullanan bir proje yöneticisinin notları ve deneyimleridir.', '',
+    `## ${one(bl.pageTitle || bl.title || 'Yazılar')}`, '', ...(posts.length ? posts : ['- Henüz yazı yok.']), '',
+    '## Sayfalar', '', `- [Ana sayfa](${origin}/)`, `- [Tüm yazılar](${origin}/blog/)`, `- [Hakkımda](${origin}/#hakkimda)`, '',
+    ...(accs.length ? ['## Hesaplar', '', ...accs, ''] : [])].join('\n');
 }
 
 // "media:ID" referanslarını gerçek adreslerle değiştirir. map: { ID: url }

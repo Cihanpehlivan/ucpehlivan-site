@@ -9,7 +9,7 @@ import { tmpdir } from 'node:os';
 import { fileURLToPath } from 'node:url';
 import { createHash } from 'node:crypto';
 import { execFileSync } from 'node:child_process';
-import { layout } from '../shared/render.js';
+import { layout, identityLd, articleLd, trDate } from '../shared/render.js';
 import { seedBundle } from './build-static.mjs';
 
 const here = dirname(fileURLToPath(import.meta.url));
@@ -58,12 +58,28 @@ function flipCard({ tag, title, front, backLabel, back, why, whyLabel }) {
 </button></li>`;
 }
 
+// Görünür yazar ve tarih: okur ve arama motorları/yapay zeka araçları kimin, ne zaman yazdığını görsün.
+function byline() {
+  const m = C.meta;
+  const date = trDate(m.published);
+  const upd = m.updated && m.updated !== m.published ? ` · <span>Güncellendi: <time datetime="${esc(m.updated)}">${trDate(m.updated)}</time></span>` : '';
+  return `<p class="yz-byline"><a href="/#hakkimda" rel="author">${esc(s.name)}</a> · <time datetime="${esc(m.published)}">${date}</time>${upd}${m.readingMinutes ? ` · <span>${esc(m.readingMinutes)} dk okuma</span>` : ''}</p>`;
+}
+// Yazının başında kısa özet: cevabı önce veren yapı, yapay zeka araçlarının alıntılamasını kolaylaştırır.
+function summary() {
+  const m = C.meta;
+  if (!(m.summary || []).length) return '';
+  return `<aside class="yz-tldr" aria-label="${esc(m.summaryLabel)}"><p class="yz-mono">${esc(m.summaryLabel)}</p><ul>${m.summary.map((x) => `<li>${md(x)}</li>`).join('')}</ul></aside>`;
+}
+
 function s01(s) {
   const h = s.hero;
   return `<section class="yz-sec yz-hero" id="${s.id}" aria-labelledby="h-${s.id}" data-sec>
   ${secHead(s, '')}
   <p class="yz-kicker yz-mono">${esc(h.kicker)}</p>
   <h1 class="d yz-title" id="h-${s.id}">${esc(h.title)}</h1>
+  ${byline()}
+  ${summary()}
   <div class="yz-claim"><div class="yz-claim-top"><span class="yz-mono yz-claim-l">${esc(h.claimLabel)}</span><span class="yz-claim-dots" aria-hidden="true">${h.pillars.map((_, i) => `<i>${i + 1}</i>`).join('')}</span></div><p class="yz-claim-t">${(() => { let n = 0; return h.claim.map((p) => (p.key ? `<mark data-k="${esc(p.key)}"><sup aria-hidden="true">${++n}</sup>${esc(p.text)}</mark>` : esc(p.text))).join(''); })()}</p></div>
   <p class="yz-mono yz-small">${esc(h.pillarsHint)}</p>
   <div class="yz-pillars">${h.pillars.map((p, i) => `<button type="button" class="yz-pillar" data-k="${esc(p.key)}" aria-pressed="false"><span class="yz-mono"><b class="yz-pn">${i + 1}</b>${esc(p.label)}</span><span>${esc(p.text)}</span></button>`).join('')}</div>
@@ -192,9 +208,8 @@ const js = readFileSync(join(pub, 'assets', 'yazi.js'));
 const v = createHash('sha1').update(css).update(js).digest('hex').slice(0, 8);
 
 const ld = {
-  '@context': 'https://schema.org', '@type': 'BlogPosting', headline: C.meta.title, description: C.meta.description,
-  datePublished: C.meta.published, inLanguage: 'tr', image: ORIGIN + C.meta.ogImage,
-  author: { '@type': 'Person', name: s.name, url: ORIGIN + '/' }, mainEntityOfPage: ORIGIN + C.meta.path,
+  '@context': 'https://schema.org',
+  '@graph': [...identityLd(c, ORIGIN), articleLd({ url: ORIGIN + C.meta.path, headline: C.meta.title, description: C.meta.description, datePublished: C.meta.published, dateModified: C.meta.updated, image: ORIGIN + C.meta.ogImage }, ORIGIN)],
 };
 let html = layout(c, { origin: ORIGIN, path: C.meta.path, type: 'article', jsonld: ld, title: `${C.meta.title} | ${s.name}`, description: C.meta.description, image: C.meta.ogImage, imageAlt: C.meta.ogImageAlt, body });
 // Sitenin içerik yenileme script'i bu sayfayı tanımaz; bu sayfada yüklenmez.
@@ -202,6 +217,8 @@ html = html.replace(/<script type="module" src="\/assets\/app\.js[^"]*"><\/scrip
 const og = `<meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="article:published_time" content="${esc(C.meta.published)}">
+<meta property="article:modified_time" content="${esc(C.meta.updated || C.meta.published)}">
+<meta property="article:author" content="${esc(s.name)}">
 <link rel="stylesheet" href="/assets/yazi.css?v=${v}">`;
 html = html.replace('</head>', `${og}\n</head>`);
 html = html.replace('</body>', `<script src="/assets/yazi.js?v=${v}" defer></script>\n</body>`);

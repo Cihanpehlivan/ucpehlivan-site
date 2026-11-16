@@ -6,7 +6,15 @@
     "description": "Yeni modeller zeki; adım adım reçeteyle kısıtlanınca değil, hedef ve sınırla yönlendirilince iyi iş çıkarıyor. Bir proje yöneticisinin gözünden interaktif bir okuma.",
     "ogImage": "/yazi/prompt-brief/og.png",
     "ogImageAlt": "Prompt yazmak, aslında iyi bir brief yazmak.",
-    "published": "2026-11-16"
+    "published": "2026-11-16",
+    "updated": "2026-11-16",
+    "readingMinutes": 7,
+    "summaryLabel": "Kısaca",
+    "summary": [
+      "Yeni modellere adım adım tarif yazma. **Hedefi**, **sınırları** ve modele bıraktığın **serbest alanı** yaz.",
+      "Rol vermek, uzun brief ve her şeyi tek mesaja sığdırmak artık işe yaramıyor. Yerine somut malzeme, kısa ve net metin, hazır proje bağlamı ver.",
+      "Kopyalanabilir şablon: **Hedef + Elindekiler + Sınırlar**, sonunda “Talimatımda bir hata görürsen önce bana söyle.”"
+    ]
   },
   "ui": {
     "navLabel": "Bölümler",
