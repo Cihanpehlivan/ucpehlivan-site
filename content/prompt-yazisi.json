@@ -10,7 +10,6 @@
   },
   "ui": {
     "navLabel": "Bölümler",
-    "keysHint": "j / k: sonraki / önceki bölüm",
     "flip": "Çevir",
     "flipBack": "Geri çevir",
     "flipAll": "Hepsini çevir",

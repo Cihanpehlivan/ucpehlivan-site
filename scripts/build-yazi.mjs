@@ -171,7 +171,7 @@ const site = await siteBundle();
 const c = { ...site, settings: { ...(site.settings || {}), gaId: '' } };
 const s = c.settings;
 
-const nav = `<nav class="yz-nav" aria-label="${esc(C.ui.navLabel)}"><ol>${C.sections.map((x) => `<li><a href="#${x.id}" data-nav="${x.id}"><span class="yz-num">${esc(x.num)}</span><span class="yz-nl">${esc(x.nav)}</span></a></li>`).join('')}</ol><p class="yz-mono yz-keys">${esc(C.ui.keysHint)}</p></nav>`;
+const nav = `<nav class="yz-nav" aria-label="${esc(C.ui.navLabel)}"><ol>${C.sections.map((x) => `<li><a href="#${x.id}" data-nav="${x.id}"><span class="yz-num">${esc(x.num)}</span><span class="yz-nl">${esc(x.nav)}</span></a></li>`).join('')}</ol></nav>`;
 const client = {
   ui: C.ui,
   template: S.sablon.template,
