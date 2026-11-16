@@ -135,6 +135,20 @@ firebase deploy                  # hosting + firestore kuralları
 
 **Kod değişikliğinden sonra:** `npm run build` çalıştır, `npm run dev` ile kontrol et, sonra commit.
 
+### Sahibinin Windows bilgisayarında (Git yok, Node yok)
+
+```
+ Oturum başı:  repo yoksa → gh api ile ZIP indir (veya: gh api repos/Cihanpehlivan/ucpehlivan-site/zipball/main)
+               repo varsa → GitHub'daki main ile aynı mı kontrol et (son commit sha)
+ Push:         powershell -ExecutionPolicy Bypass -File scripts\gh-push.ps1 -Message "…" -Files "yol/a,yol/b" -ExpectSha <sha>
+ Yayın:        gh workflow run yayinla.yml -R Cihanpehlivan/ucpehlivan-site -f hedef=onizleme  →  kontrol  →  hedef=canli
+ Önizleme:     https://ucpehlivan--onizleme-qg07p53h.web.app  (7 gün; yeni yayında adres değişebilir, run log'una bak)
+```
+
+- `gh` kurulu ve giriş yapılı (`C:\Program Files\GitHub CLI\gh.exe`). Git ve Node **yok**; `npm run build` çalışmaz.
+- Node yokken: `render.js` değişikliğini tarayıcıda modül olarak içe aktarıp Firestore içeriğiyle test et; derlenmiş `app.js`/`admin.js`'e aynı değişikliği elle uygula; `build-yazi.mjs` çıktısını (`public/yazi/…/index.html`) elle güncelle ve `yazi.css?v=` sürümünü (yazi.css+yazi.js SHA1'inin ilk 8 hanesi) artır.
+- Yerel önizleme: `public/` klasörünü basit bir statik sunucuyla servis et (Python yok; PowerShell `HttpListener` yeterli).
+
 **Yayın:** GitHub Actions › "Siteyi yayına al" › önce `onizleme`, kontrol et, sonra `canli`. Workflow içeriği Firestore'dan alır (`scripts/publish.mjs`) ve sayfaları üretir.
 
 ---
