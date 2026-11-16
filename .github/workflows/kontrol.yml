@@ -1,0 +1,52 @@
+# CLAUDE.md'deki kuralların otomatik kontrolü. Her push'ta ve PR'da çalışır; siteyi yayınlamaz.
+#  1) Yasaklı içerik (§2): hata verir, commit kırmızı görünür.
+#  2) Design system senkronu (§6.1): yalnız uyarı verir.
+name: Kural kontrolü
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  kontrol:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+
+      - name: Yasaklı içerik (CLAUDE.md §2)
+        run: |
+          # Sitede yayınlanan veya sayfa üreten dosyalar. CLAUDE.md, docs/ ve ui-kit/README kuralları anlattığı için taranmaz.
+          PATHS="public content shared scripts admin/src web firebase.json"
+          FOUND=0
+          check() {
+            HITS=$(grep -rnIiE -e "$2" $PATHS 2>/dev/null || true)
+            if [ -n "$HITS" ]; then
+              FOUND=1
+              echo "$HITS" | head -20 | while IFS=: read -r f l rest; do echo "::error file=$f,line=$l::$1"; done
+            fi
+          }
+          check '"ajans" kelimesi olmaz (işveren bilgisi)'            'ajans'
+          check 'CV / iş arama ifadesi olmaz'                           'cv ind[iİ]r|[iİ]şe al[ıI]m'
+          check 'Hizmet satışı dili olmaz'                              'b[iİ]rl[iİ]kte çalışalım|h[iİ]zmet ver[iİ]yorum|uçtan uca çözüm'
+          check 'Telefon numarası olmaz'                                '(\+90|\b0)[ ]?5[0-9]{2}[ -]?[0-9]{3}[ -]?[0-9]{2}[ -]?[0-9]{2}'
+          check 'Gizli anahtar / servis hesabı repoya yazılmaz'          'BEGIN ([A-Z]+ )?PRIVATE KEY|"type" *: *"service_account"'
+          if [ "$FOUND" = "1" ]; then echo "Kural ihlali bulundu (CLAUDE.md §2)."; exit 1; fi
+          echo "Yasaklı içerik yok."
+
+      - name: Design system senkronu (CLAUDE.md §6.1)
+        if: github.event_name != 'workflow_dispatch'
+        run: |
+          BASE="${{ github.event.pull_request.base.sha || github.event.before }}"
+          if [ -z "$BASE" ] || [ "$BASE" = "0000000000000000000000000000000000000000" ]; then echo "Karşılaştırılacak commit yok."; exit 0; fi
+          CHANGED=$(git diff --name-only "$BASE" "${{ github.sha }}")
+          UI=$(echo "$CHANGED" | grep -E '^(public/assets/(main|yazi)\.css|shared/render\.js|scripts/build-yazi\.mjs)$' || true)
+          KIT=$(echo "$CHANGED" | grep -E '^ui-kit/' || true)
+          if [ -n "$UI" ] && [ -z "$KIT" ]; then
+            echo "::warning title=Design system güncellenmedi::Önyüz dosyaları değişti ($(echo $UI | tr '\n' ' ')) ama ui-kit/ değişmedi. Token, bileşen ölçüsü, varyant veya durum değiştiyse ui-kit/tokens.json ve components.json'u güncelle (CLAUDE.md §6.1)."
+          else
+            echo "Design system senkronu tamam."
+          fi

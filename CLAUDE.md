@@ -158,6 +158,8 @@ Sahibi aynı repoda hem Mac'te hem Windows'ta çalışır. **İlk iş:** `git --
 
 Önizleme adresi: `https://ucpehlivan--onizleme-qg07p53h.web.app` (7 gün geçerli; yeni yayında değişebilir, Actions log'una bak).
 
+**Otomatik kontrol:** Her push'ta `.github/workflows/kontrol.yml` çalışır. §2'deki yasaklı içerik (ajans, CV/iş arama, hizmet satışı dili, telefon, gizli anahtar) bulunursa **hata** verir; önyüz CSS/şablonu değişip `ui-kit/` değişmediyse **uyarı** verir (§6.1). Push'tan sonra sonucuna bak (`gh run list -w kontrol.yml -L 1`); kırmızıysa canlıya alma. Müşteri/marka adları listede yok (liste herkese açık repoda durmamalı); onları sen kontrol et.
+
 **Yayın:** GitHub Actions › "Siteyi yayına al" › önce `onizleme`, kontrol et, sonra `canli`. Workflow içeriği Firestore'dan alır (`scripts/publish.mjs`) ve sayfaları üretir.
 
 ---
@@ -312,7 +314,9 @@ Teknik fikirler: arama (20+ yazıda), RSS, yazı başına otomatik paylaşım g�
 
 ## 11. Devam notları
 
-Her oturumun sonunda **en üste** yeni bir not ekle. Eski notları silme. 10 nottan fazlası olursa en eski notları tek satırlık özetlere indir.
+Her oturumun sonunda **en üste** yeni bir not ekle. Burada **en fazla 3 not** durur: 4. not olunca en eskisini `docs/devam-notlari.md`'nin en üstüne taşı (silme). Bu dosya her oturumda baştan okunur; kısa kalmalı. Eski bir karar veya bağlam gerekirse arşivi oku.
+
+Not eklerken **Açık işler** listesini de güncelle: biten işi sil, yeni açık işi ekle. Bu liste arşive taşınmaz.
 
 **Format:**
 
@@ -324,8 +328,25 @@ Her oturumun sonunda **en üste** yeni bir not ekle. Eski notları silme. 10 not
 - **Sonraki adım:** …
 ```
 
-### 2026-11-16 — Çalışma ortamı (Windows → yarın Mac)
-- **Yapılan:** Bugünkü tüm iş Windows'ta, Git/Node olmadan `gh` ile yapıldı. `scripts/gh-push.ps1` eklendi. §5'e Mac/Windows tablosu ve iki makine kuralları yazıldı.
+### Açık işler (güncel)
+
+| İş | Kimde | Not |
+|---|---|---|
+| Elle düzenlenen derleme dosyalarını doğrula | Claude (Mac) | `npm install && npm run build` + `git diff`: `public/assets/app.js`, `public/admin/admin.js`, `public/yazi/prompt-brief/index.html` (§5) |
+| `ASSET_V` (`main.css?v=8`) artırılmadı | Claude | Bir sonraki `main.css` değişikliğinde `render.js`'te artır ve derle (Node gerekir) |
+| Google Search Console, Bing Webmaster Tools | Sahibi | Doğrulama etiketi gelince `layout` head'ine eklenir |
+| Kendi alan adı kararı | Sahibi | Firebase'e bağlamak ücretsiz, alan adı ücretli |
+| Tema butonu mobilde 36px (<44) | Claude | Dokunma alanı kuralı |
+| `main.css` eski seçici temizliği (~70) | Claude | `ui-kit/components.json` › `dropped_selectors`; önce önizleme |
+| `build-yazi.mjs` tek dosyaya bağlı | Claude | İkinci interaktif yazıda genelleştir (§4) |
+| Normal blog yazısı, kategori filtresi | Claude | Ekrana gelince `ui-kit`'e ekle (`template_only`) |
+| Yayın workflow'unda Node 20 uyarısı | Claude | `actions/checkout`, `setup-node` sürümlerini güncelle |
+| LinkedIn paylaşımı · X/YouTube hesapları · pasif bölüm fikirleri (§10) | Sahibi | |
+| Repo herkese açık: private repo / `CLAUDE.local.md` kararı | Sahibi | |
+
+### 2026-11-16 — Çalışma ortamı ve süreklilik (Windows → yarın Mac)
+- **Yapılan:** Bugünkü tüm iş Windows'ta, Git/Node olmadan `gh` ile yapıldı. `scripts/gh-push.ps1` eklendi. §5'e Mac/Windows tablosu ve iki makine kuralları yazıldı. §11 kısaltıldı: son 3 not + "Açık işler" tablosu; eski notlar `docs/devam-notlari.md`'ye taşındı. `.github/workflows/kontrol.yml` eklendi (§2 yasaklı içerik = hata, §6.1 ui-kit senkronu = uyarı).
+- **Karar:** Süreklilik CLAUDE.md (repoda, iki makinede aynı) + kural kontrolü workflow'u ile sağlanır. Claude'un makineye özel hafızasına güvenilmez.
 - **Açık kalan:** Mac'te ilk oturumda `npm install && npm run build` + `git diff` ile elle düzenlenmiş derleme dosyalarını doğrula (§5).
 - **Sonraki adım:** Sahibi yarın Mac'ten devam edebilir. Önce `git pull`, sonra §11'deki en son notları oku.
 
@@ -340,31 +361,4 @@ Her oturumun sonunda **en üste** yeni bir not ekle. Eski notları silme. 10 not
 - **Karar:** Kaynak her zaman CSS + render.js; kit onları yansıtır. Senkron kuralları §2 ve §6.1'de. "Design canvas" aracı olmadığı için skill'deki `canvas.json` adımı uygulanmadı.
 - **Açık kalan:** Tema butonu mobilde 36px (<44). `main.css` eski seçici temizliği. Normal blog yazısı ve kategori filtresi ekrana gelince kite eklenecek.
 - **Sonraki adım:** İstenirse `main.css` temizliği (ayrı iş, önce önizleme).
-
-### 2026-11-16 — SEO ve GEO
-- **Yapılan:** Tarama yapıldı, 12 madde çıktı; 1–9 uygulandı ve canlıda: yazıda görünür yazar/tarih satırı ve "Kısaca" kutusu, `/llms.txt`, `/blog/prompt-yazmak-brief/` için 301 (`firebase.json`), tüm sayfalarda `og:site_name` + WebSite/Person verisi, BlogPosting tamamlandı (dateModified, yayıncı, @id bağları), blogda Blog verisi, site haritasında ana sayfa/blog tarihleri. Kod `render.js`, `build-static.mjs`, `build-yazi.mjs`; yazı HTML'i elle güncellendi (Node yok). `render.js` tarayıcıda gerçek Firestore içeriğiyle test edildi.
-- **Karar:** Kısaca kutusu metni Claude taslağıdır; sahibi onayladı. Kişi verisinde işveren yok.
-- **Açık kalan (sahibinde):** Google Search Console (URL öneki + HTML etiketi + sitemap gönderimi), Bing Webmaster Tools (Search Console'dan içe aktar), kendi alan adı kararı.
-- **Sonraki adım:** Search Console doğrulama etiketi gelince `layout` head'ine ekle ve yayınla.
-
-### 2026-11-16 — Okunurluk, ana sayfa düzeni ve footer
-- **Yapılan:** Yazı sayfası (`yazi.css`): sütun çizgileri gizlendi, bölümlere mor şeritli ayırıcı, tekrar eden bölüm etiketi gizlendi, giriş cümlesi koyulaştı, küçük etiketler büyüdü. Ana sayfa (`main.css` sonundaki "Düzen ve okunurluk" bloğu): eşit bölüm boşlukları, ayırıcılar, başlık açıklaması başlığın altında, tek yazı kartı tam genişlikte. Footer: wordmark kaldırıldı, telif ortada, "Sayfa" → "Keşfet", Hesaplarım çıkarıldı (`render.js` + derlenmiş `app.js`/`admin.js` + statik HTML'ler). Hepsi önizleme → canlı ile yayında.
-- **Karar:** §7'ye eklendi (footer, sütun çizgileri).
-- **Açık kalan:** Bu bilgisayarda Node.js yok; `app.js` ve `admin.js` elle düzenlendi (kaynak `render.js` ile aynı). Node olan bir yerde `npm run build` çalıştırıp farkın çıkmadığını doğrula. `ASSET_V` (main.css `?v=8`) artırılmadı; `/assets/**` 1 saat önbellekte. Push ve yayın `gh` (GitHub CLI) ile yapılıyor, Git kurulu değil. Workflow'daki `actions/checkout@v4` ve `setup-node@v4` Node 20 uyarısı veriyor.
-- **Sonraki adım:** Bir sonraki yazı. Fırsat olunca `npm run build` ile derlenmiş dosyaları kaynaktan yeniden üret.
-
-### 2026-11-16 — CLAUDE.md eklendi
-- **Yapılan:** Proje rehberi (bu dosya) oluşturuldu. İnteraktif yazı süreci (§8) ve devam notu kuralı eklendi.
-- **Açık kalan:** Repo herkese açık; bu dosya da herkese açık. Private repo veya `CLAUDE.local.md` kararı verilmedi.
-- **Sonraki adım:** Bir sonraki yazı veya interaktif yazı.
-
-### 2026-11-16 — İnteraktif yazı yayında
-- **Yapılan:** /yazi/prompt-brief/ yayına alındı (content/prompt-yazisi.json + scripts/build-yazi.mjs). Yazı şemasına "Özel sayfa adresi" alanı eklendi. og.png üretildi. Eski 3 yazı kaldırıldı; listede sadece bu yazı var.
-- **Açık kalan:** `build-yazi.mjs` tek dosyaya bağlı (§4 notu). LinkedIn paylaşımı.
-- **Sonraki adım:** İkinci interaktif yazıda scripti genelleştir.
-
-### 2026-11-16 — Kişisel marka yapısına geçiş
-- **Yapılan:** Site CV sitesinden içerik/vitrin sitesine çevrildi. Admin yeni yapıya uyarlandı (Düzen, Hero, Yazılar, Hakkımda, Hesaplarım). Bölüm aktif/pasif, kategori listesi ve filtresi, hesaplar listesi eklendi. CV, fotoğraf ve vaka görselleri silindi. Footer sadeleştirildi.
-- **Karar:** §7'deki kararlar.
-- **Açık kalan:** X ve YouTube hesapları yok. Pasif bölüm fikirleri (§10) bekliyor.
 
