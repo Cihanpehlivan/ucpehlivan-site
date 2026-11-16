@@ -1,7 +1,9 @@
 /* İnteraktif yazı sayfası (/yazi/...). Renk ve fontlar main.css değişkenlerinden; açık/koyu tema otomatik. */
 .yz{--mono:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;--line-strong:color-mix(in srgb,var(--ink) 22%,transparent);--soft:color-mix(in srgb,var(--accent) 10%,var(--surface))}
-.yz-mono{font-family:var(--mono);font-size:13px;letter-spacing:.08em;text-transform:uppercase;font-weight:600}
-.yz-small{font-size:12px;color:var(--muted)}
+.yz-mono{font-family:var(--mono);font-size:13px;letter-spacing:.05em;text-transform:uppercase;font-weight:600}
+.yz-small{font-size:13px;color:var(--muted)}
+/* Uzun okumada arka plandaki sütun çizgileri metnin içinden geçmesin */
+body:has(.yz) .guides{display:none}
 .yz-grid{display:grid;grid-template-columns:200px minmax(0,1fr);gap:56px;align-items:start;padding-top:56px;padding-bottom:40px}
 
 /* Numaralı bölüm menüsü */
@@ -11,18 +13,22 @@
 .yz-nav a:hover{color:var(--ink)}
 .yz-nav a[aria-current="true"]{color:var(--ink);border-left-color:var(--accent);font-weight:600}
 .yz-nav a[aria-current="true"] .yz-num{background:var(--accent);color:var(--on-accent)}
-.yz-keys{margin-top:18px;font-size:11px;color:var(--muted);letter-spacing:.04em;text-transform:none;font-weight:500}
+.yz-keys{margin-top:18px;font-size:12px;color:var(--muted);letter-spacing:.04em;text-transform:none;font-weight:500}
 .yz-num{font-family:var(--mono);font-size:12px;font-weight:700;padding:3px 7px;border-radius:6px;background:var(--surface-2);color:var(--ink);flex:none}
 
 /* Bölümler */
 .yz-article{min-width:0}
-.yz-sec{padding:72px 0 88px;border-top:1px solid var(--line);scroll-margin-top:84px}
-.yz-sec:first-child{border-top:0;padding-top:8px}
+.yz-sec{position:relative;padding:80px 0 96px;scroll-margin-top:84px}
+.yz-sec:first-child{padding-top:8px}
+/* Bölüm başı: belirgin çizgi + vurgu renginde kısa şerit */
+.yz-sec+.yz-sec::before{content:"";position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(to right,var(--accent) 0 72px,var(--line-strong) 72px)}
 .yz-sh{display:flex;align-items:center;gap:14px;margin-bottom:20px;color:var(--muted)}
-.yz-sh .yz-num{font-size:14px;padding:5px 10px;background:var(--accent);color:var(--on-accent)}
+.yz-sh .yz-num{font-size:16px;padding:6px 12px;background:var(--accent);color:var(--on-accent)}
+/* Etiket, altındaki başlığın aynısıysa gizle; numara kalsın */
+.yz-sh:has(+ .yz-h) .yz-mono{display:none}
 .yz-h{font-size:clamp(40px,6vw,80px);margin-bottom:28px;max-width:16ch}
-.yz-h:has(+ .yz-lede){margin-bottom:14px}
-.yz-lede{font-size:clamp(18px,1.8vw,21px);line-height:1.45;color:var(--muted);max-width:52ch;margin-bottom:32px}
+.yz-h:has(+ .yz-lede){margin-bottom:18px}
+.yz-lede{font-size:clamp(20px,2vw,23px);line-height:1.45;font-weight:500;color:var(--ink);max-width:52ch;margin-bottom:36px}
 .yz-prose{max-width:66ch}
 .yz-prose p{font-size:19px;line-height:1.7;color:var(--text);margin:0 0 20px}
 .yz-prose strong{color:var(--ink)}
@@ -63,7 +69,7 @@
 .yz-card[aria-pressed="true"] .yz-front{transform:rotateY(180deg)}
 .yz-card[aria-pressed="true"] .yz-back{transform:rotateY(0)}
 .yz-card:hover .yz-front{border-color:var(--accent)}
-.yz-tag{align-self:flex-start;font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:5px 10px;border-radius:6px;background:var(--surface-2);color:var(--muted)}
+.yz-tag{align-self:flex-start;font-family:var(--mono);font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:5px 10px;border-radius:6px;background:var(--surface-2);color:var(--muted)}
 .yz-tag-on{background:var(--accent);color:var(--on-accent)}
 .yz-ct{font-family:var(--display);font-variation-settings:"wdth" 92;font-weight:800;font-size:22px;line-height:1.12;letter-spacing:-.015em;color:var(--ink)}
 .yz-txt{font-size:16px;line-height:1.55}
@@ -72,7 +78,7 @@
 .yz-ct-sm{font-size:17px;opacity:.85}
 .yz-hint{margin-top:auto;padding-top:6px;font-family:var(--mono);font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--accent)}
 .yz-why{margin-top:auto;font-size:14px;line-height:1.5;padding-top:12px;border-top:1px solid color-mix(in srgb,var(--bg) 22%,transparent)}
-.yz-why i{display:block;font-style:normal;font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-bottom:4px;opacity:.75}
+.yz-why i{display:block;font-style:normal;font-family:var(--mono);font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-bottom:4px;opacity:.75}
 .yz-cardshead{display:flex;justify-content:space-between;align-items:end;gap:16px;flex-wrap:wrap;margin:56px 0 16px}
 .yz-cardshead h3{font-size:clamp(28px,3.4vw,40px);margin-bottom:6px}
 
@@ -86,7 +92,7 @@
 .yz-hmeta{display:flex;flex-direction:column;gap:10px;align-items:flex-start}
 .yz-hname{font-family:var(--display);font-variation-settings:"wdth" 92;font-weight:800;font-size:clamp(22px,2.4vw,28px);line-height:1.1;letter-spacing:-.015em;color:var(--ink)}
 .yz-hwhy{font-size:16px;line-height:1.6;color:var(--text)}
-.yz-hwhy .yz-mono{display:block;font-size:11px;color:var(--muted);margin-bottom:4px}
+.yz-hwhy .yz-mono{display:block;font-size:12px;color:var(--muted);margin-bottom:4px}
 .yz-diff{display:flex;flex-direction:column;gap:8px;align-self:center}
 .yz-del,.yz-add{display:grid;grid-template-columns:22px minmax(0,1fr);gap:6px;font:15px/1.55 var(--mono);padding:12px 14px;border-radius:10px}
 .yz-del{background:color-mix(in srgb,#D93A3A 7%,var(--bg));color:var(--ink)}
@@ -123,7 +129,7 @@
 .yz-way-recete .yz-end span{background:var(--surface-2);color:var(--muted)}
 .yz-way-hedef .yz-end span{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
 .yz-example{border-left:4px solid var(--accent);padding:6px 0 6px 16px}
-.yz-example .yz-mono{color:var(--muted);font-size:11px}
+.yz-example .yz-mono{color:var(--muted);font-size:12px}
 .yz-example p{font-size:18px;color:var(--ink);margin-top:4px}
 .yz-way-recete .yz-example{border-left-color:var(--line-strong)}
 
@@ -164,7 +170,7 @@
 .yz-form>.btn{align-self:flex-start}
 .yz-field{display:flex;flex-direction:column;gap:8px}
 .yz-field label{font-size:14px;font-weight:700;color:var(--ink)}
-.yz-field small{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-left:6px}
+.yz-field small{font-family:var(--mono);font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-left:6px}
 .yz-field textarea{font:15px/1.5 var(--body);color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:12px 14px;resize:vertical;width:100%;min-height:52px}
 .yz-field textarea::placeholder{color:var(--muted);opacity:.85}
 .yz-field textarea:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 22%,transparent)}
@@ -195,10 +201,10 @@
 .yz-chips input:focus-visible+span{outline:3px solid var(--accent);outline-offset:2px}
 .yz-whybox{border-left:4px solid #D93A3A;padding:4px 0 4px 14px;font-size:15px;color:var(--text)}
 .yz-whybox[hidden]{display:none}
-.yz-whybox .yz-mono{display:block;font-size:11px;color:#D93A3A;margin-bottom:2px}
+.yz-whybox .yz-mono{display:block;font-size:12px;color:#D93A3A;margin-bottom:2px}
 .yz-before{background:color-mix(in srgb,var(--bg) 8%,transparent);border-radius:12px;padding:12px 14px}
 .yz-before[hidden]{display:none}
-.yz-before .yz-mono{font-size:11px;opacity:.7}
+.yz-before .yz-mono{font-size:12px;opacity:.7}
 .yz-before p{font:14px/1.5 var(--mono);margin-top:4px;opacity:.85;text-decoration:line-through;text-decoration-color:color-mix(in srgb,#ff7a7a 70%,transparent)}
 .yz-checks{border-top:1px solid color-mix(in srgb,var(--bg) 16%,transparent);padding-top:12px}
 .yz-checkhead{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
@@ -227,7 +233,7 @@
   .yz-nav a[aria-current="true"]{border-color:var(--accent)}
   .yz-nav a[aria-current="true"] .yz-nl{display:inline}
   .yz-keys{display:none}
-  .yz-sec{scroll-margin-top:136px;padding:56px 0 64px}
+  .yz-sec{scroll-margin-top:136px;padding:64px 0 72px}
   .yz-sec:first-child{padding-top:40px}
   .yz-cards-3{grid-template-columns:minmax(0,1fr)}
   .yz-habit{grid-template-columns:minmax(0,1fr);gap:16px}
@@ -263,7 +269,7 @@
   .yz-table th,.yz-table td{padding:0;border:0}
   .yz-table tbody th{width:auto;margin-bottom:8px}
   .yz-table td{padding:6px 0}
-  .yz-table td::before{content:attr(data-l);display:block;font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--accent)}
+  .yz-table td::before{content:attr(data-l);display:block;font-family:var(--mono);font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--accent)}
 }
 @media (prefers-reduced-motion:reduce){
   html:has(.yz){scroll-behavior:auto}
