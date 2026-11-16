@@ -39,8 +39,8 @@ body:has(.yz) .guides{display:none}
 
 /* 01 Hero */
 .yz-kicker{color:var(--accent);margin-bottom:18px}
-.yz-title{font-size:clamp(46px,8.4vw,120px);letter-spacing:-.04em;line-height:.92;margin-bottom:40px;max-width:13ch}
-.yz-byline{display:flex;flex-wrap:wrap;gap:4px 8px;margin:-16px 0 28px;font-size:15px;color:var(--muted)}
+.yz-title{font-size:clamp(42px,7vw,96px);letter-spacing:-.03em;line-height:1.02;margin-bottom:24px;max-width:14ch}
+.yz-byline{display:flex;flex-wrap:wrap;gap:4px 8px;margin:0 0 28px;font-size:15px;color:var(--muted)}
 .yz-byline a{color:var(--ink);font-weight:600;text-decoration:none}
 .yz-byline a:hover{color:var(--accent)}
 .yz-tldr{max-width:880px;margin:0 0 32px;padding:20px 24px;border-radius:18px;background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--accent)}
