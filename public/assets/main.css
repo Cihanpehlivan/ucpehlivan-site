@@ -406,3 +406,33 @@ main > .bhero:first-child{position:relative}
 .acc-tx small{font-size:14px;opacity:.75;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .acc-go{font-size:20px;font-weight:700}
 .foot-grid span{color:var(--muted);font-size:15px}
+
+/* ---- Düzen ve okunurluk ---- */
+/* Sütun çizgileri yalnızca ana sayfanın ilk ekranında, aşağı doğru kaybolarak; diğer sayfalarda yok */
+.guides{display:none}
+body:has(.hero) .guides{display:block;position:absolute;inset:0 0 auto;height:100vh;-webkit-mask:linear-gradient(#000 55%,transparent);mask:linear-gradient(#000 55%,transparent)}
+/* Bölümler: dengeli boşluk + başta belirgin ayırıcı (vurgu renginde kısa şerit).
+   render.js bazı bölümlere satır içi padding-top:40px veriyor; onu da eşitlemek için !important. */
+section.block{position:relative;padding:96px 0!important}
+section.block::before{content:"";position:absolute;top:0;left:max(32px,calc((100% - var(--wrap)) / 2 + 32px));right:max(32px,calc((100% - var(--wrap)) / 2 + 32px));height:2px;background:linear-gradient(to right,var(--accent) 0 72px,color-mix(in srgb,var(--ink) 18%,transparent) 72px)}
+/* Bölüm başlığı: açıklama başlığın altında, sola hizalı */
+.head{flex-direction:column;align-items:flex-start;justify-content:flex-start;gap:14px}
+.head p{color:var(--text);font-size:18px;max-width:52ch}
+.kicker{color:var(--accent);font-weight:600;margin-bottom:12px}
+/* Az yazı varken kartlar boşlukta kalmasın */
+.bgrid:has(> .bcard:only-child){grid-template-columns:minmax(0,1fr)}
+.bgrid > .bcard:only-child{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr)}
+.bgrid > .bcard:only-child .bcover{aspect-ratio:auto;min-height:300px}
+.bgrid > .bcard:only-child .bbody{padding:36px 40px;justify-content:center;gap:14px}
+.bgrid > .bcard:only-child h3{font-size:clamp(26px,2.6vw,36px)}
+.bgrid > .bcard:only-child p.ex{font-size:17px}
+.bgrid:has(> .bcard:nth-child(2):last-child){grid-template-columns:1fr 1fr}
+.bcard p.ex{color:var(--text)}
+.foot{border-top:2px solid color-mix(in srgb,var(--ink) 18%,transparent)}
+@media (max-width:640px){
+  section.block{padding:64px 0!important}
+  section.block::before{left:20px;right:20px}
+  .bgrid > .bcard:only-child{display:flex}
+  .bgrid > .bcard:only-child .bcover{aspect-ratio:16/10;min-height:0}
+  .bgrid > .bcard:only-child .bbody{padding:22px 24px 26px}
+}
