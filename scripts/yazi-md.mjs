@@ -16,6 +16,7 @@ export function yaziMarkdown(C, { author = '', date = '', origin = 'https://ucpe
 
   push(`# ${m.title}`);
   push([author, date, m.readingMinutes ? `${m.readingMinutes} dk okuma` : ''].filter(Boolean).join(' · ') + `  \nKaynak: ${origin}${m.path}`);
+  if (m.cover) push(`![${m.cover.alt}](${origin}${m.cover.src})`);
   push(quote(m.description));
   if ((m.summary || []).length) push(`## ${m.summaryLabel || 'Özet'}`, m.summary.map((x) => `- ${clean(x)}`).join('\n'));
 

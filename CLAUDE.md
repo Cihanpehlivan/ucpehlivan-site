@@ -101,7 +101,7 @@ Umut Cihan Pehlivan'ın kişisel marka sitesi: **yapay zeka içeriklerinin kalı
 | Normal yazı | Admin › Yazılar. Adres: `/blog/<slug>/` |
 | İnteraktif yazı | `content/<ad>.json` yaz → `node scripts/build-yazi.mjs` → admin'de yazının **Özel sayfa adresi** alanına `/yazi/<ad>/` yaz. Kart ve `/blog/` adresi oraya gider. |
 
-> Yeni interaktif yazıda: `firebase.json` › `redirects` içine `/blog/<slug>` → `/yazi/<ad>/` için **301** kaydı ekle. İçerik dosyasının `meta` alanında `updated`, `readingMinutes`, `summaryLabel` ve 3 maddelik `summary` (Özet alanı, `summaryLabel: "Özet"`) olsun.
+> Yeni interaktif yazıda: `firebase.json` › `redirects` içine `/blog/<slug>` → `/yazi/<ad>/` için **301** kaydı ekle. İçerik dosyasının `meta` alanında `updated`, `readingMinutes`, `summaryLabel` ve 3 maddelik `summary` (Özet alanı, `summaryLabel: "Özet"`), `cover` (blog kartındaki görsel: `src`, `width`, `height`, açıklayıcı `alt`), `crumbs`, `share` ve `faq` olsun.
 
 > Bilinen sınır: `build-yazi.mjs` şu an tek bir dosyayı (`content/prompt-yazisi.json`) okur. İkinci interaktif yazıda scripti, `content/` klasöründeki tüm JSON dosyalarını işleyecek şekilde genelleştir.
 
@@ -355,7 +355,7 @@ Not eklerken **Açık işler** listesini de güncelle: biten işi sil, yeni aç�
 | Google Analytics var, çerez onay bandı yok | Sahibi | KVKK açısından bakılmalı (SEO değil) |
 
 ### 2026-11-17 — SEO/GEO teknik tur 2 (Windows)
-- **Yapılan:** Canlı tarama (PageSpeed API 429 verdi; başlık, boyut, önbellek elle ölçüldü). Uygulanan: `/assets/**` 1 yıl önbellek + `ASSET_V` 8→9 + `kontrol.yml`'ye sürüm denetimi; yazının düz metin sürümü (`scripts/yazi-md.mjs` → `index.md`, head'de alternate link, llms.txt'te link); BreadcrumbList (yazı ve normal yazı şablonu); RSS beslemesi (`/feed.xml`, `renderFeed`, tüm sayfalarda head linki); uygulama simgeleri + manifest + theme-color; yazıya FAQPage (`meta.faq`); yazıda görünür sayfa yolu ve paylaşım satırı (ui-kit: `Nav/Breadcrumb`, `Share/Row`, molekül 21); ana sayfa illüstrasyonları telefonda gizli, tablette metnin altında (`ASSET_V` 10, telefonda sayfa ~690px kısaldı). Kod tarayıcıda gerçek Firestore içeriğiyle test edildi; `index.md` ve yazı HTML'i tarayıcı çıktısından yazıldı.
+- **Yapılan:** Canlı tarama (PageSpeed API 429 verdi; başlık, boyut, önbellek elle ölçüldü). Uygulanan: `/assets/**` 1 yıl önbellek + `ASSET_V` 8→9 + `kontrol.yml`'ye sürüm denetimi; yazının düz metin sürümü (`scripts/yazi-md.mjs` → `index.md`, head'de alternate link, llms.txt'te link); BreadcrumbList (yazı ve normal yazı şablonu); RSS beslemesi (`/feed.xml`, `renderFeed`, tüm sayfalarda head linki); uygulama simgeleri + manifest + theme-color; yazıya FAQPage (`meta.faq`); yazıda görünür sayfa yolu ve paylaşım satırı (ui-kit: `Nav/Breadcrumb`, `Share/Row`, molekül 21); ana sayfa illüstrasyonları telefonda gizli, tablette metnin altında (`ASSET_V` 10, telefonda sayfa ~690px kısaldı); yazı sayfasına kapak görseli (`meta.cover`, yazar satırının altında, BlogPosting `image` dizisinde ilk sırada, `index.md`'de de). Kod tarayıcıda gerçek Firestore içeriğiyle test edildi; `index.md` ve yazı HTML'i tarayıcı çıktısından yazıldı.
 - **Karar:** Sürüm artırma insan hafızasına bırakılmaz; `kontrol.yml` zorlar. 2026-11-17 taramasındaki tüm teknik maddeler tamam; kalan SEO işleri sahibinde (Search Console, Bing, alan adı).
 - **Açık kalan:** Açık işler tablosu (Mac'te derleme doğrulaması dahil).
 - **Sonraki adım:** Search Console doğrulaması gelince head'e ekle.

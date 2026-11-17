@@ -79,6 +79,12 @@ function crumbs() {
   if (!k) return '';
   return `<nav class="yz-crumb" aria-label="${esc(k.label)}"><ol><li><a href="/">${esc(k.home)}</a></li><li><a href="/blog/">${esc(k.blog)}</a></li><li aria-current="page">${esc(C.meta.title)}</li></ol></nav>`;
 }
+// Kapak görseli: blog kartındakiyle aynı görsel. İlk ekranda olduğu için öncelikli yüklenir; boyut verilir (kayma olmaz).
+function cover() {
+  const k = C.meta.cover;
+  if (!k) return '';
+  return `<figure class="yz-cover"><img src="${esc(k.src)}" alt="${esc(k.alt)}" width="${esc(k.width)}" height="${esc(k.height)}" fetchpriority="high" decoding="async"></figure>`;
+}
 // Paylaşım: LinkedIn (sitenin dağıtım kanalı), linki kopyala, destekleyen cihazlarda sistem paylaşımı.
 function share() {
   const k = C.meta.share;
@@ -95,6 +101,7 @@ function s01(s) {
   <p class="yz-kicker yz-mono">${esc(h.kicker)}</p>
   <h1 class="d yz-title" id="h-${s.id}">${esc(h.title)}</h1>
   ${byline()}
+  ${cover()}
   ${summary()}
   <div class="yz-claim"><div class="yz-claim-top"><span class="yz-mono yz-claim-l">${esc(h.claimLabel)}</span><span class="yz-claim-dots" aria-hidden="true">${h.pillars.map((_, i) => `<i>${i + 1}</i>`).join('')}</span></div><p class="yz-claim-t">${(() => { let n = 0; return h.claim.map((p) => (p.key ? `<mark data-k="${esc(p.key)}"><sup aria-hidden="true">${++n}</sup>${esc(p.text)}</mark>` : esc(p.text))).join(''); })()}</p></div>
   <p class="yz-mono yz-small">${esc(h.pillarsHint)}</p>
@@ -226,7 +233,7 @@ const v = createHash('sha1').update(css).update(js).digest('hex').slice(0, 8);
 
 const ld = {
   '@context': 'https://schema.org',
-  '@graph': [...identityLd(c, ORIGIN), articleLd({ url: ORIGIN + C.meta.path, headline: C.meta.title, description: C.meta.description, datePublished: C.meta.published, dateModified: C.meta.updated, image: ORIGIN + C.meta.ogImage }, ORIGIN), breadcrumbLd([['Ana sayfa', '/'], ['Yazılar', '/blog/'], [C.meta.title, C.meta.path]], ORIGIN), ...((C.meta.faq || []).length ? [faqLd(C.meta.faq, ORIGIN + C.meta.path)] : [])],
+  '@graph': [...identityLd(c, ORIGIN), articleLd({ url: ORIGIN + C.meta.path, headline: C.meta.title, description: C.meta.description, datePublished: C.meta.published, dateModified: C.meta.updated, image: [C.meta.cover && ORIGIN + C.meta.cover.src, ORIGIN + C.meta.ogImage].filter(Boolean) }, ORIGIN), breadcrumbLd([['Ana sayfa', '/'], ['Yazılar', '/blog/'], [C.meta.title, C.meta.path]], ORIGIN), ...((C.meta.faq || []).length ? [faqLd(C.meta.faq, ORIGIN + C.meta.path)] : [])],
 };
 let html = layout(c, { origin: ORIGIN, path: C.meta.path, type: 'article', jsonld: ld, title: `${C.meta.title} | ${s.name}`, description: C.meta.description, image: C.meta.ogImage, imageAlt: C.meta.ogImageAlt, body });
 // Sitenin içerik yenileme script'i bu sayfayı tanımaz; bu sayfada yüklenmez.

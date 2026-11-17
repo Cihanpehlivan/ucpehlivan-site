@@ -58,7 +58,10 @@ body:has(.yz) .guides{display:none}
 .yz-byline{display:flex;flex-wrap:wrap;gap:4px 8px;margin:0 0 28px;font-size:15px;color:var(--muted)}
 .yz-byline a{color:var(--ink);font-weight:600;text-decoration:none}
 .yz-byline a:hover{color:var(--accent)}
-/* Özet: yazının dışında duran, düz ve hafif tonlu alan (kenarsız, gölgesiz).
+/* Kapak görseli: yazar satırının altında, blog kartındaki görselle aynı; kart köşesi ve ince kenar */
+.yz-cover{max-width:880px;margin:0 0 32px;border-radius:22px;overflow:hidden;border:1px solid var(--line);background:var(--surface)}
+.yz-cover img{display:block;width:100%;height:auto;aspect-ratio:3/2}
+/* Özet:yazının dışında duran, düz ve hafif tonlu alan (kenarsız, gölgesiz).
    Yazı, altındaki beyaz ve gölgeli iddia kutusuyla başlar; aradaki 56px boşluk ve ton farkı ikisini ayırır. */
 .yz-tldr{max-width:880px;margin:0 0 56px;padding:18px 24px 22px;border-radius:16px;background:color-mix(in srgb,var(--surface-2) 60%,transparent)}
 .yz-tldr .yz-mono{display:flex;align-items:center;gap:8px;margin-bottom:14px;padding-bottom:12px;border-bottom:1px solid var(--line);font-size:12px;color:var(--ink)}
@@ -274,6 +277,7 @@ body:has(.yz) .guides{display:none}
   .yz-prose p{font-size:17px}
   .yz-claim{padding:18px 20px 22px}
   .yz-tldr{padding:16px 18px 18px;margin-bottom:40px}
+  .yz-cover{border-radius:16px;margin-bottom:24px}
   .yz-tldr ul{grid-template-columns:minmax(0,1fr);gap:12px}
   .yz-tldr li,.yz-tldr li+li{position:relative;padding-left:30px;border-left:0}
   .yz-tldr li+li{border-top:1px solid var(--line);padding-top:12px}

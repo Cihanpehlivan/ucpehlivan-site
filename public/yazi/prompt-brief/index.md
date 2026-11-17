@@ -3,6 +3,8 @@
 Umut Cihan Pehlivan · 16 Kasım 2026 · 7 dk okuma  
 Kaynak: https://ucpehlivan.web.app/yazi/prompt-brief/
 
+![Üzerinde Hedef, Sınırlar ve Serbestlik yazan bir brief kâğıdı; yanında ekranda bir sayfa taslağı ve parlayan bir yıldız.](https://ucpehlivan.web.app/yazi/prompt-brief/kapak.webp)
+
 > Yeni modeller zeki; adım adım reçeteyle kısıtlanınca değil, hedef ve sınırla yönlendirilince iyi iş çıkarıyor. Bir proje yöneticisinin gözünden interaktif bir okuma.
 
 ## Özet
