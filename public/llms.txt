@@ -1,0 +1,22 @@
+# Umut Cihan Pehlivan
+
+> Her gün yapay zeka kullanan birinden notlar ve tecrübeler. Denediklerim, öğrendiklerim ve işe yarayanlar.
+
+Marmara Üniversitesi Yönetim Bilişim Sistemleri mezunuyum. 4+ yıldır web, e-ticaret ve mobil projeler yönetiyorum. Teknik ve tasarım tarafını bilen bir proje yöneticisiyim. Geliştirici ve tasarımcı ile aynı dili konuşurum. Yapay zeka çıktığı günden beri işimin bir parçası. Bu site, o yolculukta paylaştığım her şeyin arşivi.
+
+Site Türkçedir. Yazılar, yapay zekayı her gün gerçek işte kullanan bir proje yöneticisinin notları ve deneyimleridir.
+
+## Yazılar
+
+- [Prompt Yazmak, Aslında İyi Bir Brief Yazmak](https://ucpehlivan.web.app/yazi/prompt-brief/): Yeni modeller zeki; adım adım reçeteyle kısıtlanınca değil, hedef ve sınırla yönlendirilince iyi iş çıkarıyor. Eski bir promptunu brief'e çevir.
+
+## Sayfalar
+
+- [Ana sayfa](https://ucpehlivan.web.app/)
+- [Tüm yazılar](https://ucpehlivan.web.app/blog/)
+- [Hakkımda](https://ucpehlivan.web.app/#hakkimda)
+
+## Hesaplar
+
+- [LinkedIn](https://www.linkedin.com/in/umutcihanpehlivan/)
+- [GitHub](https://github.com/Cihanpehlivan)

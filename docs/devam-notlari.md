@@ -2,6 +2,12 @@
 
 CLAUDE.md §11'de yalnız son 3 not durur. Daha eski notlar buraya, **en üste** taşınır (yeniden eskiye). Güncel açık işler CLAUDE.md §11 › "Açık işler" listesindedir; buradaki "Açık kalan" satırları o günün durumudur.
 
+### 2026-11-16 — Design system (ui-kit)
+- **Yapılan:** `ui-kit/` kuruldu: `UI-00-Kit.html` (tek board, 3 kolon, bileşenleri `public/` sayfalarından canlı okur), `tokens.json`, `components.json`, `README.md`. 24 atom · 19 molekül · 13 organizma · 5 şablon. ~90 kullanılmayan seçici `dropped_selectors`'a ayrıldı. Yazı başlığı rahatlatıldı (96px, lh 1.02, ls -.03em).
+- **Karar:** Kaynak her zaman CSS + render.js; kit onları yansıtır. Senkron kuralları §2 ve §6.1'de. "Design canvas" aracı olmadığı için skill'deki `canvas.json` adımı uygulanmadı.
+- **Açık kalan:** Tema butonu mobilde 36px (<44). `main.css` eski seçici temizliği. Normal blog yazısı ve kategori filtresi ekrana gelince kite eklenecek.
+- **Sonraki adım:** İstenirse `main.css` temizliği (ayrı iş, önce önizleme).
+
 ### 2026-11-16 — SEO ve GEO
 - **Yapılan:** Tarama yapıldı, 12 madde çıktı; 1–9 uygulandı ve canlıda: yazıda görünür yazar/tarih satırı ve "Kısaca" kutusu, `/llms.txt`, `/blog/prompt-yazmak-brief/` için 301 (`firebase.json`), tüm sayfalarda `og:site_name` + WebSite/Person verisi, BlogPosting tamamlandı (dateModified, yayıncı, @id bağları), blogda Blog verisi, site haritasında ana sayfa/blog tarihleri. Kod `render.js`, `build-static.mjs`, `build-yazi.mjs`; yazı HTML'i elle güncellendi (Node yok). `render.js` tarayıcıda gerçek Firestore içeriğiyle test edildi.
 - **Karar:** Kısaca kutusu metni Claude taslağıdır; sahibi onayladı. Kişi verisinde işveren yok.

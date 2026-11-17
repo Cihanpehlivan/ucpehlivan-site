@@ -332,7 +332,6 @@ Not eklerken **Açık işler** listesini de güncelle: biten işi sil, yeni aç�
 
 | İş | Kimde | Not |
 |---|---|---|
-| Elle düzenlenen derleme dosyalarını doğrula | Claude (Mac) | `npm install && npm run build` + `git diff`: `public/assets/app.js`, `public/admin/admin.js`, `public/yazi/prompt-brief/index.html` (§5) |
 | `ASSET_V` (`main.css?v=8`) artırılmadı | Claude | Bir sonraki `main.css` değişikliğinde `render.js`'te artır ve derle (Node gerekir) |
 | Google Search Console, Bing Webmaster Tools | Sahibi | Doğrulama etiketi gelince `layout` head'ine eklenir |
 | Kendi alan adı kararı | Sahibi | Firebase'e bağlamak ücretsiz, alan adı ücretli |
@@ -343,6 +342,12 @@ Not eklerken **Açık işler** listesini de güncelle: biten işi sil, yeni aç�
 | Yayın workflow'unda Node 20 uyarısı | Claude | `actions/checkout`, `setup-node` sürümlerini güncelle |
 | LinkedIn paylaşımı · X/YouTube hesapları · pasif bölüm fikirleri (§10) | Sahibi | |
 | Repo herkese açık: private repo / `CLAUDE.local.md` kararı | Sahibi | |
+
+### 2026-11-17 — Mac'te derleme doğrulaması
+- **Yapılan:** Mac'te `git pull` (Windows'taki 17 commit alındı), `npm install`, `npm run build:js` + `node scripts/publish.mjs` + `node scripts/build-yazi.mjs`. Windows'ta elle düzenlenen `app.js`/`admin.js` kaynaktan yeniden üretildi; gövdeyi etkileyen tüm değişiklikler (footer "Keşfet", Hesaplarım linki yok, wordmark yok, yönlendirme, admin alanları) elle sürümde de vardı. Eksik olan yalnız head'deki şema kodu (`@graph`, `og:site_name`); hydrate head'e dokunmadığı için etkisiz. Yazı HTML'i birebir aynı çıktı. Statik sayfalar ve `public/llms.txt` canlıyla aynı hâle getirilip commit'lendi.
+- **Karar:** Mac'te sayfa üretimi için `npm run build` değil `build:js` + `publish.mjs` + `build-yazi.mjs` kullanılır (`npm run build` sayfaları örnek veriden üretir).
+- **Açık kalan:** Mac'te `gh` yok; push sonrası `kontrol.yml` sonucuna GitHub › Actions'tan bakılır.
+- **Sonraki adım:** Açık işler tablosundan devam.
 
 ### 2026-11-16 — Çalışma ortamı ve süreklilik (Windows → yarın Mac)
 - **Yapılan:** Bugünkü tüm iş Windows'ta, Git/Node olmadan `gh` ile yapıldı. `scripts/gh-push.ps1` eklendi. §5'e Mac/Windows tablosu ve iki makine kuralları yazıldı. §11 kısaltıldı: son 3 not + "Açık işler" tablosu; eski notlar `docs/devam-notlari.md`'ye taşındı. `.github/workflows/kontrol.yml` eklendi (§2 yasaklı içerik = hata, §6.1 ui-kit senkronu = uyarı).
@@ -355,10 +360,3 @@ Not eklerken **Açık işler** listesini de güncelle: biten işi sil, yeni aç�
 - **Karar:** Özet "yazının dışındaki not" gibi düz ve tonlu kalır; yazının içeriği beyaz/gölgeli kartlarla başlar. Ayrım yeni öğeyle değil ton farkı + boşlukla yapılır.
 - **Açık kalan:** Yok.
 - **Sonraki adım:** Yeni interaktif yazıda aynı özet yapısını kullan (`meta.summary`, 3 madde).
-
-### 2026-11-16 — Design system (ui-kit)
-- **Yapılan:** `ui-kit/` kuruldu: `UI-00-Kit.html` (tek board, 3 kolon, bileşenleri `public/` sayfalarından canlı okur), `tokens.json`, `components.json`, `README.md`. 24 atom · 19 molekül · 13 organizma · 5 şablon. ~90 kullanılmayan seçici `dropped_selectors`'a ayrıldı. Yazı başlığı rahatlatıldı (96px, lh 1.02, ls -.03em).
-- **Karar:** Kaynak her zaman CSS + render.js; kit onları yansıtır. Senkron kuralları §2 ve §6.1'de. "Design canvas" aracı olmadığı için skill'deki `canvas.json` adımı uygulanmadı.
-- **Açık kalan:** Tema butonu mobilde 36px (<44). `main.css` eski seçici temizliği. Normal blog yazısı ve kategori filtresi ekrana gelince kite eklenecek.
-- **Sonraki adım:** İstenirse `main.css` temizliği (ayrı iş, önce önizleme).
-
