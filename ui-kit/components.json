@@ -2,7 +2,7 @@
   "name": "ucpehlivan.web.app — components",
   "updated": "2026-11-16",
   "note": "Yalnız yayındaki ekranlarda (/, /blog/, /yazi/prompt-brief/, 404, /blog/post.html kabuğu) kullanılan bileşenler. Seçiciler public/assets/main.css ve yazi.css'ten; işaretleme shared/render.js ve scripts/build-yazi.mjs'ten.",
-  "counts": { "atom": 24, "molecule": 19, "organism": 13, "template": 5, "section": 2 },
+  "counts": { "atom": 24, "molecule": 21, "organism": 13, "template": 5, "section": 2 },
   "cta_codes": "Yok. Sitede izleme kodu veya CTA kodu kullanılmıyor (yazı sayfasında analitik bilinçli olarak kapalı).",
   "components": [
     { "code": "Logo/Wordmark", "level": "atom", "group": "Marka", "spec": "Archivo wdth82 800 21px · ink · vurgu noktası .3em accent · footer 30px · mobil 17px", "selector": ".logo .wl, .wl-lg", "pages": ["*"], "uses": [] },
@@ -48,6 +48,8 @@
     { "code": "Row/Definition", "level": "molecule", "group": "Liste", "spec": "180px mono dt + 17–19px 500 dd · alt çizgi", "selector": ".yz-panel dl > div", "pages": ["yazi"], "uses": [] },
     { "code": "Check/Item", "level": "molecule", "group": "Liste", "spec": "Check/Tick + başlık 600 + ipucu 12px · boşken opacity .6", "selector": ".yz-checks li", "pages": ["yazi"], "uses": ["Check/Tick"] },
     { "code": "Nav/Yazı item", "level": "molecule", "group": "Gezinme", "spec": "Badge/Number + ad 14px · aktif: ink 600 + sol accent çizgi · mobil: pill, yalnız aktifte ad", "selector": ".yz-nav a", "pages": ["yazi"], "uses": ["Badge/Number"] },
+    { "code": "Nav/Breadcrumb", "level": "molecule", "group": "Gezinme", "spec": "13px muted · › ayırıcı · son adım ink 500, tek satır, taşarsa … · başlık bloğunun üstünde · BreadcrumbList verisiyle aynı adımlar", "selector": ".yz-crumb", "pages": ["yazi"], "uses": ["Link"] },
+    { "code": "Share/Row", "level": "molecule", "group": "Aksiyon grubu", "spec": "üst 1px line · mono etiket + Button/Ghost · sm × 2–3 (LinkedIn’de paylaş ↗, Linki kopyala; Paylaş yalnız navigator.share varsa) · durum metni go rengi", "selector": ".yz-share", "pages": ["yazi"], "uses": ["Button/Ghost"] },
     { "code": "Footer/Column", "level": "molecule", "group": "Gezinme", "spec": "başlık 13px 600 muted + Link/Footer × n", "selector": ".foot-grid > div", "pages": ["*"], "uses": ["Link/Footer"] },
 
     { "code": "Header", "level": "organism", "group": "Global kabuk", "spec": "sticky · 72px · bg %82 + blur 14 · Logo + Nav/Header + IconButton/Theme", "selector": "header .bar", "pages": ["*"], "uses": ["Logo/Wordmark", "Nav/Header", "IconButton/Theme"] },

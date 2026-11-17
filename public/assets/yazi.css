@@ -40,6 +40,21 @@ body:has(.yz) .guides{display:none}
 /* 01 Hero */
 .yz-kicker{color:var(--accent);margin-bottom:18px}
 .yz-title{font-size:clamp(42px,7vw,96px);letter-spacing:-.03em;line-height:1.02;margin-bottom:24px;max-width:14ch}
+/* Sayfa yolu: başlığın üstünde küçük, gri; son adım (yazı adı) kısaltılır */
+/* main.css'teki genel nav kuralları (flex, margin-left:auto, 1020 altında display:none) header menüsü içindir; burada geçersiz kılınır */
+.yz-crumb{display:block;margin:0 0 18px;gap:0}
+.yz-crumb ol{list-style:none;display:flex;align-items:center;gap:6px;font-size:13px;line-height:1.4;color:var(--muted);min-width:0}
+.yz-crumb li{display:flex;align-items:center;gap:6px;min-width:0;flex:none}
+.yz-crumb li+li::before{content:"›";color:var(--muted);opacity:.7}
+.yz-crumb a{color:var(--muted);text-decoration:none;transition:color .2s}
+.yz-crumb a:hover{color:var(--ink);text-decoration:underline;text-underline-offset:3px}
+.yz-crumb [aria-current]{flex:0 1 auto;color:var(--ink);font-weight:500;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+/* Paylaşım: yazının sonunda, takip butonunun altında, çizgiyle ayrılmış sade satır */
+.yz-share{margin-top:32px;padding-top:20px;border-top:1px solid var(--line);display:flex;flex-wrap:wrap;align-items:center;gap:12px 16px}
+.yz-share .yz-mono{font-size:12px;color:var(--muted)}
+.yz-share-row{display:flex;flex-wrap:wrap;gap:10px}
+.yz-share .yz-status{flex-basis:100%;min-height:0;margin:0}
+.yz-share .yz-status:empty{display:none}
 .yz-byline{display:flex;flex-wrap:wrap;gap:4px 8px;margin:0 0 28px;font-size:15px;color:var(--muted)}
 .yz-byline a{color:var(--ink);font-weight:600;text-decoration:none}
 .yz-byline a:hover{color:var(--accent)}

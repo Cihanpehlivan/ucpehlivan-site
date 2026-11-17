@@ -317,6 +317,8 @@ function molecules() {
   item(n, { code: 'Nav/Header', node: q('home', 'header nav') });
   item(n, { code: 'Nav/Yazı item', variant: 'varsayılan · aktif', node: (() => { const ol = h('<nav class="yz-nav" style="position:static;width:260px"><ol></ol></nav>'); const a = q('yazi', '.yz-nav li:nth-child(1)'); a.querySelector('a').setAttribute('aria-current', 'true'); ol.querySelector('ol').append(a, q('yazi', '.yz-nav li:nth-child(2)'), q('yazi', '.yz-nav li:nth-child(3)')); return ol; })(), yz: true });
   item(n, { code: 'Footer/Column', node: q('home', '.foot-grid > div:nth-child(2)') });
+  item(n, { code: 'Nav/Breadcrumb', node: (() => { const x = q('yazi', '.yz-crumb'); x.style.margin = 0; x.style.maxWidth = '460px'; return x; })(), yz: true, width: 520 });
+  item(n, { code: 'Share/Row', node: (() => { const x = q('yazi', '.yz-share'); x.style.margin = 0; x.style.width = '620px'; return x; })(), yz: true, width: 680, desc: 'Sistem "Paylaş" düğmesi yalnız navigator.share olan cihazlarda görünür (kitte gizli).' });
 
   const i = group(sec, 'Bilgi satırı ve bölüm başlığı', 'meta 13px muted · yazar ink');
   item(i, { code: 'Meta/Post', node: q('home', '.bmeta') });

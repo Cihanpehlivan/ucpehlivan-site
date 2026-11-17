@@ -73,9 +73,24 @@ function summary() {
   return `<aside class="yz-tldr" aria-label="${esc(m.summaryLabel)}"><p class="yz-mono">${esc(m.summaryLabel)}</p><ul>${m.summary.map((x) => `<li>${md(x)}</li>`).join('')}</ul></aside>`;
 }
 
+// Görünür sayfa yolu: koddaki BreadcrumbList ile aynı adımlar.
+function crumbs() {
+  const k = C.meta.crumbs;
+  if (!k) return '';
+  return `<nav class="yz-crumb" aria-label="${esc(k.label)}"><ol><li><a href="/">${esc(k.home)}</a></li><li><a href="/blog/">${esc(k.blog)}</a></li><li aria-current="page">${esc(C.meta.title)}</li></ol></nav>`;
+}
+// Paylaşım: LinkedIn (sitenin dağıtım kanalı), linki kopyala, destekleyen cihazlarda sistem paylaşımı.
+function share() {
+  const k = C.meta.share;
+  if (!k) return '';
+  const url = ORIGIN + C.meta.path;
+  return `<div class="yz-share"><span class="yz-mono">${esc(k.label)}</span><div class="yz-share-row"><a class="btn btn-ghost btn-sm" href="https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}" target="_blank" rel="noopener">${esc(k.linkedin)} ↗</a><button type="button" class="btn btn-ghost btn-sm" data-share-copy="${esc(url)}">${esc(k.copy)}</button><button type="button" class="btn btn-ghost btn-sm" data-share-native data-url="${esc(url)}" data-title="${esc(C.meta.title)}" hidden>${esc(k.native)}</button></div><p class="yz-status" id="yz-share-status" role="status" aria-live="polite"></p></div>`;
+}
+
 function s01(s) {
   const h = s.hero;
   return `<section class="yz-sec yz-hero" id="${s.id}" aria-labelledby="h-${s.id}" data-sec>
+  ${crumbs()}
   ${secHead(s, '')}
   <p class="yz-kicker yz-mono">${esc(h.kicker)}</p>
   <h1 class="d yz-title" id="h-${s.id}">${esc(h.title)}</h1>
@@ -180,6 +195,7 @@ function s06(s) {
   return `<section class="yz-sec yz-end-sec" id="${s.id}" aria-labelledby="h-${s.id}" data-sec>${secHead(s)}
   <div class="yz-prose yz-big">${ps(s.paragraphs)}</div>
   <div class="yz-cta"><a class="btn btn-cv" href="${esc(s.linkedin.href)}"${ext(s.linkedin.href)}>${esc(s.linkedin.label)} ↗</a></div>
+  ${share()}
 </section>`;
 }
 

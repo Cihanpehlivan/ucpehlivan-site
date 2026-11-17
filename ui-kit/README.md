@@ -21,7 +21,7 @@ Bu klasör yayına girmez. Hosting yalnız `public/` klasörünü yükler.
 | Token | Tek değer | `--accent`, `display.article`, `radius.card` | — |
 | Görsel | Logo, illüstrasyon, kapak | `Logo/Wordmark`, `Illustration/About` | — |
 | Atom | Bölünmeyen parça | `Button/Primary`, `Field/Textarea` | 24 |
-| Molekül | Atomların tek işe yarayan birleşimi | `Card/Post`, `Row/Account` | 19 |
+| Molekül | Atomların tek işe yarayan birleşimi | `Card/Post`, `Nav/Breadcrumb`, `Share/Row` | 21 |
 | Organizma | Sayfada tek başına anlam taşıyan bölüm | `Header`, `Bench/Brief` | 13 |
 | Şablon | Organizmaların sayfa sırası | `Template/Home` | 5 |
 | Section | Sayfaya özel bölüm, kitte çizilmez | `Section/Yazı sonuç` | 2 |

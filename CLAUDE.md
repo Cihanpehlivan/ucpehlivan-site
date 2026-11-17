@@ -115,7 +115,8 @@ Umut Cihan Pehlivan'ın kişisel marka sitesi: **yapay zeka içeriklerinin kalı
 | Site haritası | `renderSitemap` | Ana sayfa ve blog tarihi = en yeni yazının tarihi. |
 | Yazı sayfası | `build-yazi.mjs` | Görünür yazar satırı (`.yz-byline`) ve Özet alanı (`.yz-tldr`). |
 | Düz metin sürümü | `scripts/yazi-md.mjs` → `public/yazi/<ad>/index.md` | Arayüz metni olmadan yazının kendisi. Head'de `rel="alternate" type="text/markdown"`, llms.txt'te link. İçerik değişince yeniden üret. |
-| Sayfa yolu | `breadcrumbLd` | Yazıda Ana sayfa › Yazılar › Yazı. |
+| Sayfa yolu | `breadcrumbLd` + görünür `.yz-crumb` | Yazıda Ana sayfa › Yazılar › Yazı (veri ve görünen aynı adımlar). **Dikkat:** `main.css`'te genel `nav{…}` kuralı 1020 altında tüm `<nav>`'ları gizler; yeni bir `<nav>` eklersen sınıfla `display` ver. |
+| Paylaşım | `build-yazi.mjs` › `share()` · `meta.share` | Yazı sonunda: LinkedIn'de paylaş, linki kopyala, (destekleyen cihazda) sistem paylaşımı. |
 | Soru-cevap | `faqLd` · `content/<ad>.json` › `meta.faq` | Soru = bölüm sorusu, cevap = yazıda **görünen** cümleler. Yazı metni değişirse `faq`'ı da eşitle. |
 | Simge ve tema rengi | `layout` head · `public/site.webmanifest` | `apple-touch-icon.png` (180), `icon-192/512.png` favicon'dan üretildi; `theme-color` açık/koyu. Favicon değişirse bunları yeniden üret. |
 | RSS | `renderFeed` → `build-static.mjs` → `/feed.xml` | Yayında Firestore'dan üretilir. Her sayfanın head'inde `rel="alternate" type="application/rss+xml"`, llms.txt'te link. Tarihler yazılardan gelir. |
@@ -344,7 +345,8 @@ Not eklerken **Açık işler** listesini de güncelle: biten işi sil, yeni aç�
 | Tema butonu mobilde 36px (<44) | Claude | Dokunma alanı kuralı |
 | `main.css` eski seçici temizliği (~70) | Claude | `ui-kit/components.json` › `dropped_selectors`; önce önizleme |
 | `build-yazi.mjs` tek dosyaya bağlı | Claude | İkinci interaktif yazıda genelleştir (§4) |
-| Normal blog yazısı, kategori filtresi | Claude | Ekrana gelince `ui-kit`'e ekle (`template_only`) |
+| Normal blog yazısı, kategori filtresi | Claude | Ekrana gelince `ui-kit`'e ekle (`template_only`). Normal yazı şablonuna (`renderPost`) da görünür sayfa yolu + paylaşım satırı ekle (yalnız interaktif yazıda var); `main.css` + `ASSET_V` + derleme gerekir (Mac). |
+| Sonraki dönem: ayrı Hakkımda sayfası (`/hakkimda/`) + yazı sonunda yazar kutusu | Sahibi karar verdi: sonra | Person verisinin merkezi olur; "kim yazdı" sorusu (GEO) |
 | Yayın workflow'unda Node 20 uyarısı | Claude | `actions/checkout`, `setup-node` sürümlerini güncelle |
 | LinkedIn paylaşımı · X/YouTube hesapları · pasif bölüm fikirleri (§10) | Sahibi | |
 | Repo herkese açık: private repo / `CLAUDE.local.md` kararı | Sahibi | |
@@ -352,7 +354,7 @@ Not eklerken **Açık işler** listesini de güncelle: biten işi sil, yeni aç�
 | Google Analytics var, çerez onay bandı yok | Sahibi | KVKK açısından bakılmalı (SEO değil) |
 
 ### 2026-11-17 — SEO/GEO teknik tur 2 (Windows)
-- **Yapılan:** Canlı tarama (PageSpeed API 429 verdi; başlık, boyut, önbellek elle ölçüldü). Uygulanan: `/assets/**` 1 yıl önbellek + `ASSET_V` 8→9 + `kontrol.yml`'ye sürüm denetimi; yazının düz metin sürümü (`scripts/yazi-md.mjs` → `index.md`, head'de alternate link, llms.txt'te link); BreadcrumbList (yazı ve normal yazı şablonu); RSS beslemesi (`/feed.xml`, `renderFeed`, tüm sayfalarda head linki); uygulama simgeleri + manifest + theme-color; yazıya FAQPage (`meta.faq`). Kod tarayıcıda gerçek Firestore içeriğiyle test edildi; `index.md` ve yazı HTML'i tarayıcı çıktısından yazıldı.
+- **Yapılan:** Canlı tarama (PageSpeed API 429 verdi; başlık, boyut, önbellek elle ölçüldü). Uygulanan: `/assets/**` 1 yıl önbellek + `ASSET_V` 8→9 + `kontrol.yml`'ye sürüm denetimi; yazının düz metin sürümü (`scripts/yazi-md.mjs` → `index.md`, head'de alternate link, llms.txt'te link); BreadcrumbList (yazı ve normal yazı şablonu); RSS beslemesi (`/feed.xml`, `renderFeed`, tüm sayfalarda head linki); uygulama simgeleri + manifest + theme-color; yazıya FAQPage (`meta.faq`); yazıda görünür sayfa yolu ve paylaşım satırı (ui-kit: `Nav/Breadcrumb`, `Share/Row`, molekül 21). Kod tarayıcıda gerçek Firestore içeriğiyle test edildi; `index.md` ve yazı HTML'i tarayıcı çıktısından yazıldı.
 - **Karar:** Sürüm artırma insan hafızasına bırakılmaz; `kontrol.yml` zorlar. 2026-11-17 taramasındaki tüm teknik maddeler tamam; kalan SEO işleri sahibinde (Search Console, Bing, alan adı).
 - **Açık kalan:** Açık işler tablosu (Mac'te derleme doğrulaması dahil).
 - **Sonraki adım:** Search Console doğrulaması gelince head'e ekle.

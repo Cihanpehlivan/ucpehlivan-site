@@ -174,6 +174,18 @@
     btn.addEventListener('click', function () { copy(D.template, function (ok) { feedback(btn, status, ok); }); });
   });
 
+  /* ---------- Paylaşım ---------- */
+  [].forEach.call(document.querySelectorAll('[data-share-copy]'), function (btn) {
+    var status = document.getElementById('yz-share-status');
+    btn.addEventListener('click', function () { copy(btn.getAttribute('data-share-copy'), function (ok) { feedback(btn, status, ok); }); });
+  });
+  // Sistem paylaşım menüsü yalnız destekleyen cihazlarda (çoğunlukla telefon) görünür.
+  [].forEach.call(document.querySelectorAll('[data-share-native]'), function (btn) {
+    if (!navigator.share) return;
+    btn.hidden = false;
+    btn.addEventListener('click', function () { navigator.share({ title: btn.getAttribute('data-title'), url: btn.getAttribute('data-url') }).catch(function () {}); });
+  });
+
   /* ---------- 05: brief tezgâhı ---------- */
   var B = D.bench, F = B.fields;
   var form = document.getElementById('yz-form');
