@@ -338,7 +338,8 @@ Not eklerken **Açık işler** listesini de güncelle: biten işi sil, yeni aç�
 
 | İş | Kimde | Not |
 |---|---|---|
-| Google Search Console, Bing Webmaster Tools | Sahibi | Doğrulama etiketi gelince `layout` head'ine eklenir |
+| Search Console: site haritası "Getirilemedi" | Sahibi + Claude | 2026-11-17: mülk (`https://ucpehlivan.web.app/`, URL öneki) eklendi ve doğrulandı, `sitemap.xml` gönderildi → "Getirilemedi". Dosya Googlebot ile kontrol edildi: 200, `application/xml`, geçerli, robots.txt'te var; yeni mülkte geçici olması beklenir. **Sonraki gün:** durumu kontrol et; değişmediyse sil + yeniden gönder, "Canlı URL'yi test et" ile erişimi doğrula. "Dizine eklenmesini iste" günlük kotası doldu: önce `/yazi/prompt-brief/`, sonra `/` ve `/blog/`. |
+| Bing Webmaster Tools | Sahibi | Search Console'dan içe aktar (site haritası "Başarılı" olmadan da çalışır) |
 | Kendi alan adı kararı | Sahibi | Firebase'e bağlamak ücretsiz, alan adı ücretli |
 | Tema butonu mobilde 36px (<44) | Claude | Dokunma alanı kuralı |
 | `main.css` eski seçici temizliği (~70) | Claude | `ui-kit/components.json` › `dropped_selectors`; önce önizleme |
