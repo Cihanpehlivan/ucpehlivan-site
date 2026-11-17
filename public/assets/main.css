@@ -433,7 +433,10 @@ section.block::before{content:"";position:absolute;top:0;left:max(32px,calc((100
 .wordmark{display:none}
 .copy{justify-content:center;text-align:center;margin-top:48px}
 .copy span:empty{display:none}
+/* Süs illüstrasyonları: tablette metnin altında (önce başlık okunur), telefonda gizli (~600px kazanç) */
+@media (max-width:900px){.about2 .about-ill{order:2}}
 @media (max-width:640px){
+  .about-ill,.acc-ill{display:none}
   section.block{padding:64px 0!important}
   section.block::before{left:20px;right:20px}
   .bgrid > .bcard:only-child{display:flex}

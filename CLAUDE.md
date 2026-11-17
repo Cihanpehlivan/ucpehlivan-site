@@ -211,6 +211,7 @@ Kontrol: `ui-kit/UI-00-Kit.html` repo kökünden yerel sunucuyla açılır (`npx
 | Hesaplar: LinkedIn (vurgulu), GitHub, E-posta. X ve YouTube hesapları **henüz yok**. | Kas 2026 |
 | Footer: büyük isim yazısı (wordmark) yok, telif satırı ortada, menü başlığı **"Keşfet"** (Yazılar, Hakkımda). | Kas 2026 |
 | Sütun çizgileri (`.guides`) sadece ana sayfanın ilk ekranında; yazı ve blog sayfalarında yok. Bölümler mor şeritli çizgiyle ayrılır. | Kas 2026 |
+| Hakkımda ve Hesaplarım illüstrasyonları telefonda (≤640) gizli, tablette (≤900) metnin altında. | Kas 2026 |
 
 ---
 
@@ -350,11 +351,11 @@ Not eklerken **Açık işler** listesini de güncelle: biten işi sil, yeni aç�
 | Yayın workflow'unda Node 20 uyarısı | Claude | `actions/checkout`, `setup-node` sürümlerini güncelle |
 | LinkedIn paylaşımı · X/YouTube hesapları · pasif bölüm fikirleri (§10) | Sahibi | |
 | Repo herkese açık: private repo / `CLAUDE.local.md` kararı | Sahibi | |
-| Mac'te derlemeyi doğrula | Claude (Mac) | `render.js` (breadcrumbLd, faqLd, renderFeed, head'de RSS/simge/manifest/theme-color, llms satırları, ASSET_V 9) ve `build-yazi.mjs` değişti; Windows'ta paketlere yalnız `ASSET_V` elle işlendi. `npm run build:js` + `node scripts/publish.mjs` + `node scripts/build-yazi.mjs` → `git diff` |
+| Mac'te derlemeyi doğrula | Claude (Mac) | `render.js` (breadcrumbLd, faqLd, renderFeed, head'de RSS/simge/manifest/theme-color, llms satırları, ASSET_V 10) ve `build-yazi.mjs` değişti; Windows'ta paketlere yalnız `ASSET_V` elle işlendi. `npm run build:js` + `node scripts/publish.mjs` + `node scripts/build-yazi.mjs` → `git diff` |
 | Google Analytics var, çerez onay bandı yok | Sahibi | KVKK açısından bakılmalı (SEO değil) |
 
 ### 2026-11-17 — SEO/GEO teknik tur 2 (Windows)
-- **Yapılan:** Canlı tarama (PageSpeed API 429 verdi; başlık, boyut, önbellek elle ölçüldü). Uygulanan: `/assets/**` 1 yıl önbellek + `ASSET_V` 8→9 + `kontrol.yml`'ye sürüm denetimi; yazının düz metin sürümü (`scripts/yazi-md.mjs` → `index.md`, head'de alternate link, llms.txt'te link); BreadcrumbList (yazı ve normal yazı şablonu); RSS beslemesi (`/feed.xml`, `renderFeed`, tüm sayfalarda head linki); uygulama simgeleri + manifest + theme-color; yazıya FAQPage (`meta.faq`); yazıda görünür sayfa yolu ve paylaşım satırı (ui-kit: `Nav/Breadcrumb`, `Share/Row`, molekül 21). Kod tarayıcıda gerçek Firestore içeriğiyle test edildi; `index.md` ve yazı HTML'i tarayıcı çıktısından yazıldı.
+- **Yapılan:** Canlı tarama (PageSpeed API 429 verdi; başlık, boyut, önbellek elle ölçüldü). Uygulanan: `/assets/**` 1 yıl önbellek + `ASSET_V` 8→9 + `kontrol.yml`'ye sürüm denetimi; yazının düz metin sürümü (`scripts/yazi-md.mjs` → `index.md`, head'de alternate link, llms.txt'te link); BreadcrumbList (yazı ve normal yazı şablonu); RSS beslemesi (`/feed.xml`, `renderFeed`, tüm sayfalarda head linki); uygulama simgeleri + manifest + theme-color; yazıya FAQPage (`meta.faq`); yazıda görünür sayfa yolu ve paylaşım satırı (ui-kit: `Nav/Breadcrumb`, `Share/Row`, molekül 21); ana sayfa illüstrasyonları telefonda gizli, tablette metnin altında (`ASSET_V` 10, telefonda sayfa ~690px kısaldı). Kod tarayıcıda gerçek Firestore içeriğiyle test edildi; `index.md` ve yazı HTML'i tarayıcı çıktısından yazıldı.
 - **Karar:** Sürüm artırma insan hafızasına bırakılmaz; `kontrol.yml` zorlar. 2026-11-17 taramasındaki tüm teknik maddeler tamam; kalan SEO işleri sahibinde (Search Console, Bing, alan adı).
 - **Açık kalan:** Açık işler tablosu (Mac'te derleme doğrulaması dahil).
 - **Sonraki adım:** Search Console doğrulaması gelince head'e ekle.
