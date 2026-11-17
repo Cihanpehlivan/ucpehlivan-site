@@ -142,6 +142,7 @@ export function layout(c, { title, description, type = 'website', jsonld, noinde
 <title>${e(pageTitle)}</title>
 <meta name="description" content="${e(desc)}">
 <link rel="canonical" href="${e(canonical)}">
+<link rel="alternate" type="application/rss+xml" title="${e(s.name)}" href="/feed.xml">
 <meta property="og:type" content="${type}">
 <meta property="og:site_name" content="${e(s.name)}">
 <meta property="og:title" content="${e(pageTitle)}">
@@ -294,6 +295,38 @@ export function renderSitemap(c, origin = 'https://ucpehlivan.web.app') {
   return `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.map(([u, d]) => `  <url><loc>${origin}${u}</loc>${d ? `<lastmod>${String(d).slice(0, 10)}</lastmod>` : ''}</url>`).join('\n')}\n</urlset>\n`;
 }
 
+// RSS 2.0 beslemesi (/feed.xml): okuyucu uygulamaları ve içerik toplayıcılar yeni yazıları buradan bulur.
+// Tarihler yazılardan gelir (yayın anı değil): içerik değişmedikçe dosya da değişmez.
+const rfc822 = (iso) => { const d = new Date(String(iso || '').length === 10 ? `${iso}T09:00:00+03:00` : iso); return Number.isNaN(d.getTime()) ? '' : d.toUTCString(); };
+export function renderFeed(c, origin = 'https://ucpehlivan.web.app') {
+  const s = c.settings || {}, bl = (c.home || {}).blog || {};
+  const posts = c.posts || [];
+  const latest = posts.map((p) => p.updatedAt || p.publishedAt).filter(Boolean).sort().pop();
+  const items = posts.map((p) => {
+    const url = origin + postHref(p);
+    return `    <item>
+      <title>${e(p.title)}</title>
+      <link>${e(url)}</link>
+      <guid isPermaLink="true">${e(url)}</guid>
+      <pubDate>${rfc822(p.publishedAt)}</pubDate>
+      <dc:creator>${e(s.name)}</dc:creator>${String(p.category || '').trim() ? `\n      <category>${e(String(p.category).trim())}</category>` : ''}
+      <description>${e(p.seoDescription || p.excerpt)}</description>
+    </item>`;
+  }).join('\n');
+  return `<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    <title>${e(`${bl.pageTitle || bl.title || 'Yazılar'} | ${s.name}`)}</title>
+    <link>${origin}/blog/</link>
+    <atom:link href="${origin}/feed.xml" rel="self" type="application/rss+xml"/>
+    <description>${e(s.seoDescription || s.footerTagline || '')}</description>
+    <language>tr</language>${latest ? `\n    <lastBuildDate>${rfc822(latest)}</lastBuildDate>` : ''}
+${items}
+  </channel>
+</rss>
+`;
+}
+
 // llms.txt: yapay zeka araçlarına sitenin ne olduğunu ve önemli sayfalarını anlatan düz metin (llmstxt.org).
 export function renderLlms(c, origin = 'https://ucpehlivan.web.app') {
   const s = c.settings || {}, bl = (c.home || {}).blog || {};
@@ -305,7 +338,7 @@ export function renderLlms(c, origin = 'https://ucpehlivan.web.app') {
   return [`# ${one(s.name)}`, '', `> ${one(s.seoDescription || s.footerTagline)}`, '', ...(about.length ? [about.join(' '), ''] : []),
     'Site Türkçedir. Yazılar, yapay zekayı her gün gerçek işte kullanan bir proje yöneticisinin notları ve deneyimleridir.', '',
     `## ${one(bl.pageTitle || bl.title || 'Yazılar')}`, '', ...(posts.length ? posts : ['- Henüz yazı yok.']), '',
-    '## Sayfalar', '', `- [Ana sayfa](${origin}/)`, `- [Tüm yazılar](${origin}/blog/)`, `- [Hakkımda](${origin}/#hakkimda)`, '',
+    '## Sayfalar', '', `- [Ana sayfa](${origin}/)`, `- [Tüm yazılar](${origin}/blog/)`, `- [Hakkımda](${origin}/#hakkimda)`, `- [RSS beslemesi](${origin}/feed.xml)`, '',
     ...(accs.length ? ['## Hesaplar', '', ...accs, ''] : [])].join('\n');
 }
 

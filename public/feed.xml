@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    <title>Yazılar | Umut Cihan Pehlivan</title>
+    <link>https://ucpehlivan.web.app/blog/</link>
+    <atom:link href="https://ucpehlivan.web.app/feed.xml" rel="self" type="application/rss+xml"/>
+    <description>Her gün yapay zeka kullanan birinden notlar ve tecrübeler. Denediklerim, öğrendiklerim ve işe yarayanlar.</description>
+    <language>tr</language>
+    <lastBuildDate>Mon, 16 Nov 2026 13:52:24 GMT</lastBuildDate>
+    <item>
+      <title>Prompt Yazmak, Aslında İyi Bir Brief Yazmak</title>
+      <link>https://ucpehlivan.web.app/yazi/prompt-brief/</link>
+      <guid isPermaLink="true">https://ucpehlivan.web.app/yazi/prompt-brief/</guid>
+      <pubDate>Mon, 16 Nov 2026 06:00:00 GMT</pubDate>
+      <dc:creator>Umut Cihan Pehlivan</dc:creator>
+      <category>AI</category>
+      <description>Yeni modeller zeki; adım adım reçeteyle kısıtlanınca değil, hedef ve sınırla yönlendirilince iyi iş çıkarıyor. Eski bir promptunu brief'e çevir.</description>
+    </item>
+  </channel>
+</rss>

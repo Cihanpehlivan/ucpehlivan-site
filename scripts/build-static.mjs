@@ -3,7 +3,7 @@
 import { readFileSync, writeFileSync, mkdirSync, rmSync, existsSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { renderHome, renderBlogIndex, renderPost, render404, renderSitemap, renderLlms, layout } from '../shared/render.js';
+import { renderHome, renderBlogIndex, renderPost, render404, renderSitemap, renderLlms, renderFeed, layout } from '../shared/render.js';
 
 const here = dirname(fileURLToPath(import.meta.url));
 const pub = join(here, '..', 'public');
@@ -30,7 +30,8 @@ export function buildPages(c) {
   write('404.html', render404(c, o));
   write('sitemap.xml', renderSitemap(c, ORIGIN));
   write('llms.txt', renderLlms(c, ORIGIN));
-  console.log(`Statik sayfalar üretildi: ana sayfa, yazılar, ${c.posts.length} yazı, 404, sitemap, llms.txt.`);
+  write('feed.xml', renderFeed(c, ORIGIN));
+  console.log(`Statik sayfalar üretildi: ana sayfa, yazılar, ${c.posts.length} yazı, 404, sitemap, llms.txt, feed.xml.`);
 }
 
 if (process.argv[1] === fileURLToPath(import.meta.url)) {

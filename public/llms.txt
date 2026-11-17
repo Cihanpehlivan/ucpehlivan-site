@@ -15,6 +15,7 @@ Site Türkçedir. Yazılar, yapay zekayı her gün gerçek işte kullanan bir pr
 - [Ana sayfa](https://ucpehlivan.web.app/)
 - [Tüm yazılar](https://ucpehlivan.web.app/blog/)
 - [Hakkımda](https://ucpehlivan.web.app/#hakkimda)
+- [RSS beslemesi](https://ucpehlivan.web.app/feed.xml)
 
 ## Hesaplar
 
