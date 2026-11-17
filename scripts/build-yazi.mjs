@@ -93,15 +93,23 @@ function share() {
   return `<div class="yz-share"><span class="yz-mono">${esc(k.label)}</span><div class="yz-share-row"><a class="btn btn-ghost btn-sm" href="https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}" target="_blank" rel="noopener">${esc(k.linkedin)} ↗</a><button type="button" class="btn btn-ghost btn-sm" data-share-copy="${esc(url)}">${esc(k.copy)}</button><button type="button" class="btn btn-ghost btn-sm" data-share-native data-url="${esc(url)}" data-title="${esc(C.meta.title)}" hidden>${esc(k.native)}</button></div><p class="yz-status" id="yz-share-status" role="status" aria-live="polite"></p></div>`;
 }
 
-function s01(s) {
+// Yazı başlığı bloğu: ızgaranın ilk satırında, içerik kolonunda. Bölüm menüsü (yz-nav) ikinci satırda başlar,
+// böylece menünün üstü Özet alanıyla aynı hizadadır. <header> kullanılmaz: main.css'teki genel header kuralı (sticky) uygulanır.
+function head01(s) {
   const h = s.hero;
-  return `<section class="yz-sec yz-hero" id="${s.id}" aria-labelledby="h-${s.id}" data-sec>
+  return `<div class="yz-head">
   ${crumbs()}
   ${secHead(s, '')}
   <p class="yz-kicker yz-mono">${esc(h.kicker)}</p>
   <h1 class="d yz-title" id="h-${s.id}">${esc(h.title)}</h1>
   ${byline()}
   ${cover()}
+</div>`;
+}
+
+function s01(s) {
+  const h = s.hero;
+  return `<section class="yz-sec yz-hero" id="${s.id}" aria-labelledby="h-${s.id}" data-sec>
   ${summary()}
   <div class="yz-claim"><div class="yz-claim-top"><span class="yz-mono yz-claim-l">${esc(h.claimLabel)}</span><span class="yz-claim-dots" aria-hidden="true">${h.pillars.map((_, i) => `<i>${i + 1}</i>`).join('')}</span></div><p class="yz-claim-t">${(() => { let n = 0; return h.claim.map((p) => (p.key ? `<mark data-k="${esc(p.key)}"><sup aria-hidden="true">${++n}</sup>${esc(p.text)}</mark>` : esc(p.text))).join(''); })()}</p></div>
   <p class="yz-mono yz-small">${esc(h.pillarsHint)}</p>
@@ -217,7 +225,7 @@ const client = {
   template: S.sablon.template,
   bench: S.sablon,
 };
-const body = `<div class="yz" id="yz"><div class="wrap yz-grid">${nav}<article class="yz-article">
+const body = `<div class="yz" id="yz"><div class="wrap yz-grid">${head01(S.neden)}${nav}<article class="yz-article">
 ${s01(S.neden)}
 ${s02(S.inanclar)}
 ${s03(S.sinir)}

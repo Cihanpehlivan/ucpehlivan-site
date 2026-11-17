@@ -4,7 +4,11 @@
 .yz-small{font-size:13px;color:var(--muted)}
 /* Uzun okumada arka plandaki sütun çizgileri metnin içinden geçmesin */
 body:has(.yz) .guides{display:none}
-.yz-grid{display:grid;grid-template-columns:200px minmax(0,1fr);gap:56px;align-items:start;padding-top:56px;padding-bottom:40px}
+.yz-grid{display:grid;grid-template-columns:200px minmax(0,1fr);column-gap:56px;row-gap:0;align-items:start;padding-top:56px;padding-bottom:40px}
+/* 1. satır: başlık bloğu içerik kolonunda. 2. satır: menü + yazı. Menünün üstü Özet ile hizalı. */
+.yz-head{grid-column:2;grid-row:1;min-width:0}
+.yz-nav{grid-column:1;grid-row:2}
+.yz-article{grid-column:2;grid-row:2}
 
 /* Numaralı bölüm menüsü */
 .yz-nav{position:sticky;top:104px;display:block;gap:0;margin-left:0}
@@ -19,7 +23,7 @@ body:has(.yz) .guides{display:none}
 /* Bölümler */
 .yz-article{min-width:0}
 .yz-sec{position:relative;padding:80px 0 96px;scroll-margin-top:84px}
-.yz-sec:first-child{padding-top:8px}
+.yz-sec:first-child{padding-top:0}
 /* Bölüm başı: belirgin çizgi + vurgu renginde kısa şerit */
 .yz-sec+.yz-sec::before{content:"";position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(to right,var(--accent) 0 72px,var(--line-strong) 72px)}
 .yz-sh{display:flex;align-items:center;gap:14px;margin-bottom:20px;color:var(--muted)}
@@ -255,6 +259,9 @@ body:has(.yz) .guides{display:none}
 @media (max-width:1100px){.yz-cards-6{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (max-width:900px){
   .yz-grid{grid-template-columns:minmax(0,1fr);gap:0;padding-top:0}
+  /* Tek kolon: başlık bloğu → yapışkan menü şeridi → yazı */
+  .yz-head,.yz-nav,.yz-article{grid-column:1;grid-row:auto}
+  .yz-head{padding-top:40px}
   /* Menü üstte yapışkan, yatay bir şerit olur (kaydırma sadece şeridin içinde) */
   .yz-nav{top:calc(env(safe-area-inset-top,0px) + 68px);z-index:40;margin:0 -32px;padding:10px 32px;background:color-mix(in srgb,var(--bg) 90%,transparent);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
   .yz-nav ol{flex-direction:row;border-left:0;gap:6px;overflow-x:auto;scrollbar-width:none}
@@ -265,7 +272,7 @@ body:has(.yz) .guides{display:none}
   .yz-nav a[aria-current="true"] .yz-nl{display:inline}
   .yz-keys{display:none}
   .yz-sec{scroll-margin-top:136px;padding:64px 0 72px}
-  .yz-sec:first-child{padding-top:40px}
+  .yz-sec:first-child{padding-top:24px}
   .yz-cards-3{grid-template-columns:minmax(0,1fr)}
   .yz-habit{grid-template-columns:minmax(0,1fr);gap:16px}
   .yz-bgrid,.yz-bench{grid-template-columns:minmax(0,1fr)}

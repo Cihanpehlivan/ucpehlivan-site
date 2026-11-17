@@ -399,8 +399,11 @@ function organisms() {
   frame(hr, { code: 'Hero/Home', html: q('home', '.hero').outerHTML, home: true });
   frame(hr, { code: 'Hero/Page', variant: 'blog', html: q('blog', '.bhero').outerHTML, home: true });
   frame(hr, { code: 'Hero/Page', variant: '404', html: q('nf', '.bhero').outerHTML, home: true });
-  frame(hr, { code: 'Hero/Yazı', html: q('yazi', '#neden').outerHTML, yz: true });
-  frame(hr, { code: 'Hero/Yazı', variant: 'mobil', html: q('yazi', '#neden').outerHTML, width: 375, yz: true });
+  // Yazı başı iki parça: .yz-head (ızgaranın 1. satırı) + #neden bölümü (Özet ile başlar)
+  const yzHero = () => q('yazi', '.yz-head').outerHTML + q('yazi', '#neden').outerHTML;
+  frame(hr, { code: 'Hero/Yazı', html: yzHero(), yz: true });
+  frame(hr, { code: 'Hero/Yazı', variant: 'mobil', html: yzHero(), width: 375, yz: true });
+  frame(hr, { code: 'Hero/Yazı', variant: 'menüyle düzen', html: `<div class="yz"><div class="wrap yz-grid">${q('yazi', '.yz-head').outerHTML}${q('yazi', '.yz-nav').outerHTML}<article class="yz-article">${q('yazi', '#neden').outerHTML}</article></div></div>`, desc: 'Başlık bloğu 1. satırda içerik kolonunda; bölüm menüsü 2. satırda başlar, üstü Özet ile aynı hizada.' });
   const sb = group(og, 'Bölümler', 'mor şeritli ayırıcıyla başlar · 96/96');
   frame(sb, { code: 'Section/Yazılar', html: q('home', '#yazilar').outerHTML, home: true });
   frame(sb, { code: 'Section/Hakkımda', html: q('home', '#hakkimda').outerHTML, home: true });
