@@ -8,7 +8,7 @@ Site Türkçedir. Yazılar, yapay zekayı her gün gerçek işte kullanan bir pr
 
 ## Yazılar
 
-- [Prompt Yazmak, Aslında İyi Bir Brief Yazmak](https://ucpehlivan.web.app/yazi/prompt-brief/): Yeni modeller zeki; adım adım reçeteyle kısıtlanınca değil, hedef ve sınırla yönlendirilince iyi iş çıkarıyor. Eski bir promptunu brief'e çevir.
+- [Prompt Yazmak, Aslında İyi Bir Brief Yazmak](https://ucpehlivan.web.app/yazi/prompt-brief/): Yeni modeller zeki; adım adım reçeteyle kısıtlanınca değil, hedef ve sınırla yönlendirilince iyi iş çıkarıyor. Eski bir promptunu brief'e çevir. Düz metin: https://ucpehlivan.web.app/yazi/prompt-brief/index.md
 
 ## Sayfalar
 

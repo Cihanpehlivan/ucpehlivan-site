@@ -9,7 +9,8 @@ import { tmpdir } from 'node:os';
 import { fileURLToPath } from 'node:url';
 import { createHash } from 'node:crypto';
 import { execFileSync } from 'node:child_process';
-import { layout, identityLd, articleLd, trDate } from '../shared/render.js';
+import { layout, identityLd, articleLd, breadcrumbLd, trDate } from '../shared/render.js';
+import { yaziMarkdown } from './yazi-md.mjs';
 import { seedBundle } from './build-static.mjs';
 
 const here = dirname(fileURLToPath(import.meta.url));
@@ -209,7 +210,7 @@ const v = createHash('sha1').update(css).update(js).digest('hex').slice(0, 8);
 
 const ld = {
   '@context': 'https://schema.org',
-  '@graph': [...identityLd(c, ORIGIN), articleLd({ url: ORIGIN + C.meta.path, headline: C.meta.title, description: C.meta.description, datePublished: C.meta.published, dateModified: C.meta.updated, image: ORIGIN + C.meta.ogImage }, ORIGIN)],
+  '@graph': [...identityLd(c, ORIGIN), articleLd({ url: ORIGIN + C.meta.path, headline: C.meta.title, description: C.meta.description, datePublished: C.meta.published, dateModified: C.meta.updated, image: ORIGIN + C.meta.ogImage }, ORIGIN), breadcrumbLd([['Ana sayfa', '/'], ['Yazılar', '/blog/'], [C.meta.title, C.meta.path]], ORIGIN)],
 };
 let html = layout(c, { origin: ORIGIN, path: C.meta.path, type: 'article', jsonld: ld, title: `${C.meta.title} | ${s.name}`, description: C.meta.description, image: C.meta.ogImage, imageAlt: C.meta.ogImageAlt, body });
 // Sitenin içerik yenileme script'i bu sayfayı tanımaz; bu sayfada yüklenmez.
@@ -219,6 +220,7 @@ const og = `<meta property="og:image:width" content="1200">
 <meta property="article:published_time" content="${esc(C.meta.published)}">
 <meta property="article:modified_time" content="${esc(C.meta.updated || C.meta.published)}">
 <meta property="article:author" content="${esc(s.name)}">
+<link rel="alternate" type="text/markdown" href="${esc(C.meta.path)}index.md" title="${esc(C.meta.title)} (düz metin)">
 <link rel="stylesheet" href="/assets/yazi.css?v=${v}">`;
 html = html.replace('</head>', `${og}\n</head>`);
 html = html.replace('</body>', `<script src="/assets/yazi.js?v=${v}" defer></script>\n</body>`);
@@ -226,6 +228,7 @@ if (/app\.js|googletagmanager/.test(html)) throw new Error('Sayfada istenmeyen s
 
 mkdirSync(OUT, { recursive: true });
 writeFileSync(join(OUT, 'index.html'), html);
+writeFileSync(join(OUT, 'index.md'), yaziMarkdown(C, { author: s.name, date: trDate(C.meta.published), origin: ORIGIN }));
 console.log(`${C.meta.path} üretildi (varlık sürümü ${v}).`);
 
 // Paylaşım görseli: başlık + vurgu rengi, 1200x630. Yeni bağımlılık yok; yüklü Google Chrome kullanılır.

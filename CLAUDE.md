@@ -114,6 +114,9 @@ Umut Cihan Pehlivan'ın kişisel marka sitesi: **yapay zeka içeriklerinin kalı
 | llms.txt | `renderLlms` → `build-static.mjs` | Yayında Firestore'dan üretilir. |
 | Site haritası | `renderSitemap` | Ana sayfa ve blog tarihi = en yeni yazının tarihi. |
 | Yazı sayfası | `build-yazi.mjs` | Görünür yazar satırı (`.yz-byline`) ve Özet alanı (`.yz-tldr`). |
+| Düz metin sürümü | `scripts/yazi-md.mjs` → `public/yazi/<ad>/index.md` | Arayüz metni olmadan yazının kendisi. Head'de `rel="alternate" type="text/markdown"`, llms.txt'te link. İçerik değişince yeniden üret. |
+| Sayfa yolu | `breadcrumbLd` | Yazıda Ana sayfa › Yazılar › Yazı. |
+| Önbellek | `firebase.json` | `/assets/**` 1 yıl (`immutable`), görseller 7 gün, HTML ve `.md` `no-cache`. **`main.css`, `main.js`, `app.js` değişirse `ASSET_V` artırılmalı**; `kontrol.yml` artmadıysa hata verir. |
 
 ### Kategoriler ve filtre
 
@@ -154,7 +157,7 @@ Sahibi aynı repoda hem Mac'te hem Windows'ta çalışır. **İlk iş:** `git --
 - `gh` girişi makineye özeldir. Mac'te `gh` yoksa veya giriş yoksa sahibine `gh auth login`'i kendisinin yapmasını söyle.
 - **Mac'te ilk oturumda bir kez:** `npm install && npm run build` çalıştır ve `git diff` bak. Windows'ta elle düzenlenen `public/assets/app.js`, `public/admin/admin.js` ve `public/yazi/prompt-brief/index.html` kaynaktan yeniden üretilmiş olur. Fark yalnız biçimse (boşluk, sıra) commit'le; anlamlı fark varsa sahibine göster.
 
-**Node yokken (Windows):** `render.js` değişikliğini tarayıcıda modül olarak içe aktarıp Firestore içeriğiyle test et; derlenmiş `app.js`/`admin.js`'e aynı değişikliği elle uygula; `build-yazi.mjs` çıktısını elle güncelle ve `yazi.css?v=` sürümünü (yazi.css + yazi.js SHA1'inin ilk 8 hanesi) artır.
+**Node yokken (Windows):** `render.js` değişikliğini tarayıcıda modül olarak içe aktarıp Firestore içeriğiyle test et; derlenmiş `app.js`/`admin.js`'e aynı değişikliği elle uygula; `build-yazi.mjs` çıktısını elle güncelle ve `yazi.css?v=` sürümünü (yazi.css + yazi.js SHA1'inin ilk 8 hanesi) artır. `index.md`'yi `scripts/yazi-md.mjs`'i tarayıcıda içe aktarıp üret. `ASSET_V` artınca: `render.js` + derlenmiş paketlerdeki sabit (`app.js` › `I="…"`, `admin.js` › `Tf="…"`; isimler derlemeyle değişebilir, `?v=${…}` yanında ara) + `public/**/*.html` içindeki `?v=`.
 
 Önizleme adresi: `https://ucpehlivan--onizleme-qg07p53h.web.app` (7 gün geçerli; yeni yayında değişebilir, Actions log'una bak).
 
@@ -332,7 +335,6 @@ Not eklerken **Açık işler** listesini de güncelle: biten işi sil, yeni aç�
 
 | İş | Kimde | Not |
 |---|---|---|
-| `ASSET_V` (`main.css?v=8`) artırılmadı | Claude | Bir sonraki `main.css` değişikliğinde `render.js`'te artır ve derle (Node gerekir) |
 | Google Search Console, Bing Webmaster Tools | Sahibi | Doğrulama etiketi gelince `layout` head'ine eklenir |
 | Kendi alan adı kararı | Sahibi | Firebase'e bağlamak ücretsiz, alan adı ücretli |
 | Tema butonu mobilde 36px (<44) | Claude | Dokunma alanı kuralı |
@@ -342,6 +344,15 @@ Not eklerken **Açık işler** listesini de güncelle: biten işi sil, yeni aç�
 | Yayın workflow'unda Node 20 uyarısı | Claude | `actions/checkout`, `setup-node` sürümlerini güncelle |
 | LinkedIn paylaşımı · X/YouTube hesapları · pasif bölüm fikirleri (§10) | Sahibi | |
 | Repo herkese açık: private repo / `CLAUDE.local.md` kararı | Sahibi | |
+| Düşük öncelikli SEO/GEO: RSS (`/feed.xml`), FAQPage verisi, apple-touch-icon + theme-color | Claude | 2026-11-17 taramasından; yazı sayısı artınca anlamlı |
+| Mac'te derlemeyi doğrula | Claude (Mac) | `render.js` (breadcrumbLd, llms satırı, ASSET_V 9) ve `build-yazi.mjs` değişti; Windows'ta paketlere yalnız `ASSET_V` elle işlendi. `npm run build:js` + `node scripts/build-yazi.mjs` → `git diff` |
+| Google Analytics var, çerez onay bandı yok | Sahibi | KVKK açısından bakılmalı (SEO değil) |
+
+### 2026-11-17 — SEO/GEO teknik tur 2 (Windows)
+- **Yapılan:** Canlı tarama (PageSpeed API 429 verdi; başlık, boyut, önbellek elle ölçüldü). Uygulanan: `/assets/**` 1 yıl önbellek + `ASSET_V` 8→9 + `kontrol.yml`'ye sürüm denetimi; yazının düz metin sürümü (`scripts/yazi-md.mjs` → `index.md`, head'de alternate link, llms.txt'te link); BreadcrumbList (yazı ve normal yazı şablonu). Kod tarayıcıda gerçek Firestore içeriğiyle test edildi; `index.md` ve yazı HTML'i tarayıcı çıktısından yazıldı.
+- **Karar:** Sürüm artırma insan hafızasına bırakılmaz; `kontrol.yml` zorlar. RSS/FAQ/ikon şimdilik ertelendi.
+- **Açık kalan:** Açık işler tablosu (Mac'te derleme doğrulaması dahil).
+- **Sonraki adım:** Search Console doğrulaması gelince head'e ekle.
 
 ### 2026-11-17 — Mac'te derleme doğrulaması
 - **Yapılan:** Mac'te `git pull` (Windows'taki 17 commit alındı), `npm install`, `npm run build:js` + `node scripts/publish.mjs` + `node scripts/build-yazi.mjs`. Windows'ta elle düzenlenen `app.js`/`admin.js` kaynaktan yeniden üretildi; gövdeyi etkileyen tüm değişiklikler (footer "Keşfet", Hesaplarım linki yok, wordmark yok, yönlendirme, admin alanları) elle sürümde de vardı. Eksik olan yalnız head'deki şema kodu (`@graph`, `og:site_name`); hydrate head'e dokunmadığı için etkisiz. Yazı HTML'i birebir aynı çıktı. Statik sayfalar ve `public/llms.txt` canlıyla aynı hâle getirilip commit'lendi.
@@ -354,9 +365,3 @@ Not eklerken **Açık işler** listesini de güncelle: biten işi sil, yeni aç�
 - **Karar:** Süreklilik CLAUDE.md (repoda, iki makinede aynı) + kural kontrolü workflow'u ile sağlanır. Claude'un makineye özel hafızasına güvenilmez.
 - **Açık kalan:** Mac'te ilk oturumda `npm install && npm run build` + `git diff` ile elle düzenlenmiş derleme dosyalarını doğrula (§5).
 - **Sonraki adım:** Sahibi yarın Mac'ten devam edebilir. Önce `git pull`, sonra §11'deki en son notları oku.
-
-### 2026-11-16 — Yazı özeti yeniden tasarlandı
-- **Yapılan:** Yazı başındaki özet kutusu ("AI slop" görünüyordu: beyaz kart + kalın mor sol şerit + tireli liste) yeniden yapıldı: kenarsız, hafif gri tonlu (`surface-2` %60) alan; üstte mor nokta + "ÖZET" etiketi ve çizgi; 3 kolon madde, aralarında ince çizgi, mor `01–03` numaralar; mobilde alt alta. Etiket "Kısaca" → **"Özet"** (`content/prompt-yazisi.json` › `summaryLabel`). Özet ile yazının başı arasında 56px (mobil 40px) boşluk; yazı beyaz, gölgeli iddia kutusuyla başlar. `ui-kit/components.json` › `Box/TLDR` her adımda aynı commit'te güncellendi (§6.1). Canlıda.
-- **Karar:** Özet "yazının dışındaki not" gibi düz ve tonlu kalır; yazının içeriği beyaz/gölgeli kartlarla başlar. Ayrım yeni öğeyle değil ton farkı + boşlukla yapılır.
-- **Açık kalan:** Yok.
-- **Sonraki adım:** Yeni interaktif yazıda aynı özet yapısını kullan (`meta.summary`, 3 madde).

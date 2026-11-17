@@ -37,6 +37,29 @@ jobs:
           if [ "$FOUND" = "1" ]; then echo "Kural ihlali bulundu (CLAUDE.md §2)."; exit 1; fi
           echo "Yasaklı içerik yok."
 
+      - name: Önbellek sürümü (/assets 1 yıl önbellekte)
+        run: |
+          FAIL=0
+          V=$(grep -oP "const ASSET_V = '\K[^']+" shared/render.js)
+          H=$(cat public/assets/yazi.css public/assets/yazi.js | sha1sum | cut -c1-8)
+          echo "ASSET_V=$V  yazi hash=$H"
+          # Yazı sayfaları elle/ayrı üretildiği için sürümleri burada denetlenir.
+          for f in public/yazi/*/index.html; do
+            grep -q "main.css?v=$V\"" "$f" || { echo "::error file=$f::main.css?v=$V değil. ASSET_V ile eşitle."; FAIL=1; }
+            grep -q "yazi.css?v=$H\"" "$f" || { echo "::error file=$f::yazi.css?v=$H olmalı (yazi.css + yazi.js SHA1 ilk 8)."; FAIL=1; }
+          done
+          BASE="${{ github.event.pull_request.base.sha || github.event.before }}"
+          if [ -n "$BASE" ] && [ "$BASE" != "0000000000000000000000000000000000000000" ] && git cat-file -e "$BASE" 2>/dev/null; then
+            ASSETS=$(git diff --name-only "$BASE" "${{ github.sha }}" | grep -E '^public/assets/(main\.css|main\.js|app\.js)$' || true)
+            BUMP=$(git diff "$BASE" "${{ github.sha }}" -- shared/render.js | grep -E "^[-+]const ASSET_V" || true)
+            if [ -n "$ASSETS" ] && [ -z "$BUMP" ]; then
+              echo "::error file=shared/render.js::$(echo $ASSETS | tr '\n' ' ') değişti ama ASSET_V artırılmadı. Ziyaretçiler 1 yıl eski dosyayı görür."
+              FAIL=1
+            fi
+          fi
+          if [ "$FAIL" = "1" ]; then exit 1; fi
+          echo "Sürümler tutarlı."
+
       - name: Design system senkronu (CLAUDE.md §6.1)
         if: github.event_name != 'workflow_dispatch'
         run: |

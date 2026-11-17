@@ -2,6 +2,12 @@
 
 CLAUDE.md §11'de yalnız son 3 not durur. Daha eski notlar buraya, **en üste** taşınır (yeniden eskiye). Güncel açık işler CLAUDE.md §11 › "Açık işler" listesindedir; buradaki "Açık kalan" satırları o günün durumudur.
 
+### 2026-11-16 — Yazı özeti yeniden tasarlandı
+- **Yapılan:** Yazı başındaki özet kutusu ("AI slop" görünüyordu: beyaz kart + kalın mor sol şerit + tireli liste) yeniden yapıldı: kenarsız, hafif gri tonlu (`surface-2` %60) alan; üstte mor nokta + "ÖZET" etiketi ve çizgi; 3 kolon madde, aralarında ince çizgi, mor `01–03` numaralar; mobilde alt alta. Etiket "Kısaca" → **"Özet"** (`content/prompt-yazisi.json` › `summaryLabel`). Özet ile yazının başı arasında 56px (mobil 40px) boşluk; yazı beyaz, gölgeli iddia kutusuyla başlar. `ui-kit/components.json` › `Box/TLDR` her adımda aynı commit'te güncellendi (§6.1). Canlıda.
+- **Karar:** Özet "yazının dışındaki not" gibi düz ve tonlu kalır; yazının içeriği beyaz/gölgeli kartlarla başlar. Ayrım yeni öğeyle değil ton farkı + boşlukla yapılır.
+- **Açık kalan:** Yok.
+- **Sonraki adım:** Yeni interaktif yazıda aynı özet yapısını kullan (`meta.summary`, 3 madde).
+
 ### 2026-11-16 — Design system (ui-kit)
 - **Yapılan:** `ui-kit/` kuruldu: `UI-00-Kit.html` (tek board, 3 kolon, bileşenleri `public/` sayfalarından canlı okur), `tokens.json`, `components.json`, `README.md`. 24 atom · 19 molekül · 13 organizma · 5 şablon. ~90 kullanılmayan seçici `dropped_selectors`'a ayrıldı. Yazı başlığı rahatlatıldı (96px, lh 1.02, ls -.03em).
 - **Karar:** Kaynak her zaman CSS + render.js; kit onları yansıtır. Senkron kuralları §2 ve §6.1'de. "Design canvas" aracı olmadığı için skill'deki `canvas.json` adımı uygulanmadı.
