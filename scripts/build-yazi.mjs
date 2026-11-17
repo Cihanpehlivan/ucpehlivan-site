@@ -9,7 +9,7 @@ import { tmpdir } from 'node:os';
 import { fileURLToPath } from 'node:url';
 import { createHash } from 'node:crypto';
 import { execFileSync } from 'node:child_process';
-import { layout, identityLd, articleLd, breadcrumbLd, trDate } from '../shared/render.js';
+import { layout, identityLd, articleLd, breadcrumbLd, faqLd, trDate } from '../shared/render.js';
 import { yaziMarkdown } from './yazi-md.mjs';
 import { seedBundle } from './build-static.mjs';
 
@@ -210,7 +210,7 @@ const v = createHash('sha1').update(css).update(js).digest('hex').slice(0, 8);
 
 const ld = {
   '@context': 'https://schema.org',
-  '@graph': [...identityLd(c, ORIGIN), articleLd({ url: ORIGIN + C.meta.path, headline: C.meta.title, description: C.meta.description, datePublished: C.meta.published, dateModified: C.meta.updated, image: ORIGIN + C.meta.ogImage }, ORIGIN), breadcrumbLd([['Ana sayfa', '/'], ['Yazılar', '/blog/'], [C.meta.title, C.meta.path]], ORIGIN)],
+  '@graph': [...identityLd(c, ORIGIN), articleLd({ url: ORIGIN + C.meta.path, headline: C.meta.title, description: C.meta.description, datePublished: C.meta.published, dateModified: C.meta.updated, image: ORIGIN + C.meta.ogImage }, ORIGIN), breadcrumbLd([['Ana sayfa', '/'], ['Yazılar', '/blog/'], [C.meta.title, C.meta.path]], ORIGIN), ...((C.meta.faq || []).length ? [faqLd(C.meta.faq, ORIGIN + C.meta.path)] : [])],
 };
 let html = layout(c, { origin: ORIGIN, path: C.meta.path, type: 'article', jsonld: ld, title: `${C.meta.title} | ${s.name}`, description: C.meta.description, image: C.meta.ogImage, imageAlt: C.meta.ogImageAlt, body });
 // Sitenin içerik yenileme script'i bu sayfayı tanımaz; bu sayfada yüklenmez.

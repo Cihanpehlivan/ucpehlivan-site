@@ -117,6 +117,10 @@ export function articleLd({ url, headline, description, datePublished, dateModif
 export function breadcrumbLd(items, origin = 'https://ucpehlivan.web.app') {
   return { '@type': 'BreadcrumbList', itemListElement: items.map(([name, path], i) => ({ '@type': 'ListItem', position: i + 1, name, item: origin + path })) };
 }
+// Soru-cevap: yazının bölüm sorularını ve yazıda görünen cevaplarını işaretler. items: [{ q, a }, …]
+export function faqLd(items = [], url = '') {
+  return { '@type': 'FAQPage', ...(url ? { '@id': `${url}#faq`, url } : {}), inLanguage: 'tr', mainEntity: items.map(({ q, a }) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a } })) };
+}
 const graph = (...items) => ({ '@context': 'https://schema.org', '@graph': items.flat() });
 
 export function layout(c, { title, description, type = 'website', jsonld, noindex = false, path = '/', home = false, origin = 'https://ucpehlivan.web.app', version = '', image = '', imageAlt = '', body }) {
@@ -155,6 +159,10 @@ ${image ? '' : '<meta property="og:image:width" content="1200">\n<meta property=
 <meta name="ucp-version" content="${e(version || c.version || '')}">
 ${noindex ? '<meta name="robots" content="noindex">' : ''}
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta name="theme-color" content="#F1F2F4" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0C0D10" media="(prefers-color-scheme: dark)">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Geist:wght@400;500;600&display=swap" rel="stylesheet">

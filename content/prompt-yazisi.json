@@ -14,6 +14,13 @@
       "Yeni modellere adım adım tarif yazma. **Hedefi**, **sınırları** ve modele bıraktığın **serbest alanı** yaz.",
       "Rol vermek, uzun brief ve her şeyi tek mesaja sığdırmak artık işe yaramıyor. Yerine somut malzeme, kısa ve net metin, hazır proje bağlamı ver.",
       "Kopyalanabilir şablon: **Hedef + Elindekiler + Sınırlar**, sonunda “Talimatımda bir hata görürsen önce bana söyle.”"
+    ],
+    "_faq_not": "Yalnız yapılandırılmış veri (FAQPage) için. Soru = bölüm lede'i; cevap = yazıda görünen cümleler (Google cevabın sayfada görünmesini ister). Metni değiştirirsen yazıdaki karşılığıyla aynı tut.",
+    "faq": [
+      { "q": "Hazır prompt şablonlarındaki hangi alışkanlıklar yeni yapay zekâ modellerinde artık işe yaramıyor?", "a": "Modele unvan takmak, brief'i romana çevirmek ve her şeyi tek mesaja sığdırmak. Üçü de bir zamanlar işe yarıyordu, bugün modeli yavaşlatıyor." },
+      { "q": "Adım adım talimat yerine hedef ve sınır yazmak neden daha iyi sonuç veriyor?", "a": "Güçlü bir modele adım adım tarif yazdığında, onu kendi planının içine kapatırsın. Model senin bildiğin sırayla ilerler; daha iyi bir yol olsa bile aramaz. İşe yarayan brief üç şeyi söyler, gerisini bırakır: hedef, sınır ve serbestlik." },
+      { "q": "Claude ve GPT'ye prompt yazarken nelere dikkat ediyorum?", "a": "Benim için pratik sonuç şu: hangi modelle çalışırsam çalışayım önce amacı yazıyorum. Talimata sadık bir modelde sınırları daha net çiziyorum; niyeti okumaya çalışan bir modelde ise işin ne zaman bitmiş sayılacağını." },
+      { "q": "Prompt yazmak neden aslında iyi bir brief yazmak?", "a": "Prompt yazmak yeni bir meslek değil; kendini net ifade etmenin yeni adı. İyi brief yazan biri, iyi prompt yazmanın yarısını zaten biliyor." }
     ]
   },
   "ui": {

@@ -116,6 +116,8 @@ Umut Cihan Pehlivan'ın kişisel marka sitesi: **yapay zeka içeriklerinin kalı
 | Yazı sayfası | `build-yazi.mjs` | Görünür yazar satırı (`.yz-byline`) ve Özet alanı (`.yz-tldr`). |
 | Düz metin sürümü | `scripts/yazi-md.mjs` → `public/yazi/<ad>/index.md` | Arayüz metni olmadan yazının kendisi. Head'de `rel="alternate" type="text/markdown"`, llms.txt'te link. İçerik değişince yeniden üret. |
 | Sayfa yolu | `breadcrumbLd` | Yazıda Ana sayfa › Yazılar › Yazı. |
+| Soru-cevap | `faqLd` · `content/<ad>.json` › `meta.faq` | Soru = bölüm sorusu, cevap = yazıda **görünen** cümleler. Yazı metni değişirse `faq`'ı da eşitle. |
+| Simge ve tema rengi | `layout` head · `public/site.webmanifest` | `apple-touch-icon.png` (180), `icon-192/512.png` favicon'dan üretildi; `theme-color` açık/koyu. Favicon değişirse bunları yeniden üret. |
 | RSS | `renderFeed` → `build-static.mjs` → `/feed.xml` | Yayında Firestore'dan üretilir. Her sayfanın head'inde `rel="alternate" type="application/rss+xml"`, llms.txt'te link. Tarihler yazılardan gelir. |
 | Önbellek | `firebase.json` | `/assets/**` 1 yıl (`immutable`), görseller 7 gün, HTML ve `.md` `no-cache`. **`main.css`, `main.js`, `app.js` değişirse `ASSET_V` artırılmalı**; `kontrol.yml` artmadıysa hata verir. |
 
@@ -345,13 +347,12 @@ Not eklerken **Açık işler** listesini de güncelle: biten işi sil, yeni aç�
 | Yayın workflow'unda Node 20 uyarısı | Claude | `actions/checkout`, `setup-node` sürümlerini güncelle |
 | LinkedIn paylaşımı · X/YouTube hesapları · pasif bölüm fikirleri (§10) | Sahibi | |
 | Repo herkese açık: private repo / `CLAUDE.local.md` kararı | Sahibi | |
-| Düşük öncelikli SEO/GEO: apple-touch-icon + theme-color, FAQPage verisi | Claude | 2026-11-17 taramasından; FAQ'ın etkisi küçük |
-| Mac'te derlemeyi doğrula | Claude (Mac) | `render.js` (breadcrumbLd, renderFeed, RSS head linki, llms satırları, ASSET_V 9) ve `build-yazi.mjs` değişti; Windows'ta paketlere yalnız `ASSET_V` elle işlendi. `npm run build:js` + `node scripts/publish.mjs` + `node scripts/build-yazi.mjs` → `git diff` |
+| Mac'te derlemeyi doğrula | Claude (Mac) | `render.js` (breadcrumbLd, faqLd, renderFeed, head'de RSS/simge/manifest/theme-color, llms satırları, ASSET_V 9) ve `build-yazi.mjs` değişti; Windows'ta paketlere yalnız `ASSET_V` elle işlendi. `npm run build:js` + `node scripts/publish.mjs` + `node scripts/build-yazi.mjs` → `git diff` |
 | Google Analytics var, çerez onay bandı yok | Sahibi | KVKK açısından bakılmalı (SEO değil) |
 
 ### 2026-11-17 — SEO/GEO teknik tur 2 (Windows)
-- **Yapılan:** Canlı tarama (PageSpeed API 429 verdi; başlık, boyut, önbellek elle ölçüldü). Uygulanan: `/assets/**` 1 yıl önbellek + `ASSET_V` 8→9 + `kontrol.yml`'ye sürüm denetimi; yazının düz metin sürümü (`scripts/yazi-md.mjs` → `index.md`, head'de alternate link, llms.txt'te link); BreadcrumbList (yazı ve normal yazı şablonu); RSS beslemesi (`/feed.xml`, `renderFeed`, tüm sayfalarda head linki). Kod tarayıcıda gerçek Firestore içeriğiyle test edildi; `index.md` ve yazı HTML'i tarayıcı çıktısından yazıldı.
-- **Karar:** Sürüm artırma insan hafızasına bırakılmaz; `kontrol.yml` zorlar. FAQ ve ikon şimdilik ertelendi.
+- **Yapılan:** Canlı tarama (PageSpeed API 429 verdi; başlık, boyut, önbellek elle ölçüldü). Uygulanan: `/assets/**` 1 yıl önbellek + `ASSET_V` 8→9 + `kontrol.yml`'ye sürüm denetimi; yazının düz metin sürümü (`scripts/yazi-md.mjs` → `index.md`, head'de alternate link, llms.txt'te link); BreadcrumbList (yazı ve normal yazı şablonu); RSS beslemesi (`/feed.xml`, `renderFeed`, tüm sayfalarda head linki); uygulama simgeleri + manifest + theme-color; yazıya FAQPage (`meta.faq`). Kod tarayıcıda gerçek Firestore içeriğiyle test edildi; `index.md` ve yazı HTML'i tarayıcı çıktısından yazıldı.
+- **Karar:** Sürüm artırma insan hafızasına bırakılmaz; `kontrol.yml` zorlar. 2026-11-17 taramasındaki tüm teknik maddeler tamam; kalan SEO işleri sahibinde (Search Console, Bing, alan adı).
 - **Açık kalan:** Açık işler tablosu (Mac'te derleme doğrulaması dahil).
 - **Sonraki adım:** Search Console doğrulaması gelince head'e ekle.
 
