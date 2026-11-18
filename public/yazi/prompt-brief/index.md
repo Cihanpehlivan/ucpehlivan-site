@@ -25,7 +25,7 @@ Kaynak: https://ucpehlivan.web.app/yazi/prompt-brief/
 
 Bir yıl önce ben de hazır prompt şablonlarıyla çalışıyordum: modele bir rol ver, adımları sırala, çıktının formatını dikte et. O dönem işe yarıyordu, çünkü modeller elinden tutulmadan yolu bulamıyordu. Bugünün modelleri farklı. Akıl yürütüyor, bağlamı okuyor, bazen benim aklıma gelmeyen bir yolu öneriyor. Onları eski şablonlarla adım adım yönlendirmek, zeki bir uzmanı kendi planımın sınırına hapsetmek demek. Adımları bırakıp sadece hedefi ve sınırları verdiğimde aynı model daha iyi iş çıkarıyor.
 
-> **Sonradan duyduğum:** Claude Code’u geliştiren [Boris Cherny](https://x.com/bcherny/status/2107565388250874193), prompt yazmak için kısa bir öneri paylaştı: “Claude ile bir iş arkadaşınla konuşur gibi konuş.” Ona göre bunun bir sırrı yok; çoğu iş için her adımı dikte etmeye gerek yok. Okuyunca gülümsedim: bu yazının anlatmaya çalıştığı şey de tam olarak bu.
+> **Bu arada:** Claude Code’u geliştiren [Boris Cherny](https://x.com/bcherny/status/2107565388250874193), prompt yazmak için kısa bir öneri paylaştı: “Claude ile bir iş arkadaşınla konuşur gibi konuş.” Ona göre bunun bir sırrı yok; çoğu iş için her adımı dikte etmeye gerek yok. Okuyunca gülümsedim: bu yazının anlatmaya çalıştığı şey de tam olarak bu.
 
 ## 02 · Şablondan kalan üç alışkanlık
 
