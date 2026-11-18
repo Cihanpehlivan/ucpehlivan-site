@@ -444,7 +444,7 @@ section.block::before{content:"";position:absolute;top:0;left:max(32px,calc((100
 @media (max-width:900px){.about2 .about-ill{order:2}}
 @media (max-width:640px){
   .acc-ill{display:none}
-  .about2 .about-ill{order:0;max-width:220px;margin:0}
+  .about2 .about-ill{order:0;max-width:240px;margin:0 auto}
   section.block{padding:64px 0!important}
   section.block::before{left:20px;right:20px}
   .bgrid > .bcard:only-child{display:flex}
