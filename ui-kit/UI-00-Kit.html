@@ -336,6 +336,7 @@ function molecules() {
 
   const b = group(sec, 'Kutu', 'yazı sayfası · surface + line · radius 16–22');
   item(b, { code: 'Box/TLDR', node: (() => { const x = q('yazi', '.yz-tldr'); x.style.margin = 0; x.style.width = '760px'; return x; })(), yz: true, width: 820 });
+  item(b, { code: 'Box/Aside', variant: 'bölüm sonu notu', node: (() => { const x = q('yazi', '.yz-aside'); x.style.margin = 0; return x; })(), yz: true, width: 720 });
   item(b, { code: 'Box/Claim', variant: 'varsayılan', node: (() => { const x = q('yazi', '.yz-claim'); x.style.margin = 0; x.style.width = '640px'; return x; })(), yz: true, width: 700 });
   item(b, { code: 'Box/Claim', variant: '2. parça seçili', node: (() => { const x = q('yazi', '.yz-claim'); x.style.margin = 0; x.style.width = '640px'; x.querySelectorAll('mark')[1].classList.add('on'); return x; })(), yz: true, width: 700, desc: 'mark.on: accent zemin, on-accent metin, 3px halka' });
   item(b, { code: 'Button/Pillar', variant: 'varsayılan · basılı', node: (() => { const x = q('yazi', '.yz-pillars'); x.style.margin = 0; x.style.width = '760px'; x.querySelector('.yz-pillar').setAttribute('aria-pressed', 'true'); return x; })(), yz: true, width: 820 });

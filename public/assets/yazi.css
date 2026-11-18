@@ -77,6 +77,12 @@ body:has(.yz) .guides{display:none}
 .yz-tldr li+li{border-left:1px solid var(--line);padding-left:20px}
 .yz-tldr li::before{content:counter(tldr,decimal-leading-zero);display:block;margin-bottom:6px;font:700 12px var(--mono);letter-spacing:.04em;color:var(--accent)}
 .yz-tldr strong{color:var(--ink);font-weight:600}
+/* Bölüm sonu notu: Özet ile aynı dil (düz, tonlu, accent noktalı etiket), yazı genişliğinde tek paragraf */
+.yz-aside{max-width:66ch;margin:12px 0 0;padding:18px 24px 20px;border-radius:16px;background:color-mix(in srgb,var(--surface-2) 60%,transparent)}
+.yz-aside .yz-mono{display:flex;align-items:center;gap:8px;margin:0 0 10px;font-size:12px;color:var(--ink)}
+.yz-aside .yz-mono::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--accent)}
+.yz-aside p:last-child{margin:0;font-size:16px;line-height:1.65;color:var(--text)}
+.yz-aside a{color:var(--ink);font-weight:600;text-decoration:underline;text-decoration-color:var(--accent);text-underline-offset:3px}
 .yz-claim{position:relative;border:1px solid var(--line);border-radius:22px;padding:22px 30px 30px;background:var(--surface);margin-bottom:28px;max-width:880px;box-shadow:0 1px 0 var(--line),0 18px 40px -28px color-mix(in srgb,var(--ink) 40%,transparent)}
 .yz-claim-top{display:flex;justify-content:space-between;align-items:center;gap:12px;padding-bottom:16px;margin-bottom:20px;border-bottom:1px dashed var(--line-strong)}
 .yz-claim-l{color:var(--accent)}
@@ -286,6 +292,7 @@ body:has(.yz) .guides{display:none}
   .yz-prose p{font-size:17px}
   .yz-claim{padding:18px 20px 22px}
   .yz-tldr{padding:16px 18px 18px;margin-bottom:40px}
+  .yz-aside{padding:16px 18px 18px}
   .yz-cover{border-radius:16px;margin-bottom:24px}
   .yz-tldr ul{grid-template-columns:minmax(0,1fr);gap:12px}
   .yz-tldr li,.yz-tldr li+li{position:relative;padding-left:30px;border-left:0}

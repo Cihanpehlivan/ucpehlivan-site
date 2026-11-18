@@ -26,6 +26,10 @@ const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (ch) => ({ '&': '&amp;', 
 const md = (s) => esc(s).replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
 const ps = (arr = []) => arr.map((p) => `<p>${md(p)}</p>`).join('');
 const ext = (href) => (/^https?:/.test(href) ? ' target="_blank" rel="noopener"' : '');
+// Not kutusunda ayrıca [metin](https://…) linki desteklenir (kaynak gösterimi).
+const mdLink = (s) => md(s).replace(/\[(.+?)\]\((https?:\/\/[^)\s]+)\)/g, (_, t, u) => `<a href="${u}"${ext(u)}>${t}</a>`);
+// Bölüm sonunda yazının dışında kalan kısa not (ör. sonradan duyulan bir alıntı). Özet ile aynı tonlu, düz alan.
+const aside = (a) => (a ? `<aside class="yz-aside" aria-label="${esc(a.label)}"><p class="yz-mono">${esc(a.label)}</p><p>${mdLink(a.text)}</p></aside>` : '');
 const ARROW = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>';
 const FLOW_ARROW = '<svg class="yz-farrow" viewBox="0 0 40 16" aria-hidden="true"><path d="M2 8h32M28 3l6 5-6 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
 
@@ -115,6 +119,7 @@ function s01(s) {
   <p class="yz-mono yz-small">${esc(h.pillarsHint)}</p>
   <div class="yz-pillars">${h.pillars.map((p, i) => `<button type="button" class="yz-pillar" data-k="${esc(p.key)}" aria-pressed="false"><span class="yz-mono"><b class="yz-pn">${i + 1}</b>${esc(p.label)}</span><span>${esc(p.text)}</span></button>`).join('')}</div>
   <div class="yz-prose">${ps(s.paragraphs)}</div>
+  ${aside(s.aside)}
 </section>`;
 }
 

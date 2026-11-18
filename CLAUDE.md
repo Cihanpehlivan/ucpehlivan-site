@@ -222,7 +222,9 @@ Sitedeki ilk interaktif yazı "Prompt Yazmak, Aslında İyi Bir Brief Yazmak" bu
 ```
  1. İLHAM        Bir video / okuma / gerçek iş deneyimi
       │          (Dış kaynağın adı, metni, rakamı sayfaya GİRMEZ. Fikir kendi
-      ▼           deneyimimle, PM bakışıyla yeniden yazılır.)
+      │           deneyimimle, PM bakışıyla yeniden yazılır.
+      │           İstisna: sahibi açıkça isterse, yazıyı destekleyen kısa bir
+      ▼           alıntı kaynağı ve linkiyle not kutusu olur: Box/Aside.)
  2. METİN        claude.ai'da Claude Doc olarak yazılır → Markdown dışa aktarılır
       │
       ▼
@@ -356,8 +358,8 @@ Not eklerken **Açık işler** listesini de güncelle: biten işi sil, yeni aç�
 | Google Analytics var, çerez onay bandı yok | Sahibi | KVKK açısından bakılmalı (SEO değil) |
 
 ### 2026-11-18 — Search Console site haritası + mobil bölüm menüsü (Windows)
-- **Yapılan:** Repo `gh` olmadan GitHub ZIP ile alındı (uzun yol sınırı: `Expand-Archive` hata verir, önek kırpılarak açıldı). Canlı `sitemap.xml` ve `robots.txt` Googlebot UA ile 200. Search Console'da durum hâlâ "Getirilemedi" idi; `sitemap.xml` için "Canlı URL'yi test et" → "URL, Google tarafından kullanılabilir". Kayıt silindi ve yeniden gönderildi. `/yazi/prompt-brief/` için dizine ekleme isteği → "Kota Aşıldı". Yazıda mobil bölüm şeridi kesiliyordu (405 px içerik, 335 px alan; 06 görünmüyordu): 900 altı şeritte yalnız numara, `space-between`; bölüm adı görsel olarak gizli, ekran okuyucuda kalır. `yazi.css?v=05601ec7`, `ui-kit/components.json` güncellendi. Yerelde (PowerShell `HttpListener`, port 5077; 5050 bu makinede dolu) 375 px'te doğrulandı. Yazı kapağı yenilendi ("İyi prompt, iyi brief’tir" görseli): `kapak.webp` 1536×864 (16:9), 51 KB; tarayıcı canvas'ıyla sıkıştırıldı (bu makinede görüntü aracı yok). Dosya adı aynı → blog kartı da değişti (Firestore'a dokunulmadı). Mobildeki 3:2 kapak kırpması kaldırıldı (yazı kesilirdi). `meta.cover`, alt metin, `index.md`, `ui-kit/tokens.json` güncellendi, `yazi.css?v=7c88ef8d`.
-- **Karar:** Site haritasında site tarafında düzeltilecek bir şey yok; bundan sonra yalnız beklenir, kayıt tekrar silinmez. Mobil yazı menüsünde bölüm adı gösterilmez (yalnız numara).
+- **Yapılan:** Repo `gh` olmadan GitHub ZIP ile alındı (uzun yol sınırı: `Expand-Archive` hata verir, önek kırpılarak açıldı). Canlı `sitemap.xml` ve `robots.txt` Googlebot UA ile 200. Search Console'da durum hâlâ "Getirilemedi" idi; `sitemap.xml` için "Canlı URL'yi test et" → "URL, Google tarafından kullanılabilir". Kayıt silindi ve yeniden gönderildi. `/yazi/prompt-brief/` için dizine ekleme isteği → "Kota Aşıldı". Yazıda mobil bölüm şeridi kesiliyordu (405 px içerik, 335 px alan; 06 görünmüyordu): 900 altı şeritte yalnız numara, `space-between`; bölüm adı görsel olarak gizli, ekran okuyucuda kalır. `yazi.css?v=05601ec7`, `ui-kit/components.json` güncellendi. Yerelde (PowerShell `HttpListener`, port 5077; 5050 bu makinede dolu) 375 px'te doğrulandı. Yazı kapağı yenilendi ("İyi prompt, iyi brief’tir" görseli): `kapak.webp` 1536×864 (16:9), 51 KB; tarayıcı canvas'ıyla sıkıştırıldı (bu makinede görüntü aracı yok). Dosya adı aynı → blog kartı da değişti (Firestore'a dokunulmadı). Mobildeki 3:2 kapak kırpması kaldırıldı (yazı kesilirdi). `meta.cover`, alt metin, `index.md`, `ui-kit/tokens.json` güncellendi, `yazi.css?v=7c88ef8d`. 01'in sonuna “Sonradan duyduğum” not kutusu eklendi: Boris Cherny'nin X gönderisi (“Claude ile bir iş arkadaşınla konuşur gibi konuş”), link: x.com/bcherny/status/2107565388250874193. Yeni alan `section.aside {label, text}` (metinde `[ad](https://…)` linki); `build-yazi.mjs` (`aside()`, `mdLink`) ve `yazi-md.mjs` bunu işler; HTML ve `index.md` elle güncellendi. Yeni bileşen `Box/Aside` (`.yz-aside`, Özet ile aynı dil); `meta.updated` 2026-11-18; `yazi.css?v=1fd3e06c`.
+- **Karar:** Site haritasında site tarafında düzeltilecek bir şey yok; bundan sonra yalnız beklenir, kayıt tekrar silinmez. Mobil yazı menüsünde bölüm adı gösterilmez (yalnız numara). Dış kaynak, sahibi isterse kaynak linkli kısa alıntı olarak girebilir (§8 istisnası); ton “ben demiştim” değil, “sonradan duydum”.
 - **Açık kalan:** Site haritası durumu, dizine ekleme istekleri (Açık işler).
 - **Sonraki adım:** Search Console › Site haritaları'na bak; sonra dizine ekleme isteklerini dene.
 

@@ -26,6 +26,7 @@ export function yaziMarkdown(C, { author = '', date = '', origin = 'https://ucpe
   push(`**${h.claimLabel}:** ${h.claim.map((p) => p.text).join('')}`);
   push(h.pillars.map((p) => `- **${p.label}:** ${p.text}`).join('\n'));
   push(para(n.paragraphs));
+  if (n.aside) push(quote(`**${n.aside.label}:** ${n.aside.text}`));
 
   // 02 Alışkanlıklar
   const a = S.inanclar;
