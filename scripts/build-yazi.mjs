@@ -267,12 +267,17 @@ writeFileSync(join(OUT, 'index.html'), html);
 writeFileSync(join(OUT, 'index.md'), yaziMarkdown(C, { author: s.name, date: trDate(C.meta.published), origin: ORIGIN }));
 console.log(`${C.meta.path} üretildi (varlık sürümü ${v}).`);
 
-// Paylaşım görseli: başlık + vurgu rengi, 1200x630. Yeni bağımlılık yok; yüklü Google Chrome kullanılır.
+// Paylaşım görseli, 1200x630. Yeni bağımlılık yok; yüklü Google Chrome kullanılır.
+// Kapak varsa: kapak kırpılmadan yüksekliğe sığdırılır, yanlar kapağın kenar rengiyle (meta.cover.bg) dolar.
+// Kapak yoksa: başlık + vurgu rengi şablonu.
 if (process.argv.includes('--og')) {
   const chrome = process.env.CHROME || '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';
   const tmp = mkdtempSync(join(tmpdir(), 'og-'));
   const page = join(tmp, 'og.html');
-  writeFileSync(page, `<!doctype html><html><head><meta charset="utf-8">
+  const cv = C.meta.cover;
+  if (cv) writeFileSync(page, `<!doctype html><html><head><meta charset="utf-8"><style>*{margin:0}html,body{width:1200px;height:630px;overflow:hidden;background:${cv.bg || '#EFF1F5'};display:flex;justify-content:center}img{height:630px;width:auto;display:block}</style></head>
+<body><img src="file://${join(pub, ...cv.src.split('/').filter(Boolean))}" alt=""></body></html>`);
+  else writeFileSync(page, `<!doctype html><html><head><meta charset="utf-8">
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,800&family=Geist:wght@500&display=block" rel="stylesheet">
 <style>*{margin:0;box-sizing:border-box}html,body{width:1200px;height:630px;overflow:hidden}
 body{background:#F1F2F4;font-family:Geist,system-ui,sans-serif;padding:72px 80px;display:flex;flex-direction:column;justify-content:space-between;position:relative}
