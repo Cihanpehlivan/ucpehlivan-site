@@ -354,9 +354,9 @@ Not eklerken **Açık işler** listesini de güncelle: biten işi sil, yeni aç�
 | Mac'te derlemeyi doğrula | Claude (Mac) | `render.js` (breadcrumbLd, faqLd, renderFeed, head'de RSS/simge/manifest/theme-color, llms satırları, ASSET_V 10) ve `build-yazi.mjs` değişti; Windows'ta paketlere yalnız `ASSET_V` elle işlendi. `npm run build:js` + `node scripts/publish.mjs` + `node scripts/build-yazi.mjs` → `git diff` |
 | Google Analytics var, çerez onay bandı yok | Sahibi | KVKK açısından bakılmalı (SEO değil) |
 
-### 2026-11-18 — Search Console site haritası (Windows)
-- **Yapılan:** Repo `gh` olmadan GitHub ZIP ile alındı (uzun yol sınırı: `Expand-Archive` hata verir, önek kırpılarak açıldı). Canlı `sitemap.xml` ve `robots.txt` Googlebot UA ile 200. Search Console'da durum hâlâ "Getirilemedi" idi; `sitemap.xml` için "Canlı URL'yi test et" → "URL, Google tarafından kullanılabilir". Kayıt silindi ve yeniden gönderildi. `/yazi/prompt-brief/` için dizine ekleme isteği → "Kota Aşıldı".
-- **Karar:** Site tarafında düzeltilecek bir şey yok; bundan sonra yalnız beklenir, kayıt tekrar silinmez.
+### 2026-11-18 — Search Console site haritası + mobil bölüm menüsü (Windows)
+- **Yapılan:** Repo `gh` olmadan GitHub ZIP ile alındı (uzun yol sınırı: `Expand-Archive` hata verir, önek kırpılarak açıldı). Canlı `sitemap.xml` ve `robots.txt` Googlebot UA ile 200. Search Console'da durum hâlâ "Getirilemedi" idi; `sitemap.xml` için "Canlı URL'yi test et" → "URL, Google tarafından kullanılabilir". Kayıt silindi ve yeniden gönderildi. `/yazi/prompt-brief/` için dizine ekleme isteği → "Kota Aşıldı". Yazıda mobil bölüm şeridi kesiliyordu (405 px içerik, 335 px alan; 06 görünmüyordu): 900 altı şeritte yalnız numara, `space-between`; bölüm adı görsel olarak gizli, ekran okuyucuda kalır. `yazi.css?v=05601ec7`, `ui-kit/components.json` güncellendi. Yerelde (PowerShell `HttpListener`, port 5077; 5050 bu makinede dolu) 375 px'te doğrulandı.
+- **Karar:** Site haritasında site tarafında düzeltilecek bir şey yok; bundan sonra yalnız beklenir, kayıt tekrar silinmez. Mobil yazı menüsünde bölüm adı gösterilmez (yalnız numara).
 - **Açık kalan:** Site haritası durumu, dizine ekleme istekleri (Açık işler).
 - **Sonraki adım:** Search Console › Site haritaları'na bak; sonra dizine ekleme isteklerini dene.
 

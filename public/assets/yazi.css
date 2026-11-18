@@ -268,12 +268,12 @@ body:has(.yz) .guides{display:none}
   .yz-cover img{aspect-ratio:3/2}
   /* Menü üstte yapışkan, yatay bir şerit olur (kaydırma sadece şeridin içinde) */
   .yz-nav{top:calc(env(safe-area-inset-top,0px) + 68px);z-index:40;margin:0 -32px;padding:10px 32px;background:color-mix(in srgb,var(--bg) 90%,transparent);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
-  .yz-nav ol{flex-direction:row;border-left:0;gap:6px;overflow-x:auto;scrollbar-width:none}
+  /* Şeritte yalnız numaralar: hepsi sığar, kesik yok. Bölüm adı ekran okuyucuya kalır. */
+  .yz-nav ol{flex-direction:row;justify-content:space-between;border-left:0;gap:6px;overflow-x:auto;scrollbar-width:none}
   .yz-nav ol::-webkit-scrollbar{display:none}
-  .yz-nav a{margin:0;padding:6px 10px 6px 6px;border-left:0;border-radius:999px;white-space:nowrap;background:var(--surface);border:1px solid var(--line)}
-  .yz-nav a .yz-nl{display:none}
+  .yz-nav a{margin:0;padding:6px;border-left:0;border-radius:999px;white-space:nowrap;background:var(--surface);border:1px solid var(--line)}
+  .yz-nav a .yz-nl{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap}
   .yz-nav a[aria-current="true"]{border-color:var(--accent)}
-  .yz-nav a[aria-current="true"] .yz-nl{display:inline}
   .yz-keys{display:none}
   .yz-sec{scroll-margin-top:136px;padding:64px 0 72px}
   .yz-sec:first-child{padding-top:24px}
