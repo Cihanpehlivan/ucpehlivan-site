@@ -247,7 +247,7 @@ function visuals() {
   const g1 = group(sec, 'Logo', 'yazı logosu + vurgu noktası · görsel logo yok');
   item(g1, { code: 'Logo/Wordmark', variant: 'header 40px', node: q('home', 'header .logo'), desc: 'Header, tüm sayfalar · iki satırlı SVG (mobil 34px)' });
   item(g1, { code: 'Logo/Wordmark', variant: 'footer 64px', node: q('home', 'footer .logo'), desc: 'Footer, tüm sayfalar' });
-  item(g1, { code: 'Favicon', node: h(`<img src="${PUB}favicon.svg" width="48" height="48" alt="">`), desc: '/favicon.svg' });
+  item(g1, { code: 'Favicon', node: h(`<img src="${PUB}favicon.svg" width="48" height="48" alt="">`), desc: '/favicon.svg · kesik ayaklı P + mor üçgen (logodan)' });
   const g2 = group(sec, 'Hero pill ve rozet', 'yalnız ana sayfa hero');
   const mega = h('<div class="d mega" style="font-size:81px;display:flex;gap:24px"></div>');
   mega.append(...['.pill-check', '.pill-gantt', '.pill-chart'].map((s) => q('home', s)));
