@@ -5,8 +5,9 @@
 /* Uzun okumada arka plandaki sütun çizgileri metnin içinden geçmesin */
 body:has(.yz) .guides{display:none}
 .yz-grid{display:grid;grid-template-columns:200px minmax(0,1fr);column-gap:56px;row-gap:0;align-items:start;padding-top:56px;padding-bottom:40px}
-/* 1. satır: başlık bloğu içerik kolonunda. 2. satır: menü + yazı. Menünün üstü Özet ile hizalı. */
-.yz-head{grid-column:2;grid-row:1;min-width:0}
+/* 1. satır: başlık bloğu iki kolonu birden kaplar (sol kenarı logo ve menüyle aynı; kapak tam genişlik).
+   2. satır: menü + yazı. Menünün üstü Özet ile hizalı. */
+.yz-head{grid-column:1/-1;grid-row:1;min-width:0}
 .yz-nav{grid-column:1;grid-row:2}
 .yz-article{grid-column:2;grid-row:2}
 
@@ -63,8 +64,9 @@ body:has(.yz) .guides{display:none}
 .yz-byline a{color:var(--ink);font-weight:600;text-decoration:none}
 .yz-byline a:hover{color:var(--accent)}
 /* Kapak görseli: yazar satırının altında, blog kartındaki görselle aynı; kart köşesi ve ince kenar */
-.yz-cover{max-width:880px;margin:0 0 32px;border-radius:22px;overflow:hidden;border:1px solid var(--line);background:var(--surface)}
-.yz-cover img{display:block;width:100%;height:auto;aspect-ratio:3/2}
+.yz-cover{margin:0 0 40px;border-radius:22px;overflow:hidden;border:1px solid var(--line);background:var(--surface)}
+/* Masaüstünde tam genişlik + 16:9 (3:2 tam genişlikte çok uzun kalır); kırpma üstten az, alttan biraz fazla */
+.yz-cover img{display:block;width:100%;height:auto;aspect-ratio:16/9;object-fit:cover;object-position:50% 40%}
 /* Özet:yazının dışında duran, düz ve hafif tonlu alan (kenarsız, gölgesiz).
    Yazı, altındaki beyaz ve gölgeli iddia kutusuyla başlar; aradaki 56px boşluk ve ton farkı ikisini ayırır. */
 .yz-tldr{max-width:880px;margin:0 0 56px;padding:18px 24px 22px;border-radius:16px;background:color-mix(in srgb,var(--surface-2) 60%,transparent)}
@@ -262,6 +264,8 @@ body:has(.yz) .guides{display:none}
   /* Tek kolon: başlık bloğu → yapışkan menü şeridi → yazı */
   .yz-head,.yz-nav,.yz-article{grid-column:1;grid-row:auto}
   .yz-head{padding-top:40px}
+  /* Dar ekranda kapak zaten kısa: görselin tamamı görünsün */
+  .yz-cover img{aspect-ratio:3/2}
   /* Menü üstte yapışkan, yatay bir şerit olur (kaydırma sadece şeridin içinde) */
   .yz-nav{top:calc(env(safe-area-inset-top,0px) + 68px);z-index:40;margin:0 -32px;padding:10px 32px;background:color-mix(in srgb,var(--bg) 90%,transparent);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
   .yz-nav ol{flex-direction:row;border-left:0;gap:6px;overflow-x:auto;scrollbar-width:none}
