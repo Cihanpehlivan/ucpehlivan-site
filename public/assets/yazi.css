@@ -264,8 +264,6 @@ body:has(.yz) .guides{display:none}
   /* Tek kolon: başlık bloğu → yapışkan menü şeridi → yazı */
   .yz-head,.yz-nav,.yz-article{grid-column:1;grid-row:auto}
   .yz-head{padding-top:40px}
-  /* Dar ekranda kapak zaten kısa: görselin tamamı görünsün */
-  .yz-cover img{aspect-ratio:3/2}
   /* Menü üstte yapışkan, yatay bir şerit olur (kaydırma sadece şeridin içinde) */
   .yz-nav{top:calc(env(safe-area-inset-top,0px) + 68px);z-index:40;margin:0 -32px;padding:10px 32px;background:color-mix(in srgb,var(--bg) 90%,transparent);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
   /* Şeritte yalnız numaralar: hepsi sığar, kesik yok. Bölüm adı ekran okuyucuya kalır. */

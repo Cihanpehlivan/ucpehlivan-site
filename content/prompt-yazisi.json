@@ -15,7 +15,7 @@
       "Rol vermek, uzun brief ve her şeyi tek mesaja sığdırmak artık işe yaramıyor. Yerine somut malzeme, kısa ve net metin, hazır proje bağlamı ver.",
       "Kopyalanabilir şablon: **Hedef + Elindekiler + Sınırlar**, sonunda “Talimatımda bir hata görürsen önce bana söyle.”"
     ],
-    "cover": { "src": "/yazi/prompt-brief/kapak.webp", "width": 1536, "height": 1024, "alt": "Üzerinde Hedef, Sınırlar ve Serbestlik yazan bir brief kâğıdı; yanında ekranda bir sayfa taslağı ve parlayan bir yıldız." },
+    "cover": { "src": "/yazi/prompt-brief/kapak.webp", "width": 1536, "height": 864, "alt": "“İyi prompt, iyi brief’tir.” yazısı; yanında Hedef, Sınırlar ve Serbestlik maddeleri işaretlenmiş bir kâğıt altlığı ve kalem." },
     "crumbs": { "label": "Sayfa yolu", "home": "Ana sayfa", "blog": "Yazılar" },
     "share": { "label": "Bu yazıyı paylaş", "linkedin": "LinkedIn'de paylaş", "copy": "Linki kopyala", "native": "Paylaş" },
     "_faq_not":"Yalnız yapılandırılmış veri (FAQPage) için. Soru = bölüm lede'i; cevap = yazıda görünen cümleler (Google cevabın sayfada görünmesini ister). Metni değiştirirsen yazıdaki karşılığıyla aynı tut.",
