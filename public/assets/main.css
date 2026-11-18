@@ -36,10 +36,10 @@ header{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;background:co
 .lm-bg{fill:var(--ink)}.lm-a{fill:var(--bg);opacity:.45}.lm-b{fill:var(--bg)}.lm-c{fill:var(--accent)}.lm-d{fill:var(--go)}
 .logo-mark rect,.logo-mark path{transition:transform .35s cubic-bezier(.2,.8,.2,1);transform-box:fill-box}
 .logo:hover .lm-a{transform:translateX(3px)}.logo:hover .lm-c{transform:translateX(-3px)}.logo:hover .lm-d{transform:rotate(90deg)}
-.wl{font-family:var(--display);font-variation-settings:"wdth" 82;font-weight:800;font-size:21px;letter-spacing:-.035em;line-height:1;color:var(--ink);white-space:nowrap;display:inline-flex;align-items:baseline}
-.wl i{width:.3em;height:.3em;border-radius:50%;background:var(--accent);margin-left:.08em;transition:transform .3s cubic-bezier(.2,.8,.2,1)}
-.logo:hover .wl i{transform:scale(1.4)}
-.wl-lg{font-size:30px}
+/* Logo: iki satırlı SVG (render.js › logoSvg). Metin Archivo 800, genişlik 100 (ölçüler bu ayara göre). */
+.logo-svg{display:block;height:40px;width:auto;overflow:visible}
+.logo-svg text{font-family:var(--display);font-weight:800;font-variation-settings:"wdth" 100;letter-spacing:-1.5px}
+.logo-svg-lg{height:64px}
 .logo-text b{font-weight:800;font-size:15px;letter-spacing:-.01em;line-height:1}
 .logo-text small{font-family:var(--body);font-variation-settings:normal;font-weight:500;font-size:12px;color:var(--muted);line-height:1}
 .foot-grid h4{font:600 13px var(--body);color:var(--muted);margin-bottom:10px}
@@ -299,7 +299,7 @@ section.block{padding:128px 0}
   .cta-card{padding:24px}.paths{grid-template-columns:1fr}.path{padding:22px}
   .foot-grid{grid-template-columns:1fr}
   .cv-label{display:none}
-  .bar .logo .wl{font-size:17px}
+  .bar .logo .logo-svg{height:34px}
   .bar{gap:12px}.bar .btn-sm{padding:8px 13px;font-size:13px}.bar .icon-btn{width:36px;height:36px}
   .mega{font-size:clamp(34px,10.4vw,52px)}
 }

@@ -245,8 +245,8 @@ function tokens() {
 function visuals() {
   const sec = section('c1', 'img', 'Marka görselleri', ['logo', 'hero pill', 'rozet', 'illüstrasyon', 'kapak ve paylaşım']);
   const g1 = group(sec, 'Logo', 'yazı logosu + vurgu noktası · görsel logo yok');
-  item(g1, { code: 'Logo/Wordmark', variant: 'header 21px', node: q('home', 'header .logo'), desc: 'Header, tüm sayfalar · hover: nokta 1.4×' });
-  item(g1, { code: 'Logo/Wordmark', variant: 'footer 30px', node: q('home', 'footer .logo'), desc: 'Footer, tüm sayfalar' });
+  item(g1, { code: 'Logo/Wordmark', variant: 'header 40px', node: q('home', 'header .logo'), desc: 'Header, tüm sayfalar · iki satırlı SVG (mobil 34px)' });
+  item(g1, { code: 'Logo/Wordmark', variant: 'footer 64px', node: q('home', 'footer .logo'), desc: 'Footer, tüm sayfalar' });
   item(g1, { code: 'Favicon', node: h(`<img src="${PUB}favicon.svg" width="48" height="48" alt="">`), desc: '/favicon.svg' });
   const g2 = group(sec, 'Hero pill ve rozet', 'yalnız ana sayfa hero');
   const mega = h('<div class="d mega" style="font-size:81px;display:flex;gap:24px"></div>');

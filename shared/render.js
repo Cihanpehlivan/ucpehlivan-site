@@ -66,12 +66,15 @@ const accSvg = (k) => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor
 const accounts = (c) => (((c.home || {}).accounts || {}).items || []).filter((a) => a.visible !== false && a.url);
 const mainAccount = (c) => { const l = accounts(c); return l.find((a) => a.highlight) || l[0] || null; };
 
+// Logo: iki satırlı SVG (Archivo 800 metin + kesik ayaklar P/h + v içinde vurgu üçgeni). Ölçüler Archivo glif ölçümünden.
+// id: sayfada iki logo (header, footer) olduğu için mask id'si ayrı verilir.
+const logoSvg = (id, cls = '') => `<svg class="logo-svg${cls}" viewBox="0 0 414 136" aria-hidden="true" focusable="false"><defs><mask id="${id}" maskUnits="userSpaceOnUse" x="0" y="0" width="414" height="136"><rect width="414" height="136" fill="#fff"/><polygon fill="#000" points="4.25,129 18,117.84 18,136 4.25,136"/><polygon fill="#000" points="124.16,123.56 133.09,129 133.09,136 124.16,136"/></mask></defs><text x="-5" y="50" font-size="72" fill="var(--accent)">Umut Cihan</text><polygon fill="var(--accent)" points="251.16,76 277.16,76 264.16,114"/><g fill="currentColor"><text x="-8" y="129" font-size="100" mask="url(#${id})">Pehlivan</text><polygon points="0,128.5 4.25,128.5 0,132.45"/><polygon points="133.09,128.5 142.16,128.5 142.16,134.52"/></g></svg>`;
 const ILLUSTRATION = `<div class="about-ill about-avatar"><img src="/img/avatar.webp" alt="Çay bardağı tutan, bıyıklı ve sakallı Umut Cihan Pehlivan illüstrasyonu" width="680" height="880" loading="lazy" decoding="async"><svg viewBox="0 0 440 456" fill="none" aria-hidden="true"><path class="ill-spark" d="M58 92l5 13 13 5-13 5-5 13-5-13-13-5 13-5z" fill="var(--accent)"/><path class="ill-spark s2" d="M384 70l4 10 10 4-10 4-4 10-4-10-10-4 10-4z" fill="var(--go)"/><path class="ill-spark s3" d="M398 286l3 8 8 3-8 3-3 8-3-8-8-3 8-3z" fill="var(--accent)"/></svg></div>`;
 
 // CSS/JS değişince bu sayıyı artır: tarayıcı önbelleğindeki eski dosyalar kullanılmaz.
 // /assets/** 1 yıl önbellekte (firebase.json). main.css, main.js veya app.js değişip bu sayı değişmezse
 // .github/workflows/kontrol.yml push'u hatayla durdurur.
-const ASSET_V = '12';
+const ASSET_V = '13';
 
 const ACC_ILLUSTRATION = `<div class="acc-ill" aria-hidden="true"><svg viewBox="0 0 480 440" fill="none"><circle cx="240" cy="220" r="190" fill="var(--surface-2)"/><path d="M150 150 C110 170 100 230 120 270M330 120 C380 140 400 190 390 230M250 350 C250 380 300 395 340 380" stroke="var(--muted)" stroke-width="2" stroke-dasharray="4 8" stroke-linecap="round" opacity=".6"/><rect x="150" y="110" width="180" height="230" rx="22" fill="var(--ink)"/><rect x="162" y="122" width="156" height="206" rx="14" fill="var(--surface)"/><rect x="162" y="122" width="156" height="58" rx="14" fill="var(--accent)" opacity=".25"/><circle cx="240" cy="180" r="30" fill="var(--accent)" stroke="var(--surface)" stroke-width="6"/><circle cx="240" cy="172" r="10" fill="var(--on-accent)" opacity=".9"/><path d="M222 198a18 14 0 0 1 36 0" fill="var(--on-accent)" opacity=".9"/><rect x="196" y="224" width="88" height="10" rx="5" fill="var(--ink)" opacity=".85"/><rect x="210" y="242" width="60" height="7" rx="3.5" fill="var(--muted)" opacity=".6"/><rect x="186" y="266" width="108" height="34" rx="17" fill="var(--accent)"/><path d="M226 283h28M244 275l8 8-8 8" stroke="var(--on-accent)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><g class="ill-float"><rect x="322" y="70" width="112" height="62" rx="16" fill="var(--surface)" stroke="var(--line)"/><path d="M346 132l-8 16 22-16" fill="var(--surface)"/><circle class="ill-dot" cx="356" cy="101" r="6" fill="var(--accent)"/><circle class="ill-dot d2" cx="378" cy="101" r="6" fill="var(--accent)"/><circle class="ill-dot d3" cx="400" cy="101" r="6" fill="var(--accent)"/></g><g class="ill-float f2"><rect x="44" y="240" width="104" height="72" rx="12" fill="var(--surface)" stroke="var(--line)"/><path d="M48 246l48 36 48-36" stroke="var(--accent)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><circle cx="142" cy="246" r="12" fill="var(--go)"/><path d="M137 246l4 4 7-7" stroke="var(--surface)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></g><g class="ill-float f3"><rect x="330" y="330" width="96" height="44" rx="22" fill="var(--ink)"/><path d="M352 352a8 8 0 0 1 8-8h6M374 352a8 8 0 0 1-8 8h-6M356 352h14" stroke="var(--surface)" stroke-width="3" stroke-linecap="round"/><rect x="384" y="346" width="28" height="12" rx="6" fill="var(--go)"/></g><path class="ill-spark" d="M96 120l6 16 16 6-16 6-6 16-6-16-16-6 16-6z" fill="var(--accent)"/><path class="ill-spark s2" d="M420 200l4 10 10 4-10 4-4 10-4-10-10-4 10-4z" fill="var(--go)"/><path class="ill-spark s3" d="M200 380l3 8 8 3-8 3-3 8-3-8-8-3 8-3z" fill="var(--accent)"/></svg></div>`;
 
@@ -175,7 +178,7 @@ ${s.gaId ? `<script async src="https://www.googletagmanager.com/gtag/js?id=${e(s
 <div class="progress" aria-hidden="true"><i></i></div>
 <header>
   <div class="wrap bar">
-    <a class="logo" href="/" aria-label="${e(s.name)}, ana sayfa"><span class="wl">${e(s.name)}<i aria-hidden="true"></i></span></a>
+    <a class="logo" href="/" aria-label="${e(s.name)}, ana sayfa">${logoSvg('lgm-h')}</a>
     <nav aria-label="Ana menü">${navs}</nav>
     <div class="tools" style="display:flex;gap:10px;align-items:center">
       <button class="icon-btn" id="theme" type="button" aria-label="Açık ve koyu tema arasında geçiş yap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4.5"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></button>
@@ -188,7 +191,7 @@ ${body}
 <footer class="foot">
   <div class="wrap">
     <div class="foot-grid">
-      <div><a class="logo" href="/" style="padding:0" aria-label="${e(s.name)}, ana sayfa"><span class="wl wl-lg">${e(s.name)}<i aria-hidden="true"></i></span></a><p class="foot-tag">${e(s.footerTagline)}</p><a class="mail" href="mailto:${e(s.email)}">${e(s.email)}</a></div>
+      <div><a class="logo" href="/" style="padding:0" aria-label="${e(s.name)}, ana sayfa">${logoSvg('lgm-f', ' logo-svg-lg')}</a><p class="foot-tag">${e(s.footerTagline)}</p><a class="mail" href="mailto:${e(s.email)}">${e(s.email)}</a></div>
       ${footPages ? `<div><h4>Keşfet</h4>${footPages}</div>` : ''}
       ${accs.length ? `<div><h4>Hesaplar</h4>${accs.map((a) => `<a href="${e(a.url)}"${tgt(a.url)}>${e(a.name)}</a>`).join('')}</div>` : ''}
       ${s.location ? `<div><h4>Konum</h4><span>${e(s.location)}</span></div>` : ''}

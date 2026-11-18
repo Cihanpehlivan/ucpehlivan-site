@@ -5,7 +5,7 @@
   "counts": { "atom": 24, "molecule": 21, "organism": 13, "template": 5, "section": 2 },
   "cta_codes": "Yok. Sitede izleme kodu veya CTA kodu kullanılmıyor (yazı sayfasında analitik bilinçli olarak kapalı).",
   "components": [
-    { "code": "Logo/Wordmark", "level": "atom", "group": "Marka", "spec": "Archivo wdth82 800 21px · ink · vurgu noktası .3em accent · footer 30px · mobil 17px", "selector": ".logo .wl, .wl-lg", "pages": ["*"], "uses": [] },
+    { "code": "Logo/Wordmark", "level": "atom", "group": "Marka", "spec": "iki satırlı SVG (render.js › logoSvg, viewBox 414×136): “Umut Cihan” accent 72 · “Pehlivan” currentColor (ink) 100 · Archivo 800 wdth 100, ls -1.5 · P ve h gövdesinde eğik kesik ayak (mask + üçgen) · v iç boşluğunda accent üçgen · header 40px yükseklik, mobil 34px, footer 64px · koyu temada renkler değişkenlerden", "selector": ".logo .logo-svg, .logo-svg-lg", "pages": ["*"], "uses": [] },
     { "code": "Button/Primary", "level": "atom", "group": "Buton", "spec": "pill · 17×28 · 16px 600 · accent / on-accent · ikon 16px kayar · hover brightness 1.08", "selector": ".btn.btn-cv", "pages": ["home", "yazi"], "uses": ["Icon/arrow"] },
     { "code": "Button/Ghost", "level": "atom", "group": "Buton", "spec": "pill · 13×22 · 15px 600 · surface + line kenar · hover kenar ink · sm: 10×18 14px", "selector": ".btn.btn-ghost, .btn-sm", "pages": ["home", "yazi", "404"], "uses": [] },
     { "code": "Button/Ink", "level": "atom", "group": "Buton", "spec": "pill · 13×22 · 15px 600 · ink / bg", "selector": ".btn.btn-ink", "pages": ["404"], "uses": [] },
