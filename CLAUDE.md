@@ -340,7 +340,7 @@ Not eklerken **Açık işler** listesini de güncelle: biten işi sil, yeni aç�
 
 | İş | Kimde | Not |
 |---|---|---|
-| Search Console: site haritası "Getirilemedi" | Sahibi + Claude | 2026-11-17: mülk (`https://ucpehlivan.web.app/`, URL öneki) eklendi ve doğrulandı, `sitemap.xml` gönderildi → "Getirilemedi". Dosya Googlebot ile kontrol edildi: 200, `application/xml`, geçerli, robots.txt'te var; yeni mülkte geçici olması beklenir. **Sonraki gün:** durumu kontrol et; değişmediyse sil + yeniden gönder, "Canlı URL'yi test et" ile erişimi doğrula. "Dizine eklenmesini iste" günlük kotası doldu: önce `/yazi/prompt-brief/`, sonra `/` ve `/blog/`. |
+| Search Console: site haritası "Getirilemedi" | Sahibi + Claude | 2026-11-18: hâlâ "Getirilemedi" idi. Canlı URL testi `sitemap.xml` için başarılı (Google erişebiliyor). Kayıt silindi, 18 Kas'ta yeniden gönderildi. **Sonraki gün:** "Başarılı" ve keşfedilen sayfa sayısı 3 mü bak. Değilse sorun Google tarafında; bekle, tekrar silme. "Dizine eklenmesini iste" kotası 18 Kas'ta da doluydu: önce `/yazi/prompt-brief/`, sonra `/` ve `/blog/`. |
 | Bing Webmaster Tools | Sahibi | Search Console'dan içe aktar (site haritası "Başarılı" olmadan da çalışır) |
 | Kendi alan adı kararı | Sahibi | Firebase'e bağlamak ücretsiz, alan adı ücretli |
 | Tema butonu mobilde 36px (<44) | Claude | Dokunma alanı kuralı |
@@ -354,6 +354,12 @@ Not eklerken **Açık işler** listesini de güncelle: biten işi sil, yeni aç�
 | Mac'te derlemeyi doğrula | Claude (Mac) | `render.js` (breadcrumbLd, faqLd, renderFeed, head'de RSS/simge/manifest/theme-color, llms satırları, ASSET_V 10) ve `build-yazi.mjs` değişti; Windows'ta paketlere yalnız `ASSET_V` elle işlendi. `npm run build:js` + `node scripts/publish.mjs` + `node scripts/build-yazi.mjs` → `git diff` |
 | Google Analytics var, çerez onay bandı yok | Sahibi | KVKK açısından bakılmalı (SEO değil) |
 
+### 2026-11-18 — Search Console site haritası (Windows)
+- **Yapılan:** Repo `gh` olmadan GitHub ZIP ile alındı (uzun yol sınırı: `Expand-Archive` hata verir, önek kırpılarak açıldı). Canlı `sitemap.xml` ve `robots.txt` Googlebot UA ile 200. Search Console'da durum hâlâ "Getirilemedi" idi; `sitemap.xml` için "Canlı URL'yi test et" → "URL, Google tarafından kullanılabilir". Kayıt silindi ve yeniden gönderildi. `/yazi/prompt-brief/` için dizine ekleme isteği → "Kota Aşıldı".
+- **Karar:** Site tarafında düzeltilecek bir şey yok; bundan sonra yalnız beklenir, kayıt tekrar silinmez.
+- **Açık kalan:** Site haritası durumu, dizine ekleme istekleri (Açık işler).
+- **Sonraki adım:** Search Console › Site haritaları'na bak; sonra dizine ekleme isteklerini dene.
+
 ### 2026-11-17 — SEO/GEO teknik tur 2 (Windows)
 - **Yapılan:** Canlı tarama (PageSpeed API 429 verdi; başlık, boyut, önbellek elle ölçüldü). Uygulanan: `/assets/**` 1 yıl önbellek + `ASSET_V` 8→9 + `kontrol.yml`'ye sürüm denetimi; yazının düz metin sürümü (`scripts/yazi-md.mjs` → `index.md`, head'de alternate link, llms.txt'te link); BreadcrumbList (yazı ve normal yazı şablonu); RSS beslemesi (`/feed.xml`, `renderFeed`, tüm sayfalarda head linki); uygulama simgeleri + manifest + theme-color; yazıya FAQPage (`meta.faq`); yazıda görünür sayfa yolu ve paylaşım satırı (ui-kit: `Nav/Breadcrumb`, `Share/Row`, molekül 21); ana sayfa illüstrasyonları telefonda gizli, tablette metnin altında (`ASSET_V` 10, telefonda sayfa ~690px kısaldı); yazı sayfasına kapak görseli (`meta.cover`, yazar satırının altında, BlogPosting `image` dizisinde ilk sırada, `index.md`'de de); 2026-11-18: bölüm menüsü Özet ile hizalı başlıyor (başlık bloğu `.yz-head` ızgaranın ilk satırına alındı); başlık bloğu tam genişliğe yayıldı, kapak iki kolonu kaplıyor (sayfa sağa kaymış görünüyordu). Kod tarayıcıda gerçek Firestore içeriğiyle test edildi; `index.md` ve yazı HTML'i tarayıcı çıktısından yazıldı.
 - **Karar:** Sürüm artırma insan hafızasına bırakılmaz; `kontrol.yml` zorlar. 2026-11-17 taramasındaki tüm teknik maddeler tamam; kalan SEO işleri sahibinde (Search Console, Bing, alan adı).
@@ -365,9 +371,3 @@ Not eklerken **Açık işler** listesini de güncelle: biten işi sil, yeni aç�
 - **Karar:** Mac'te sayfa üretimi için `npm run build` değil `build:js` + `publish.mjs` + `build-yazi.mjs` kullanılır (`npm run build` sayfaları örnek veriden üretir).
 - **Açık kalan:** Mac'te `gh` yok; push sonrası `kontrol.yml` sonucuna GitHub › Actions'tan bakılır.
 - **Sonraki adım:** Açık işler tablosundan devam.
-
-### 2026-11-16 — Çalışma ortamı ve süreklilik (Windows → yarın Mac)
-- **Yapılan:** Bugünkü tüm iş Windows'ta, Git/Node olmadan `gh` ile yapıldı. `scripts/gh-push.ps1` eklendi. §5'e Mac/Windows tablosu ve iki makine kuralları yazıldı. §11 kısaltıldı: son 3 not + "Açık işler" tablosu; eski notlar `docs/devam-notlari.md`'ye taşındı. `.github/workflows/kontrol.yml` eklendi (§2 yasaklı içerik = hata, §6.1 ui-kit senkronu = uyarı).
-- **Karar:** Süreklilik CLAUDE.md (repoda, iki makinede aynı) + kural kontrolü workflow'u ile sağlanır. Claude'un makineye özel hafızasına güvenilmez.
-- **Açık kalan:** Mac'te ilk oturumda `npm install && npm run build` + `git diff` ile elle düzenlenmiş derleme dosyalarını doğrula (§5).
-- **Sonraki adım:** Sahibi yarın Mac'ten devam edebilir. Önce `git pull`, sonra §11'deki en son notları oku.

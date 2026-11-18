@@ -2,6 +2,12 @@
 
 CLAUDE.md §11'de yalnız son 3 not durur. Daha eski notlar buraya, **en üste** taşınır (yeniden eskiye). Güncel açık işler CLAUDE.md §11 › "Açık işler" listesindedir; buradaki "Açık kalan" satırları o günün durumudur.
 
+### 2026-11-16 — Çalışma ortamı ve süreklilik (Windows → yarın Mac)
+- **Yapılan:** Bugünkü tüm iş Windows'ta, Git/Node olmadan `gh` ile yapıldı. `scripts/gh-push.ps1` eklendi. §5'e Mac/Windows tablosu ve iki makine kuralları yazıldı. §11 kısaltıldı: son 3 not + "Açık işler" tablosu; eski notlar `docs/devam-notlari.md`'ye taşındı. `.github/workflows/kontrol.yml` eklendi (§2 yasaklı içerik = hata, §6.1 ui-kit senkronu = uyarı).
+- **Karar:** Süreklilik CLAUDE.md (repoda, iki makinede aynı) + kural kontrolü workflow'u ile sağlanır. Claude'un makineye özel hafızasına güvenilmez.
+- **Açık kalan:** Mac'te ilk oturumda `npm install && npm run build` + `git diff` ile elle düzenlenmiş derleme dosyalarını doğrula (§5).
+- **Sonraki adım:** Sahibi yarın Mac'ten devam edebilir. Önce `git pull`, sonra §11'deki en son notları oku.
+
 ### 2026-11-16 — Yazı özeti yeniden tasarlandı
 - **Yapılan:** Yazı başındaki özet kutusu ("AI slop" görünüyordu: beyaz kart + kalın mor sol şerit + tireli liste) yeniden yapıldı: kenarsız, hafif gri tonlu (`surface-2` %60) alan; üstte mor nokta + "ÖZET" etiketi ve çizgi; 3 kolon madde, aralarında ince çizgi, mor `01–03` numaralar; mobilde alt alta. Etiket "Kısaca" → **"Özet"** (`content/prompt-yazisi.json` › `summaryLabel`). Özet ile yazının başı arasında 56px (mobil 40px) boşluk; yazı beyaz, gölgeli iddia kutusuyla başlar. `ui-kit/components.json` › `Box/TLDR` her adımda aynı commit'te güncellendi (§6.1). Canlıda.
 - **Karar:** Özet "yazının dışındaki not" gibi düz ve tonlu kalır; yazının içeriği beyaz/gölgeli kartlarla başlar. Ayrım yeni öğeyle değil ton farkı + boşlukla yapılır.
