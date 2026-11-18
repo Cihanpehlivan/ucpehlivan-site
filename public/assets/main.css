@@ -374,6 +374,12 @@ main > .bhero:first-child{position:relative}
 .about.about2{grid-template-columns:1fr 1.15fr;align-items:center}
 .about2 .about-ill{order:2}
 .about-ill svg{width:100%;height:auto;display:block}
+/* Avatar: gri daire zemin, gövde dairenin içinde, baş dairenin üstüne taşar (maske = daire ∪ daire merkezinin üstü).
+   Ölçüler avatar.webp (680×880) içindir: genişlik %80, daire çapı %90, ikisi de alta hizalı. */
+.about-avatar{position:relative;width:100%;max-width:440px;aspect-ratio:440/456;margin-inline:auto}
+.about-avatar::before{content:"";position:absolute;left:5%;right:5%;bottom:0;aspect-ratio:1;border-radius:50%;background:var(--surface-2)}
+.about-avatar img{position:absolute;left:10%;bottom:0;width:80%;height:auto;-webkit-mask:radial-gradient(56.25% 43.47% at 50% 56.53%,#000 99.5%,transparent 100%),linear-gradient(#000 0 0) 0 0/100% 56.53% no-repeat;mask:radial-gradient(56.25% 43.47% at 50% 56.53%,#000 99.5%,transparent 100%),linear-gradient(#000 0 0) 0 0/100% 56.53% no-repeat}
+.about-avatar svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none}
 .about-facts{display:flex;flex-wrap:wrap;gap:8px;margin-top:26px}
 .about-facts span{font-size:13px;font-weight:600;padding:7px 13px;border-radius:999px;border:1px solid var(--line);background:var(--surface);color:var(--ink)}
 @media (max-width:900px){.about.about2{grid-template-columns:1fr}.about2 .about-ill{order:0;max-width:420px}}
@@ -433,10 +439,12 @@ section.block::before{content:"";position:absolute;top:0;left:max(32px,calc((100
 .wordmark{display:none}
 .copy{justify-content:center;text-align:center;margin-top:48px}
 .copy span:empty{display:none}
-/* Süs illüstrasyonları: tablette metnin altında (önce başlık okunur), telefonda gizli (~600px kazanç) */
+/* Süs illüstrasyonları: tablette metnin altında (önce başlık okunur). Telefonda Hesaplarım çizimi gizli;
+   Hakkımda avatarı küçük ve metnin üstünde (yazının arkasındaki kişi önce görünsün). */
 @media (max-width:900px){.about2 .about-ill{order:2}}
 @media (max-width:640px){
-  .about-ill,.acc-ill{display:none}
+  .acc-ill{display:none}
+  .about2 .about-ill{order:0;max-width:220px;margin:0}
   section.block{padding:64px 0!important}
   section.block::before{left:20px;right:20px}
   .bgrid > .bcard:only-child{display:flex}
