@@ -1,19 +1,19 @@
 {
   "format": "blok",
-  "_not": "Blok biçimli interaktif yazı. Üretim: scripts/build-yazi-blok.mjs (Node) veya scripts/yazi-blok.mjs tarayıcıda. Yazı metni sahibinin metnidir; değiştirme. [DÜZENLE], [SÜRE], [ÖRNEK: …] işaretleri kaldıkça canlıya alınmaz (yayinla.yml durdurur).",
+  "_not": "Blok biçimli interaktif yazı. Üretim: scripts/build-yazi-blok.mjs (Node) veya scripts/yazi-blok.mjs tarayıcıda. Tez (sahibi, 2026-11-19): Yapay zeka modelleri (LLM'ler) zaten birer araç ve her SaaS'a rakip; onlarla yarışan uygulama kurmak yerine onları işin adımlarında, sonuca ulaşmak için kullanmak. Rakibimiz yapay zeka şirketleri olamaz. Köşeli parantezli yer tutucu (DÜZENLE, SÜRE, ÖRNEK) kalırsa canlıya alınmaz (yayinla.yml).",
   "meta": {
     "path": "/yazi/arac-degil-sonuc/",
     "title": "Yapay Zekayla Araç Yapmak Kolaylaştı. Asıl Değer Hâlâ Sonuçta.",
-    "description": "Yapay zekayla kendi işim için bir araç yapmak artık birkaç saat sürüyor. Benim işimde değer, aracın işin içinde ürettiği sonuçta.",
+    "description": "Yapay zeka modelleri artık kendileri birer araç ve her SaaS'a rakip. Onlarla yarışan bir uygulama kurmak yerine, onları işin içinde kullanıp sonuca ulaşmayı seçiyorum.",
     "ogImage": "/yazi/arac-degil-sonuc/og.png",
-    "ogImageAlt": "Yapay zekayla araç yapmak kolaylaştı. Asıl değer hâlâ sonuçta.",
+    "ogImageAlt": "Görünen araç değil, sonuç.",
     "published": "2026-11-19",
     "updated": "2026-11-19",
     "readingMinutes": 4,
     "kicker": "Sahadan not",
     "summaryLabel": "Kısaca",
     "summary": [
-      "Yapay zekayla kendi işim için bir araç yapmak artık birkaç saat sürüyor. Bu yüzden aracın kendisi tek başına az değerli. Benim işimde değer, aracın işin içinde ürettiği sonuçta."
+      "Yapay zeka modelleri (LLM'ler) artık kendileri birer araç. Her yeni sürümde, ayrı bir SaaS ürününün yaptığı işi doğrudan yapabiliyorlar. Bu yüzden onlarla yarışan bir uygulama kurmak yerine, onları işin içinde kullanıp sonuca ulaşmayı seçiyorum. Rakibimizi yapay zeka şirketleri yapamayız."
     ],
     "cover": {
       "src": "/yazi/arac-degil-sonuc/kapak.webp",
@@ -24,12 +24,12 @@
     },
     "crumbs": { "label": "Sayfa yolu", "home": "Ana sayfa", "blog": "Yazılar" },
     "share": { "label": "Bu yazıyı paylaş", "linkedin": "LinkedIn'de paylaş", "copy": "Linki kopyala", "native": "Paylaş" },
-    "_faq_not": "Yalnız yapılandırılmış veri (FAQPage). Cevaplar yazıda görünen cümlelerdir; [DÜZENLE] içeren paragraflar kullanılmaz. Metin değişirse burayı da eşitle.",
+    "_faq_not": "Yalnız yapılandırılmış veri (FAQPage). Cevaplar yazıda görünen cümlelerdir. Metin değişirse burayı da eşitle.",
     "faq": [
-      { "q": "Yapay zekayla yapılan bir aracın değeri nerede?", "a": "Yapay zekayla kendi işim için bir araç yapmak artık birkaç saat sürüyor. Bu yüzden aracın kendisi tek başına az değerli. Benim işimde değer, aracın işin içinde ürettiği sonuçta." },
+      { "q": "Yapay zeka modelleriyle yarışan bir SaaS ürünü kurmak mantıklı mı?", "a": "Yapay zeka modelleri (LLM'ler) artık kendileri birer araç. Her yeni sürümde, ayrı bir SaaS ürününün yaptığı işi doğrudan yapabiliyorlar. Bu yüzden onlarla yarışan bir uygulama kurmak yerine, onları işin içinde kullanıp sonuca ulaşmayı seçiyorum. Rakibimizi yapay zeka şirketleri yapamayız." },
       { "q": "Kendi işim için yaptığım bir aracı ürüne çevirmek neden zor?", "a": "Araç benim çalışma şeklime göre kuruldu. Başka biri kullansın diye kurulum, açıklama ve destek gerekir. Bu iş, aracın kendisinden daha büyük." },
-      { "q": "Yeni model sürümleri kendi yaptığım araçları nasıl etkiliyor?", "a": "Bugün özel olan bir araç, yarın sıradan bir özellik olabilir. Araç ayrı bir ürünse, bu kötü haber. Araç işin içindeyse, iyi haber: Model geliştikçe benim işim de kolaylaşıyor." },
-      { "q": "Yeni bir araç yaptığımda kendime hangi soruları soruyorum?", "a": "Bu araç hangi sonucu üretiyor? Model yarın bunu kendisi yaparsa ne kaybederim? Bu aracı ben mi kullanacağım, yoksa başkası mı? İlk iki soruya net bir cevabım varsa, araç işin içinde kalıyor." }
+      { "q": "Yapay zeka modellerinin yeni sürümleri, model üstüne kurulan uygulamaları nasıl etkiliyor?", "a": "Bugün özel olan bir uygulama, yarın modelin sıradan bir özelliği olabilir. Uygulama ayrı bir ürünse, bu kötü haber: Rakibi, her sürümde güçlenen yapay zeka şirketleri olur. Model işin içindeyse, iyi haber: Model geliştikçe iş de kolaylaşıyor." },
+      { "q": "Bir yapay zeka fikrini ürüne çevirmeden önce hangi sorular sorulmalı?", "a": "Bir sonraki model sürümü bunu kendisi yapabilir mi? Asıl değer ürünün kendisinde değil, ortaya çıkan sonuçta mı? Rakibin, yapay zeka şirketinin kendisi mi olur? Üçüne de “evet” diyorsan ürünü kurma. Modeli işin içinde kullan, sonuca odaklan." }
     ]
   },
   "ui": {
@@ -42,19 +42,19 @@
     {
       "id": "giris",
       "num": "01",
-      "nav": "Bir rapor, bir araç",
+      "nav": "Model zaten bir araç",
       "head": true,
       "blocks": [
         { "type": "summary" },
         { "type": "prose", "paragraphs": [
-          "Her gün yapay zekayı işimde kullanıyorum. Son aylarda yeni bir alışkanlık edindim: Tekrar eden bir iş görünce, onun için küçük bir araç yapıyorum.",
-          "[DÜZENLE] Bir projede her ay aynı raporu hazırlıyordum. Görev listesinden veriyi alıyor, tabloya döküyor, üstüne kısa bir özet yazıyordum. Yapay zekayla bu adımları yapan küçük bir araç kurdum. Rapor artık [SÜRE] içinde hazır."
+          "Her gün yapay zekayı işimde kullanıyorum. Son aylarda bir şey netleşti: Yapay zeka modelleri artık bir araç yapmak için kullanılan bir altyapı değil. Kendileri birer araç.",
+          "Tekrar eden bir iş için eskiden ayrı bir uygulama gerekirdi. Bugün aynı işi bir yapay zeka modeline doğru bağlamla anlatmak çoğu zaman yetiyor. Veriyi alıyor, düzenliyor, özetini yazıyor. Araç yapmak birkaç saat sürüyor. Bazen hiç gerekmiyor."
         ] },
-        { "type": "flow", "label": "Aylık rapor", "options": [
-          { "key": "elle", "label": "Elle", "who": "Ben" },
-          { "key": "arac", "label": "Araçla", "who": "Araç" }
-        ], "steps": ["Görev listesinden veriyi al", "Tabloya dök", "Kısa özet yaz"],
-          "result": { "elle": "Her ay aynı rapor", "arac": "Rapor [SÜRE] içinde hazır" },
+        { "type": "flow", "label": "Tekrar eden bir iş", "options": [
+          { "key": "elle", "label": "Ayrı uygulama", "who": "Uygulama" },
+          { "key": "arac", "label": "Model ile", "who": "Model" }
+        ], "steps": ["Veriyi al", "Düzenle", "Özetle"],
+          "result": { "elle": "Kurulum, bakım, abonelik", "arac": "Sonuç doğrudan çıkıyor" },
           "caption": "Adımlar aynı. Değişen, onları kimin yaptığı." }
       ]
     },
@@ -65,7 +65,7 @@
       "title": "Ürüne çevirsem mi?",
       "blocks": [
         { "type": "prose", "paragraphs": [
-          "Araç çalışınca aklıma ilk gelen şu oldu: Bunu ayrı bir ürüne çevirsem mi? Her gün yeni bir yapay zeka aracı görüyorum. Araç yapmak bu kadar kolaylaşınca, bu soru da kolay geliyor."
+          "Araç yapmak bu kadar kolaylaşınca akla ilk gelen soru şu oluyor: Bunu ayrı bir ürüne, bir SaaS'a çevirsem mi? Her gün yeni bir yapay zeka uygulaması çıkıyor. Bu soru da kolay geliyor."
         ] },
         { "type": "poll", "question": "Sen olsan çevirir miydin?", "options": [
           { "key": "evet", "label": "Evet, çevirirdim", "reply": "Ben de ilk anda öyle düşündüm." },
@@ -109,17 +109,17 @@
       "title": "2. Model her sürümde daha fazlasını kendisi yapıyor",
       "blocks": [
         { "type": "prose", "paragraphs": [
-          "[DÜZENLE] Birkaç ay önce bir iş için ayrı bir adım kurmuştum. Modelin yeni sürümüyle bu adıma gerek kalmadı. Model o işi kendisi yapmaya başladı."
+          "Bir yapay zeka modelinin etrafına ayrı bir adım, ayrı bir ekran kurmak bugün mantıklı görünebilir. Bir sonraki sürümde o adıma gerek kalmayabilir. Model o işi kendisi yapmaya başlar."
         ] },
-        { "type": "version", "label": "Model sürümü", "stops": ["Birkaç ay önce", "Yeni sürüm"],
-          "model": "Model", "tool": "Benim aracım", "steps": ["Veriyi al", "Ayrı adım", "Özeti yaz"], "moving": 1,
+        { "type": "version", "label": "Model sürümü", "stops": ["Bugün", "Sonraki sürüm"],
+          "model": "Model", "tool": "Üstüne kurulan uygulama", "steps": ["Veriyi al", "Ayrı adım", "Özeti yaz"], "moving": 1,
           "movedNote": "Gerek kalmadı: model kendisi yapıyor",
           "outcomes": [
-            { "tone": "bad", "label": "Araç ayrı bir ürünse", "before": "Ürünün bir özelliği", "after": "Model bunu kendisi yapıyor" },
-            { "tone": "good", "label": "Araç işin içindeyse", "before": "Benim bir adımım", "after": "Bir adım eksik, iş daha kolay" }
+            { "tone": "bad", "label": "Uygulama ayrı bir ürünse", "before": "Ürünün bir özelliği", "after": "Model bunu kendisi yapıyor" },
+            { "tone": "good", "label": "Model işin içindeyse", "before": "İşin bir adımı", "after": "Bir adım eksik, iş daha kolay" }
           ] },
         { "type": "prose", "paragraphs": [
-          "Bugün özel olan bir araç, yarın sıradan bir özellik olabilir. Araç ayrı bir ürünse, bu kötü haber. Araç işin içindeyse, iyi haber: Model geliştikçe benim işim de kolaylaşıyor."
+          "Bugün özel olan bir uygulama, yarın modelin sıradan bir özelliği olabilir. Uygulama ayrı bir ürünse, bu kötü haber: Rakibi, her sürümde güçlenen yapay zeka şirketleri olur. Model işin içindeyse, iyi haber: Model geliştikçe iş de kolaylaşıyor."
         ] }
       ]
     },
@@ -131,11 +131,11 @@
       "title": "3. Hiçbir araç işin tamamını çözmüyor",
       "blocks": [
         { "type": "prose", "paragraphs": [
-          "Rapor çıkıyor. Ama hangi satırın o ay önemli olduğunu araç bilmiyor. Hangi gecikmenin risk, hangisinin normal olduğunu da bilmiyor. Aradaki boşluğu ben dolduruyorum. Aracı değerli yapan şey, o boşluğun yanında durması."
+          "Model raporu çıkarıyor. Ama hangi satırın o ay önemli olduğunu bilmiyor. Hangi gecikmenin risk, hangisinin normal olduğunu da bilmiyor. Aradaki boşluğu işi bilen kişi dolduruyor. Değer, o boşluğun yanında durmakta."
         ] },
         { "type": "report", "label": "Örnek rapor", "note": "Temsilî satırlar", "options": [
-          { "key": "arac", "label": "Aracın gördüğü" },
-          { "key": "ben", "label": "Benim gördüğüm" }
+          { "key": "arac", "label": "Modelin gördüğü" },
+          { "key": "ben", "label": "İşi bilenin gördüğü" }
         ], "cols": ["İş", "Durum"],
           "rows": [
             { "task": "Tasarım onayı", "status": "2 gün gecikme", "tag": "risk", "tagLabel": "Risk", "why": "Sonraki üç işi bekletiyor." },
@@ -143,47 +143,48 @@
             { "task": "İçerik girişi", "status": "Tamam", "tag": "", "tagLabel": "", "why": "" },
             { "task": "Ödeme adımı", "status": "Başlamadı", "tag": "onemli", "tagLabel": "Bu ay önemli", "why": "Ay sonu teslimin ön koşulu." }
           ],
-          "caption": { "arac": "Araç satırları sıralıyor. Hepsi aynı ağırlıkta.", "ben": "Aradaki boşluğu ben dolduruyorum." } }
+          "caption": { "arac": "Model satırları sıralıyor. Hepsi aynı ağırlıkta.", "ben": "Aradaki boşluğu işi bilen kişi dolduruyor." } }
       ]
     },
     {
       "id": "sonuc",
       "num": "06",
-      "nav": "Görünen araç değil, sonuç",
-      "title": "Sonuç: Görünen araç değil, sonuç",
+      "nav": "Rakip değil, araç",
+      "title": "Sonuç: Rakip değil, araç",
       "blocks": [
         { "type": "prose", "paragraphs": [
-          "Araç arka planda çalışıyor. Ekibimin gördüğü şey araç değil. Gördükleri şey sonuç: zamanında çıkan rapor, daha az hata, daha net bir plan."
+          "Yapay zeka modelleriyle yarışan bir uygulama kurmak, her yeni sürümde yeniden yarışmak demek. Rakibimizi yapay zeka şirketleri yapamayız.",
+          "Vardığım kanaat şu: Modeli rakip değil, araç olarak görmek. Onu işin adımlarında, sonuca ulaşmak için kullanmak. Böylece model her geliştiğinde iş de bir adım kolaylaşıyor."
         ] },
         { "type": "outcome", "label": "Nereden bakıyorsun?", "options": [
           { "key": "arka", "label": "Arka plan" },
           { "key": "ekip", "label": "Ekibin gördüğü" }
-        ], "back": ["Görev listesi", "Araç", "Tablo + özet"],
+        ], "back": ["Veri", "Model", "Tablo + özet"],
           "front": ["Zamanında çıkan rapor", "Daha az hata", "Daha net bir plan"] },
         { "type": "prose", "paragraphs": [
-          "[DÜZENLE] Ölçebildiğim fark: [ÖRNEK: Rapora ayırdığım süre X'ten Y'ye indi / ayda N düzeltme yerine artık M düzeltme yapıyorum.]"
+          "Ekibin gördüğü şey araç değil. Gördükleri şey sonuç: zamanında çıkan rapor, daha az hata, daha net bir plan."
         ] }
       ]
     },
     {
       "id": "sorular",
       "num": "07",
-      "nav": "Kendime sorduğum 3 soru",
-      "title": "Kendime sorduğum 3 soru",
+      "nav": "Ürüne çevirmeden önce",
+      "title": "Ürüne çevirmeden önce 3 soru",
       "end": true,
       "blocks": [
-        { "type": "questions", "intro": "Yeni bir araç yaptığımda artık bu üç soruyu soruyorum:",
+        { "type": "questions", "intro": "Bir fikri ürüne çevirmeden önce şu üç soruyu sor:",
           "items": [
-            "Bu araç hangi sonucu üretiyor?",
-            "Model yarın bunu kendisi yaparsa ne kaybederim?",
-            "Bu aracı ben mi kullanacağım, yoksa başkası mı?"
+            "Bir sonraki model sürümü bunu kendisi yapabilir mi?",
+            "Asıl değer ürünün kendisinde değil, ortaya çıkan sonuçta mı?",
+            "Rakibin, yapay zeka şirketinin kendisi mi olur?"
           ],
-          "rule": "İlk iki soruya net bir cevabım varsa, araç işin içinde kalıyor.",
-          "tryLabel": "Kendi aracın için dene",
-          "checkHint": "Net cevabın olanları işaretle",
-          "verdict": { "yes": "Araç işin içinde kalıyor.", "wait": "Önce ilk iki soru." },
-          "need": [0, 1] },
-        { "type": "closing", "paragraphs": ["Siz kendi işiniz için bir araç yaptınız mı? Onu ürüne çevirmeyi düşündünüz mü?"],
+          "rule": "Üçüne de “evet” diyorsan ürünü kurma. Modeli işin içinde kullan, sonuca odaklan.",
+          "tryLabel": "Kendi fikrin için dene",
+          "checkHint": "“Evet” dediklerini işaretle",
+          "verdict": { "yes": "Ürünü kurma, modeli işin içinde kullan.", "wait": "Evet dediklerin" },
+          "need": [0, 1, 2] },
+        { "type": "closing", "paragraphs": ["Siz bir yapay zeka modelinin etrafına ürün mü kuruyorsunuz, yoksa onu işin içinde mi kullanıyorsunuz?"],
           "linkedin": { "label": "LinkedIn'de yazın", "href": "https://www.linkedin.com/in/umutcihanpehlivan/" } },
         { "type": "share" }
       ]

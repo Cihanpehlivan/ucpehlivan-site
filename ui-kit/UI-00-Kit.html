@@ -407,7 +407,7 @@ function organisms() {
   frame(pq, { code: 'Nav/Jump', html: q('blok', '#urun .yb-jump').outerHTML, yz: true });
   const pq2 = h('<div class="k-pair"></div>'); bq.append(pq2);
   frame(pq2, { code: 'Box/Questions', variant: 'boş', html: q('blok', '.yb-qbox').outerHTML, yz: true });
-  frame(pq2, { code: 'Box/Questions', variant: 'ilk iki soru işaretli', html: (() => { const x = q('blok', '.yb-qbox'); x.querySelectorAll('input').forEach((i, n) => { if (n < 2) i.setAttribute('checked', ''); }); const v = x.querySelector('.yb-verdict'); v.classList.add('ok'); v.querySelector('.yb-vt').textContent = v.getAttribute('data-yes'); v.querySelector('.yb-vn').textContent = ''; return x.outerHTML; })(), yz: true });
+  frame(pq2, { code: 'Box/Questions', variant: 'üçü de işaretli', html: (() => { const x = q('blok', '.yb-qbox'); x.querySelectorAll('input').forEach((i) => i.setAttribute('checked', '')); const v = x.querySelector('.yb-verdict'); v.classList.add('ok'); v.querySelector('.yb-vt').textContent = v.getAttribute('data-yes'); v.querySelector('.yb-vn').textContent = ''; return x.outerHTML; })(), yz: true });
   frame(pq2, { code: 'Box/Questions', variant: 'mobil', html: q('blok', '.yb-qbox').outerHTML, width: 375, yz: true });
 
   const og = section('c3', 'organism', 'Organizmalar', ['global kabuk', 'hero', 'tekrar eden bölüm', 'tek amaçlı bölüm', 'yazı gezinmesi']);

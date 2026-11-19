@@ -5,15 +5,15 @@ Kaynak: https://ucpehlivan.web.app/yazi/arac-degil-sonuc/
 
 ![Solda küçük bir araç kutusu, ondan çıkan ok sağda büyük bir sonuç kartına gidiyor: zamanında rapor, daha az hata, daha net plan. Üstte “Görünen araç değil, sonuç.” yazısı.](https://ucpehlivan.web.app/yazi/arac-degil-sonuc/kapak.webp)
 
-**Kısaca:** Yapay zekayla kendi işim için bir araç yapmak artık birkaç saat sürüyor. Bu yüzden aracın kendisi tek başına az değerli. Benim işimde değer, aracın işin içinde ürettiği sonuçta.
+**Kısaca:** Yapay zeka modelleri (LLM'ler) artık kendileri birer araç. Her yeni sürümde, ayrı bir SaaS ürününün yaptığı işi doğrudan yapabiliyorlar. Bu yüzden onlarla yarışan bir uygulama kurmak yerine, onları işin içinde kullanıp sonuca ulaşmayı seçiyorum. Rakibimizi yapay zeka şirketleri yapamayız.
 
-Her gün yapay zekayı işimde kullanıyorum. Son aylarda yeni bir alışkanlık edindim: Tekrar eden bir iş görünce, onun için küçük bir araç yapıyorum.
+Her gün yapay zekayı işimde kullanıyorum. Son aylarda bir şey netleşti: Yapay zeka modelleri artık bir araç yapmak için kullanılan bir altyapı değil. Kendileri birer araç.
 
-[DÜZENLE] Bir projede her ay aynı raporu hazırlıyordum. Görev listesinden veriyi alıyor, tabloya döküyor, üstüne kısa bir özet yazıyordum. Yapay zekayla bu adımları yapan küçük bir araç kurdum. Rapor artık [SÜRE] içinde hazır.
+Tekrar eden bir iş için eskiden ayrı bir uygulama gerekirdi. Bugün aynı işi bir yapay zeka modeline doğru bağlamla anlatmak çoğu zaman yetiyor. Veriyi alıyor, düzenliyor, özetini yazıyor. Araç yapmak birkaç saat sürüyor. Bazen hiç gerekmiyor.
 
 ## Ürüne çevirsem mi?
 
-Araç çalışınca aklıma ilk gelen şu oldu: Bunu ayrı bir ürüne çevirsem mi? Her gün yeni bir yapay zeka aracı görüyorum. Araç yapmak bu kadar kolaylaşınca, bu soru da kolay geliyor.
+Araç yapmak bu kadar kolaylaşınca akla ilk gelen soru şu oluyor: Bunu ayrı bir ürüne, bir SaaS'a çevirsem mi? Her gün yeni bir yapay zeka uygulaması çıkıyor. Bu soru da kolay geliyor.
 
 Düşündüm. Çevirmedim. Üç sebebim var.
 
@@ -23,30 +23,32 @@ Araç benim çalışma şeklime göre kuruldu. Hangi veriyi nereden aldığını
 
 ## 2. Model her sürümde daha fazlasını kendisi yapıyor
 
-[DÜZENLE] Birkaç ay önce bir iş için ayrı bir adım kurmuştum. Modelin yeni sürümüyle bu adıma gerek kalmadı. Model o işi kendisi yapmaya başladı.
+Bir yapay zeka modelinin etrafına ayrı bir adım, ayrı bir ekran kurmak bugün mantıklı görünebilir. Bir sonraki sürümde o adıma gerek kalmayabilir. Model o işi kendisi yapmaya başlar.
 
-Bugün özel olan bir araç, yarın sıradan bir özellik olabilir. Araç ayrı bir ürünse, bu kötü haber. Araç işin içindeyse, iyi haber: Model geliştikçe benim işim de kolaylaşıyor.
+Bugün özel olan bir uygulama, yarın modelin sıradan bir özelliği olabilir. Uygulama ayrı bir ürünse, bu kötü haber: Rakibi, her sürümde güçlenen yapay zeka şirketleri olur. Model işin içindeyse, iyi haber: Model geliştikçe iş de kolaylaşıyor.
 
 ## 3. Hiçbir araç işin tamamını çözmüyor
 
-Rapor çıkıyor. Ama hangi satırın o ay önemli olduğunu araç bilmiyor. Hangi gecikmenin risk, hangisinin normal olduğunu da bilmiyor. Aradaki boşluğu ben dolduruyorum. Aracı değerli yapan şey, o boşluğun yanında durması.
+Model raporu çıkarıyor. Ama hangi satırın o ay önemli olduğunu bilmiyor. Hangi gecikmenin risk, hangisinin normal olduğunu da bilmiyor. Aradaki boşluğu işi bilen kişi dolduruyor. Değer, o boşluğun yanında durmakta.
 
-## Sonuç: Görünen araç değil, sonuç
+## Sonuç: Rakip değil, araç
 
-Araç arka planda çalışıyor. Ekibimin gördüğü şey araç değil. Gördükleri şey sonuç: zamanında çıkan rapor, daha az hata, daha net bir plan.
+Yapay zeka modelleriyle yarışan bir uygulama kurmak, her yeni sürümde yeniden yarışmak demek. Rakibimizi yapay zeka şirketleri yapamayız.
 
-[DÜZENLE] Ölçebildiğim fark: [ÖRNEK: Rapora ayırdığım süre X'ten Y'ye indi / ayda N düzeltme yerine artık M düzeltme yapıyorum.]
+Vardığım kanaat şu: Modeli rakip değil, araç olarak görmek. Onu işin adımlarında, sonuca ulaşmak için kullanmak. Böylece model her geliştiğinde iş de bir adım kolaylaşıyor.
 
-## Kendime sorduğum 3 soru
+Ekibin gördüğü şey araç değil. Gördükleri şey sonuç: zamanında çıkan rapor, daha az hata, daha net bir plan.
 
-Yeni bir araç yaptığımda artık bu üç soruyu soruyorum:
+## Ürüne çevirmeden önce 3 soru
 
-1. Bu araç hangi sonucu üretiyor?
-2. Model yarın bunu kendisi yaparsa ne kaybederim?
-3. Bu aracı ben mi kullanacağım, yoksa başkası mı?
+Bir fikri ürüne çevirmeden önce şu üç soruyu sor:
 
-İlk iki soruya net bir cevabım varsa, araç işin içinde kalıyor.
+1. Bir sonraki model sürümü bunu kendisi yapabilir mi?
+2. Asıl değer ürünün kendisinde değil, ortaya çıkan sonuçta mı?
+3. Rakibin, yapay zeka şirketinin kendisi mi olur?
+
+Üçüne de “evet” diyorsan ürünü kurma. Modeli işin içinde kullan, sonuca odaklan.
 
 ---
 
-Siz kendi işiniz için bir araç yaptınız mı? Onu ürüne çevirmeyi düşündünüz mü?
+Siz bir yapay zeka modelinin etrafına ürün mü kuruyorsunuz, yoksa onu işin içinde mi kullanıyorsunuz?
