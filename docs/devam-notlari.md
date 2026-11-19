@@ -2,6 +2,12 @@
 
 CLAUDE.md §11'de yalnız son 3 not durur. Daha eski notlar buraya, **en üste** taşınır (yeniden eskiye). Güncel açık işler CLAUDE.md §11 › "Açık işler" listesindedir; buradaki "Açık kalan" satırları o günün durumudur.
 
+### 2026-11-17 — Mac'te derleme doğrulaması
+- **Yapılan:** Mac'te `git pull` (Windows'taki 17 commit alındı), `npm install`, `npm run build:js` + `node scripts/publish.mjs` + `node scripts/build-yazi.mjs`. Windows'ta elle düzenlenen `app.js`/`admin.js` kaynaktan yeniden üretildi; gövdeyi etkileyen tüm değişiklikler (footer "Keşfet", Hesaplarım linki yok, wordmark yok, yönlendirme, admin alanları) elle sürümde de vardı. Eksik olan yalnız head'deki şema kodu (`@graph`, `og:site_name`); hydrate head'e dokunmadığı için etkisiz. Yazı HTML'i birebir aynı çıktı. Statik sayfalar ve `public/llms.txt` canlıyla aynı hâle getirilip commit'lendi.
+- **Karar:** Mac'te sayfa üretimi için `npm run build` değil `build:js` + `publish.mjs` + `build-yazi.mjs` kullanılır (`npm run build` sayfaları örnek veriden üretir).
+- **Açık kalan:** Mac'te `gh` yok; push sonrası `kontrol.yml` sonucuna GitHub › Actions'tan bakılır.
+- **Sonraki adım:** Açık işler tablosundan devam.
+
 ### 2026-11-16 — Çalışma ortamı ve süreklilik (Windows → yarın Mac)
 - **Yapılan:** Bugünkü tüm iş Windows'ta, Git/Node olmadan `gh` ile yapıldı. `scripts/gh-push.ps1` eklendi. §5'e Mac/Windows tablosu ve iki makine kuralları yazıldı. §11 kısaltıldı: son 3 not + "Açık işler" tablosu; eski notlar `docs/devam-notlari.md`'ye taşındı. `.github/workflows/kontrol.yml` eklendi (§2 yasaklı içerik = hata, §6.1 ui-kit senkronu = uyarı).
 - **Karar:** Süreklilik CLAUDE.md (repoda, iki makinede aynı) + kural kontrolü workflow'u ile sağlanır. Claude'un makineye özel hafızasına güvenilmez.

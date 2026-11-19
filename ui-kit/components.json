@@ -11,7 +11,7 @@
     { "code": "Button/Ink", "level": "atom", "group": "Buton", "spec": "pill · 13×22 · 15px 600 · ink / bg", "selector": ".btn.btn-ink", "pages": ["404"], "uses": [] },
     { "code": "Button/Accent · sm", "level": "atom", "group": "Buton", "spec": "pill · 10×18 · 14px 600 · accent · hover brightness 1.08", "selector": ".btn.btn-sm.yz-btn-acc", "pages": ["yazi"], "uses": [] },
     { "code": "Button/Revise", "level": "atom", "group": "Buton", "spec": "mono 12px 700 büyük harf · accent · 1px kesik kenar · radius 8 · revize sonrası muted", "selector": ".yz-revbtn", "pages": ["yazi"], "uses": [] },
-    { "code": "IconButton/Theme", "level": "atom", "group": "Buton", "spec": "40×40 (mobil 36) · daire · surface + line · ikon 18px", "selector": ".icon-btn", "pages": ["*"], "uses": ["Icon/theme"] },
+    { "code": "IconButton/Theme", "level": "atom", "group": "Buton", "spec": "40×40 (mobil 36, dokunma alanı 44 · ::after inset -4px) · daire · surface + line · ikon 18px", "selector": ".icon-btn", "pages": ["*"], "uses": ["Icon/theme"] },
     { "code": "Link/Nav", "level": "atom", "group": "Link", "spec": "14px 500 · muted → ink · aria-current", "selector": "header nav a", "pages": ["*"], "uses": [] },
     { "code": "Link/Footer", "level": "atom", "group": "Link", "spec": "15px · text → ink · blok · 4px dikey", "selector": ".foot-grid a", "pages": ["*"], "uses": [] },
     { "code": "Kicker", "level": "atom", "group": "Etiket", "spec": "14px 600 · accent · [ … ] köşeli parantez CSS ile", "selector": ".kicker", "pages": ["home", "blog", "404"], "uses": [] },
