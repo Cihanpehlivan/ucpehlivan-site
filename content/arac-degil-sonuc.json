@@ -6,7 +6,7 @@
     "title": "Yapay Zekayla Araç Yapmak Kolaylaştı. Asıl Değer Hâlâ Sonuçta.",
     "description": "Yapay zeka modelleri artık kendileri birer araç ve her SaaS'a rakip. Onlarla yarışan bir uygulama kurmak yerine, onları işin içinde kullanıp sonuca ulaşmayı seçiyorum.",
     "ogImage": "/yazi/arac-degil-sonuc/og.png",
-    "ogImageAlt": "Görünen araç değil, sonuç.",
+    "ogImageAlt": "Araç değil, sonuç.",
     "published": "2026-11-19",
     "updated": "2026-11-19",
     "readingMinutes": 4,
@@ -19,11 +19,11 @@
       "src": "/yazi/arac-degil-sonuc/kapak.webp",
       "width": 1536,
       "height": 864,
-      "bg": "#EFF1F5",
-      "alt": "Solda küçük bir araç kutusu, ondan çıkan ok sağda büyük bir sonuç kartına gidiyor: zamanında rapor, daha az hata, daha net plan. Üstte “Görünen araç değil, sonuç.” yazısı."
+      "bg": "#F1F2F6",
+      "alt": "Solda büyük harflerle “Araç değil, sonuç.” yazısı. Sağda arkada iki uygulama penceresi, önde mor çubuk grafikli ve üç onay işaretli bir rapor sayfası, köşesinde yeşil büyük bir onay işareti."
     },
     "crumbs": { "label": "Sayfa yolu", "home": "Ana sayfa", "blog": "Yazılar" },
-    "share": { "label": "Bu yazıyı paylaş", "linkedin": "LinkedIn'de paylaş", "copy": "Linki kopyala", "native": "Paylaş" },
+    "share": { "label": "Bu yazıyı paylaş", "linkedin": "LinkedIn'de paylaş", "x": "X'te paylaş", "copy": "Linki kopyala", "native": "Paylaş" },
     "_faq_not": "Yalnız yapılandırılmış veri (FAQPage). Cevaplar yazıda görünen cümlelerdir. Metin değişirse burayı da eşitle.",
     "faq": [
       { "q": "Yapay zeka modelleriyle yarışan bir SaaS ürünü kurmak mantıklı mı?", "a": "Yapay zeka modelleri (LLM'ler) artık kendileri birer araç. Her yeni sürümde, ayrı bir SaaS ürününün yaptığı işi doğrudan yapabiliyorlar. Bu yüzden onlarla yarışan bir uygulama kurmak yerine, onları işin içinde kullanıp sonuca ulaşmayı seçiyorum. Rakibimizi yapay zeka şirketleri yapamayız." },

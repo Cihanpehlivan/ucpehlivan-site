@@ -34,7 +34,7 @@ export function renderBlok(C, site, { origin = 'https://ucpehlivan.web.app', yaz
   const share = () => {
     const k = m.share;
     if (!k) return '';
-    return `<div class="yz-share"><span class="yz-mono">${esc(k.label)}</span><div class="yz-share-row"><a class="btn btn-ghost btn-sm" href="https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}" target="_blank" rel="noopener">${esc(k.linkedin)} ↗</a><button type="button" class="btn btn-ghost btn-sm" data-share-copy="${esc(url)}">${esc(k.copy)}</button><button type="button" class="btn btn-ghost btn-sm" data-share-native data-url="${esc(url)}" data-title="${esc(m.title)}" hidden>${esc(k.native)}</button></div><p class="yz-status" id="yz-share-status" role="status" aria-live="polite"></p></div>`;
+    return `<div class="yz-share"><span class="yz-mono">${esc(k.label)}</span><div class="yz-share-row"><a class="btn btn-ghost btn-sm" href="https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}" target="_blank" rel="noopener">${esc(k.linkedin)} ↗</a>${k.x ? `<a class="btn btn-ghost btn-sm" href="${esc(`https://x.com/intent/post?text=${encodeURIComponent(m.title)}&url=${encodeURIComponent(url)}`)}" target="_blank" rel="noopener">${esc(k.x)} ↗</a>` : ''}<button type="button" class="btn btn-ghost btn-sm" data-share-copy="${esc(url)}">${esc(k.copy)}</button><button type="button" class="btn btn-ghost btn-sm" data-share-native data-url="${esc(url)}" data-title="${esc(m.title)}" hidden>${esc(k.native)}</button></div><p class="yz-status" id="yz-share-status" role="status" aria-live="polite"></p></div>`;
   };
 
   const B = {

@@ -451,3 +451,6 @@ section.block::before{content:"";position:absolute;top:0;left:max(32px,calc((100
   .bgrid > .bcard:only-child .bcover{aspect-ratio:16/10;min-height:0}
   .bgrid > .bcard:only-child .bbody{padding:22px 24px 26px}
 }
+/* Görselli kapak: kapak görselleri 16:9 üretilir (yazı kapağı 1536×864). Kutu da her düzende 16:9 olur;
+   object-fit:cover hiçbir kenarı kırpmaz (16:10 kutuda yazı ve çizim kenardan taşıyordu). Çizimli kapaklar 16:10 kalır. */
+.bcover.has-img,.bgrid.feat .bcard:first-child .bcover.has-img,.bgrid > .bcard:only-child .bcover.has-img,.post-cover .bcover.has-img{aspect-ratio:16/9;min-height:0;flex:none;align-self:center;background:var(--surface-2)}

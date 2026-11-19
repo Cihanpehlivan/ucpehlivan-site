@@ -329,7 +329,7 @@ function molecules() {
 
   const k = group(sec, 'Kart ve liste', 'kart radius 22 · satır radius 20 · hover yükselir');
   item(k, { code: 'Card/Post', variant: 'tek yazı (yatay)', node: (() => { const g = q('home', '#yazilar .bgrid'); g.style.width = '1100px'; return g; })(), width: 1160 });
-  item(k, { code: 'Card/Post', variant: 'ızgarada', node: (() => { const c = q('blog', '.bcard'); c.style.width = '380px'; return c; })(), desc: '1 kolon içinde · kapak 16:10 · gövde 22×24' });
+  item(k, { code: 'Card/Post', variant: 'ızgarada', node: (() => { const c = q('blog', '.bcard'); c.style.width = '380px'; return c; })(), desc: '1 kolon içinde · görselli kapak 16:9 (kırpılmaz), çizimli kapak 16:10 · gövde 22×24' });
   item(k, { code: 'Row/Account', variant: 'hot', node: (() => { const r = q('home', '.acc-row.hot'); r.style.width = '480px'; return r; })() });
   item(k, { code: 'Row/Account', variant: 'varsayılan', node: (() => { const r = q('home', '.acc-row:not(.hot)'); r.style.width = '480px'; return r; })() });
   item(k, { code: 'Facts/About', node: q('home', '.about-facts') });

@@ -17,7 +17,7 @@
     ],
     "cover": { "src": "/yazi/prompt-brief/kapak.webp", "width": 1536, "height": 864, "bg": "#EFF1F5", "alt": "“İyi prompt, iyi brief’tir.” yazısı; yanında Hedef, Sınırlar ve Serbestlik maddeleri işaretlenmiş bir kâğıt altlığı ve kalem." },
     "crumbs": { "label": "Sayfa yolu", "home": "Ana sayfa", "blog": "Yazılar" },
-    "share": { "label": "Bu yazıyı paylaş", "linkedin": "LinkedIn'de paylaş", "copy": "Linki kopyala", "native": "Paylaş" },
+    "share": { "label": "Bu yazıyı paylaş", "linkedin": "LinkedIn'de paylaş", "x": "X'te paylaş", "copy": "Linki kopyala", "native": "Paylaş" },
     "_faq_not":"Yalnız yapılandırılmış veri (FAQPage) için. Soru = bölüm lede'i; cevap = yazıda görünen cümleler (Google cevabın sayfada görünmesini ister). Metni değiştirirsen yazıdaki karşılığıyla aynı tut.",
     "faq": [
       { "q": "Hazır prompt şablonlarındaki hangi alışkanlıklar yeni yapay zekâ modellerinde artık işe yaramıyor?", "a": "Modele unvan takmak, brief'i romana çevirmek ve her şeyi tek mesaja sığdırmak. Üçü de bir zamanlar işe yarıyordu, bugün modeli yavaşlatıyor." },
