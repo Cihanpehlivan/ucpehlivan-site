@@ -429,7 +429,7 @@ function organisms() {
   frame(sb, { code: 'Section/Yazılar', html: q('home', '#yazilar').outerHTML, home: true });
   frame(sb, { code: 'Section/Hakkımda', html: q('home', '#hakkimda').outerHTML, home: true });
   frame(sb, { code: 'Section/Hesaplarım', html: q('home', '#iletisim').outerHTML, home: true });
-  frame(sb, { code: 'Section/Yazılar', variant: 'mobil', html: q('home', '#yazilar').outerHTML, width: 375, home: true });
+  frame(sb, { code: 'Section/Yazılar', variant: 'mobil', html: q('home', '#yazilar').outerHTML, width: 375, home: true, desc: 'yatay kaydırılan kartlar: kart %84, sonraki kartın kenarı görünür, scroll-snap' });
   const yn = group(og, 'Yazı gezinmesi', 'masaüstü: sol sütun, yapışkan · 900 altı: üstte yatay şerit');
   frame(yn, { code: 'Nav/Yazı', html: `<div class="yz"><div class="wrap yz-grid" style="padding-top:24px">${q('yazi', '.yz-nav').outerHTML}<div></div></div></div>` });
   frame(yn, { code: 'Nav/Yazı', variant: 'mobil', html: `<div class="yz"><div class="wrap yz-grid">${q('yazi', '.yz-nav').outerHTML}</div></div>`, width: 375 });

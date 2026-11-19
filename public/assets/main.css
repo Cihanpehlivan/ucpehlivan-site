@@ -454,3 +454,16 @@ section.block::before{content:"";position:absolute;top:0;left:max(32px,calc((100
 /* Görselli kapak: kapak görselleri 16:9 üretilir (yazı kapağı 1536×864). Kutu da her düzende 16:9 olur;
    object-fit:cover hiçbir kenarı kırpmaz (16:10 kutuda yazı ve çizim kenardan taşıyordu). Çizimli kapaklar 16:10 kalır. */
 .bcover.has-img,.bgrid.feat .bcard:first-child .bcover.has-img,.bgrid > .bcard:only-child .bcover.has-img,.post-cover .bcover.has-img{aspect-ratio:16/9;min-height:0;flex:none;align-self:center;background:var(--surface-2)}
+/* Telefonda yazı listesi: yatay kaydırılan kartlar. Kart genişliği %84; bir sonraki kartın kenarı görünür (kaydırılabilir olduğu anlaşılır).
+   Kaydırma şeridi sayfa kenarına kadar uzanır (wrap boşluğu negatif margin + padding ile), kartlar kenara yapışarak durur (scroll-snap).
+   Tek yazı varken kart tam genişliktir. Not: 2 kartlık ızgara kuralı (:has, yukarıda) mobil kuralını ezdiği için burada da seçici olarak yazılır. */
+@media (max-width:640px){
+  .bgrid,.bgrid.two,.bgrid.feat,.bgrid:has(> .bcard:nth-child(2):last-child){display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;overscroll-behavior-x:contain;margin:0 -20px;padding:2px 20px 10px;scroll-padding-inline:20px;scrollbar-width:none}
+  .bgrid::-webkit-scrollbar{display:none}
+  .bgrid > .bcard{flex:0 0 84%;scroll-snap-align:start;min-width:0}
+  .bgrid > .bcard:only-child{flex-basis:100%}
+  .bgrid > .bcard:hover{transform:none}
+  .bgrid .bbody{padding:18px 20px 22px;gap:8px}
+  .bgrid .bcard h3{font-size:20px}
+  .bgrid .bcard p.ex{font-size:14px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+}
