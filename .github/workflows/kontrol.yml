@@ -42,11 +42,17 @@ jobs:
           FAIL=0
           V=$(grep -oP "const ASSET_V = '\K[^']+" shared/render.js)
           H=$(cat public/assets/yazi.css public/assets/yazi.js | sha1sum | cut -c1-8)
-          echo "ASSET_V=$V  yazi hash=$H"
+          HB=$(cat public/assets/yazi-blok.css public/assets/yazi-blok.js | sha1sum | cut -c1-8)
+          echo "ASSET_V=$V  yazi hash=$H  yazi-blok hash=$HB"
           # Yazı sayfaları elle/ayrı üretildiği için sürümleri burada denetlenir.
           for f in public/yazi/*/index.html; do
             grep -q "main.css?v=$V\"" "$f" || { echo "::error file=$f::main.css?v=$V değil. ASSET_V ile eşitle."; FAIL=1; }
             grep -q "yazi.css?v=$H\"" "$f" || { echo "::error file=$f::yazi.css?v=$H olmalı (yazi.css + yazi.js SHA1 ilk 8)."; FAIL=1; }
+            if grep -q "yazi-blok.css" "$f"; then
+              grep -q "yazi-blok.css?v=$HB\"" "$f" || { echo "::error file=$f::yazi-blok.css?v=$HB olmalı (yazi-blok.css + yazi-blok.js SHA1 ilk 8). Sayfayı yeniden üret."; FAIL=1; }
+            fi
+            # Yer tutucu kalmışsa yalnız uyarı: önizleme olur, canlıya yayinla.yml almaz.
+            if grep -qE '\[(DÜZENLE|SÜRE|ÖRNEK:)' "$f"; then echo "::warning file=$f::Yer tutucu var ([DÜZENLE]/[SÜRE]/[ÖRNEK]). Canlı yayında bu sayfa çıkarılır."; fi
           done
           BASE="${{ github.event.pull_request.base.sha || github.event.before }}"
           if [ -n "$BASE" ] && [ "$BASE" != "0000000000000000000000000000000000000000" ] && git cat-file -e "$BASE" 2>/dev/null; then
@@ -66,7 +72,7 @@ jobs:
           BASE="${{ github.event.pull_request.base.sha || github.event.before }}"
           if [ -z "$BASE" ] || [ "$BASE" = "0000000000000000000000000000000000000000" ]; then echo "Karşılaştırılacak commit yok."; exit 0; fi
           CHANGED=$(git diff --name-only "$BASE" "${{ github.sha }}")
-          UI=$(echo "$CHANGED" | grep -E '^(public/assets/(main|yazi)\.css|shared/render\.js|scripts/build-yazi\.mjs)$' || true)
+          UI=$(echo "$CHANGED" | grep -E '^(public/assets/(main|yazi|yazi-blok)\.css|shared/render\.js|scripts/(build-yazi|yazi-blok)\.mjs)$' || true)
           KIT=$(echo "$CHANGED" | grep -E '^ui-kit/' || true)
           if [ -n "$UI" ] && [ -z "$KIT" ]; then
             echo "::warning title=Design system güncellenmedi::Önyüz dosyaları değişti ($(echo $UI | tr '\n' ' ')) ama ui-kit/ değişmedi. Token, bileşen ölçüsü, varyant veya durum değiştiyse ui-kit/tokens.json ve components.json'u güncelle (CLAUDE.md §6.1)."

@@ -2,6 +2,12 @@
 
 CLAUDE.md §11'de yalnız son 3 not durur. Daha eski notlar buraya, **en üste** taşınır (yeniden eskiye). Güncel açık işler CLAUDE.md §11 › "Açık işler" listesindedir; buradaki "Açık kalan" satırları o günün durumudur.
 
+### 2026-11-17 — SEO/GEO teknik tur 2 (Windows)
+- **Yapılan:** Canlı tarama (PageSpeed API 429 verdi; başlık, boyut, önbellek elle ölçüldü). Uygulanan: `/assets/**` 1 yıl önbellek + `ASSET_V` 8→9 + `kontrol.yml`'ye sürüm denetimi; yazının düz metin sürümü (`scripts/yazi-md.mjs` → `index.md`, head'de alternate link, llms.txt'te link); BreadcrumbList (yazı ve normal yazı şablonu); RSS beslemesi (`/feed.xml`, `renderFeed`, tüm sayfalarda head linki); uygulama simgeleri + manifest + theme-color; yazıya FAQPage (`meta.faq`); yazıda görünür sayfa yolu ve paylaşım satırı (ui-kit: `Nav/Breadcrumb`, `Share/Row`, molekül 21); ana sayfa illüstrasyonları telefonda gizli, tablette metnin altında (`ASSET_V` 10, telefonda sayfa ~690px kısaldı); yazı sayfasına kapak görseli (`meta.cover`, yazar satırının altında, BlogPosting `image` dizisinde ilk sırada, `index.md`'de de); 2026-11-18: bölüm menüsü Özet ile hizalı başlıyor (başlık bloğu `.yz-head` ızgaranın ilk satırına alındı); başlık bloğu tam genişliğe yayıldı, kapak iki kolonu kaplıyor (sayfa sağa kaymış görünüyordu). Kod tarayıcıda gerçek Firestore içeriğiyle test edildi; `index.md` ve yazı HTML'i tarayıcı çıktısından yazıldı.
+- **Karar:** Sürüm artırma insan hafızasına bırakılmaz; `kontrol.yml` zorlar. 2026-11-17 taramasındaki tüm teknik maddeler tamam; kalan SEO işleri sahibinde (Search Console, Bing, alan adı).
+- **Açık kalan:** Açık işler tablosu (Mac'te derleme doğrulaması dahil).
+- **Sonraki adım:** Search Console doğrulaması gelince head'e ekle.
+
 ### 2026-11-17 — Mac'te derleme doğrulaması
 - **Yapılan:** Mac'te `git pull` (Windows'taki 17 commit alındı), `npm install`, `npm run build:js` + `node scripts/publish.mjs` + `node scripts/build-yazi.mjs`. Windows'ta elle düzenlenen `app.js`/`admin.js` kaynaktan yeniden üretildi; gövdeyi etkileyen tüm değişiklikler (footer "Keşfet", Hesaplarım linki yok, wordmark yok, yönlendirme, admin alanları) elle sürümde de vardı. Eksik olan yalnız head'deki şema kodu (`@graph`, `og:site_name`); hydrate head'e dokunmadığı için etkisiz. Yazı HTML'i birebir aynı çıktı. Statik sayfalar ve `public/llms.txt` canlıyla aynı hâle getirilip commit'lendi.
 - **Karar:** Mac'te sayfa üretimi için `npm run build` değil `build:js` + `publish.mjs` + `build-yazi.mjs` kullanılır (`npm run build` sayfaları örnek veriden üretir).

@@ -1,0 +1,192 @@
+{
+  "format": "blok",
+  "_not": "Blok biçimli interaktif yazı. Üretim: scripts/build-yazi-blok.mjs (Node) veya scripts/yazi-blok.mjs tarayıcıda. Yazı metni sahibinin metnidir; değiştirme. [DÜZENLE], [SÜRE], [ÖRNEK: …] işaretleri kaldıkça canlıya alınmaz (yayinla.yml durdurur).",
+  "meta": {
+    "path": "/yazi/arac-degil-sonuc/",
+    "title": "Yapay Zekayla Araç Yapmak Kolaylaştı. Asıl Değer Hâlâ Sonuçta.",
+    "description": "Yapay zekayla kendi işim için bir araç yapmak artık birkaç saat sürüyor. Benim işimde değer, aracın işin içinde ürettiği sonuçta.",
+    "ogImage": "/yazi/arac-degil-sonuc/og.png",
+    "ogImageAlt": "Yapay zekayla araç yapmak kolaylaştı. Asıl değer hâlâ sonuçta.",
+    "published": "2026-11-19",
+    "updated": "2026-11-19",
+    "readingMinutes": 4,
+    "kicker": "Sahadan not",
+    "summaryLabel": "Kısaca",
+    "summary": [
+      "Yapay zekayla kendi işim için bir araç yapmak artık birkaç saat sürüyor. Bu yüzden aracın kendisi tek başına az değerli. Benim işimde değer, aracın işin içinde ürettiği sonuçta."
+    ],
+    "cover": {
+      "src": "/yazi/arac-degil-sonuc/kapak.webp",
+      "width": 1536,
+      "height": 864,
+      "bg": "#EFF1F5",
+      "alt": "Solda küçük bir araç kutusu, ondan çıkan ok sağda büyük bir sonuç kartına gidiyor: zamanında rapor, daha az hata, daha net plan. Üstte “Görünen araç değil, sonuç.” yazısı."
+    },
+    "crumbs": { "label": "Sayfa yolu", "home": "Ana sayfa", "blog": "Yazılar" },
+    "share": { "label": "Bu yazıyı paylaş", "linkedin": "LinkedIn'de paylaş", "copy": "Linki kopyala", "native": "Paylaş" },
+    "_faq_not": "Yalnız yapılandırılmış veri (FAQPage). Cevaplar yazıda görünen cümlelerdir; [DÜZENLE] içeren paragraflar kullanılmaz. Metin değişirse burayı da eşitle.",
+    "faq": [
+      { "q": "Yapay zekayla yapılan bir aracın değeri nerede?", "a": "Yapay zekayla kendi işim için bir araç yapmak artık birkaç saat sürüyor. Bu yüzden aracın kendisi tek başına az değerli. Benim işimde değer, aracın işin içinde ürettiği sonuçta." },
+      { "q": "Kendi işim için yaptığım bir aracı ürüne çevirmek neden zor?", "a": "Araç benim çalışma şeklime göre kuruldu. Başka biri kullansın diye kurulum, açıklama ve destek gerekir. Bu iş, aracın kendisinden daha büyük." },
+      { "q": "Yeni model sürümleri kendi yaptığım araçları nasıl etkiliyor?", "a": "Bugün özel olan bir araç, yarın sıradan bir özellik olabilir. Araç ayrı bir ürünse, bu kötü haber. Araç işin içindeyse, iyi haber: Model geliştikçe benim işim de kolaylaşıyor." },
+      { "q": "Yeni bir araç yaptığımda kendime hangi soruları soruyorum?", "a": "Bu araç hangi sonucu üretiyor? Model yarın bunu kendisi yaparsa ne kaybederim? Bu aracı ben mi kullanacağım, yoksa başkası mı? İlk iki soruya net bir cevabım varsa, araç işin içinde kalıyor." }
+    ]
+  },
+  "ui": {
+    "navLabel": "Bölümler",
+    "copy": "Kopyala",
+    "copied": "Kopyalandı",
+    "copyFailed": "Kopyalanamadı, metni elle seç"
+  },
+  "sections": [
+    {
+      "id": "giris",
+      "num": "01",
+      "nav": "Bir rapor, bir araç",
+      "head": true,
+      "blocks": [
+        { "type": "summary" },
+        { "type": "prose", "paragraphs": [
+          "Her gün yapay zekayı işimde kullanıyorum. Son aylarda yeni bir alışkanlık edindim: Tekrar eden bir iş görünce, onun için küçük bir araç yapıyorum.",
+          "[DÜZENLE] Bir projede her ay aynı raporu hazırlıyordum. Görev listesinden veriyi alıyor, tabloya döküyor, üstüne kısa bir özet yazıyordum. Yapay zekayla bu adımları yapan küçük bir araç kurdum. Rapor artık [SÜRE] içinde hazır."
+        ] },
+        { "type": "flow", "label": "Aylık rapor", "options": [
+          { "key": "elle", "label": "Elle", "who": "Ben" },
+          { "key": "arac", "label": "Araçla", "who": "Araç" }
+        ], "steps": ["Görev listesinden veriyi al", "Tabloya dök", "Kısa özet yaz"],
+          "result": { "elle": "Her ay aynı rapor", "arac": "Rapor [SÜRE] içinde hazır" },
+          "caption": "Adımlar aynı. Değişen, onları kimin yaptığı." }
+      ]
+    },
+    {
+      "id": "urun",
+      "num": "02",
+      "nav": "Ürüne çevirsem mi?",
+      "title": "Ürüne çevirsem mi?",
+      "blocks": [
+        { "type": "prose", "paragraphs": [
+          "Araç çalışınca aklıma ilk gelen şu oldu: Bunu ayrı bir ürüne çevirsem mi? Her gün yeni bir yapay zeka aracı görüyorum. Araç yapmak bu kadar kolaylaşınca, bu soru da kolay geliyor."
+        ] },
+        { "type": "poll", "question": "Sen olsan çevirir miydin?", "options": [
+          { "key": "evet", "label": "Evet, çevirirdim", "reply": "Ben de ilk anda öyle düşündüm." },
+          { "key": "hayir", "label": "Hayır, çevirmezdim", "reply": "Ben de aynı yere vardım." }
+        ] },
+        { "type": "prose", "big": true, "paragraphs": ["Düşündüm. Çevirmedim. Üç sebebim var."] },
+        { "type": "jump", "label": "Üç sebep", "items": [
+          { "to": "ogretmek", "num": "1", "text": "Aracı yapmak kolay, öğretmek zor" },
+          { "to": "model", "num": "2", "text": "Model her sürümde daha fazlasını kendisi yapıyor" },
+          { "to": "bosluk", "num": "3", "text": "Hiçbir araç işin tamamını çözmüyor" }
+        ] }
+      ]
+    },
+    {
+      "id": "ogretmek",
+      "num": "03",
+      "nav": "Yapmak kolay, öğretmek zor",
+      "label": "Sebep 1/3",
+      "title": "1. Aracı yapmak kolay, öğretmek zor",
+      "blocks": [
+        { "type": "prose", "paragraphs": [
+          "Araç benim çalışma şeklime göre kuruldu. Hangi veriyi nereden aldığını, hangi istisnayı nasıl geçtiğini ben biliyorum. Başka biri kullansın diye kurulum, açıklama ve destek gerekir. Bu iş, aracın kendisinden daha büyük."
+        ] },
+        { "type": "stack", "label": "Kim kullanacak?", "options": [
+          { "key": "ben", "label": "Sadece ben" },
+          { "key": "baskasi", "label": "Başkası kullanırsa" }
+        ], "base": { "label": "Araç", "note": "Çalışma şeklimi ben biliyorum" },
+          "extra": [
+            { "label": "Kurulum", "size": 2 },
+            { "label": "Açıklama", "size": 2 },
+            { "label": "Destek", "size": 3 }
+          ],
+          "caption": { "ben": "İş = araç.", "baskasi": "Bu iş, aracın kendisinden daha büyük." } }
+      ]
+    },
+    {
+      "id": "model",
+      "num": "04",
+      "nav": "Model daha fazlasını yapıyor",
+      "label": "Sebep 2/3",
+      "title": "2. Model her sürümde daha fazlasını kendisi yapıyor",
+      "blocks": [
+        { "type": "prose", "paragraphs": [
+          "[DÜZENLE] Birkaç ay önce bir iş için ayrı bir adım kurmuştum. Modelin yeni sürümüyle bu adıma gerek kalmadı. Model o işi kendisi yapmaya başladı."
+        ] },
+        { "type": "version", "label": "Model sürümü", "stops": ["Birkaç ay önce", "Yeni sürüm"],
+          "model": "Model", "tool": "Benim aracım", "steps": ["Veriyi al", "Ayrı adım", "Özeti yaz"], "moving": 1,
+          "movedNote": "Gerek kalmadı: model kendisi yapıyor",
+          "outcomes": [
+            { "tone": "bad", "label": "Araç ayrı bir ürünse", "before": "Ürünün bir özelliği", "after": "Model bunu kendisi yapıyor" },
+            { "tone": "good", "label": "Araç işin içindeyse", "before": "Benim bir adımım", "after": "Bir adım eksik, iş daha kolay" }
+          ] },
+        { "type": "prose", "paragraphs": [
+          "Bugün özel olan bir araç, yarın sıradan bir özellik olabilir. Araç ayrı bir ürünse, bu kötü haber. Araç işin içindeyse, iyi haber: Model geliştikçe benim işim de kolaylaşıyor."
+        ] }
+      ]
+    },
+    {
+      "id": "bosluk",
+      "num": "05",
+      "nav": "İşin tamamı araçta değil",
+      "label": "Sebep 3/3",
+      "title": "3. Hiçbir araç işin tamamını çözmüyor",
+      "blocks": [
+        { "type": "prose", "paragraphs": [
+          "Rapor çıkıyor. Ama hangi satırın o ay önemli olduğunu araç bilmiyor. Hangi gecikmenin risk, hangisinin normal olduğunu da bilmiyor. Aradaki boşluğu ben dolduruyorum. Aracı değerli yapan şey, o boşluğun yanında durması."
+        ] },
+        { "type": "report", "label": "Örnek rapor", "note": "Temsilî satırlar", "options": [
+          { "key": "arac", "label": "Aracın gördüğü" },
+          { "key": "ben", "label": "Benim gördüğüm" }
+        ], "cols": ["İş", "Durum"],
+          "rows": [
+            { "task": "Tasarım onayı", "status": "2 gün gecikme", "tag": "risk", "tagLabel": "Risk", "why": "Sonraki üç işi bekletiyor." },
+            { "task": "Test ortamı", "status": "1 gün gecikme", "tag": "normal", "tagLabel": "Normal", "why": "Planda payı vardı." },
+            { "task": "İçerik girişi", "status": "Tamam", "tag": "", "tagLabel": "", "why": "" },
+            { "task": "Ödeme adımı", "status": "Başlamadı", "tag": "onemli", "tagLabel": "Bu ay önemli", "why": "Ay sonu teslimin ön koşulu." }
+          ],
+          "caption": { "arac": "Araç satırları sıralıyor. Hepsi aynı ağırlıkta.", "ben": "Aradaki boşluğu ben dolduruyorum." } }
+      ]
+    },
+    {
+      "id": "sonuc",
+      "num": "06",
+      "nav": "Görünen araç değil, sonuç",
+      "title": "Sonuç: Görünen araç değil, sonuç",
+      "blocks": [
+        { "type": "prose", "paragraphs": [
+          "Araç arka planda çalışıyor. Ekibimin gördüğü şey araç değil. Gördükleri şey sonuç: zamanında çıkan rapor, daha az hata, daha net bir plan."
+        ] },
+        { "type": "outcome", "label": "Nereden bakıyorsun?", "options": [
+          { "key": "arka", "label": "Arka plan" },
+          { "key": "ekip", "label": "Ekibin gördüğü" }
+        ], "back": ["Görev listesi", "Araç", "Tablo + özet"],
+          "front": ["Zamanında çıkan rapor", "Daha az hata", "Daha net bir plan"] },
+        { "type": "prose", "paragraphs": [
+          "[DÜZENLE] Ölçebildiğim fark: [ÖRNEK: Rapora ayırdığım süre X'ten Y'ye indi / ayda N düzeltme yerine artık M düzeltme yapıyorum.]"
+        ] }
+      ]
+    },
+    {
+      "id": "sorular",
+      "num": "07",
+      "nav": "Kendime sorduğum 3 soru",
+      "title": "Kendime sorduğum 3 soru",
+      "end": true,
+      "blocks": [
+        { "type": "questions", "intro": "Yeni bir araç yaptığımda artık bu üç soruyu soruyorum:",
+          "items": [
+            "Bu araç hangi sonucu üretiyor?",
+            "Model yarın bunu kendisi yaparsa ne kaybederim?",
+            "Bu aracı ben mi kullanacağım, yoksa başkası mı?"
+          ],
+          "rule": "İlk iki soruya net bir cevabım varsa, araç işin içinde kalıyor.",
+          "tryLabel": "Kendi aracın için dene",
+          "checkHint": "Net cevabın olanları işaretle",
+          "verdict": { "yes": "Araç işin içinde kalıyor.", "wait": "Önce ilk iki soru." },
+          "need": [0, 1] },
+        { "type": "closing", "paragraphs": ["Siz kendi işiniz için bir araç yaptınız mı? Onu ürüne çevirmeyi düşündünüz mü?"],
+          "linkedin": { "label": "LinkedIn'de yazın", "href": "https://www.linkedin.com/in/umutcihanpehlivan/" } },
+        { "type": "share" }
+      ]
+    }
+  ]
+}

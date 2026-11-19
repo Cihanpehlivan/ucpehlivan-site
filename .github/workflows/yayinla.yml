@@ -24,6 +24,17 @@ jobs:
       - name: İçeriği Firestore'dan al ve sayfaları üret
         run: node scripts/publish.mjs
 
+      # Metninde yer tutucu ([DÜZENLE], [SÜRE], [ÖRNEK: …]) kalan yazı sayfası canlıya çıkmaz; önizlemede görünür.
+      - name: Yer tutuculu yazıları canlıdan çıkar
+        if: inputs.hedef == 'canli'
+        run: |
+          for d in public/yazi/*/; do
+            if grep -rqE '\[(DÜZENLE|SÜRE|ÖRNEK:)' "$d"; then
+              echo "::warning::$d yer tutucu içeriyor, canlı yayına alınmadı."
+              rm -rf "$d"
+            fi
+          done
+
       - name: Firebase Hosting'e yükle
         uses: FirebaseExtended/action-hosting-deploy@v0
         with:

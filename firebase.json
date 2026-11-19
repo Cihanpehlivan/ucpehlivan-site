@@ -3,7 +3,8 @@
     "public": "public",
     "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
     "redirects": [
-      { "source": "/blog/prompt-yazmak-brief{,/,/index.html}", "destination": "/yazi/prompt-brief/", "type": 301 }
+      { "source": "/blog/prompt-yazmak-brief{,/,/index.html}", "destination": "/yazi/prompt-brief/", "type": 301 },
+      { "source": "/blog/arac-degil-sonuc{,/,/index.html}", "destination": "/yazi/arac-degil-sonuc/", "type": 301 }
     ],
     "rewrites": [
       { "source": "/admin", "destination": "/admin/index.html" },

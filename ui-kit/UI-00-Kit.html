@@ -11,6 +11,7 @@
 <!-- Sitenin gerçek CSS'i: kitteki atom ve moleküller bu kurallarla çizilir -->
 <link rel="stylesheet" href="../public/assets/main.css">
 <link rel="stylesheet" href="../public/assets/yazi.css">
+<link rel="stylesheet" href="../public/assets/yazi-blok.css">
 <style>
 /* ---- Kit board'unun kendi stili (sitede yok) ---- */
 body.kit-page{overflow-x:auto;background:#D4D6DB}
@@ -96,7 +97,7 @@ body.kit-page{overflow-x:auto;background:#D4D6DB}
   <div class="k-head">
     <div>
       <h1>ucpehlivan.web.app UI kit</h1>
-      <p>Yayındaki ekranlarda (<code>/</code>, <code>/blog/</code>, <code>/yazi/prompt-brief/</code>, <code>404</code>, <code>/blog/post.html</code> kabuğu) <b>gerçekten kullanılan</b> token ve bileşenler. Kullanılmayan öğe yok; değerler <code>public/assets/main.css</code> ve <code>yazi.css</code>'ten birebir. Bileşenler sitenin kendi sayfalarından canlı alınır ve sitenin gerçek CSS'iyle çizilir. Ayrıntı: <code>ui-kit/tokens.json</code>, <code>ui-kit/components.json</code>, <code>ui-kit/README.md</code>. Referans genişlik 1440 px (mobil 375 px); organizmalar %50 ölçekte.</p>
+      <p>Yayındaki ekranlarda (<code>/</code>, <code>/blog/</code>, <code>/yazi/prompt-brief/</code>, <code>/yazi/arac-degil-sonuc/</code>, <code>404</code>, <code>/blog/post.html</code> kabuğu) <b>gerçekten kullanılan</b> token ve bileşenler. Kullanılmayan öğe yok; değerler <code>public/assets/main.css</code> ve <code>yazi.css</code>'ten birebir. Bileşenler sitenin kendi sayfalarından canlı alınır ve sitenin gerçek CSS'iyle çizilir. Ayrıntı: <code>ui-kit/tokens.json</code>, <code>ui-kit/components.json</code>, <code>ui-kit/README.md</code>. Referans genişlik 1440 px (mobil 375 px); organizmalar %50 ölçekte.</p>
     </div>
     <div>
       <div class="k-legend"><span class="k-lv lv-token">Token</span><span class="k-lv lv-img">Görsel</span><span class="k-lv lv-atom">Atom</span><span class="k-lv lv-mol">Molekül</span><span class="k-lv lv-org">Organizma</span><span class="k-lv lv-tpl">Şablon</span></div>
@@ -110,7 +111,7 @@ body.kit-page{overflow-x:auto;background:#D4D6DB}
 // Kit, sitenin üretilmiş sayfalarını (public/) okur ve bileşenleri oradan kopyalar.
 // Böylece kit, ekranlarla her zaman aynı kalır. Yerel sunucu gerekir (fetch file:// ile çalışmaz).
 const PUB = new URL('../public/', location.href).href;
-const PAGES = { home: 'index.html', blog: 'blog/index.html', yazi: 'yazi/prompt-brief/index.html', nf: '404.html', shell: 'blog/post.html' };
+const PAGES = { home: 'index.html', blog: 'blog/index.html', yazi: 'yazi/prompt-brief/index.html', blok: 'yazi/arac-degil-sonuc/index.html', nf: '404.html', shell: 'blog/post.html' };
 const LV = { token: ['lv-token', 'Token'], img: ['lv-img', 'Görsel'], atom: ['lv-atom', 'Atom'], molecule: ['lv-mol', 'Molekül'], organism: ['lv-org', 'Organizma'], template: ['lv-tpl', 'Şablon'] };
 const esc = (s) => String(s ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 const h = (html) => { const t = document.createElement('template'); t.innerHTML = html.trim(); return t.content.firstElementChild; };
@@ -144,7 +145,7 @@ function frame(box, { code, variant, html, width = 1440, desc, yz = false, home 
   const body = yz ? `<div class="yz"><div class="wrap yz-grid"><div></div><article class="yz-article">${html}</article></div></div>` : home ? `<main>${html}</main>` : html;
   const doc = `<!doctype html><html lang="tr" data-theme="light"><head><meta charset="utf-8"><meta name="viewport" content="width=${width}">
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Geist:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="${PUB}assets/main.css"><link rel="stylesheet" href="${PUB}assets/yazi.css">
+<link rel="stylesheet" href="${PUB}assets/main.css"><link rel="stylesheet" href="${PUB}assets/yazi.css"><link rel="stylesheet" href="${PUB}assets/yazi-blok.css">
 <style>html{height:auto!important}body{display:flow-root}header,.yz-nav,.yz-outbox{position:relative!important;top:0!important}.progress{position:relative}.guides{display:none!important}.yz-sec:first-child{padding-top:24px}</style></head><body>${absPaths(body)}</body></html>`;
   const it = h(`<div class="k-item"><div class="k-frame" style="width:${width / 2}px;height:200px"><iframe width="${width}" height="400" loading="eager" title="${esc(code)}"></iframe></div><p class="k-desc" style="max-width:${width / 2}px"><code>${esc(code)}${variant ? ` · ${esc(variant)}` : ''} · ${width}px</code>${esc(desc ?? spec(code))}</p></div>`);
   const fr = it.querySelector('iframe'), wrap = it.querySelector('.k-frame');
@@ -390,6 +391,25 @@ function organisms() {
   frame(p4, { code: 'Tabs/Model', variant: 'Claude', html: tb(false), yz: true });
   frame(p4, { code: 'Tabs/Model', variant: 'GPT', html: tb(true), yz: true });
 
+  // Blok yazı bileşenleri (yazi-blok.css): her biri iki durumlu; durum statik çizilir (data-state + .is-alt + .yb-on[hidden]).
+  const bs = section('c3', 'organism', 'Blok yazı bileşenleri', ['Switch/Flow', 'Stack/Work', 'Slider/Version', 'Report/Notes', 'Switch/Outcome', 'Poll/Reader', 'Nav/Jump', 'Box/Questions']);
+  const alt = (sel, val, mod) => { const x = q('blok', sel); x.setAttribute('data-state', val); x.classList.add('is-alt'); x.querySelectorAll('input[type=radio]').forEach((r) => { if (r.value === val) r.setAttribute('checked', ''); else r.removeAttribute('checked'); }); x.querySelectorAll('.yb-on').forEach((e) => { e.hidden = e.getAttribute('data-on') !== val; }); mod?.(x); return x.outerHTML; };
+  const two = (g, code, sel, v0, v1, val, mod) => { const p = h('<div class="k-pair"></div>'); g.append(p); frame(p, { code, variant: v0, html: q('blok', sel).outerHTML, yz: true }); frame(p, { code, variant: v1, html: alt(sel, val, mod), yz: true }); };
+  const bg = group(bs, 'Anahtarlı kutular', 'Choice/Segment ile iki durum · radius 22 · surface + line');
+  two(bg, 'Switch/Flow', '#giris .yb-flow', 'elle', 'araçla', 'arac');
+  two(bg, 'Stack/Work', '#ogretmek .yb-stack', 'sadece ben', 'başkası kullanırsa', 'baskasi');
+  two(bg, 'Slider/Version', '#model .yb-ver', 'birkaç ay önce', 'yeni sürüm', '1', (x) => x.querySelector('input[type=range]').setAttribute('value', '1'));
+  two(bg, 'Report/Notes', '#bosluk .yb-report', 'aracın gördüğü', 'benim gördüğüm', 'ben');
+  two(bg, 'Switch/Outcome', '#sonuc .yb-outc', 'arka plan', 'ekibin gördüğü', 'ekip');
+  const bq = group(bs, 'Okur etkileşimi', 'soru · üç sebebe atlama · vurgulu soru kutusu');
+  const pq = h('<div class="k-pair"></div>'); bq.append(pq);
+  frame(pq, { code: 'Poll/Reader', variant: 'seçili', html: (() => { const x = q('blok', '#urun .yb-poll'); const c = x.querySelector('.yb-choice'); c.setAttribute('aria-pressed', 'true'); x.querySelector('.yb-reply').textContent = c.getAttribute('data-reply'); return x.outerHTML; })(), yz: true });
+  frame(pq, { code: 'Nav/Jump', html: q('blok', '#urun .yb-jump').outerHTML, yz: true });
+  const pq2 = h('<div class="k-pair"></div>'); bq.append(pq2);
+  frame(pq2, { code: 'Box/Questions', variant: 'boş', html: q('blok', '.yb-qbox').outerHTML, yz: true });
+  frame(pq2, { code: 'Box/Questions', variant: 'ilk iki soru işaretli', html: (() => { const x = q('blok', '.yb-qbox'); x.querySelectorAll('input').forEach((i, n) => { if (n < 2) i.setAttribute('checked', ''); }); const v = x.querySelector('.yb-verdict'); v.classList.add('ok'); v.querySelector('.yb-vt').textContent = v.getAttribute('data-yes'); v.querySelector('.yb-vn').textContent = ''; return x.outerHTML; })(), yz: true });
+  frame(pq2, { code: 'Box/Questions', variant: 'mobil', html: q('blok', '.yb-qbox').outerHTML, width: 375, yz: true });
+
   const og = section('c3', 'organism', 'Organizmalar', ['global kabuk', 'hero', 'tekrar eden bölüm', 'tek amaçlı bölüm', 'yazı gezinmesi']);
   const k = group(og, 'Global kabuk', 'tüm sayfalarda aynı · header yapışkan');
   frame(k, { code: 'Header', html: q('home', 'header').outerHTML });
@@ -417,13 +437,14 @@ function organisms() {
 
 // ---------------- ŞABLON
 function templates() {
-  const sec = section('c3', 'template', 'Sayfa şablonları', ['Template/Home', 'Template/Blog', 'Template/Yazı', 'Template/404', 'Template/Blog kabuk']);
+  const sec = section('c3', 'template', 'Sayfa şablonları', ['Template/Home', 'Template/Blog', 'Template/Yazı', 'Template/Yazı (blok)', 'Template/404', 'Template/Blog kabuk']);
   sec.append(h(`<div class="k-legend" style="justify-content:flex-start"><span class="k-lv" style="background:#3A3D46;color:#fff">global kabuk</span><span class="k-lv" style="background:#DCDAFB;color:#2a2490">organizma</span><span class="k-lv" style="background:#ECEBFD;color:#4B43E0">molekül</span><span class="k-lv" style="background:#4B43E0;color:#fff">atom</span><span class="k-lv lv-sec">sayfaya özel bölüm</span></div>`));
   const box = group(sec, 'Bölüm sırası', 'her sayfa: başlık → içerik → footer · ilk ekran %25 ölçekte');
   const T = [
     ['Template/Home', '/', 'home', [['Progress/Read', 'atom'], ['Header', 'shell'], ['Hero/Home', 'org'], ['Section/Yazılar', 'org'], ['Section/Hakkımda', 'org'], ['Section/Hesaplarım', 'org'], ['Footer', 'shell']], 'Sıra ve aktiflik: admin › Ana sayfa › Düzen. Sütun çizgileri yalnız ilk ekranda.'],
     ['Template/Blog', '/blog/', 'blog', [['Progress/Read', 'atom'], ['Header', 'shell'], ['Hero/Page', 'org'], ['Card/Post ızgarası', 'mol'], ['Takip notu', 'sec'], ['Footer', 'shell']], 'Filtre çubuğu 2+ kategoride görünür (şu an yok).'],
     ['Template/Yazı', '/yazi/prompt-brief/', 'yazi', [['Progress/Read', 'atom'], ['Header', 'shell'], ['Nav/Yazı (sol sütun)', 'org'], ['Hero/Yazı', 'org'], ['Revision/List', 'org'], ['Switch/Brief', 'org'], ['Tabs/Model', 'org'], ['Bench/Brief', 'org'], ['Yazı sonuç', 'sec'], ['Footer', 'shell']], 'Analitik yok. app.js yüklenmez. Bölümler mor şeritle ayrılır.'],
+    ['Template/Yazı (blok)', '/yazi/arac-degil-sonuc/', 'blok', [['Progress/Read', 'atom'], ['Header', 'shell'], ['Nav/Yazı (sol sütun)', 'org'], ['Hero/Yazı (Kısaca tek paragraf)', 'org'], ['Switch/Flow', 'org'], ['Poll/Reader + Nav/Jump', 'org'], ['Stack/Work', 'org'], ['Slider/Version', 'org'], ['Report/Notes', 'org'], ['Switch/Outcome', 'org'], ['Box/Questions + Yazı sonuç', 'sec'], ['Footer', 'shell']], 'content/<ad>.json "format": "blok" → scripts/build-yazi-blok.mjs. Analitik yok.'],
     ['Template/404', '/404.html', 'nf', [['Progress/Read', 'atom'], ['Header', 'shell'], ['Hero/Page + 2 buton', 'org'], ['Footer', 'shell']], 'noindex.'],
     ['Template/Blog kabuk', '/blog/post.html', 'shell', [['Header', 'shell'], ['Hero/Page "Yükleniyor"', 'org'], ['Footer', 'shell']], 'noindex · içerik tarayıcıda Firestore\'dan çizilir.'],
   ];
