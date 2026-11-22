@@ -1,0 +1,65 @@
+/* Pehlivan AI marka değişkenleri · sürüm 1.0 · 22 Kasım 2026
+   Siteye eklenir. Sitedeki mevcut değişkenler bu adlara bağlanır, düzen değişmez. */
+
+@import url("https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;600;800&family=IBM+Plex+Mono:wght@500&display=swap");
+
+:root {
+  /* Zemin ve yüzey */
+  --pa-kraft: #E9DCC3;          /* sayfa zemini */
+  --pa-kagit: #F8F2E6;          /* okuma kartı, kod bloğu */
+  /* Metin */
+  --pa-murekkep: #1B2340;       /* ana metin, başlık · kraft üzerinde 11,4:1 */
+  --pa-silik: #4A4F66;          /* ikincil metin · kraft üzerinde 6,0:1 */
+  /* Vurgu */
+  --pa-tukenmez: #2747B0;       /* link, ana buton · kraft üzerinde 5,9:1 */
+  --pa-ceket: #D0683B;          /* sadece maskot ve büyük alan · metin olmaz */
+  /* Durum (sadece durum göstermek için) */
+  --pa-zeytin: #4F5E2A;         /* doğru, işe yaradı · 5,2:1 */
+  --pa-pas: #A1431F;            /* yanlış, sınır · 4,6:1 */
+
+  /* Yazı tipleri */
+  --pa-font: "Schibsted Grotesk", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --pa-font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+
+  /* Site yazı ölçeği */
+  --pa-h1: clamp(2.25rem, 5vw, 3.5rem);   /* 36-56 px, 800 */
+  --pa-h2: 2rem;                          /* 32 px, 800 */
+  --pa-h3: 1.5rem;                        /* 24 px, 800 */
+  --pa-govde: 1.125rem;                   /* 18 px, 400, satır 1.6 */
+  --pa-kucuk: 0.875rem;                   /* 14 px */
+  --pa-etiket: 0.8125rem;                 /* 13 px, mono */
+  --pa-satir: 1.6;
+  --pa-olcu: 68ch;                        /* uzun metin satır uzunluğu */
+
+  /* Doku */
+  --pa-doku-opaklik: 0.3;                 /* sadece zeminde, kartta yok */
+}
+
+/* Koyu varyant: koyu mod ve video kapakları */
+:root[data-theme="dark"] {
+  --pa-kraft: #141A30;          /* gece mürekkep: zemin */
+  --pa-kagit: #1F2742;          /* gece kart */
+  --pa-murekkep: #E9DCC3;       /* metin kraft rengi olur · 12,7:1 */
+  --pa-silik: #B9B3A3;          /* 8,2:1 */
+  --pa-tukenmez: #8FA6F0;       /* açık tükenmez · 7,3:1 */
+  --pa-ceket: #E58457;          /* açık ceket · 6,4:1 */
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --pa-kraft: #141A30;
+    --pa-kagit: #1F2742;
+    --pa-murekkep: #E9DCC3;
+    --pa-silik: #B9B3A3;
+    --pa-tukenmez: #8FA6F0;
+    --pa-ceket: #E58457;
+  }
+}
+
+/* Marka link stili: renk değil, çizgi taşır */
+.pa-link, .pa a {
+  color: var(--pa-tukenmez);
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 5px;
+}
