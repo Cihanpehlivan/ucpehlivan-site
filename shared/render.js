@@ -37,14 +37,21 @@ export function cover(p) {
 // Yazının adresi: "Özel sayfa adresi" doluysa (sadece site içi yol) o, değilse /blog/slug/.
 export const postHref = (p) => (typeof p.pageUrl === 'string' && /^\/[a-z0-9/-]+\/$/.test(p.pageUrl.trim()) ? p.pageUrl.trim() : `/blog/${p.slug}/`);
 
+// Video kartı (Videolar bölümü). Veri: c.videos = videos.json (yayında YouTube RSS'ten). Kart YouTube'da açılır.
+export const ytThumb = (id) => `https://i.ytimg.com/vi/${encodeURIComponent(id)}/hqdefault.jpg`;
+export function videoCard(v) {
+  return `<a class="bcard vcard" href="https://www.youtube.com/watch?v=${e(encodeURIComponent(v.id))}" target="_blank" rel="noopener"><div class="bcover has-img vcover"><img src="${e(ytThumb(v.id))}" alt="" loading="lazy" width="480" height="360"><span class="vplay" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z" fill="currentColor"/></svg></span></div><div class="bbody"><p class="bmeta"><span class="chip">Video</span><time datetime="${e(String(v.published || '').slice(0, 10))}">${trDate(String(v.published || '').slice(0, 10))}</time></p><h3>${e(v.title)}</h3></div></a>`;
+}
+
 export function postCard(p) {
   return `<a class="bcard" href="${e(postHref(p))}" data-cat="${e(p.category)}">${cover(p)}<div class="bbody"><p class="bmeta">${p.category ? `<span class="chip">${e(p.category)}</span>` : ''}<time datetime="${e(p.publishedAt)}">${trDate(p.publishedAt)}</time>${p.readingMinutes ? `<span>${e(p.readingMinutes)} dk okuma</span>` : ''}</p><h3>${e(p.title)}</h3><p class="ex">${e(p.excerpt)}</p></div></a>`;
 }
 
 // ---------- Bölüm düzeni (admin: Ana sayfa > Düzen)
-export const SECTION_KEYS = [['hero', 'Hero'], ['blog', 'Yazılar'], ['about', 'Hakkımda'], ['accounts', 'Hesaplarım']];
-const DEFAULT_LAYOUT = SECTION_KEYS.map(([key]) => ({ key, on: true }));
-const NAV = { blog: ['yazilar', 'Yazılar'], about: ['hakkimda', 'Hakkımda'], accounts: ['iletisim', 'Hesaplarım'] };
+export const SECTION_KEYS = [['hero', 'Hero'], ['blog', 'Yazılar'], ['videos', 'Videolar'], ['about', 'Hakkımda'], ['accounts', 'Hesaplarım']];
+// Videolar yeni bölüm: düzende yoksa pasif (CLAUDE.md §4).
+const DEFAULT_LAYOUT = SECTION_KEYS.map(([key]) => ({ key, on: key !== 'videos' }));
+const NAV = { blog: ['yazilar', 'Yazılar'], videos: ['videolar', 'Videolar'], about: ['hakkimda', 'Hakkımda'], accounts: ['iletisim', 'Hesaplarım'] };
 export function activeSections(h = {}) {
   const src = Array.isArray(h.layout) && h.layout.length ? h.layout : DEFAULT_LAYOUT;
   const seen = new Set(), out = [];
@@ -76,7 +83,7 @@ const ILLUSTRATION = '<div class="about-ill about-maskot"><img src="/assets/bran
 // CSS/JS değişince bu sayıyı artır: tarayıcı önbelleğindeki eski dosyalar kullanılmaz.
 // /assets/** 1 yıl önbellekte (firebase.json). main.css, main.js veya app.js değişip bu sayı değişmezse
 // .github/workflows/kontrol.yml push'u hatayla durdurur.
-const ASSET_V = '23';
+const ASSET_V = '24';
 
 // Hesaplarım: çalışma masasındaki maskot (karakter sheet › Çalışma pozu, 305×261; kapalı zemin cepleri ve yer gölgesi temizlendi, koyu temada da temiz). Masaüstünde solda, listeye dönük; telefonda gizli.
 const ACC_ILLUSTRATION = '<div class="acc-ill acc-maskot" aria-hidden="true"><img src="/assets/brand/pehlivan-poz-calisma-2.webp" alt="" width="305" height="261" loading="lazy" decoding="async"></div>';
@@ -144,8 +151,9 @@ export function layout(c, { title, ogTitle = '', description, type = 'website', 
   const ld = jsonld || graph(identityLd(c, origin));
   const secs = activeSections((c.home || {}));
   const navLink = (k) => { const [id, label] = NAV[k]; if (k === 'blog') return `<a href="${home ? '#yazilar' : '/blog/'}"${path.startsWith('/blog') ? ' aria-current="page"' : ''}>${label}</a>`; return `<a href="${p}#${id}">${label}</a>`; };
-  const navs = secs.filter((k) => NAV[k]).map(navLink).join('');
-  const footPages = secs.filter((k) => NAV[k] && k !== 'accounts').map((k) => (k === 'blog' ? '<a href="/blog/">Yazılar</a>' : `<a href="/#${NAV[k][0]}">${NAV[k][1]}</a>`)).join('');
+  const shown = (k) => NAV[k] && (k !== 'videos' || (c.videos || []).length > 0);
+  const navs = secs.filter(shown).map(navLink).join('');
+  const footPages = secs.filter((k) => shown(k) && k !== 'accounts').map((k) => (k === 'blog' ? '<a href="/blog/">Yazılar</a>' : `<a href="/#${NAV[k][0]}">${NAV[k][1]}</a>`)).join('');
   return `<!DOCTYPE html>
 <html lang="tr">
 <head>
@@ -230,6 +238,13 @@ const SECTIONS = {
     const latest = (c.posts || []).slice(0, bl.count ?? 6);
     if (!latest.length) return '';
     return `<section class="block" id="yazilar" style="padding-top:40px"><div class="wrap"><div class="head"><div>${bl.kicker ? `<span class="kicker">${e(bl.kicker)}</span>` : ''}<h2 class="d">${e(bl.title)}</h2></div>${bl.intro ? `<p>${e(bl.intro)}</p>` : ''}</div>${filterBar(c, latest)}<div class="bgrid${latest.length >= 3 ? ' feat' : ''}" data-grid>${latest.map(postCard).join('')}</div>${(c.posts || []).length > latest.length || bl.allLabel ? `<div style="margin-top:28px"><a class="btn btn-ghost" href="/blog/">${e(bl.allLabel || 'Tüm yazıları gör')}</a></div>` : ''}</div></section>`;
+  },
+  videos(c) {
+    const vd = (c.home || {}).videos || {};
+    const list = (c.videos || []).slice(0, vd.count ?? 3);
+    if (!list.length) return '';
+    const kanal = vd.channelUrl || 'https://www.youtube.com/@pehlivanai';
+    return `<section class="block" id="videolar" style="padding-top:40px"><div class="wrap"><div class="head"><div><span class="kicker">${e(vd.kicker || 'YouTube')}</span><h2 class="d">${e(vd.title || 'Videolar')}</h2></div>${vd.intro ? `<p>${e(vd.intro)}</p>` : ''}</div><div class="bgrid${list.length === 2 ? ' two' : ''}">${list.map(videoCard).join('')}</div><div style="margin-top:28px"><a class="btn btn-ghost" href="${e(kanal)}" target="_blank" rel="noopener">${e(vd.allLabel || 'Kanala git')} ↗</a></div></div></section>`;
   },
   about(c) {
     const ab = (c.home || {}).about || {};
@@ -353,9 +368,11 @@ export function renderLlms(c, origin = 'https://ucpehlivan.web.app') {
   // İnteraktif yazıların (/yazi/…) düz metin sürümü de verilir: build-yazi.mjs index.md üretir.
   const posts = (c.posts || []).map((p) => { const h = postHref(p); return `- [${one(p.title)}](${origin}${h}): ${one(p.seoDescription || p.excerpt)}${h.startsWith('/yazi/') ? ` Düz metin: ${origin}${h}index.md` : ''}`; });
   const accs = accounts(c).filter((a) => /^https?:/.test(a.url)).map((a) => `- [${one(a.name)}](${a.url})`);
+  const vids = (c.videos || []).slice(0, 10).map((v) => `- [${one(v.title)}](https://www.youtube.com/watch?v=${v.id}) (${String(v.published || '').slice(0, 10)})`);
   return [`# ${one(s.name)}`, '', `> ${one(s.seoDescription || s.footerTagline)}`, '', ...(about.length ? [about.join(' '), ''] : []),
     'Site Türkçedir. Yazılar, yapay zekayı her gün gerçek işte kullanan bir proje yöneticisinin notları ve deneyimleridir.', '',
     `## ${one(bl.pageTitle || bl.title || 'Yazılar')}`, '', ...(posts.length ? posts : ['- Henüz yazı yok.']), '',
+    ...(vids.length ? ['## Videolar', '', ...vids, ''] : []),
     '## Sayfalar', '', `- [Ana sayfa](${origin}/)`, `- [Tüm yazılar](${origin}/blog/)`, `- [Hakkımda](${origin}/#hakkimda)`, `- [RSS beslemesi](${origin}/feed.xml)`, '',
     ...(accs.length ? ['## Hesaplar', '', ...accs, ''] : [])].join('\n');
 }

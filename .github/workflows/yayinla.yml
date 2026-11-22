@@ -10,10 +10,15 @@ on:
           - onizleme
           - canli
         default: onizleme
+  # Her sabah 07:00 (TR): yeni YouTube videosu varsa canlıyı yeniler (videos.json değişmediyse yüklemez).
+  schedule:
+    - cron: '0 4 * * *'
 
 jobs:
   yayinla:
     runs-on: ubuntu-latest
+    env:
+      HEDEF: ${{ inputs.hedef || 'canli' }}
     steps:
       - uses: actions/checkout@v5
 
@@ -24,9 +29,18 @@ jobs:
       - name: İçeriği Firestore'dan al ve sayfaları üret
         run: node scripts/publish.mjs
 
+      # Zamanlı çalışma: video listesi canlıdakiyle aynıysa yükleme yapılmaz.
+      - name: Video listesi değişti mi?
+        id: degisim
+        run: |
+          if [ "${{ github.event_name }}" != "schedule" ]; then echo "yukle=1" >> "$GITHUB_OUTPUT"; exit 0; fi
+          if curl -sf https://ucpehlivan.web.app/videos.json | cmp -s - public/videos.json; then
+            echo "Video listesi aynı, yükleme yok."; echo "yukle=0" >> "$GITHUB_OUTPUT"
+          else echo "yukle=1" >> "$GITHUB_OUTPUT"; fi
+
       # Metninde yer tutucu ([DÜZENLE], [SÜRE], [ÖRNEK: …]) kalan yazı sayfası canlıya çıkmaz; önizlemede görünür.
       - name: Yer tutuculu yazıları canlıdan çıkar
-        if: inputs.hedef == 'canli'
+        if: env.HEDEF == 'canli' && steps.degisim.outputs.yukle == '1'
         run: |
           for d in public/yazi/*/; do
             if grep -rqE '\[(DÜZENLE|SÜRE|ÖRNEK:)' "$d"; then
@@ -36,18 +50,19 @@ jobs:
           done
 
       - name: Firebase Hosting'e yükle
+        if: steps.degisim.outputs.yukle == '1'
         uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: ${{ secrets.GITHUB_TOKEN }}
           firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_UCPEHLIVAN }}
           projectId: ucpehlivan
-          channelId: ${{ inputs.hedef == 'canli' && 'live' || 'onizleme' }}
+          channelId: ${{ env.HEDEF == 'canli' && 'live' || 'onizleme' }}
           expires: 7d
 
       # IndexNow: canlı yayından sonra site haritasındaki adresleri Bing/Yandex'e bildirir (ücretsiz).
       # Anahtar gizli değildir; doğrulama için public/<anahtar>.txt herkese açık durmalıdır.
       - name: Arama motorlarına bildir (IndexNow)
-        if: inputs.hedef == 'canli'
+        if: env.HEDEF == 'canli' && steps.degisim.outputs.yukle == '1'
         continue-on-error: true
         env:
           INDEXNOW_KEY: ea58339bf86fb6753cfb4a481016fe5f

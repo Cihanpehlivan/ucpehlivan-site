@@ -45,6 +45,12 @@ export const homeSections = [
     strs('categories', 'Kategori listesi', { help: 'Her satıra bir kategori. Yazı formundaki kategori seçenekleri bu listeden gelir.' }),
     { key: 'showFilter', title: 'Kategori filtresini göster', type: 'bool', help: 'Açıkken ve yayındaki yazılarda en az 2 farklı kategori varsa, yazıların üstünde filtre butonları görünür.' },
   ] },
+  { key: 'videos', title: 'Videolar', anchor: 'videolar', fields: [
+    { type: 'note', title: 'Videolar YouTube kanalından (RSS) her yayında otomatik gelir; GitHub her sabah siteyi yeniden yayınlar. Kanalda video yokken bölüm ve menü linki görünmez. Bölümü açmak için: Düzen > Videolar > Sitede göster.' },
+    t('kicker', 'Küçük etiket', { help: 'Boşsa: YouTube' }), t('title', 'Başlık', { help: 'Boşsa: Videolar' }), ta('intro', 'Açıklama', 2),
+    { key: 'count', title: 'Gösterilecek video sayısı', type: 'number', help: 'Boşsa 3.' },
+    t('allLabel', 'Kanal butonu metni', { help: 'Boşsa: Kanala git' }), t('channelUrl', 'Kanal adresi', { help: 'Boşsa: https://www.youtube.com/@pehlivanai' }),
+  ] },
   { key: 'about', title: 'Hakkımda', anchor: 'hakkimda', fields: [
     t('kicker', 'Küçük etiket'), t('title', 'Başlık'),
     strs('paragraphs', 'Paragraflar', { help: 'Her satır ayrı bir paragraftır.' }),

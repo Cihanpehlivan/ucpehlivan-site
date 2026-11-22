@@ -484,3 +484,10 @@ section.block::before{content:"";position:absolute;top:0;left:max(32px,calc((100
 /* Hesaplarım maskotu (çalışma pozu, kaynak 305 px): masaüstünde solda (liste sağda), 400px; ≤900 listenin altında, ≤640 gizli (mevcut kurallar) */
 .acc-maskot img{display:block;width:100%;max-width:400px;height:auto;margin:0 auto}
 @media (min-width:901px){.acc-wrap.has-ill{grid-template-columns:minmax(0,1fr) minmax(0,1.15fr)}.acc-wrap.has-ill .acc-maskot{order:-1}}
+
+/* Videolar bölümü (video kartı = yazı kartı + oynat rozeti). Kapak YouTube hqdefault (4:3), 16:9 kutuda kırpılır. */
+.vcover{position:relative}
+.vplay{position:absolute;left:50%;top:50%;width:64px;height:64px;margin:-32px 0 0 -32px;border-radius:50%;background:var(--accent);color:var(--on-accent);display:grid;place-items:center;transition:transform .2s}
+.vplay svg{width:28px;height:28px;margin-left:3px}
+.vcard:hover .vplay,.vcard:focus-visible .vplay{transform:scale(1.08)}
+@media (prefers-reduced-motion:reduce){.vplay{transition:none}}

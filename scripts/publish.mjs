@@ -5,6 +5,7 @@ import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { collectMedia, resolveMedia } from '../shared/render.js';
 import { buildPages } from './build-static.mjs';
+import { fetchVideos } from './youtube.mjs';
 
 const here = dirname(fileURLToPath(import.meta.url));
 const pid = process.env.FIREBASE_PROJECT || JSON.parse(readFileSync(join(here, '..', '.firebaserc'), 'utf8')).projects.default;
@@ -36,4 +37,7 @@ for (const id of ids) {
   map[id] = `/media/${id}.${ext}`;
 }
 console.log(`${ids.length} medya dosyası indirildi.`);
-buildPages(resolveMedia(bundle, map));
+const { videos, source } = await fetchVideos();
+writeFileSync(join(here, '..', 'public', 'videos.json'), JSON.stringify(videos));
+console.log(`${videos.length} video (${source}).`);
+buildPages({ ...resolveMedia(bundle, map), videos });

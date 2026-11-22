@@ -135,3 +135,14 @@
   .is-alt tr.yb-t-risk{box-shadow:inset 4px 0 0 var(--stop)}
   .is-alt tr.yb-t-onemli{box-shadow:inset 4px 0 0 var(--accent)}
 }
+
+/* Video bloğu: kapak + oynat düğmesi; tıklanınca youtube-nocookie iframe (yazi-blok.js) */
+.yb-video{margin:4px 0 28px;max-width:66ch}
+.yb-vbox{position:relative;aspect-ratio:16/9;border-radius:16px;overflow:hidden;background:var(--surface-2);border:1px solid var(--line)}
+.yb-vbox img,.yb-vbox iframe{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border:0}
+.yb-vplay{position:absolute;left:50%;top:50%;width:72px;height:72px;margin:-36px 0 0 -36px;border:0;border-radius:50%;background:var(--accent);color:var(--on-accent);display:grid;place-items:center;cursor:pointer;transition:transform .2s}
+.yb-vplay svg{width:30px;height:30px;margin-left:4px}
+.yb-vplay:hover,.yb-vplay:focus-visible{transform:scale(1.08)}
+.yb-vplay:focus-visible{outline:3px solid var(--on-accent);outline-offset:3px}
+.yb-video figcaption{margin-top:10px}
+@media (prefers-reduced-motion:reduce){.yb-vplay{transition:none}}

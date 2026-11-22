@@ -3,7 +3,7 @@
 // Ortak parçalar /yazi/prompt-brief/ ile aynı sınıfları kullanır (yazi.css + yazi.js): sayfa yolu, yazar satırı, Özet/Kısaca,
 // kapak, bölüm menüsü, ilerleme, paylaşım. Yeni bileşenler yazi-blok.css + yazi-blok.js içindedir (önek: yb-).
 // build-yazi.mjs (prompt-brief) bu dosyadan bağımsızdır; ona dokunulmaz.
-import { layout, identityLd, articleLd, breadcrumbLd, faqLd, trDate } from '../shared/render.js';
+import { layout, identityLd, articleLd, breadcrumbLd, faqLd, trDate, ytThumb } from '../shared/render.js';
 
 const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (ch) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[ch]));
 // Yayına girmemesi gereken işaretler: [DÜZENLE], [SÜRE], [ÖRNEK: …]. Önizlemede vurgulu görünür; yayinla.yml canlıya almaz.
@@ -44,6 +44,8 @@ export function renderBlok(C, site, { origin = 'https://ucpehlivan.web.app', yaz
       const one = list.length === 1;
       return `<aside class="yz-tldr${one ? ' yb-tldr-one' : ''}" aria-label="${esc(m.summaryLabel)}"><p class="yz-mono">${esc(m.summaryLabel)}</p>${one ? `<p class="yb-tldr-t">${md(list[0])}</p>` : `<ul>${list.map((x) => `<li>${md(x)}</li>`).join('')}</ul>`}</aside>`;
     },
+    // YouTube videosu: önce yalnız kapak görseli; tıklayınca youtube-nocookie oynatıcısı yüklenir (yazi-blok.js). Link JS olmadan da çalışır.
+    video: (b) => `<figure class="yb-video"><div class="yb-vbox" data-yb="video" data-id="${esc(b.id)}" data-title="${esc(b.title)}"><img src="${esc(ytThumb(b.id))}" alt="" loading="lazy" width="480" height="360"><button type="button" class="yb-vplay" aria-label="Videoyu oynat: ${esc(b.title)}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5z" fill="currentColor"/></svg></button></div><figcaption class="yz-mono yz-small">${b.caption ? `${esc(b.caption)} · ` : ''}<a href="https://www.youtube.com/watch?v=${esc(encodeURIComponent(b.id))}" target="_blank" rel="noopener">YouTube'da izle ↗</a></figcaption></figure>`,
     prose: (b) => `<div class="yz-prose${b.big ? ' yz-big' : ''}">${ps(b.paragraphs)}</div>`,
     // Aynı adımlar, iki yapan: anahtar adımların sahibini değiştirir.
     flow: (b, sec) => `<figure class="yz-switchbox yb-flow" data-yb="state" data-state="${esc(b.options[0].key)}">
@@ -115,9 +117,11 @@ ${secs.map(section).join('\n')}
 </article></div></div>
 <script type="application/json" id="yz-data">${JSON.stringify(client).replace(/</g, '\\u003c')}</script>`;
 
+  // VideoObject: yazıdaki her video bloğu (yükleme tarihi olanlar) Google'da videolu sonuç için.
+  const videoLd = C.sections.flatMap((x) => x.blocks).filter((b) => b.type === 'video' && b.id && b.date).map((b) => ({ '@type': 'VideoObject', name: b.title, description: b.description || m.description, thumbnailUrl: ytThumb(b.id), uploadDate: b.date, embedUrl: `https://www.youtube.com/embed/${b.id}`, url: `https://www.youtube.com/watch?v=${b.id}`, ...(b.duration ? { duration: b.duration } : {}) }));
   const ld = {
     '@context': 'https://schema.org',
-    '@graph': [...identityLd(c, origin), articleLd({ url, headline: m.title, description: m.description, datePublished: m.published, dateModified: m.updated, image: [m.cover && origin + m.cover.src, origin + m.ogImage].filter(Boolean) }, origin), breadcrumbLd([['Ana sayfa', '/'], ['Yazılar', '/blog/'], [m.title, m.path]], origin), ...((m.faq || []).length ? [faqLd(m.faq, url)] : [])],
+    '@graph': [...identityLd(c, origin), ...videoLd, articleLd({ url, headline: m.title, description: m.description, datePublished: m.published, dateModified: m.updated, image: [m.cover && origin + m.cover.src, origin + m.ogImage].filter(Boolean) }, origin), breadcrumbLd([['Ana sayfa', '/'], ['Yazılar', '/blog/'], [m.title, m.path]], origin), ...((m.faq || []).length ? [faqLd(m.faq, url)] : [])],
   };
   let html = layout(c, { origin, path: m.path, type: 'article', jsonld: ld, title: `${m.seoTitle || m.title} | ${s.name}`, ogTitle: m.seoTitle ? `${m.title} | ${s.name}` : '', description: m.description, image: m.ogImage, imageAlt: m.ogImageAlt, body });
   html = html.replace(/<script type="module" src="\/assets\/app\.js[^"]*"><\/script>\n?/, '');
@@ -148,6 +152,7 @@ export function blokMarkdown(C, { author = '', origin = 'https://ucpehlivan.web.
     for (const b of x.blocks) {
       if (b.type === 'summary' && (m.summary || []).length) push(`**${m.summaryLabel}:** ${m.summary.join(' ')}`);
       if (b.type === 'prose') push(...b.paragraphs);
+      if (b.type === 'video') push(`[Video: ${b.title}](https://www.youtube.com/watch?v=${b.id})`);
       if (b.type === 'closing') push('---', ...b.paragraphs);
       if (b.type === 'questions') push(b.intro, b.items.map((q, i) => `${i + 1}. ${q}`).join('\n'), b.rule);
     }

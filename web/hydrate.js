@@ -39,6 +39,8 @@ async function getDoc(api, pid, path) {
       } catch {}
     }));
     const c = resolveMedia(bundle, map);
+    // Videolar Firestore'da değil, yayında üretilen /videos.json'da (YouTube RSS).
+    try { c.videos = await (await fetch('/videos.json', { cache: 'no-store' })).json(); } catch { c.videos = []; }
     let path = location.pathname;
     if (path === '/blog/post.html') path = '/blog/';
     const { html } = renderPath(c, path, { origin: location.origin, version: bundle.version });

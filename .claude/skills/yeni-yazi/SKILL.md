@@ -52,6 +52,7 @@ Blok kataloğu (ayrıntı: `scripts/yazi-blok.mjs`, örnek: `content/arac-degil-
 |---|---|
 | `summary` | Kısaca kutusu (`meta.summary`, giriş bölümünde) |
 | `prose` | Paragraflar (`**kalın**` olur) |
+| `video` | YouTube videosu: `{ "type": "video", "id": "<videoId>", "title": "…", "date": "YYYY-AA-GG", "caption": "…", "description": "…" }`. Tıklayınca oynar; `date` varsa VideoObject. Yazının videosu varsa giriş bölümüne koy. |
 | `flow` | İki seçenekli adım akışı + sonuç (önce/sonra) |
 | `poll` | Okura soru, seçime göre cevap |
 | `jump` | Numaralı bölümlere atlama listesi |

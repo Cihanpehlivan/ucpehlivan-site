@@ -55,4 +55,18 @@
     boxes.forEach(function (b) { b.addEventListener('change', sync); });
     sync();
   });
+
+  /* Video: tıklanınca oynatıcı yüklenir (öncesinde YouTube'a istek yok) */
+  each('[data-yb="video"]', function (box) {
+    var btn = box.querySelector('.yb-vplay');
+    if (!btn) return;
+    btn.addEventListener('click', function () {
+      var f = document.createElement('iframe');
+      f.src = 'https://www.youtube-nocookie.com/embed/' + encodeURIComponent(box.getAttribute('data-id')) + '?autoplay=1&rel=0';
+      f.title = box.getAttribute('data-title') || 'YouTube videosu';
+      f.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen';
+      f.allowFullscreen = true;
+      box.innerHTML = ''; box.appendChild(f); f.focus();
+    });
+  });
 })();

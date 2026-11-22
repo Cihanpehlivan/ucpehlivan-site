@@ -21,6 +21,10 @@
         "on": true
       },
       {
+        "key": "videos",
+        "on": false
+      },
+      {
         "key": "about",
         "on": true
       },
@@ -113,6 +117,14 @@
           "visible": true
         }
       ]
+    },
+    "videos": {
+      "kicker": "YouTube",
+      "title": "Videolar",
+      "intro": "Yapay zekayı gerçek işte nasıl kullandığımı videoda da anlatıyorum.",
+      "count": 3,
+      "allLabel": "Kanala git",
+      "channelUrl": "https://www.youtube.com/@pehlivanai"
     }
   },
   "cases": [],
