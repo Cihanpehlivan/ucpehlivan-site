@@ -16,11 +16,11 @@
       "Yapay zeka modelleri (LLM'ler) artık kendileri birer araç. Her yeni sürümde, ayrı bir SaaS ürününün yaptığı işi doğrudan yapabiliyorlar. Bu yüzden onlarla yarışan bir uygulama kurmak yerine, onları işin içinde kullanıp sonuca ulaşmayı seçiyorum. Rakibimizi yapay zeka şirketleri yapamayız."
     ],
     "cover": {
-      "src": "/yazi/arac-degil-sonuc/kapak-2.webp",
+      "src": "/yazi/arac-degil-sonuc/kapak-3.webp",
       "width": 1536,
       "height": 864,
-      "bg": "#F1F2F6",
-      "alt": "Solda büyük harflerle “Araç değil, sonuç.” yazısı. Sağda arkada iki uygulama penceresi, önde mor çubuk grafikli ve üç onay işaretli bir rapor sayfası, köşesinde yeşil büyük bir onay işareti."
+      "bg": "#13162B",
+      "alt": "Koyu zeminde “Araç değil, sonuç.” yazısı. Altında “Araç” başlıklı üç uygulama penceresinden bir okla üç onay işaretli ve tablolu “Sonuç” sayfasına geçiş. Sağda elinde kahveyle sayfayı gösteren bıyıklı maskot."
     },
     "crumbs": { "label": "Sayfa yolu", "home": "Ana sayfa", "blog": "Yazılar" },
     "share": { "label": "Bu yazıyı paylaş", "linkedin": "LinkedIn'de paylaş", "x": "X'te paylaş", "copy": "Linki kopyala", "native": "Paylaş" },

@@ -3,7 +3,7 @@
 Umut Cihan Pehlivan · 16 Kasım 2026 · 7 dk okuma  
 Kaynak: https://ucpehlivan.web.app/yazi/prompt-brief/
 
-![“İyi prompt, iyi brief’tir.” yazısı; yanında Hedef, Sınırlar ve Serbestlik maddeleri işaretlenmiş bir kâğıt altlığı ve kalem.](https://ucpehlivan.web.app/yazi/prompt-brief/kapak.webp)
+![Koyu zeminde “İyi prompt, iyi brief.” yazısı. Altında üç uzun kâğıt şeridinden bir okla Hedef, Sınır ve Serbestlik bölümlü tek bir sayfaya geçiş. Sağda elinde kahveyle sayfayı gösteren bıyıklı maskot.](https://ucpehlivan.web.app/yazi/prompt-brief/kapak-2.webp)
 
 > Yeni modeller zeki; adım adım reçeteyle kısıtlanınca değil, hedef ve sınırla yönlendirilince iyi iş çıkarıyor. Bir proje yöneticisinin gözünden interaktif bir okuma.
 
