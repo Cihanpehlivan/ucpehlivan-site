@@ -75,7 +75,9 @@ Yeni bir blok tipi gerekiyorsa: önce sor; `yazi-blok.mjs` + `yazi-blok.css/js` 
 
 ## 5. Kapak
 - `kapak.webp` 1536×864 (16:9) + `og.png` 1200×630 (kapak yüksekliğe sığar, yanlar `meta.cover.bg`).
-- Sahibinin görseli: oranı koruyarak canvas ile (headless Chrome) dönüştür. Şablon: marka renkleri (`pehlivan-tokens.css`), Schibsted Grotesk; Türkçe harfler için `document.fonts.load(…, 'ğüşıöçİĞÜŞÖÇ')`.
+- **Şablondan (varsayılan, görsel yoksa):** `meta.kapakBaslik` yaz (kısa, 2–6 kelime; `*vurgu*` Tükenmez renginde; yoksa `title` kullanılır), sonra
+  `CHROME=<yol> node scripts/build-kapak.mjs content/<ad>.json [--poz anlatim|calisma] [--ad kapak-2]` → `kapak.webp` + `og.png`. Çıktıdaki `meta.cover` satırını JSON'a işle, `alt` yaz. Windows'ta `CHROME="C:/Program Files/Google/Chrome/Application/chrome.exe"`. Önce `--cikti <scratchpad>` ile deneyip görseli sahibine göster.
+- Sahibinin görseli: oranı koruyarak canvas ile (headless Chrome) dönüştür; Türkçe harfler için `document.fonts.load(…, 'ğüşıöçİĞÜŞÖÇ')`.
 - **Yayındaki bir görsel değişirse yeni dosya adı** (`kapak-2.webp`): görseller 7 gün önbellekte.
 - `meta.cover.alt` görseli anlatır (dosya adında / alt metinde marka adı yok).
 
