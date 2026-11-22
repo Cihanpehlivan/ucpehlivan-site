@@ -215,7 +215,7 @@ Kontrol: `ui-kit/UI-00-Kit.html` repo kökünden yerel sunucuyla açılır (`npx
 | Kaldırıldı: markalar şeridi, rakamlar, "ne yaparım", vakalar, çalışma şekli/sistemim, seriler, "yazdığım konular" şeridi, araçlar şeridi, kariyer çizelgesi, fotoğraf, telefon, CV, header butonu. | Kas 2026 |
 | Bölüm adı "Arşiv" değil **"Yazılar"**. | Kas 2026 |
 | Hero başlığı: "Her gün yapay zeka kullanan birinden notlar ve tecrübeler". | Kas 2026 |
-| Hesaplar: LinkedIn (vurgulu), GitHub, E-posta. X ve YouTube hesapları **henüz yok**. | Kas 2026 |
+| Hesaplar: LinkedIn (vurgulu), GitHub, YouTube (`@pehlivanai`, 2026-11-22), E-posta. X hesabı **henüz yok**. | Kas 2026 |
 | Footer: büyük isim yazısı (wordmark) yok, telif satırı ortada, menü başlığı **"Keşfet"** (Yazılar, Hakkımda). | Kas 2026 |
 | Sütun çizgileri (`.guides`) sadece ana sayfanın ilk ekranında; yazı ve blog sayfalarında yok. Bölümler mor şeritli çizgiyle ayrılır. | Kas 2026 |
 | Hesaplarım illüstrasyonu telefonda (≤640) gizli, tablette (≤900) metnin altında. | Kas 2026 |
@@ -326,7 +326,7 @@ METİN            [Claude Doc'tan Markdown]
 | Bülten aboneliği | Firestore'a e-posta kaydı (Spark'ta çalışır). Gönderim harici ücretsiz servisle. |
 | Prompt kütüphanesi | Kopyala butonlu kartlar. |
 | Öne çıkan içerik | Hero altında tek sabitlenmiş yazı/video. |
-| Videolar | YouTube kanalı açılınca. |
+| Videolar | YouTube kanalı açıldı (`@pehlivanai`); bölüm istenince eklenir. |
 | Şu an masamda | Şu an denenen araçlar. |
 | Yaptıklarım | Kendi araçları ve deneyleri, GitHub linkli. |
 
@@ -362,7 +362,7 @@ Not eklerken **Açık işler** listesini de güncelle: biten işi sil, yeni aç�
 | Search Console: `/yazi/arac-degil-sonuc/` dizine ekleme | Sahibi + Claude | Kota açılınca listeye ekle (prompt-brief, /, /blog/ ile birlikte). Uygulama panelinde Google oturumu yok; Claude in Chrome kullan. |
 | Normal blog yazısı, kategori filtresi | Claude | Ekrana gelince `ui-kit`'e ekle (`template_only`). Normal yazı şablonuna (`renderPost`) da görünür sayfa yolu + paylaşım satırı ekle (yalnız interaktif yazıda var); `main.css` + `ASSET_V` + derleme gerekir (Mac). |
 | Sonraki dönem: ayrı Hakkımda sayfası (`/hakkimda/`) + yazı sonunda yazar kutusu | Sahibi karar verdi: sonra | Person verisinin merkezi olur; "kim yazdı" sorusu (GEO) |
-| LinkedIn paylaşımı · X/YouTube hesapları · pasif bölüm fikirleri (§10) | Sahibi | |
+| LinkedIn paylaşımı · X hesabı · pasif bölüm fikirleri (§10) | Sahibi | YouTube 2026-11-22'de eklendi |
 | Repo herkese açık: private repo / `CLAUDE.local.md` kararı | Sahibi | |
 | Google Analytics var, çerez onay bandı yok | Sahibi | KVKK açısından bakılmalı (SEO değil) |
 | Marka: maskot 2x kaynak (480×590), kökteki `[1]` adlı marka dosyaları, hero 4 satır | Sahibi | 2026-11-22 marka katmanı notu |
@@ -379,6 +379,7 @@ Not eklerken **Açık işler** listesini de güncelle: biten işi sil, yeni aç�
 - **Logo canlıda (aynı gün):** `be054b5` canlıya alındı; dört sayfada yeni logo (viewBox 414×144), `?v=18`, favicon yeni, yalnız Schibsted yükleniyor.
 - **Maskot büyüdü (aynı gün):** Sahibi maskotu metne baksın ve büyüsün istedi. 240×295 PNG büyütülünce bulanıktı; sheet'teki poz da aynı boyutta. Maskot `kapak-3` görselinden (1672×941) kesildi: kenardan flood fill + büyük koyu bölgeler zemin, yalnız en büyük bileşen (belge çizimi atıldı), lacivert kenar halesi çizgi rengine çekildi → `pehlivan-poz-anlatim-buyuk.webp` (591×844, 45 KB, alfa). Kapakta zaten sola bakıyor, aynalama yok. `.about-maskot img` max 340px (telefon 240px, mevcut kural), `clip-path` kalktı. `ASSET_V` 18→19.
 - **Maskot kesimi düzeltildi (aynı gün):** İlk kesimde (flood fill + kenar halesini çizgi rengine çekme) dış çizgi kesik kesik kaldı; sahibi fark etti. Yeni yöntem: saydamlık mavi fazlasından (B−R; lacivert zemin ≈23, siyah çizgi ≈−7), yarı saydam piksellerin rengi zeminden ayrıştırıldı (unmix), yalnız en büyük bileşen + 3px kenar. Çıktı `pehlivan-poz-anlatim-2x.webp` (598×857); önizlemeye çıkmış `-buyuk.webp` silindi (yeni ad: 1 yıl önbellek). `ASSET_V` 19→20. **Ders:** kesimden sonra tam boyutta (1:1) dış çizgiye bak. `b0da3e5` canlıda (`?v=20`, maskot 340px doğrulandı).
+- **YouTube hesabı (aynı gün):** Admin › Ana sayfa › Hesaplarım'a eklendi (Claude in Chrome): ad YouTube, alt metin “pehlivanai · videolar”, adres https://www.youtube.com/@pehlivanai, simge youtube, sıra GitHub ile E-posta arası. Kaydedince canlıda göründü (kart + footer). Statik HTML / JSON-LD `sameAs` / llms.txt bir sonraki canlı yayında güncellenir.
 - **Açık kalan:** Kullanılmayan dosyalar: `doku-kraft.webp`, `build-doku.mjs`, `archivo-800-latin.woff2` + `OFL-Archivo.txt`, kökteki `[1]` dosyaları (silme onayı). Kökteki `pehlivan-tokens[1].css` ve `pehlivan-poz-anlatim-seffaf[1].png` (silme onayı). Maskot için 2x (480×590) kaynak. Hero satır kırılması.
 - **Sonraki adım:** Onayla push → `kontrol.yml` → `yayinla.yml hedef=onizleme` → önizlemede kontrol → canlı.
 ### 2026-11-19 — İkinci yazı: /yazi/arac-degil-sonuc/ (Windows, blok biçimi)
