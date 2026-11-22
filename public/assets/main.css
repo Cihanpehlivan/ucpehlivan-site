@@ -41,9 +41,9 @@ header{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;background:co
 .lm-bg{fill:var(--ink)}.lm-a{fill:var(--bg);opacity:.45}.lm-b{fill:var(--bg)}.lm-c{fill:var(--accent)}.lm-d{fill:var(--accent)}
 .logo-mark rect,.logo-mark path{transition:transform .35s cubic-bezier(.2,.8,.2,1);transform-box:fill-box}
 .logo:hover .lm-a{transform:translateX(3px)}.logo:hover .lm-c{transform:translateX(-3px)}.logo:hover .lm-d{transform:rotate(90deg)}
-/* Logo: iki satırlı SVG (render.js › logoSvg). Metin Archivo 800, genişlik 100 (ölçüler bu ayara göre). */
+/* Logo: iki satırlı SVG (render.js › logoSvg). Metin Schibsted Grotesk 800, harf aralığı -1.5px (ölçüler bu ayara göre). */
 .logo-svg{display:block;height:40px;width:auto;overflow:visible}
-.logo-svg text{font-family:"Archivo",var(--display);font-weight:800;font-variation-settings:"wdth" 100;letter-spacing:-1.5px}
+.logo-svg text{font-family:var(--display);font-weight:800;letter-spacing:-1.5px}
 .logo-svg-lg{height:64px}
 .logo-text b{font-weight:800;font-size:15px;letter-spacing:-.01em;line-height:1}
 .logo-text small{font-family:var(--body);font-variation-settings:normal;font-weight:500;font-size:12px;color:var(--muted);line-height:1}
