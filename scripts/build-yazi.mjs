@@ -249,7 +249,7 @@ const ld = {
   '@context': 'https://schema.org',
   '@graph': [...identityLd(c, ORIGIN), articleLd({ url: ORIGIN + C.meta.path, headline: C.meta.title, description: C.meta.description, datePublished: C.meta.published, dateModified: C.meta.updated, image: [C.meta.cover && ORIGIN + C.meta.cover.src, ORIGIN + C.meta.ogImage].filter(Boolean) }, ORIGIN), breadcrumbLd([['Ana sayfa', '/'], ['Yazılar', '/blog/'], [C.meta.title, C.meta.path]], ORIGIN), ...((C.meta.faq || []).length ? [faqLd(C.meta.faq, ORIGIN + C.meta.path)] : [])],
 };
-let html = layout(c, { origin: ORIGIN, path: C.meta.path, type: 'article', jsonld: ld, title: `${C.meta.title} | ${s.name}`, description: C.meta.description, image: C.meta.ogImage, imageAlt: C.meta.ogImageAlt, body });
+let html = layout(c, { origin: ORIGIN, path: C.meta.path, type: 'article', jsonld: ld, title: `${C.meta.seoTitle || C.meta.title} | ${s.name}`, ogTitle: C.meta.seoTitle ? `${C.meta.title} | ${s.name}` : '', description: C.meta.description, image: C.meta.ogImage, imageAlt: C.meta.ogImageAlt, body });
 // Sitenin içerik yenileme script'i bu sayfayı tanımaz; bu sayfada yüklenmez.
 html = html.replace(/<script type="module" src="\/assets\/app\.js[^"]*"><\/script>\n?/, '');
 const og = `<meta property="og:image:width" content="1200">

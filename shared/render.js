@@ -76,7 +76,7 @@ const ILLUSTRATION = '<div class="about-ill about-maskot"><img src="/assets/bran
 // CSS/JS değişince bu sayıyı artır: tarayıcı önbelleğindeki eski dosyalar kullanılmaz.
 // /assets/** 1 yıl önbellekte (firebase.json). main.css, main.js veya app.js değişip bu sayı değişmezse
 // .github/workflows/kontrol.yml push'u hatayla durdurur.
-const ASSET_V = '22';
+const ASSET_V = '23';
 
 // Hesaplarım: çalışma masasındaki maskot (karakter sheet › Çalışma pozu, 305×261; kapalı zemin cepleri ve yer gölgesi temizlendi, koyu temada da temiz). Masaüstünde solda, listeye dönük; telefonda gizli.
 const ACC_ILLUSTRATION = '<div class="acc-ill acc-maskot" aria-hidden="true"><img src="/assets/brand/pehlivan-poz-calisma-2.webp" alt="" width="305" height="261" loading="lazy" decoding="async"></div>';
@@ -96,13 +96,15 @@ const absUrl = (u, origin) => (!u || typeof u !== 'string' || u.startsWith('data
 // Site (WebSite) ve kişi (Person) her sayfada aynı @id ile tanımlanır; yazılar bu kimliklere bağlanır.
 // Google site adını ve yazarı, yapay zeka araçları "kim yazdı, ne konuda yazar" bilgisini buradan okur.
 const KNOWS_ABOUT = ['Yapay zeka', 'Prompt yazımı', 'Proje yönetimi', 'Dijital ürün yönetimi'];
+// Hakkımda metninde zaten yazılı (kamuya açık bilgi).
+const ALUMNI_OF = { '@type': 'CollegeOrUniversity', name: 'Marmara Üniversitesi' };
 export function identityLd(c, origin = 'https://ucpehlivan.web.app') {
   const s = c.settings || {};
   const bio = (((c.home || {}).about || {}).paragraphs || [])[0];
   const person = {
     '@type': 'Person', '@id': `${origin}/#person`, name: s.name, url: `${origin}/`,
     ...(s.role ? { jobTitle: s.role } : {}), ...(bio ? { description: bio } : {}),
-    ...(s.email ? { email: `mailto:${s.email}` } : {}), knowsAbout: KNOWS_ABOUT,
+    ...(s.email ? { email: `mailto:${s.email}` } : {}), knowsAbout: KNOWS_ABOUT, alumniOf: ALUMNI_OF,
     sameAs: accounts(c).map((a) => a.url).filter((u) => /^https?:/.test(u)),
   };
   const site = {
@@ -129,7 +131,7 @@ export function faqLd(items = [], url = '') {
 }
 const graph = (...items) => ({ '@context': 'https://schema.org', '@graph': items.flat() });
 
-export function layout(c, { title, description, type = 'website', jsonld, noindex = false, path = '/', home = false, origin = 'https://ucpehlivan.web.app', version = '', image = '', imageAlt = '', body }) {
+export function layout(c, { title, ogTitle = '', description, type = 'website', jsonld, noindex = false, path = '/', home = false, origin = 'https://ucpehlivan.web.app', version = '', image = '', imageAlt = '', body }) {
   const s = c.settings || {};
   const canonical = origin + path;
   const pageTitle = title || s.seoTitle || s.name;
@@ -155,7 +157,7 @@ export function layout(c, { title, description, type = 'website', jsonld, noinde
 <link rel="alternate" type="application/rss+xml" title="${e(s.name)}" href="/feed.xml">
 <meta property="og:type" content="${type}">
 <meta property="og:site_name" content="${e(s.name)}">
-<meta property="og:title" content="${e(pageTitle)}">
+<meta property="og:title" content="${e(ogTitle || pageTitle)}">
 <meta property="og:description" content="${e(desc)}">
 <meta property="og:url" content="${e(canonical)}">
 <meta property="og:locale" content="tr_TR">
@@ -255,6 +257,8 @@ export function renderHome(c, opts = {}) {
   return layout(c, { ...opts, home: true, path: '/', body });
 }
 
+// /blog/ meta açıklaması: sayfadaki giriş cümlesi + arama sonucu için tamamlayıcı cümle (toplam ≤155).
+const BLOG_DESC_EXTRA = 'Her gün yapay zeka kullanan bir proje yöneticisinden notlar, promptlar ve araç denemeleri.';
 export function renderBlogIndex(c, opts = {}) {
   const s = c.settings || {}, bl = (c.home || {}).blog || {}, posts = c.posts || [];
   const main = mainAccount(c);
@@ -268,7 +272,7 @@ ${main ? `<p class="bempty">Yeni yazılar yolda. Kaçırmamak için <a href="${e
     publisher: { '@id': `${origin}/#person` }, isPartOf: { '@id': `${origin}/#website` },
     blogPost: posts.map((p) => ({ '@type': 'BlogPosting', headline: p.title, url: origin + postHref(p), datePublished: p.publishedAt, dateModified: p.updatedAt || p.publishedAt, author: { '@id': `${origin}/#person` } })),
   };
-  return layout(c, { ...opts, title: `${bl.pageTitle || bl.title || 'Yazılar'} | ${s.name}`, description: bl.pageIntro || bl.intro, path: '/blog/', jsonld: graph(identityLd(c, origin), blogLd), body });
+  return layout(c, { ...opts, title: `${bl.pageTitle || bl.title || 'Yazılar'} | ${s.name}`, description: bl.seoDescription || [bl.pageIntro || bl.intro, BLOG_DESC_EXTRA].filter(Boolean).join(' '), path: '/blog/', jsonld: graph(identityLd(c, origin), blogLd), body });
 }
 
 export function renderPost(c, post, opts = {}) {
@@ -301,11 +305,12 @@ export function render404(c, opts = {}) {
 }
 
 export function renderSitemap(c, origin = 'https://ucpehlivan.web.app') {
-  const dated = (c.posts || []).map((p) => [postHref(p), p.updatedAt || p.publishedAt]);
+  // Görselli kapak varsa Google Görseller için <image:image> eklenir.
+  const dated = (c.posts || []).map((p) => [postHref(p), p.updatedAt || p.publishedAt, p.coverStyle === 'image' ? absUrl(p.coverImage, origin) : '']);
   // Ana sayfa ve yazı listesi en son yazıyla değişir: tarihleri en yeni yazının tarihi.
   const latest = dated.map(([, d]) => String(d || '').slice(0, 10)).filter(Boolean).sort().pop() || '';
   const urls = [['/', latest], ['/blog/', latest]].concat(dated);
-  return `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.map(([u, d]) => `  <url><loc>${origin}${u}</loc>${d ? `<lastmod>${String(d).slice(0, 10)}</lastmod>` : ''}</url>`).join('\n')}\n</urlset>\n`;
+  return `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">\n${urls.map(([u, d, img]) => `  <url><loc>${origin}${u}</loc>${d ? `<lastmod>${String(d).slice(0, 10)}</lastmod>` : ''}${img ? `<image:image><image:loc>${e(img)}</image:loc></image:image>` : ''}</url>`).join('\n')}\n</urlset>\n`;
 }
 
 // RSS 2.0 beslemesi (/feed.xml): okuyucu uygulamaları ve içerik toplayıcılar yeni yazıları buradan bulur.

@@ -43,3 +43,18 @@ jobs:
           projectId: ucpehlivan
           channelId: ${{ inputs.hedef == 'canli' && 'live' || 'onizleme' }}
           expires: 7d
+
+      # IndexNow: canlı yayından sonra site haritasındaki adresleri Bing/Yandex'e bildirir (ücretsiz).
+      # Anahtar gizli değildir; doğrulama için public/<anahtar>.txt herkese açık durmalıdır.
+      - name: Arama motorlarına bildir (IndexNow)
+        if: inputs.hedef == 'canli'
+        continue-on-error: true
+        env:
+          INDEXNOW_KEY: ea58339bf86fb6753cfb4a481016fe5f
+        run: |
+          node -e '
+            const fs = require("fs"), k = process.env.INDEXNOW_KEY, h = "ucpehlivan.web.app";
+            const urls = [...fs.readFileSync("public/sitemap.xml", "utf8").matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1]);
+            console.log(JSON.stringify({ host: h, key: k, keyLocation: "https://" + h + "/" + k + ".txt", urlList: urls }));
+          ' > indexnow.json
+          curl -sS -o /dev/null -w "IndexNow: %{http_code}\n" -X POST https://api.indexnow.org/indexnow -H "Content-Type: application/json; charset=utf-8" --data @indexnow.json

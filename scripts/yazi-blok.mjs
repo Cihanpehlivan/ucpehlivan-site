@@ -119,7 +119,7 @@ ${secs.map(section).join('\n')}
     '@context': 'https://schema.org',
     '@graph': [...identityLd(c, origin), articleLd({ url, headline: m.title, description: m.description, datePublished: m.published, dateModified: m.updated, image: [m.cover && origin + m.cover.src, origin + m.ogImage].filter(Boolean) }, origin), breadcrumbLd([['Ana sayfa', '/'], ['Yazılar', '/blog/'], [m.title, m.path]], origin), ...((m.faq || []).length ? [faqLd(m.faq, url)] : [])],
   };
-  let html = layout(c, { origin, path: m.path, type: 'article', jsonld: ld, title: `${m.title} | ${s.name}`, description: m.description, image: m.ogImage, imageAlt: m.ogImageAlt, body });
+  let html = layout(c, { origin, path: m.path, type: 'article', jsonld: ld, title: `${m.seoTitle || m.title} | ${s.name}`, ogTitle: m.seoTitle ? `${m.title} | ${s.name}` : '', description: m.description, image: m.ogImage, imageAlt: m.ogImageAlt, body });
   html = html.replace(/<script type="module" src="\/assets\/app\.js[^"]*"><\/script>\n?/, '');
   const extra = `<meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">

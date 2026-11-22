@@ -122,6 +122,9 @@ Umut Cihan Pehlivan'ın kişisel marka sitesi: **yapay zeka içeriklerinin kalı
 | Soru-cevap | `faqLd` · `content/<ad>.json` › `meta.faq` | Soru = bölüm sorusu, cevap = yazıda **görünen** cümleler. Yazı metni değişirse `faq`'ı da eşitle. |
 | Simge ve tema rengi | `layout` head · `public/site.webmanifest` | `apple-touch-icon.png` (180), `icon-192/512.png` favicon'dan üretildi; `theme-color` açık/koyu. Favicon değişirse bunları yeniden üret. |
 | RSS | `renderFeed` → `build-static.mjs` → `/feed.xml` | Yayında Firestore'dan üretilir. Her sayfanın head'inde `rel="alternate" type="application/rss+xml"`, llms.txt'te link. Tarihler yazılardan gelir. |
+| Arama başlığı | `content/<ad>.json` › `meta.seoTitle` | `<title>` için kısa başlık (toplam ≤60, ad eki dahil); `og:title` ve H1 tam başlık kalır. Meta açıklama ≤155. `/blog/` açıklaması: giriş cümlesi + `BLOG_DESC_EXTRA` (`render.js`). |
+| IndexNow | `public/<anahtar>.txt` · `yayinla.yml` son adım | Canlı yayından sonra site haritasındaki adresler Bing/Yandex’e bildirilir (ücretsiz, hata yayını durdurmaz). Anahtar gizli değil. |
+| Site haritası görselleri | `renderSitemap` | Görselli kapağı olan yazıda `<image:image>`. `/index.html`, `/blog/index.html`, `/yazi/<ad>/index.html` → temiz adrese 301. |
 | Önbellek | `firebase.json` | `/assets/**` 1 yıl (`immutable`), görseller 7 gün, HTML ve `.md` `no-cache`. **`main.css`, `main.js`, `app.js` değişirse `ASSET_V` artırılmalı**; `kontrol.yml` artmadıysa hata verir. |
 
 ### Kategoriler ve filtre
