@@ -83,6 +83,7 @@ Umut Cihan Pehlivan'ın kişisel marka sitesi: **yapay zeka içeriklerinin kalı
 | İnteraktif yazı | `content/*.json` + `scripts/build-yazi.mjs` → `public/yazi/<ad>/` | Stil: `public/assets/yazi.css`, davranış: `public/assets/yazi.js`. |
 | Blok biçimli interaktif yazı | `content/<ad>.json` (`"format": "blok"`) + `scripts/yazi-blok.mjs` (saf, tarayıcıda da çalışır) + `scripts/build-yazi-blok.mjs` (Node) | yazi.css/yazi.js ortak + `yazi-blok.css`/`yazi-blok.js` (önek `yb-`). Bloklar: summary, prose, flow, poll, jump, stack, version, report, outcome, questions, closing, share. İlk örnek: `/yazi/arac-degil-sonuc/`. |
 | Başlangıç içeriği | `scripts/seed.json` = `public/admin/seed.json` | İkisi **aynı** kalmalı. |
+| Yeni yazı hattı | `.claude/skills/yeni-yazi/` | `/yeni-yazi` skill: metinden canlıya 12 adım, 3 onay noktası. `sablon.json` boş blok iskeleti (`[DÜZENLE]` kalırsa canlıya çıkmaz). Aksayan adım skill dosyasına işlenir. |
 | Design system | `ui-kit/` | Kit board'u + tokens/components/README. Yayına girmez. Senkron kuralı §6.1. |
 | Paylaşım görseli | `scripts/build-og.mjs` → `public/og.png` | Google Chrome gerekir. |
 

@@ -1,0 +1,123 @@
+{
+  "format": "blok",
+  "_not": "ŞABLON. content/<ad>.json olarak kopyala. [DÜZENLE] kalan yazı canlıya çıkmaz (yayinla.yml). Bütün blok tipleri için örnek: content/arac-degil-sonuc.json.",
+  "meta": {
+    "path": "/yazi/<ad>/",
+    "title": "[DÜZENLE]",
+    "seoTitle": "[DÜZENLE] (≤38 karakter; | Umut Cihan Pehlivan eki ile ≤60)",
+    "description": "[DÜZENLE] (≤155 karakter)",
+    "ogImage": "/yazi/<ad>/og.png",
+    "ogImageAlt": "[DÜZENLE]",
+    "published": "YYYY-AA-GG",
+    "updated": "YYYY-AA-GG",
+    "readingMinutes": 0,
+    "kicker": "Sahadan not",
+    "summaryLabel": "Kısaca",
+    "summary": [
+      "[DÜZENLE]"
+    ],
+    "cover": {
+      "src": "/yazi/<ad>/kapak.webp",
+      "width": 1536,
+      "height": 864,
+      "bg": "#13162B",
+      "alt": "[DÜZENLE] (görseli anlatan açıklayıcı alt metin)"
+    },
+    "crumbs": {
+      "label": "Sayfa yolu",
+      "home": "Ana sayfa",
+      "blog": "Yazılar"
+    },
+    "share": {
+      "label": "Bu yazıyı paylaş",
+      "linkedin": "LinkedIn'de paylaş",
+      "x": "X'te paylaş",
+      "copy": "Linki kopyala",
+      "native": "Paylaş"
+    },
+    "_faq_not": "Yalnız yapılandırılmış veri (FAQPage). Cevaplar yazıda görünen cümlelerdir. Metin değişirse burayı da eşitle.",
+    "faq": [
+      {
+        "q": "[DÜZENLE] (bölüm sorusu)",
+        "a": "[DÜZENLE] (yazıda GÖRÜNEN cümleler)"
+      }
+    ]
+  },
+  "ui": {
+    "navLabel": "Bölümler",
+    "copy": "Kopyala",
+    "copied": "Kopyalandı",
+    "copyFailed": "Kopyalanamadı, metni elle seç"
+  },
+  "sections": [
+    {
+      "id": "giris",
+      "num": "01",
+      "nav": "[DÜZENLE]",
+      "head": true,
+      "blocks": [
+        {
+          "type": "summary"
+        },
+        {
+          "type": "prose",
+          "paragraphs": [
+            "[DÜZENLE]"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "bolum-2",
+      "num": "02",
+      "nav": "[DÜZENLE]",
+      "title": "[DÜZENLE]",
+      "blocks": [
+        {
+          "type": "prose",
+          "paragraphs": [
+            "[DÜZENLE]"
+          ]
+        },
+        {
+          "type": "poll",
+          "question": "[DÜZENLE]",
+          "options": [
+            {
+              "key": "a",
+              "label": "[DÜZENLE]",
+              "reply": "[DÜZENLE]"
+            },
+            {
+              "key": "b",
+              "label": "[DÜZENLE]",
+              "reply": "[DÜZENLE]"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sonuc",
+      "num": "03",
+      "nav": "[DÜZENLE]",
+      "title": "Sonuç: [DÜZENLE]",
+      "end": true,
+      "blocks": [
+        {
+          "type": "closing",
+          "paragraphs": [
+            "[DÜZENLE]"
+          ],
+          "linkedin": {
+            "label": "LinkedIn'de yazın",
+            "href": "https://www.linkedin.com/in/umutcihanpehlivan/"
+          }
+        },
+        {
+          "type": "share"
+        }
+      ]
+    }
+  ]
+}
