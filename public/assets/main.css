@@ -1,17 +1,23 @@
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+/* Renk ve yazı tipi değerleri marka dosyasından gelir: /assets/brand/pehlivan-tokens.css (main.css'ten önce yüklenir).
+   Kaynak: docs/Pehlivan-AI-Marka-Kimligi.md. Burada yalnız sitenin değişken adları marka adlarına bağlanır.
+   Koyu tema: --pa-* değerleri [data-theme="dark"] altında değişir; bağlar aynı kalır. */
 :root{
-  --bg:#F1F2F4;--surface:#FFFFFF;--surface-2:#E6E8EC;--ink:#0C0D10;--text:#3A3D46;--muted:#6A6E79;
-  --line:rgba(12,13,16,.09);--accent:#4B43E0;--on-accent:#FFFFFF;--go:#1FA055;
-  --display:'Archivo','Arial Narrow','Helvetica Neue',Arial,sans-serif;
-  --body:'Geist','Segoe UI',system-ui,-apple-system,sans-serif;
+  --bg:var(--pa-kraft);--surface:var(--pa-kagit);--surface-2:var(--pa-kraft);
+  --ink:var(--pa-murekkep);--text:var(--pa-murekkep);--muted:var(--pa-silik);
+  --line:color-mix(in srgb,var(--pa-murekkep) 12%,transparent);
+  --accent:var(--pa-tukenmez);--on-accent:var(--pa-kagit);
+  /* Durum: yalnız doğru/yanlış göstermek için. *-ink = durum kelimesinin rengi (koyu temada metin rengine döner, kontrast için) */
+  --go:var(--pa-zeytin);--stop:var(--pa-pas);--go-ink:var(--pa-zeytin);--stop-ink:var(--pa-pas);
+  --display:var(--pa-font);--body:var(--pa-font);--mono-font:var(--pa-font-mono);
+  --doku:url("/assets/brand/doku-kraft.webp");
   --wrap:1180px;--r:22px;
   box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
 }
-:root[data-theme="dark"]{
-  --bg:#0C0D10;--surface:#16171B;--surface-2:#1E2025;--ink:#F2F3F5;--text:#C8CAD0;--muted:#8B8F99;
-  --line:rgba(255,255,255,.08);--accent:#8C86FF;--on-accent:#0C0D10;--go:#3DDC84;color-scheme:dark}
+:root[data-theme="dark"]{--on-accent:var(--pa-kraft);--go-ink:var(--ink);--stop-ink:var(--ink);color-scheme:dark}
 html{height:100%;scroll-behavior:smooth;scroll-padding-top:calc(env(safe-area-inset-top,0px) + 80px)}
-body{background:var(--bg);color:var(--text);font-family:var(--body);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+/* Doku yalnız sayfa zemininde (küçük, tekrar eden görsel; opaklık görselin içinde ~0,3). Kartlar kendi düz zeminini taşır. */
+body{background:var(--bg) var(--doku);color:var(--text);font-family:var(--body);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
 body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:60;background:var(--bg)}
 img{max-width:100%;display:block}
 a{color:inherit}
@@ -33,12 +39,12 @@ header{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;background:co
 .bar{display:flex;align-items:center;height:72px;gap:28px}
 .logo{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink);font-family:var(--display);font-weight:800;font-size:15px;line-height:1.05;font-variation-settings:"wdth" 100}
 .logo-mark{width:38px;height:38px;flex:none;display:block}
-.lm-bg{fill:var(--ink)}.lm-a{fill:var(--bg);opacity:.45}.lm-b{fill:var(--bg)}.lm-c{fill:var(--accent)}.lm-d{fill:var(--go)}
+.lm-bg{fill:var(--ink)}.lm-a{fill:var(--bg);opacity:.45}.lm-b{fill:var(--bg)}.lm-c{fill:var(--accent)}.lm-d{fill:var(--accent)}
 .logo-mark rect,.logo-mark path{transition:transform .35s cubic-bezier(.2,.8,.2,1);transform-box:fill-box}
 .logo:hover .lm-a{transform:translateX(3px)}.logo:hover .lm-c{transform:translateX(-3px)}.logo:hover .lm-d{transform:rotate(90deg)}
 /* Logo: iki satırlı SVG (render.js › logoSvg). Metin Archivo 800, genişlik 100 (ölçüler bu ayara göre). */
 .logo-svg{display:block;height:40px;width:auto;overflow:visible}
-.logo-svg text{font-family:var(--display);font-weight:800;font-variation-settings:"wdth" 100;letter-spacing:-1.5px}
+.logo-svg text{font-family:"Archivo",var(--display);font-weight:800;font-variation-settings:"wdth" 100;letter-spacing:-1.5px}
 .logo-svg-lg{height:64px}
 .logo-text b{font-weight:800;font-size:15px;letter-spacing:-.01em;line-height:1}
 .logo-text small{font-family:var(--body);font-variation-settings:normal;font-weight:500;font-size:12px;color:var(--muted);line-height:1}
@@ -61,8 +67,8 @@ nav a:hover{color:var(--ink)}
 .hero{padding:96px 0 72px}
 .status{display:inline-flex;align-items:center;gap:10px;font-size:14px;font-weight:500;color:var(--muted);margin-bottom:28px;padding:7px 14px 7px 12px;border:1px solid var(--line);border-radius:999px;background:var(--surface)}
 .status .pin{width:16px;height:16px;color:var(--accent)}
-.pulse{width:8px;height:8px;border-radius:50%;background:var(--go);position:relative}
-.pulse::after{content:"";position:absolute;inset:-4px;border-radius:50%;border:2px solid var(--go);opacity:.5}
+.pulse{width:8px;height:8px;border-radius:50%;background:var(--accent);position:relative}
+.pulse::after{content:"";position:absolute;inset:-4px;border-radius:50%;border:2px solid var(--accent);opacity:.5}
 .mega{font-variation-settings:"wdth" 76;font-size:clamp(34px,6.3vw,81px);letter-spacing:-.035em;line-height:.98}
 .ln{display:block;overflow:hidden;padding:.04em 0}
 .ln > span{display:block}
@@ -72,12 +78,12 @@ nav a:hover{color:var(--ink)}
 .pill-gantt i{display:block;height:.13em;margin:.045em 0;border-radius:.04em;background:var(--accent);transform-origin:left}
 .pill-gantt i:nth-child(1){width:55%;margin-left:4%}
 .pill-gantt i:nth-child(2){width:48%;margin-left:30%;background:var(--bg);opacity:.75}
-.pill-gantt i:nth-child(3){width:40%;margin-left:56%;background:var(--go)}
-.pill-check{background:var(--go);padding:.1em .13em}
+.pill-gantt i:nth-child(3){width:40%;margin-left:56%;background:var(--accent)}
+.pill-check{background:var(--accent);padding:.1em .13em}
 .pill-check i{display:flex;align-items:center;gap:.06em;height:.15em;margin-bottom:.065em}
 .pill-check i:last-child{margin-bottom:0}
-.pill-check i::before{content:"";width:.15em;height:.15em;border-radius:.03em;background:#0C0D10;opacity:.85;flex:none}
-.pill-check i::after{content:"";height:.06em;border-radius:.03em;background:#0C0D10;opacity:.55;width:70%}
+.pill-check i::before{content:"";width:.15em;height:.15em;border-radius:.03em;background:var(--on-accent);opacity:.85;flex:none}
+.pill-check i::after{content:"";height:.06em;border-radius:.03em;background:var(--on-accent);opacity:.55;width:70%}
 .pill-check i:nth-child(2)::after{width:52%}.pill-check i:nth-child(3)::after{width:62%}
 .pill-chart{background:var(--accent);display:inline-flex;align-items:flex-end;gap:.06em;padding:.12em .14em}
 .pill-chart i{flex:1;background:var(--on-accent);border-radius:.03em .03em 0 0;transform-origin:bottom}
@@ -151,7 +157,7 @@ section.block{padding:128px 0}
 .col i::before{content:"";width:8px;height:8px;border-radius:50%;border:1.5px solid var(--muted);flex:none}
 .col i.live::before{border-color:var(--accent);background:var(--accent)}
 .col i.done{color:var(--muted);text-decoration:line-through;text-decoration-color:color-mix(in srgb,var(--muted) 60%,transparent)}
-.col i.done::before{border-color:var(--go);background:var(--go)}
+.col i.done::before{border-color:var(--accent);background:var(--accent)}
 .t-wide{grid-column:span 2}
 .t-accent{background:var(--accent);border-color:var(--accent)}
 .t-accent .num,.t-accent .lbl{color:var(--on-accent)}
@@ -237,8 +243,8 @@ section.block{padding:128px 0}
 .tl-row{display:grid;grid-template-columns:200px 1fr;gap:24px;padding:26px 0;border-bottom:1px solid var(--line)}
 .tl-when{font-size:14px;color:var(--muted)}
 .tl-when b{display:block;color:var(--ink);font-size:15px;font-weight:600;margin-bottom:2px}
-.tl-now{display:inline-flex;gap:6px;align-items:center;font-size:12px;font-weight:600;color:var(--go);margin-top:8px}
-.tl-now::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--go)}
+.tl-now{display:inline-flex;gap:6px;align-items:center;font-size:12px;font-weight:600;color:var(--accent);margin-top:8px}
+.tl-now::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--accent)}
 .tl-what h3{font-family:var(--display);font-variation-settings:"wdth" 96;font-size:22px;color:var(--ink);letter-spacing:-.015em;margin-bottom:10px}
 .tl-what ul{list-style:none;display:grid;gap:8px;font-size:15px}
 .tl-what li{padding-left:18px;position:relative}
@@ -359,7 +365,7 @@ section.block{padding:128px 0}
 .post-img img{border-radius:18px;width:100%}
 .post-img figcaption{font-size:14px;color:var(--muted);margin-top:10px}
 .prose h3{font-family:var(--display);font-variation-settings:"wdth" 94;font-weight:800;color:var(--ink);font-size:22px;margin:32px 0 10px}
-.prose a{color:var(--accent)}
+.prose a{color:var(--accent)}/* marka link stili: dosya sonunda */
 .bempty a{color:var(--ink)}
 main > .bhero:first-child{position:relative}
 
@@ -467,3 +473,18 @@ section.block::before{content:"";position:absolute;top:0;left:max(32px,calc((100
   .bgrid .bcard h3{font-size:20px}
   .bgrid .bcard p.ex{font-size:14px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
 }
+
+/* ===== Marka katmanı (2026-11-22) · docs/Pehlivan-AI-Marka-Kimligi.md ===== */
+/* Metin içi link: renkle değil çizgiyle tanınır (Tükenmez, 600, 2 px alt çizgi, 5 px aralık) */
+.prose a,.bempty a,.yz-aside a,.yz-article :is(p,li)>a:not([class]){color:var(--accent);font-weight:600;text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:5px;text-decoration-color:currentColor}
+/* Uzun metin Kâğıt üzerinde durur, dokulu zeminde durmaz. Düz renk taşma (blur yok) metnin yerini değiştirmez. */
+.prose{background:var(--surface);border-radius:var(--r);box-shadow:0 0 0 28px var(--surface)}
+@media (max-width:640px){.prose{box-shadow:0 0 0 16px var(--surface)}}
+/* Hesaplarım maskotu: kaynak 240 px, büyütülmez */
+.acc-maskot img{width:100%;max-width:240px;height:auto;margin:0 auto}
+/* Kaynak PNG'nin üst 2 px'inde kırpma artığı koyu şerit var: görüntüden kesilir (dosya değişmez) */
+.acc-maskot img{clip-path:inset(3px 0 0 0)}
+/* Avatar dairesi zeminden ayrılsın: --surface-2 artık Kraft (zeminle aynı), daire Kâğıt olur */
+.about-avatar::before{background:var(--surface)}
+/* Koyu temada dokunun açık tanecikleri metin kontrastını düşürmesin: zeminle çarpılarak karışır */
+:root[data-theme="dark"] body{background-blend-mode:multiply}

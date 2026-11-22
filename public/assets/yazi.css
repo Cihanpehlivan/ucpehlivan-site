@@ -1,6 +1,6 @@
 /* İnteraktif yazı sayfası (/yazi/...). Renk ve fontlar main.css değişkenlerinden; açık/koyu tema otomatik. */
-.yz{--mono:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;--line-strong:color-mix(in srgb,var(--ink) 22%,transparent);--soft:color-mix(in srgb,var(--accent) 10%,var(--surface))}
-.yz-mono{font-family:var(--mono);font-size:13px;letter-spacing:.05em;text-transform:uppercase;font-weight:600}
+.yz{--mono:var(--pa-font-mono);--line-strong:color-mix(in srgb,var(--ink) 22%,transparent);--soft:color-mix(in srgb,var(--accent) 10%,var(--surface))}
+.yz-mono{font-family:var(--mono);font-size:13px;letter-spacing:.05em;text-transform:uppercase;font-weight:500}
 .yz-small{font-size:13px;color:var(--muted)}
 /* Uzun okumada arka plandaki sütun çizgileri metnin içinden geçmesin */
 body:has(.yz) .guides{display:none}
@@ -19,7 +19,7 @@ body:has(.yz) .guides{display:none}
 .yz-nav a[aria-current="true"]{color:var(--ink);border-left-color:var(--accent);font-weight:600}
 .yz-nav a[aria-current="true"] .yz-num{background:var(--accent);color:var(--on-accent)}
 .yz-keys{margin-top:18px;font-size:12px;color:var(--muted);letter-spacing:.04em;text-transform:none;font-weight:500}
-.yz-num{font-family:var(--mono);font-size:12px;font-weight:700;padding:3px 7px;border-radius:6px;background:var(--surface-2);color:var(--ink);flex:none}
+.yz-num{font-family:var(--mono);font-size:12px;font-weight:500;padding:3px 7px;border-radius:6px;background:var(--surface-2);color:var(--ink);flex:none}
 
 /* Bölümler */
 .yz-article{min-width:0}
@@ -75,7 +75,7 @@ body:has(.yz) .guides{display:none}
 .yz-tldr ul{list-style:none;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;counter-reset:tldr}
 .yz-tldr li{counter-increment:tldr;font-size:15px;line-height:1.55;color:var(--text)}
 .yz-tldr li+li{border-left:1px solid var(--line);padding-left:20px}
-.yz-tldr li::before{content:counter(tldr,decimal-leading-zero);display:block;margin-bottom:6px;font:700 12px var(--mono);letter-spacing:.04em;color:var(--accent)}
+.yz-tldr li::before{content:counter(tldr,decimal-leading-zero);display:block;margin-bottom:6px;font:500 12px var(--mono);letter-spacing:.04em;color:var(--accent)}
 .yz-tldr strong{color:var(--ink);font-weight:600}
 /* Bölüm sonu notu: Özet ile aynı dil (düz, tonlu, accent noktalı etiket), yazı genişliğinde tek paragraf */
 .yz-aside{max-width:66ch;margin:12px 0 0;padding:18px 24px 20px;border-radius:16px;background:color-mix(in srgb,var(--surface-2) 60%,transparent)}
@@ -87,16 +87,16 @@ body:has(.yz) .guides{display:none}
 .yz-claim-top{display:flex;justify-content:space-between;align-items:center;gap:12px;padding-bottom:16px;margin-bottom:20px;border-bottom:1px dashed var(--line-strong)}
 .yz-claim-l{color:var(--accent)}
 .yz-claim-dots{display:flex;gap:6px}
-.yz-claim-dots i{font:700 11px var(--mono);font-style:normal;width:22px;height:22px;border-radius:50%;display:grid;place-items:center;border:1px solid var(--line-strong);color:var(--muted)}
+.yz-claim-dots i{font:500 11px var(--mono);font-style:normal;width:22px;height:22px;border-radius:50%;display:grid;place-items:center;border:1px solid var(--line-strong);color:var(--muted)}
 .yz-claim-t{font-family:var(--display);font-variation-settings:"wdth" 92;font-weight:700;font-size:clamp(24px,3vw,36px);line-height:1.35;color:var(--ink);letter-spacing:-.01em}
 .yz-claim mark{background:transparent;color:inherit;padding:0;border-radius:4px;box-decoration-break:clone;-webkit-box-decoration-break:clone;text-decoration:underline dashed color-mix(in srgb,var(--accent) 55%,transparent);text-decoration-thickness:2px;text-underline-offset:.22em;transition:background .25s,color .25s}
-.yz-claim mark sup{font:700 .48em var(--mono);color:var(--accent);margin-right:4px;vertical-align:.75em;letter-spacing:0}
+.yz-claim mark sup{font:500 .48em var(--mono);color:var(--accent);margin-right:4px;vertical-align:.75em;letter-spacing:0}
 .yz-claim mark.on{background:var(--accent);color:var(--on-accent);text-decoration-color:transparent;box-shadow:0 0 0 3px var(--accent)}
 .yz-claim mark.on sup{color:var(--on-accent)}
 .yz-pillars{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:12px 0 48px;max-width:860px}
 .yz-pillar{all:unset;box-sizing:border-box;cursor:pointer;display:flex;flex-direction:column;gap:8px;padding:20px;border-radius:16px;background:var(--surface);border:1px solid var(--line);color:var(--text);font-size:16px;line-height:1.45;transition:border-color .2s,background .2s,transform .2s}
 .yz-pillar .yz-mono{color:var(--accent);display:flex;align-items:center;gap:8px}
-.yz-pn{font:700 11px var(--mono);width:20px;height:20px;border-radius:50%;display:grid;place-items:center;background:var(--accent);color:var(--on-accent)}
+.yz-pn{font:500 11px var(--mono);width:20px;height:20px;border-radius:50%;display:grid;place-items:center;background:var(--accent);color:var(--on-accent)}
 .yz-pillar:hover{border-color:var(--accent)}
 .yz-pillar[aria-pressed="true"]{background:var(--soft);border-color:var(--accent)}
 .yz-pillar:focus-visible,.yz-card:focus-visible,.yz-tablist [role=tab]:focus-visible,.yz-panel:focus-visible,.yz-out:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
@@ -112,16 +112,16 @@ body:has(.yz) .guides{display:none}
 .yz-card[aria-pressed="true"] .yz-front{transform:rotateY(180deg)}
 .yz-card[aria-pressed="true"] .yz-back{transform:rotateY(0)}
 .yz-card:hover .yz-front{border-color:var(--accent)}
-.yz-tag{align-self:flex-start;font-family:var(--mono);font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:5px 10px;border-radius:6px;background:var(--surface-2);color:var(--muted)}
+.yz-tag{align-self:flex-start;font-family:var(--mono);font-size:12px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;padding:5px 10px;border-radius:6px;background:var(--surface-2);color:var(--muted)}
 .yz-tag-on{background:var(--accent);color:var(--on-accent)}
 .yz-ct{font-family:var(--display);font-variation-settings:"wdth" 92;font-weight:800;font-size:22px;line-height:1.12;letter-spacing:-.015em;color:var(--ink)}
 .yz-txt{font-size:16px;line-height:1.55}
 .yz-back .yz-txt{font-size:16px;color:var(--bg)}
 .yz-back .yz-ct{color:var(--bg)}
 .yz-ct-sm{font-size:17px;opacity:.85}
-.yz-hint{margin-top:auto;padding-top:6px;font-family:var(--mono);font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--accent)}
+.yz-hint{margin-top:auto;padding-top:6px;font-family:var(--mono);font-size:12px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--accent)}
 .yz-why{margin-top:auto;font-size:14px;line-height:1.5;padding-top:12px;border-top:1px solid color-mix(in srgb,var(--bg) 22%,transparent)}
-.yz-why i{display:block;font-style:normal;font-family:var(--mono);font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-bottom:4px;opacity:.75}
+.yz-why i{display:block;font-style:normal;font-family:var(--mono);font-size:12px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;margin-bottom:4px;opacity:.75}
 .yz-cardshead{display:flex;justify-content:space-between;align-items:end;gap:16px;flex-wrap:wrap;margin:56px 0 16px}
 .yz-cardshead h3{font-size:clamp(28px,3.4vw,40px);margin-bottom:6px}
 
@@ -138,13 +138,13 @@ body:has(.yz) .guides{display:none}
 .yz-hwhy .yz-mono{display:block;font-size:12px;color:var(--muted);margin-bottom:4px}
 .yz-diff{display:flex;flex-direction:column;gap:8px;align-self:center}
 .yz-del,.yz-add{display:grid;grid-template-columns:22px minmax(0,1fr);gap:6px;font:15px/1.55 var(--mono);padding:12px 14px;border-radius:10px}
-.yz-del{background:color-mix(in srgb,#D93A3A 7%,var(--bg));color:var(--ink)}
+.yz-del{background:color-mix(in srgb,var(--stop) 7%,var(--bg));color:var(--ink)}
 .yz-add{background:color-mix(in srgb,var(--go) 12%,var(--bg));color:var(--ink);animation:yzIn .35s ease}
 .yz-add[hidden]{display:none}
-.yz-sign{font-weight:700;color:#D93A3A}
-.yz-add .yz-sign{color:var(--go)}
-.yz-habit.is-rev .yz-del .yz-line{text-decoration:line-through;text-decoration-thickness:2px;text-decoration-color:#D93A3A;color:var(--muted)}
-.yz-revbtn{all:unset;box-sizing:border-box;align-self:flex-start;cursor:pointer;font-family:var(--mono);font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--accent);padding:8px 12px;border-radius:8px;border:1px dashed color-mix(in srgb,var(--accent) 55%,transparent)}
+.yz-sign{font-weight:700;color:var(--stop-ink)}
+.yz-add .yz-sign{color:var(--go-ink)}
+.yz-habit.is-rev .yz-del .yz-line{text-decoration:line-through;text-decoration-thickness:2px;text-decoration-color:var(--stop);color:var(--muted)}
+.yz-revbtn{all:unset;box-sizing:border-box;align-self:flex-start;cursor:pointer;font-family:var(--mono);font-size:12px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--accent);padding:8px 12px;border-radius:8px;border:1px dashed color-mix(in srgb,var(--accent) 55%,transparent)}
 .yz-revbtn:hover{background:var(--soft)}
 .yz-revbtn:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
 .yz-habit.is-rev .yz-revbtn{color:var(--muted);border-color:var(--line-strong)}
@@ -213,18 +213,18 @@ body:has(.yz) .guides{display:none}
 .yz-form>.btn{align-self:flex-start}
 .yz-field{display:flex;flex-direction:column;gap:8px}
 .yz-field label{font-size:14px;font-weight:700;color:var(--ink)}
-.yz-field small{font-family:var(--mono);font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-left:6px}
+.yz-field small{font-family:var(--mono);font-size:12px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-left:6px}
 .yz-field textarea{font:15px/1.5 var(--body);color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:12px 14px;resize:vertical;width:100%;min-height:52px}
 .yz-field textarea::placeholder{color:var(--muted);opacity:.85}
 .yz-field textarea:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 22%,transparent)}
-.yz-field textarea[aria-invalid="true"]{border-color:#D93A3A;box-shadow:0 0 0 3px rgba(217,58,58,.18)}
-.yz-err{font-size:14px;font-weight:600;color:#D93A3A}
+.yz-field textarea[aria-invalid="true"]{border-color:var(--stop);box-shadow:0 0 0 3px color-mix(in srgb,var(--stop) 18%,transparent)}
+.yz-err{font-size:14px;font-weight:600;color:var(--stop-ink)}
 .yz-outbox{position:sticky;top:96px;background:var(--ink);color:var(--bg);border-radius:18px;padding:18px;display:flex;flex-direction:column;gap:12px}
 .yz-outhead{display:flex;align-items:center;justify-content:space-between;gap:12px}
 .yz-outhead .yz-mono{opacity:.75}
 .yz-out{margin:0;font:14px/1.65 var(--mono);white-space:pre-wrap;overflow-wrap:anywhere;background:color-mix(in srgb,var(--bg) 8%,transparent);border-radius:12px;padding:16px;min-height:240px;color:var(--bg)}
 .yz-out.is-empty{opacity:.55}
-.yz-status{min-height:1.4em;font-size:14px;font-weight:600;color:var(--go)}
+.yz-status{min-height:1.4em;font-size:14px;font-weight:600;color:var(--go-ink)}
 .yz-cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:12px}
 .yz-end-sec{padding-bottom:40px}
 
@@ -233,7 +233,7 @@ body:has(.yz) .guides{display:none}
 .yz-pick{grid-column:1/-1;display:flex;flex-direction:column;gap:14px;background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:22px}
 .yz-pick>.btn{align-self:flex-start}
 .yz-pick>.btn:disabled{opacity:.45;cursor:not-allowed}
-.yz-step{display:inline-flex;align-items:center;gap:10px;font-family:var(--mono);font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink)}
+.yz-step{display:inline-flex;align-items:center;gap:10px;font-family:var(--mono);font-size:12px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--ink)}
 .yz-step b{width:24px;height:24px;border-radius:50%;display:grid;place-items:center;background:var(--accent);color:var(--on-accent);font-size:12px}
 .yz-chips{border:0;padding:0;margin:0;min-width:0;display:flex;flex-wrap:wrap;gap:8px}
 .yz-chips legend{float:left;width:100%;color:var(--muted);margin-bottom:8px;padding:0}
@@ -242,17 +242,17 @@ body:has(.yz) .guides{display:none}
 .yz-chips span{display:block;padding:8px 14px;border-radius:999px;border:1px solid var(--line-strong);font-size:14px;font-weight:600;color:var(--ink);background:var(--bg);transition:background .2s,border-color .2s,color .2s}
 .yz-chips input:checked+span{background:var(--ink);border-color:var(--ink);color:var(--bg)}
 .yz-chips input:focus-visible+span{outline:3px solid var(--accent);outline-offset:2px}
-.yz-whybox{border-left:4px solid #D93A3A;padding:4px 0 4px 14px;font-size:15px;color:var(--text)}
+.yz-whybox{border-left:4px solid var(--stop);padding:4px 0 4px 14px;font-size:15px;color:var(--text)}
 .yz-whybox[hidden]{display:none}
-.yz-whybox .yz-mono{display:block;font-size:12px;color:#D93A3A;margin-bottom:2px}
+.yz-whybox .yz-mono{display:block;font-size:12px;color:var(--stop-ink);margin-bottom:2px}
 .yz-before{background:color-mix(in srgb,var(--bg) 8%,transparent);border-radius:12px;padding:12px 14px}
 .yz-before[hidden]{display:none}
 .yz-before .yz-mono{font-size:12px;opacity:.7}
-.yz-before p{font:14px/1.5 var(--mono);margin-top:4px;opacity:.85;text-decoration:line-through;text-decoration-color:color-mix(in srgb,#ff7a7a 70%,transparent)}
+.yz-before p{font:14px/1.5 var(--mono);margin-top:4px;opacity:.85;text-decoration:line-through;text-decoration-color:color-mix(in srgb,var(--stop) 70%,transparent)}
 .yz-checks{border-top:1px solid color-mix(in srgb,var(--bg) 16%,transparent);padding-top:12px}
 .yz-checkhead{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
 .yz-checkhead .yz-mono{opacity:.75}
-.yz-score{font:700 14px var(--mono);color:var(--go)}
+.yz-score{font:500 14px var(--mono);color:var(--go-ink)}
 .yz-checks ul{list-style:none;display:grid;gap:8px}
 .yz-checks li{display:grid;grid-template-columns:20px minmax(0,1fr);gap:10px;align-items:start;font-size:14px;line-height:1.4;opacity:.6;transition:opacity .2s}
 .yz-checks li.ok{opacity:1}
@@ -323,9 +323,19 @@ body:has(.yz) .guides{display:none}
   .yz-table th,.yz-table td{padding:0;border:0}
   .yz-table tbody th{width:auto;margin-bottom:8px}
   .yz-table td{padding:6px 0}
-  .yz-table td::before{content:attr(data-l);display:block;font-family:var(--mono);font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--accent)}
+  .yz-table td::before{content:attr(data-l);display:block;font-family:var(--mono);font-size:12px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--accent)}
 }
 @media (prefers-reduced-motion:reduce){
   html:has(.yz){scroll-behavior:auto}
   .yz *,.yz *::before,.yz *::after{transition:none!important;animation:none!important}
 }
+
+/* Marka katmanı: yazı metni Kâğıt üzerinde (doku yalnız sayfa zemininde). Düz renk taşma metni kaydırmaz. */
+.yz-article{background:var(--surface);border-radius:var(--r);box-shadow:0 0 0 32px var(--surface)}
+@media (max-width:640px){.yz-article{box-shadow:0 0 0 16px var(--surface)}}
+/* Ters panel (brief oluşturucu çıktısı): zemin Mürekkep. Durum kelimesi ve ikincil metin panel metin rengini alır (kontrast).
+   Bekleyen maddelerin soluklaştırması 4,5:1'i geçecek kadar azaltıldı. */
+.yz-outbox{--go-ink:var(--bg);--muted:var(--bg)}
+.yz-checks li{opacity:.8}
+.yz-checks small{opacity:.85}
+.yz-out.is-empty{opacity:.7}

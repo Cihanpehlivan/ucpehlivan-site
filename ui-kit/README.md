@@ -30,7 +30,7 @@ Bu klasör yayına girmez. Hosting yalnız `public/` klasörünü yükler.
 
 ## Kodlarken sıra
 
-1. **Token → CSS değişkeni.** Renk için yalnız `--bg`, `--surface`, `--surface-2`, `--ink`, `--text`, `--muted`, `--line`, `--accent`, `--on-accent`, `--go`. Bileşen CSS'ine hex yazılmaz. Tek istisna: hata rengi `#D93A3A` (yazı sayfası).
+1. **Token → CSS değişkeni.** Renk için yalnız `--bg`, `--surface`, `--surface-2`, `--ink`, `--text`, `--muted`, `--line`, `--accent`, `--on-accent`, `--go`, `--stop` (durum kelimesi için `--go-ink`, `--stop-ink`). Bileşen CSS'ine hex yazılmaz. Bu değişkenler marka dosyasına bağlıdır: `public/assets/brand/pehlivan-tokens.css` (`--pa-*`), kurallar `docs/Pehlivan-AI-Marka-Kimligi.md`. Kit sayfası da önce bu dosyayı yükler.
 2. **Kırılımlar sayı olarak:** `1020`, `900`, `640` (max-width).
 3. **Atom → molekül → organizma.** Yeni bir şey çizmeden önce kitte karşılığı var mı bak.
 4. **Şablon sırası** ana sayfada admin › Ana sayfa › Düzen'den gelir. Menü ve footer linkleri aktif bölümlerden otomatik oluşur.

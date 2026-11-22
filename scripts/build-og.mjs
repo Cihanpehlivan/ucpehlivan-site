@@ -6,6 +6,7 @@ import { join, dirname } from 'node:path';
 import { tmpdir } from 'node:os';
 import { fileURLToPath } from 'node:url';
 import { execFileSync } from 'node:child_process';
+import { RENK, ogFontCss } from './og-marka.mjs';
 import { seedBundle } from './build-static.mjs';
 
 const here = dirname(fileURLToPath(import.meta.url));
@@ -44,16 +45,15 @@ const chrome = process.env.CHROME || '/Applications/Google Chrome.app/Contents/M
 const tmp = mkdtempSync(join(tmpdir(), 'og-'));
 const page = join(tmp, 'og.html');
 writeFileSync(page, `<!doctype html><html lang="tr"><head><meta charset="utf-8">
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,800&family=Geist:wght@500;600&display=block" rel="stylesheet">
-<style>*{margin:0;box-sizing:border-box}html,body{width:1200px;height:630px;overflow:hidden}
-body{background:#F1F2F4;font-family:Geist,system-ui,sans-serif;padding:72px 80px;display:flex;flex-direction:column;justify-content:space-between;position:relative}
-.k{font:600 22px ui-monospace,Menlo,monospace;letter-spacing:.08em;text-transform:uppercase;color:#4B43E0;display:flex;gap:14px;align-items:center}
-.k b{background:#4B43E0;color:#fff;padding:6px 12px;border-radius:8px;font-weight:700}
-h1{font-family:Archivo,sans-serif;font-variation-settings:"wdth" 88;font-weight:800;font-size:84px;line-height:.98;letter-spacing:-.035em;color:#0C0D10;max-width:1040px}
-h1 i{font-style:normal;color:#4B43E0}
-.f{display:flex;justify-content:space-between;align-items:center;font-size:26px;color:#3A3D46}
-.f b{font-weight:600;color:#0C0D10}
-.bar{position:absolute;left:0;right:0;bottom:0;height:16px;background:#4B43E0}</style></head>
+<style>${ogFontCss(join(root, 'public'))}*{margin:0;box-sizing:border-box}html,body{width:1200px;height:630px;overflow:hidden}
+body{background:${RENK.kraft};font-family:"Schibsted Grotesk",system-ui,sans-serif;padding:72px 80px;display:flex;flex-direction:column;justify-content:space-between;position:relative}
+.k{font:500 22px "IBM Plex Mono",ui-monospace,monospace;letter-spacing:.08em;text-transform:uppercase;color:${RENK.tukenmez};display:flex;gap:14px;align-items:center}
+.k b{background:${RENK.tukenmez};color:${RENK.kagit};padding:6px 12px;border-radius:8px;font-weight:500}
+h1{font-family:"Schibsted Grotesk",sans-serif;font-weight:800;font-size:84px;line-height:.98;letter-spacing:-.035em;color:${RENK.murekkep};max-width:1040px}
+h1 i{font-style:normal;color:${RENK.tukenmez}}
+.f{display:flex;justify-content:space-between;align-items:center;font-size:26px;color:${RENK.silik}}
+.f b{font-weight:600;color:${RENK.murekkep}}
+.bar{position:absolute;left:0;right:0;bottom:0;height:16px;background:${RENK.tukenmez}}</style></head>
 <body><div class="k"><b>${esc(name.split(' ').map((w) => w[0]).join(''))}</b>${esc(kicker)}</div>
 <h1>${titleHtml}</h1>
 <div class="f"><b>${esc(name)}</b><span>${esc(host)}</span></div><div class="bar"></div></body></html>`);

@@ -5,9 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex">
 <title>UI 00 · UI kit — ucpehlivan.web.app</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Geist:wght@400;500;600&display=swap" rel="stylesheet">
+<!-- Marka değişkenleri ve yerel fontlar (main.css bunlara bağlı, önce yüklenir) -->
+<link rel="stylesheet" href="../public/assets/brand/pehlivan-tokens.css">
 <!-- Sitenin gerçek CSS'i: kitteki atom ve moleküller bu kurallarla çizilir -->
 <link rel="stylesheet" href="../public/assets/main.css">
 <link rel="stylesheet" href="../public/assets/yazi.css">
@@ -144,7 +143,7 @@ function item(box, { code, variant, node, desc, stage = '', yz = false, width })
 function frame(box, { code, variant, html, width = 1440, desc, yz = false, home = false }) {
   const body = yz ? `<div class="yz"><div class="wrap yz-grid"><div></div><article class="yz-article">${html}</article></div></div>` : home ? `<main>${html}</main>` : html;
   const doc = `<!doctype html><html lang="tr" data-theme="light"><head><meta charset="utf-8"><meta name="viewport" content="width=${width}">
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Geist:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="${PUB}assets/brand/pehlivan-tokens.css">
 <link rel="stylesheet" href="${PUB}assets/main.css"><link rel="stylesheet" href="${PUB}assets/yazi.css"><link rel="stylesheet" href="${PUB}assets/yazi-blok.css">
 <style>html{height:auto!important}body{display:flow-root}header,.yz-nav,.yz-outbox{position:relative!important;top:0!important}.progress{position:relative}.guides{display:none!important}.yz-sec:first-child{padding-top:24px}</style></head><body>${absPaths(body)}</body></html>`;
   const it = h(`<div class="k-item"><div class="k-frame" style="width:${width / 2}px;height:200px"><iframe width="${width}" height="400" loading="eager" title="${esc(code)}"></iframe></div><p class="k-desc" style="max-width:${width / 2}px"><code>${esc(code)}${variant ? ` · ${esc(variant)}` : ''} · ${width}px</code>${esc(desc ?? spec(code))}</p></div>`);
@@ -177,11 +176,11 @@ function tokens() {
   const g4 = group(sec, 'Çizgi', '1px kenar · 2px bölüm ayırıcı'); Object.entries(T.line).forEach(([k, v]) => sw(g4, k, v));
   const g5 = group(sec, 'Durum', 'hata yalnız yazı sayfasında · başarı = go'); Object.entries(T.status).forEach(([k, v]) => sw(g5, k, v));
   const g6 = group(sec, 'Saydam yüzeyler', 'yapışkan şeritler arkasını bulanıklaştırır');
-  Object.entries(T.overlay).forEach(([k, v]) => g6.append(h(`<div class="k-sw"><div class="k-chip" style="background:repeating-linear-gradient(45deg,#4B43E0 0 8px,#fff 8px 16px)"><i style="background:color-mix(in srgb,#F1F2F4 82%,transparent);backdrop-filter:blur(6px)"></i></div><b>${esc(k)}</b><span>${esc(v.value)} · ${esc(v.usage)}</span></div>`)));
+  Object.entries(T.overlay).forEach(([k, v]) => g6.append(h(`<div class="k-sw"><div class="k-chip" style="background:repeating-linear-gradient(45deg,#2747B0 0 8px,#F8F2E6 8px 16px)"><i style="background:color-mix(in srgb,#E9DCC3 82%,transparent);backdrop-filter:blur(6px)"></i></div><b>${esc(k)}</b><span>${esc(v.value)} · ${esc(v.usage)}</span></div>`)));
 
   const ty = section('c1', 'token', 'Tipografi', ['aileler', 'başlık', 'gövde', 'arayüz', 'mono']);
-  const fam = group(ty, 'Aileler', 'Archivo başlık · Geist metin · mono yalnız yazı sayfası');
-  fam.append(h(`<div class="k-fam" style="width:100%"><div><b style="font-family:var(--display);font-weight:800;font-variation-settings:'wdth' 88">Archivo</b><p class="k-desc">display · 700/800 · wdth 76–92 · başlık, logo, kart başlığı</p></div><div><b style="font-family:var(--body);font-weight:500">Geist</b><p class="k-desc">body · 400/500/600 · metin, buton, menü, meta</p></div><div><b style="font-family:ui-monospace,Menlo,monospace;font-weight:700;font-size:36px">mono</b><p class="k-desc">sistem monospace · 600/700 · numara, etiket, çıktı</p></div></div>`));
+  const fam = group(ty, 'Aileler', 'Schibsted Grotesk başlık ve metin · IBM Plex Mono etiket/kod · Archivo yalnız logo');
+  fam.append(h(`<div class="k-fam" style="width:100%"><div><b style="font-family:var(--display);font-weight:800">Schibsted Grotesk</b><p class="k-desc">display + body · 400/600/800 · başlık 800, metin 400, link/buton 600</p></div><div><b style="font-family:'Archivo';font-weight:800">Archivo</b><p class="k-desc">yalnız logo (logoSvg ölçüleri) · 800</p></div><div><b style="font-family:ui-monospace,Menlo,monospace;font-weight:700;font-size:36px">mono</b><p class="k-desc">sistem monospace · 600/700 · numara, etiket, çıktı</p></div></div>`));
   const rows = group(ty, 'Stiller', 'token | canlı örnek | css + kullanım');
   const S = {
     'display.hero': ['HER GÜN YAPAY ZEKA', 'font-family:var(--display);font-variation-settings:"wdth" 76;font-weight:800;font-size:81px;line-height:.98;letter-spacing:-.035em'],

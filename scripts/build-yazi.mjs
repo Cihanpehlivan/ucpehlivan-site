@@ -11,6 +11,7 @@ import { createHash } from 'node:crypto';
 import { execFileSync } from 'node:child_process';
 import { layout, identityLd, articleLd, breadcrumbLd, faqLd, trDate } from '../shared/render.js';
 import { yaziMarkdown } from './yazi-md.mjs';
+import { RENK, ogFontCss } from './og-marka.mjs';
 import { seedBundle } from './build-static.mjs';
 
 const here = dirname(fileURLToPath(import.meta.url));
@@ -278,15 +279,14 @@ if (process.argv.includes('--og')) {
   if (cv) writeFileSync(page, `<!doctype html><html><head><meta charset="utf-8"><style>*{margin:0}html,body{width:1200px;height:630px;overflow:hidden;background:${cv.bg || '#EFF1F5'};display:flex;justify-content:center}img{height:630px;width:auto;display:block}</style></head>
 <body><img src="file://${join(pub, ...cv.src.split('/').filter(Boolean))}" alt=""></body></html>`);
   else writeFileSync(page, `<!doctype html><html><head><meta charset="utf-8">
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,800&family=Geist:wght@500&display=block" rel="stylesheet">
-<style>*{margin:0;box-sizing:border-box}html,body{width:1200px;height:630px;overflow:hidden}
-body{background:#F1F2F4;font-family:Geist,system-ui,sans-serif;padding:72px 80px;display:flex;flex-direction:column;justify-content:space-between;position:relative}
-.k{font:600 22px ui-monospace,Menlo,monospace;letter-spacing:.08em;text-transform:uppercase;color:#4B43E0;display:flex;gap:14px;align-items:center}
-.k b{background:#4B43E0;color:#fff;padding:6px 12px;border-radius:8px;font-weight:700}
-h1{font-family:Archivo,sans-serif;font-variation-settings:"wdth" 88;font-weight:800;font-size:92px;line-height:.95;letter-spacing:-.035em;color:#0C0D10;max-width:1000px}
-h1 i{font-style:normal;color:#4B43E0}
-.f{display:flex;justify-content:space-between;align-items:center;font-size:26px;color:#3A3D46}
-.bar{position:absolute;left:0;right:0;bottom:0;height:16px;background:#4B43E0}</style></head>
+<style>${ogFontCss(pub)}*{margin:0;box-sizing:border-box}html,body{width:1200px;height:630px;overflow:hidden}
+body{background:${RENK.kraft};font-family:"Schibsted Grotesk",system-ui,sans-serif;padding:72px 80px;display:flex;flex-direction:column;justify-content:space-between;position:relative}
+.k{font:500 22px "IBM Plex Mono",ui-monospace,monospace;letter-spacing:.08em;text-transform:uppercase;color:${RENK.tukenmez};display:flex;gap:14px;align-items:center}
+.k b{background:${RENK.tukenmez};color:${RENK.kagit};padding:6px 12px;border-radius:8px;font-weight:500}
+h1{font-family:"Schibsted Grotesk",sans-serif;font-weight:800;font-size:92px;line-height:.95;letter-spacing:-.035em;color:${RENK.murekkep};max-width:1000px}
+h1 i{font-style:normal;color:${RENK.tukenmez}}
+.f{display:flex;justify-content:space-between;align-items:center;font-size:26px;color:${RENK.silik}}
+.bar{position:absolute;left:0;right:0;bottom:0;height:16px;background:${RENK.tukenmez}}</style></head>
 <body><div class="k"><b>01–06</b>${esc(S.neden.hero.kicker)}</div>
 <h1>${esc(S.neden.hero.title).replace(/(brief yazmak\.)$/, '<i>$1</i>')}</h1>
 <div class="f"><span>${esc(s.name)}</span><span>ucpehlivan.web.app</span></div><div class="bar"></div></body></html>`);
