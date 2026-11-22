@@ -76,10 +76,10 @@ const ILLUSTRATION = '<div class="about-ill about-maskot"><img src="/assets/bran
 // CSS/JS değişince bu sayıyı artır: tarayıcı önbelleğindeki eski dosyalar kullanılmaz.
 // /assets/** 1 yıl önbellekte (firebase.json). main.css, main.js veya app.js değişip bu sayı değişmezse
 // .github/workflows/kontrol.yml push'u hatayla durdurur.
-const ASSET_V = '21';
+const ASSET_V = '22';
 
-// Hesaplarım: çalışma masasındaki maskot (karakter sheet › Çalışma pozu, 326×264). Masaüstünde solda, listeye dönük; telefonda gizli.
-const ACC_ILLUSTRATION = '<div class="acc-ill acc-maskot" aria-hidden="true"><img src="/assets/brand/pehlivan-poz-calisma.webp" alt="" width="326" height="264" loading="lazy" decoding="async"></div>';
+// Hesaplarım: çalışma masasındaki maskot (karakter sheet › Çalışma pozu, 305×261; kapalı zemin cepleri ve yer gölgesi temizlendi, koyu temada da temiz). Masaüstünde solda, listeye dönük; telefonda gizli.
+const ACC_ILLUSTRATION = '<div class="acc-ill acc-maskot" aria-hidden="true"><img src="/assets/brand/pehlivan-poz-calisma-2.webp" alt="" width="305" height="261" loading="lazy" decoding="async"></div>';
 
 // Kategori filtresi: admin'de açıksa ve en az 2 farklı kategori varsa görünür.
 function filterBar(c, posts) {
