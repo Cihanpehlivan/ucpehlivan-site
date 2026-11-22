@@ -479,5 +479,5 @@ section.block::before{content:"";position:absolute;top:0;left:max(32px,calc((100
 /* Uzun metin Kâğıt üzerinde durur, dokulu zeminde durmaz. Düz renk taşma (blur yok) metnin yerini değiştirmez. */
 .prose{background:var(--surface);border-radius:var(--r);box-shadow:0 0 0 28px var(--surface)}
 @media (max-width:640px){.prose{box-shadow:0 0 0 16px var(--surface)}}
-/* Hakkımda maskotu (marka: Pehlivan, anlatım pozu; kaynak 591×844, ~1,7x yoğunluk). Masaüstü 340px; telefonda .about-ill 240px ile sınırlı. */
+/* Hakkımda maskotu (marka: Pehlivan, anlatım pozu; kaynak 598×857, ~1,75x yoğunluk). Masaüstü 340px; telefonda .about-ill 240px ile sınırlı. */
 .about-maskot img{width:100%;max-width:340px;height:auto;margin:0 auto}
