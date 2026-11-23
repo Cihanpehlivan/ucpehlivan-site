@@ -10,7 +10,7 @@ on:
           - onizleme
           - canli
         default: onizleme
-  # Her sabah 07:00 (TR): yeni YouTube videosu varsa canlıyı yeniler (videos.json değişmediyse yüklemez).
+  # Her sabah 07:00 (TR): yeni YouTube videosu veya admin'de kaydedilmiş yeni içerik varsa canlıyı yeniler.
   schedule:
     - cron: '0 4 * * *'
 
@@ -29,13 +29,21 @@ jobs:
       - name: İçeriği Firestore'dan al ve sayfaları üret
         run: node scripts/publish.mjs
 
-      # Zamanlı çalışma: video listesi canlıdakiyle aynıysa yükleme yapılmaz.
-      - name: Video listesi değişti mi?
+      # Zamanlı çalışma: video listesi ve içerik sürümü canlıdakiyle aynıysa yükleme yapılmaz.
+      # İçerik sürümü: admin'de "Kaydet" Firestore'daki paketi (ucp-version) yeniler. Canlı statik sayfa
+      # eski sürümde kalırsa ziyaretçi önce eski içeriği görür, sonra hydrate yenisini çizer (ör. pasife
+      # alınan yazı bir an görünüp kaybolur). Sürüm farklıysa canlı yenilenir.
+      - name: Video listesi veya içerik değişti mi?
         id: degisim
         run: |
           if [ "${{ github.event_name }}" != "schedule" ]; then echo "yukle=1" >> "$GITHUB_OUTPUT"; exit 0; fi
-          if curl -sf https://ucpehlivan.web.app/videos.json | cmp -s - public/videos.json; then
-            echo "Video listesi aynı, yükleme yok."; echo "yukle=0" >> "$GITHUB_OUTPUT"
+          surum() { grep -o 'name="ucp-version" content="[^"]*"' | head -1; }
+          canli=$(curl -sf https://ucpehlivan.web.app/ | surum || true)
+          yeni=$(surum < public/index.html || true)
+          if [ -z "$canli" ] || [ "$canli" != "$yeni" ]; then
+            echo "İçerik sürümü değişti ($canli → $yeni)."; echo "yukle=1" >> "$GITHUB_OUTPUT"
+          elif curl -sf https://ucpehlivan.web.app/videos.json | cmp -s - public/videos.json; then
+            echo "Video listesi ve içerik aynı, yükleme yok."; echo "yukle=0" >> "$GITHUB_OUTPUT"
           else echo "yukle=1" >> "$GITHUB_OUTPUT"; fi
 
       # Metninde yer tutucu ([DÜZENLE], [SÜRE], [ÖRNEK: …]) kalan yazı sayfası canlıya çıkmaz; önizlemede görünür.
