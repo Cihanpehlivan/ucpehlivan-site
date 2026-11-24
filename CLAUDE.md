@@ -160,7 +160,7 @@ Sahibi aynı repoda hem Mac'te hem Windows'ta çalışır. **İlk iş:** `git --
 | Yazı sayfası | `node scripts/build-yazi.mjs` | HTML'i elle güncelle + `yazi.css?v=` sürümünü artır |
 | Yerel önizleme | `npm run dev` → `localhost:5050` | `public/`'i PowerShell `HttpListener` ile servis et (Python yok) |
 | Push | `git add` · `git commit` · `git push` | `powershell -ExecutionPolicy Bypass -File scripts\gh-push.ps1 -Message "…" -Files "yol/a,yol/b" -ExpectSha <sha>` |
-| Yayın | `gh workflow run …` varsa onu kullan; yoksa GitHub › Actions › "Siteyi yayına al" | `gh workflow run yayinla.yml -R Cihanpehlivan/ucpehlivan-site -f hedef=onizleme` → kontrol → `hedef=canli` |
+| Yayın | main'e push → kontrol başarılıysa **otomatik canlı**. Önizleme: dalda `gh workflow run …` veya GitHub › Actions › "Siteyi yayına al" | Aynı. Önizleme: `gh workflow run yayinla.yml -R Cihanpehlivan/ucpehlivan-site --ref <dal> -f hedef=onizleme` |
 
 **İki makine kuralları:**
 - Başlamadan önce **GitHub'daki en son hâli al.** Diğer makinede push yapılmış olabilir. Yerel kopyayla çalışmaya başlama.
@@ -176,7 +176,7 @@ Sahibi aynı repoda hem Mac'te hem Windows'ta çalışır. **İlk iş:** `git --
 
 **Otomatik kontrol:** Her push'ta `.github/workflows/kontrol.yml` çalışır. §2'deki yasaklı içerik (ajans, CV/iş arama, hizmet satışı dili, telefon, gizli anahtar) bulunursa **hata** verir; önyüz CSS/şablonu değişip `ui-kit/` değişmediyse **uyarı** verir (§6.1). Push'tan sonra sonucuna bak (`gh run list -w kontrol.yml -L 1`); kırmızıysa canlıya alma. Müşteri/marka adları listede yok (liste herkese açık repoda durmamalı); onları sen kontrol et.
 
-**Yayın:** GitHub Actions › "Siteyi yayına al" › önce `onizleme`, kontrol et, sonra `canli`. Workflow içeriği Firestore'dan alır (`scripts/publish.mjs`) ve sayfaları üretir.
+**Yayın:** main'e push → `kontrol.yml` → **başarılıysa `yayinla.yml` o commit'i kendiliğinden canlıya alır** (`workflow_run`, 2026-11-24'ten beri). Önizleme istenirse push'tan **önce** dalda çalış: GitHub Actions › "Siteyi yayına al" › dalı seç › `onizleme`. Elle `canli` de çalışır. Workflow içeriği Firestore'dan alır (`scripts/publish.mjs`) ve sayfaları üretir.
 
 ---
 
@@ -381,7 +381,7 @@ Not eklerken **Açık işler** listesini de güncelle: biten işi sil, yeni aç�
 - **Sonraki adım:** Merge/push → `kontrol.yml` → `yayinla.yml hedef=onizleme` → admin alanları → canlı.
 - **Aynı gün, canlı:** `22181c6` canlıda; admin'deki kayıtlı adres (`/yazi/bu-meslek-hic-olmadi-promt-muhendisligi/`) ve slug'ı da 301. Admin (Claude in Chrome, sahibi Gmail ile girdi): başlık, Özel sayfa adresi, kart özeti, kapak (`media:n4C05Kzmg27P9W7Ozw8C`, bg `#11162C`) kaydedildi; slug değişmedi. Yayın tarihi admin'de 24 Kas (yazı sayfasında 16 Kas).
 - **Güncel içerik gecikmesi (aynı gün):** Sahibi “siteye girince hemen güncellenmiyor” dedi. HTTP önbelleği değil (HTML `no-cache`). Neden: statik sayfa son yayındaki sürümde; `hydrate.js` Firestore paketini, sonra **her medyayı Firestore'dan base64** sırayla indirip yeniden çiziyordu (~2 sn eski içerik). Düzeltme: `publish.mjs` `public/media.json` (id → `/media/<id>.<uzantı>`, commit'lenmez) yazar; `hydrate.js` yayında dosyası olan medyayı oradan alır, yalnız son yayından sonra yüklenen medyayı Firestore'dan indirir; `media.json`/`videos.json` paketle paralel istenir. `yayinla.yml` zamanlı çalışma her saat başı (değişiklik yoksa yüklemez) + `concurrency`. `ASSET_V` 24→25.
-- **Karar:** Admin'de Kaydet en geç ~1 saatte statik sayfaya geçer (eskiden ertesi sabah 07:00). Zamanlı çalışma yalnız içerik sürümü veya video listesi değişince yükler; **yalnız repoda değişen** iş (yazı sayfası, CSS, kod) kendiliğinden çıkmaz, `yayinla.yml hedef=canli` elle çalıştırılır. Ama o saatte admin'de kayıt varsa main'in o anki hâli de çıkar: önizlemesi bitmemiş işi main'e alma.
+- **Karar:** Admin'de Kaydet en geç ~1 saatte statik sayfaya geçer (eskiden ertesi sabah 07:00; zamanlı çalışma yalnız içerik sürümü veya video listesi değişince yükler). **main'e push = canlı:** `kontrol.yml` başarılıysa `yayinla.yml` kendiliğinden çalışır (sahibinin kararı). Önizlemesi bitmemiş işi main'e alma; önce dalda `onizleme`.
 ### 2026-11-24 — Pasif yazı bir an görünüp kayboluyordu (Windows, Git + Node)
 - **Yapılan:** Sahibi `arac-degil-sonuc`'u admin'de pasife aldı; site açılınca yazı görünüp kayboluyordu. Neden: Kaydet yalnız Firestore `site/public`'i (sürüm …7830167, 1 yazı) yeniler; canlı statik HTML eski yayındaydı (…0562404, 2 yazı); `hydrate.js` sürüm farkını görüp sayfayı yeniden çiziyordu. Zamanlı yayın yalnız `videos.json`'a baktığı için canlıyı yenilememişti. Düzeltme: `yayinla.yml` zamanlı çalışmada canlı `/` ile yeni `public/index.html`'in `ucp-version`'ını da karşılaştırır, farklıysa yükler (`8c2c965`). Önizleme ve canlı yayın çalıştırıldı: `/` ve `/blog/` sürüm …7830167, tek yazı, site haritasında `arac-degil-sonuc` yok.
 - **Karar:** Admin'de içerik değişince canlı en geç ertesi sabah 07:00'de statik sayfaya geçer; hemen istenirse `yayinla.yml hedef=canli`.

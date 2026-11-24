@@ -1,4 +1,5 @@
-# CLAUDE.md'deki kuralların otomatik kontrolü. Her push'ta ve PR'da çalışır; siteyi yayınlamaz.
+# CLAUDE.md'deki kuralların otomatik kontrolü. Her push'ta ve PR'da çalışır.
+# main'e push'ta başarılı biterse "Siteyi yayına al" (yayinla.yml) o commit'i canlıya alır; PR'da yayın yok.
 #  1) Yasaklı içerik (§2): hata verir, commit kırmızı görünür.
 #  2) Design system senkronu (§6.1): yalnız uyarı verir.
 name: Kural kontrolü
