@@ -2,7 +2,7 @@
 
 Bu klasör sitenin design system'idir. **Üretim kodu değildir.** Site `public/assets/main.css` ve `yazi.css` ile çalışır. Buradaki değerler o dosyalardan birebir alındı.
 
-Kit yalnız yayındaki ekranlarda **gerçekten kullanılan** öğeleri içerir: `/`, `/blog/`, `/yazi/prompt-brief/`, `404` ve `/blog/post.html` kabuğu. Ekranda olmayan renk, stil veya bileşen kitte yoktur.
+Kit yalnız yayındaki ekranlarda **gerçekten kullanılan** öğeleri içerir: `/`, `/blog/`, `/yazi/prompt-muhendisligi/`, `404` ve `/blog/post.html` kabuğu. Ekranda olmayan renk, stil veya bileşen kitte yoktur.
 
 Bu klasör yayına girmez. Hosting yalnız `public/` klasörünü yükler.
 

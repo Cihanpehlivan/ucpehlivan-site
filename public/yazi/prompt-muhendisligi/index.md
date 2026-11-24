@@ -1,11 +1,11 @@
-# Prompt Yazmak, Aslında İyi Bir Brief Yazmak
+# Prompt Mühendisliği Diye Bir Meslek Hiç Olmadı
 
 Umut Cihan Pehlivan · 16 Kasım 2026 · 7 dk okuma  
-Kaynak: https://ucpehlivan.web.app/yazi/prompt-brief/
+Kaynak: https://ucpehlivan.web.app/yazi/prompt-muhendisligi/
 
-![Koyu zeminde “İyi prompt, iyi brief.” yazısı. Altında üç uzun kâğıt şeridinden bir okla Hedef, Sınır ve Serbestlik bölümlü tek bir sayfaya geçiş. Sağda elinde kahveyle sayfayı gösteren bıyıklı maskot.](https://ucpehlivan.web.app/yazi/prompt-brief/kapak-2.webp)
+![Koyu zeminde “Prompt mühendisliği diye bir meslek hiç olmadı” yazısı. Altta üstü çizili “Prompt mühendisi” etiketi. Sağda elinde kahveyle etiketi gösteren, kaşını kaldırmış bıyıklı maskot.](https://ucpehlivan.web.app/yazi/prompt-muhendisligi/kapak-meslek.webp)
 
-> Yeni modeller adım adım reçeteyle değil, hedef ve sınırla yönlendirilince iyi iş çıkarıyor. Bir proje yöneticisinin gözünden interaktif bir okuma.
+> Prompt mühendisliği yeni bir meslek değil, iyi brief yazmanın yeni adı. Modele adım adım tarif değil, hedef ve sınır ver. Bir PM’den interaktif okuma.
 
 ## Özet
 

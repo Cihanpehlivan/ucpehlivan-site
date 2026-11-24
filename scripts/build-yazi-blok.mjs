@@ -1,6 +1,6 @@
 // Blok biçimli interaktif yazıları üretir: content/*.json içinde "format": "blok" olanlar -> public/yazi/<ad>/index.html + index.md
 // Sayfa kodu scripts/yazi-blok.mjs'tedir (Node yokken aynı modül tarayıcıda çalıştırılır).
-// prompt-brief bu scriptle üretilmez (scripts/build-yazi.mjs).
+// prompt-muhendisligi (eski adı prompt-brief) bu scriptle üretilmez (scripts/build-yazi.mjs).
 // Kullanım: node scripts/build-yazi-blok.mjs
 // Kapak (kapak.webp) ve paylaşım görseli (og.png) elle/tarayıcıda üretilir ve sayfa klasöründe durur.
 import { readFileSync, writeFileSync, mkdirSync, readdirSync } from 'node:fs';

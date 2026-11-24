@@ -1,8 +1,8 @@
 // Blok biçimli interaktif yazı: content/<ad>.json ("format": "blok") -> HTML + düz metin (Markdown).
 // Saf fonksiyon: Node'da (scripts/build-yazi-blok.mjs) ve tarayıcıda aynı çalışır (Node olmayan makinede tarayıcıda üretilir).
-// Ortak parçalar /yazi/prompt-brief/ ile aynı sınıfları kullanır (yazi.css + yazi.js): sayfa yolu, yazar satırı, Özet/Kısaca,
+// Ortak parçalar /yazi/prompt-muhendisligi/ ile aynı sınıfları kullanır (yazi.css + yazi.js): sayfa yolu, yazar satırı, Özet/Kısaca,
 // kapak, bölüm menüsü, ilerleme, paylaşım. Yeni bileşenler yazi-blok.css + yazi-blok.js içindedir (önek: yb-).
-// build-yazi.mjs (prompt-brief) bu dosyadan bağımsızdır; ona dokunulmaz.
+// build-yazi.mjs (prompt-muhendisligi) bu dosyadan bağımsızdır; ona dokunulmaz.
 import { layout, identityLd, articleLd, breadcrumbLd, faqLd, trDate, ytThumb } from '../shared/render.js';
 
 const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (ch) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[ch]));

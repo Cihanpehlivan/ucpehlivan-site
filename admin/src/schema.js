@@ -73,7 +73,7 @@ export function postSchema(categories = []) {
   return [
     t('title', 'Başlık', { required: true }),
     { key: 'slug', title: 'Adres (slug)', type: 'slug', source: 'title', required: true, help: 'Sadece küçük harf, rakam ve tire. Yayından sonra değiştirme.' },
-    t('pageUrl', 'Özel sayfa adresi', { help: 'İsteğe bağlı. Yazının interaktif bir sayfası varsa adresini yaz (örn: /yazi/prompt-brief/). Doluysa yazı kartı oraya gider; /blog/ adresi de oraya yönlenir.' }),
+    t('pageUrl', 'Özel sayfa adresi', { help: 'İsteğe bağlı. Yazının interaktif bir sayfası varsa adresini yaz (örn: /yazi/prompt-muhendisligi/). Doluysa yazı kartı oraya gider; /blog/ adresi de oraya yönlenir.' }),
     sel('status', 'Durum', [['draft', 'Taslak'], ['published', 'Yayında']]),
     t('category', 'Kategori', { suggest: categories, help: 'Elle yaz ya da listeden seç. Öneriler: Ana sayfa > Yazılar > Kategori listesi.' }),
     { key: 'publishedAt', title: 'Yayın tarihi', type: 'date' },

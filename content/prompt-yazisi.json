@@ -1,14 +1,14 @@
 {
-  "_not": "/yazi/prompt-brief/ sayfasının bütün metni. Değiştirdikten sonra: node scripts/build-yazi.mjs  (metinlerde **kalın** kullanılabilir)",
+  "_not": "/yazi/prompt-muhendisligi/ sayfasının bütün metni. Değiştirdikten sonra: node scripts/build-yazi.mjs  (metinlerde **kalın** kullanılabilir)",
   "meta": {
-    "path": "/yazi/prompt-brief/",
-    "title": "Prompt Yazmak, Aslında İyi Bir Brief Yazmak",
-    "seoTitle": "Prompt Yazmak, İyi Bir Brief Yazmaktır",
-    "description": "Yeni modeller adım adım reçeteyle değil, hedef ve sınırla yönlendirilince iyi iş çıkarıyor. Bir proje yöneticisinin gözünden interaktif bir okuma.",
-    "ogImage": "/yazi/prompt-brief/og.png",
-    "ogImageAlt": "Prompt yazmak, aslında iyi bir brief yazmak.",
+    "path": "/yazi/prompt-muhendisligi/",
+    "title": "Prompt Mühendisliği Diye Bir Meslek Hiç Olmadı",
+    "seoTitle": "Prompt Mühendisliği Bir Meslek Değil",
+    "description": "Prompt mühendisliği yeni bir meslek değil, iyi brief yazmanın yeni adı. Modele adım adım tarif değil, hedef ve sınır ver. Bir PM’den interaktif okuma.",
+    "ogImage": "/yazi/prompt-muhendisligi/og.png",
+    "ogImageAlt": "Prompt mühendisliği diye bir meslek hiç olmadı.",
     "published": "2026-11-16",
-    "updated": "2026-11-18",
+    "updated": "2026-11-24",
     "readingMinutes": 7,
     "summaryLabel": "Özet",
     "summary": [
@@ -16,7 +16,7 @@
       "Rol vermek, uzun brief ve her şeyi tek mesaja sığdırmak artık işe yaramıyor. Yerine somut malzeme, kısa ve net metin, hazır proje bağlamı ver.",
       "Kopyalanabilir şablon: **Hedef + Elindekiler + Sınırlar**, sonunda “Talimatımda bir hata görürsen önce bana söyle.”"
     ],
-    "cover": { "src": "/yazi/prompt-brief/kapak-2.webp", "width": 1536, "height": 864, "bg": "#11172B", "alt": "Koyu zeminde “İyi prompt, iyi brief.” yazısı. Altında üç uzun kâğıt şeridinden bir okla Hedef, Sınır ve Serbestlik bölümlü tek bir sayfaya geçiş. Sağda elinde kahveyle sayfayı gösteren bıyıklı maskot." },
+    "cover": { "src": "/yazi/prompt-muhendisligi/kapak-meslek.webp", "width": 1536, "height": 864, "bg": "#11162C", "alt": "Koyu zeminde “Prompt mühendisliği diye bir meslek hiç olmadı” yazısı. Altta üstü çizili “Prompt mühendisi” etiketi. Sağda elinde kahveyle etiketi gösteren, kaşını kaldırmış bıyıklı maskot." },
     "crumbs": { "label": "Sayfa yolu", "home": "Ana sayfa", "blog": "Yazılar" },
     "share": { "label": "Bu yazıyı paylaş", "linkedin": "LinkedIn'de paylaş", "x": "X'te paylaş", "copy": "Linki kopyala", "native": "Paylaş" },
     "_faq_not":"Yalnız yapılandırılmış veri (FAQPage) için. Soru = bölüm lede'i; cevap = yazıda görünen cümleler (Google cevabın sayfada görünmesini ister). Metni değiştirirsen yazıdaki karşılığıyla aynı tut.",
@@ -24,7 +24,7 @@
       { "q": "Hazır prompt şablonlarındaki hangi alışkanlıklar yeni yapay zekâ modellerinde artık işe yaramıyor?", "a": "Modele unvan takmak, brief'i romana çevirmek ve her şeyi tek mesaja sığdırmak. Üçü de bir zamanlar işe yarıyordu, bugün modeli yavaşlatıyor." },
       { "q": "Adım adım talimat yerine hedef ve sınır yazmak neden daha iyi sonuç veriyor?", "a": "Güçlü bir modele adım adım tarif yazdığında, onu kendi planının içine kapatırsın. Model senin bildiğin sırayla ilerler; daha iyi bir yol olsa bile aramaz. İşe yarayan brief üç şeyi söyler, gerisini bırakır: hedef, sınır ve serbestlik." },
       { "q": "Claude ve GPT'ye prompt yazarken nelere dikkat ediyorum?", "a": "Benim için pratik sonuç şu: hangi modelle çalışırsam çalışayım önce amacı yazıyorum. Talimata sadık bir modelde sınırları daha net çiziyorum; niyeti okumaya çalışan bir modelde ise işin ne zaman bitmiş sayılacağını." },
-      { "q": "Prompt yazmak neden aslında iyi bir brief yazmak?", "a": "Prompt yazmak yeni bir meslek değil; kendini net ifade etmenin yeni adı. İyi brief yazan biri, iyi prompt yazmanın yarısını zaten biliyor." }
+      { "q": "Prompt mühendisliği ayrı bir meslek mi?", "a": "Prompt yazmak yeni bir meslek değil; kendini net ifade etmenin yeni adı. İyi brief yazan biri, iyi prompt yazmanın yarısını zaten biliyor." }
     ]
   },
   "ui": {
@@ -45,7 +45,7 @@
       "title": "Neden bu yazı",
       "hero": {
         "kicker": "Bir PM masasından",
-        "title": "Prompt yazmak, aslında iyi bir brief yazmak.",
+        "title": "Prompt mühendisliği diye bir meslek hiç olmadı.",
         "claimLabel": "Tek cümlelik brief",
         "claim": [
           {

@@ -1,7 +1,7 @@
 {
   "name": "ucpehlivan.web.app — components",
   "updated": "2026-11-22",
-  "note": "Yalnız yayındaki ekranlarda (/, /blog/, /yazi/prompt-brief/, /yazi/arac-degil-sonuc/, 404, /blog/post.html kabuğu) kullanılan bileşenler. Seçiciler public/assets/main.css, yazi.css ve yazi-blok.css'ten; işaretleme shared/render.js, scripts/build-yazi.mjs ve scripts/yazi-blok.mjs'ten.",
+  "note": "Yalnız yayındaki ekranlarda (/, /blog/, /yazi/prompt-muhendisligi/, /yazi/arac-degil-sonuc/, 404, /blog/post.html kabuğu) kullanılan bileşenler. Seçiciler public/assets/main.css, yazi.css ve yazi-blok.css'ten; işaretleme shared/render.js, scripts/build-yazi.mjs ve scripts/yazi-blok.mjs'ten.",
   "counts": { "atom": 26, "molecule": 25, "organism": 20, "template": 6, "section": 2 },
   "cta_codes": "Yok. Sitede izleme kodu veya CTA kodu kullanılmıyor (yazı sayfasında analitik bilinçli olarak kapalı).",
   "components": [
@@ -83,7 +83,7 @@
 
     { "code": "Template/Home", "level": "template", "group": "Sayfa", "spec": "Progress · Header · Hero/Home · Section/Yazılar · Section/Hakkımda · Section/Hesaplarım · Footer (sıra ve aktiflik admin › Düzen)", "selector": "/", "pages": ["home"], "uses": [] },
     { "code": "Template/Blog", "level": "template", "group": "Sayfa", "spec": "Progress · Header · Hero/Page · Card/Post ızgarası · Takip notu (section) · Footer", "selector": "/blog/", "pages": ["blog"], "uses": [] },
-    { "code": "Template/Yazı", "level": "template", "group": "Sayfa", "spec": "Progress · Header · Nav/Yazı | Hero/Yazı · Revision/List · Switch/Brief · Tabs/Model · Bench/Brief · Sonuç (section) · Footer", "selector": "/yazi/prompt-brief/", "pages": ["yazi"], "uses": [] },
+    { "code": "Template/Yazı", "level": "template", "group": "Sayfa", "spec": "Progress · Header · Nav/Yazı | Hero/Yazı · Revision/List · Switch/Brief · Tabs/Model · Bench/Brief · Sonuç (section) · Footer", "selector": "/yazi/prompt-muhendisligi/", "pages": ["yazi"], "uses": [] },
     { "code": "Template/404", "level": "template", "group": "Sayfa", "spec": "Progress · Header · Hero/Page (iki buton) · Footer · noindex", "selector": "/404.html", "pages": ["404"], "uses": [] },
     { "code": "Template/Blog kabuk", "level": "template", "group": "Sayfa", "spec": "Header · Hero/Page 'Yükleniyor' · Footer · noindex · içerik tarayıcıda Firestore'dan çizilir", "selector": "/blog/post.html", "pages": ["shell"], "uses": [] },
 

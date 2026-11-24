@@ -1,4 +1,4 @@
-// İnteraktif yazı sayfasını üretir: content/prompt-yazisi.json -> public/yazi/prompt-brief/index.html
+// İnteraktif yazı sayfasını üretir: content/prompt-yazisi.json -> public/yazi/prompt-muhendisligi/index.html
 // Header ve footer sitenin ortak şablonundan (shared/render.js) gelir; site ayarları Firestore'dan okunur.
 // Kullanım:
 //   node scripts/build-yazi.mjs          sayfayı üretir
@@ -288,7 +288,7 @@ h1 i{font-style:normal;color:${RENK.tukenmez}}
 .f{display:flex;justify-content:space-between;align-items:center;font-size:26px;color:${RENK.silik}}
 .bar{position:absolute;left:0;right:0;bottom:0;height:16px;background:${RENK.tukenmez}}</style></head>
 <body><div class="k"><b>01–06</b>${esc(S.neden.hero.kicker)}</div>
-<h1>${esc(S.neden.hero.title).replace(/(brief yazmak\.)$/, '<i>$1</i>')}</h1>
+<h1>${esc(S.neden.hero.title).replace(/(hiç olmadı\.)$/, '<i>$1</i>')}</h1>
 <div class="f"><span>${esc(s.name)}</span><span>ucpehlivan.web.app</span></div><div class="bar"></div></body></html>`);
   execFileSync(chrome, ['--headless=new', '--disable-gpu', '--hide-scrollbars', '--force-device-scale-factor=1', '--virtual-time-budget=4000', '--window-size=1200,630', `--screenshot=${join(OUT, 'og.png')}`, `file://${page}`], { stdio: 'ignore' });
   rmSync(tmp, { recursive: true, force: true });
