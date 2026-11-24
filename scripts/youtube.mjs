@@ -16,17 +16,29 @@ export function parseFeed(xml) {
   })).filter((v) => /^[\w-]{6,}$/.test(v.id) && v.title);
 }
 
-// RSS okunamazsa yayındaki videos.json kullanılır (geçici YouTube hatası bölümü boşaltmasın).
+// Önce "Yüklenenler" listesinin RSS'i (UU…): kanal RSS'i (channel_id) yeni kanalda/Shorts'ta
+// boş dönebiliyor (2026-11-24: kanal RSS'i boş, UU listesi videoyu gösteriyordu).
+// İkisi de boşsa boş liste; ikisi de okunamazsa yayındaki videos.json kullanılır
+// (geçici YouTube hatası bölümü boşaltmasın).
 export async function fetchVideos() {
-  try {
-    const r = await fetch(`https://www.youtube.com/feeds/videos.xml?channel_id=${YT_CHANNEL_ID}`);
-    if (!r.ok) throw new Error(String(r.status));
-    return { videos: parseFeed(await r.text()), source: 'rss' };
-  } catch (err) {
+  const feeds = [
+    `https://www.youtube.com/feeds/videos.xml?playlist_id=UU${YT_CHANNEL_ID.slice(2)}`,
+    `https://www.youtube.com/feeds/videos.xml?channel_id=${YT_CHANNEL_ID}`,
+  ];
+  let err = null, okEmpty = false;
+  for (const url of feeds) {
     try {
-      const r = await fetch(FALLBACK);
-      if (r.ok) return { videos: await r.json(), source: `yayındaki videos.json (RSS: ${err.message})` };
-    } catch {}
-    return { videos: [], source: `yok (RSS: ${err.message})` };
+      const r = await fetch(url);
+      if (!r.ok) throw new Error(String(r.status));
+      const videos = parseFeed(await r.text());
+      if (videos.length) return { videos, source: url.includes('playlist_id') ? 'rss (yüklenenler)' : 'rss (kanal)' };
+      okEmpty = true;
+    } catch (e) { err = e; }
   }
+  if (okEmpty) return { videos: [], source: 'rss (boş)' };
+  try {
+    const r = await fetch(FALLBACK);
+    if (r.ok) return { videos: await r.json(), source: `yayındaki videos.json (RSS: ${err.message})` };
+  } catch {}
+  return { videos: [], source: `yok (RSS: ${err.message})` };
 }
