@@ -12,7 +12,7 @@
     "readingMinutes": 7,
     "summaryLabel": "Özet",
     "summary": [
-      "Yeni modellere adım adım tarif yazma. **Hedefi**, **sınırları** ve modele bıraktığın **serbest alanı** yaz.",
+      "Prompt mühendisliği ayrı bir meslek değil, iyi bir brief yazmak. Yeni modellere adım adım tarif yazma; **hedefi**, **sınırları** ve modele bıraktığın **serbest alanı** yaz.",
       "Rol vermek, uzun brief ve her şeyi tek mesaja sığdırmak artık işe yaramıyor. Yerine somut malzeme, kısa ve net metin, hazır proje bağlamı ver.",
       "Kopyalanabilir şablon: **Hedef + Elindekiler + Sınırlar**, sonunda “Talimatımda bir hata görürsen önce bana söyle.”"
     ],
@@ -24,7 +24,7 @@
       { "q": "Hazır prompt şablonlarındaki hangi alışkanlıklar yeni yapay zekâ modellerinde artık işe yaramıyor?", "a": "Modele unvan takmak, brief'i romana çevirmek ve her şeyi tek mesaja sığdırmak. Üçü de bir zamanlar işe yarıyordu, bugün modeli yavaşlatıyor." },
       { "q": "Adım adım talimat yerine hedef ve sınır yazmak neden daha iyi sonuç veriyor?", "a": "Güçlü bir modele adım adım tarif yazdığında, onu kendi planının içine kapatırsın. Model senin bildiğin sırayla ilerler; daha iyi bir yol olsa bile aramaz. İşe yarayan brief üç şeyi söyler, gerisini bırakır: hedef, sınır ve serbestlik." },
       { "q": "Claude ve GPT'ye prompt yazarken nelere dikkat ediyorum?", "a": "Benim için pratik sonuç şu: hangi modelle çalışırsam çalışayım önce amacı yazıyorum. Talimata sadık bir modelde sınırları daha net çiziyorum; niyeti okumaya çalışan bir modelde ise işin ne zaman bitmiş sayılacağını." },
-      { "q": "Prompt mühendisliği ayrı bir meslek mi?", "a": "Prompt yazmak yeni bir meslek değil; kendini net ifade etmenin yeni adı. İyi brief yazan biri, iyi prompt yazmanın yarısını zaten biliyor." }
+      { "q": "Prompt mühendisliği ayrı bir meslek mi?", "a": "Değil. Prompt mühendisliği yeni bir meslek değil; kendini net ifade etmenin yeni adı. İyi brief yazan biri, iyi prompt yazmanın yarısını zaten biliyor." }
     ]
   },
   "ui": {
@@ -93,8 +93,8 @@
         ]
       },
       "paragraphs": [
-        "İyi bir prompt da iyi bir proje brief'i gibi çalışır: nereye varılacağını ve neyin dışına çıkılmayacağını söyler, yolu bulmayı uzmanına bırakır.",
-        "Bir yıl önce ben de hazır prompt şablonlarıyla çalışıyordum: modele bir rol ver, adımları sırala, çıktının formatını dikte et. O dönem işe yarıyordu, çünkü modeller elinden tutulmadan yolu bulamıyordu. Bugünün modelleri farklı. Akıl yürütüyor, bağlamı okuyor, bazen benim aklıma gelmeyen bir yolu öneriyor. Onları eski şablonlarla adım adım yönlendirmek, zeki bir uzmanı kendi planımın sınırına hapsetmek demek. Adımları bırakıp sadece hedefi ve sınırları verdiğimde aynı model daha iyi iş çıkarıyor."
+        "Son iki yılda “prompt mühendisliği” ayrı bir uzmanlık gibi konuşuldu. Bana göre ortada yeni bir meslek yok; yıllardır yaptığımız bir iş var: brief yazmak. İyi bir prompt da iyi bir proje brief'i gibi çalışır: nereye varılacağını ve neyin dışına çıkılmayacağını söyler, yolu bulmayı uzmanına bırakır.",
+        "Bir yıl önce ben de hazır prompt şablonlarıyla çalışıyordum: modele bir rol ver, adımları sırala, çıktının formatını dikte et. O dönem işe yarıyordu, çünkü modeller elinden tutulmadan yolu bulamıyordu. Bugünün modelleri farklı. Akıl yürütüyor, bağlamı okuyor, bazen benim aklıma gelmeyen bir yolu öneriyor. Onları eski şablonlarla adım adım yönlendirmek, zeki bir uzmanı kendi planımın sınırına hapsetmek demek. Adımları bırakıp sadece hedefi ve sınırları verdiğimde aynı model daha iyi iş çıkarıyor. Yani işin sırrı özel bir prompt dili değil, iyi bir brief."
       ],
       "aside": {
         "label": "Bu arada",
@@ -410,9 +410,9 @@
       "num": "06",
       "nav": "Sonuç",
       "title": "Sonuç",
-      "lede": "Prompt yazmak neden aslında iyi bir brief yazmak?",
+      "lede": "Prompt mühendisliği ayrı bir meslek mi?",
       "paragraphs": [
-        "Prompt yazmak yeni bir meslek değil; kendini net ifade etmenin yeni adı. İyi brief yazan biri, iyi prompt yazmanın yarısını zaten biliyor."
+        "Değil. Prompt mühendisliği yeni bir meslek değil; kendini net ifade etmenin yeni adı. İyi brief yazan biri, iyi prompt yazmanın yarısını zaten biliyor."
       ],
       "linkedin": {
         "label": "LinkedIn'de takip et",
