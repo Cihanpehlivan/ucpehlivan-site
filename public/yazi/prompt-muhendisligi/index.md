@@ -1,6 +1,6 @@
 # Prompt Mühendisliği Diye Bir Meslek Hiç Olmadı
 
-Umut Cihan Pehlivan · 16 Kasım 2026 · 7 dk okuma  
+Umut Cihan Pehlivan · 24 Kasım 2026 · 7 dk okuma  
 Kaynak: https://ucpehlivan.web.app/yazi/prompt-muhendisligi/
 
 ![Koyu zeminde “Prompt mühendisliği diye bir meslek hiç olmadı” yazısı. Altta üstü çizili “Prompt mühendisi” etiketi. Sağda elinde kahveyle etiketi gösteren, kaşını kaldırmış bıyıklı maskot.](https://ucpehlivan.web.app/yazi/prompt-muhendisligi/kapak-meslek.webp)
