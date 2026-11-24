@@ -36,6 +36,8 @@ for (const id of ids) {
   writeFileSync(join(mediaDir, `${id}.${ext}`), Buffer.from(match[2], 'base64'));
   map[id] = `/media/${id}.${ext}`;
 }
+// Yayındaki medya listesi: hydrate.js bu dosyalardaki görselleri Firestore'dan tekrar indirmez.
+writeFileSync(join(here, '..', 'public', 'media.json'), JSON.stringify(map));
 console.log(`${ids.length} medya dosyası indirildi.`);
 const { videos, source } = await fetchVideos();
 writeFileSync(join(here, '..', 'public', 'videos.json'), JSON.stringify(videos));

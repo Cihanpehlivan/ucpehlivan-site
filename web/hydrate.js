@@ -22,16 +22,25 @@ async function getDoc(api, pid, path) {
   return fields((await r.json()).fields || {});
 }
 
+const json = (url, opts) => fetch(url, opts).then((r) => (r.ok ? r.json() : Promise.reject(new Error(`${url}: ${r.status}`))));
+
 (async () => {
   try {
-    const cfg = await (await fetch('/__/firebase/init.json')).json();
+    // Yayındaki medya listesi (/media.json, publish.mjs üretir) ve videolar paketle aynı anda istenir.
+    const mediaReq = json('/media.json', { cache: 'no-store' }).catch(() => ({}));
+    const videosReq = json('/videos.json', { cache: 'no-store' }).catch(() => []);
+    const cfg = await json('/__/firebase/init.json');
     const api = cfg.firestoreApi || 'https://firestore.googleapis.com/v1';
     const bundle = await getDoc(api, cfg.projectId, 'site/public');
     const current = document.querySelector('meta[name="ucp-version"]')?.content || '';
     if (!bundle.version || String(bundle.version) === current) return;
     const ids = [...collectMedia(bundle)];
+    // Yayında dosyası olan medya doğrudan /media/<id>.<uzantı> adresinden gelir (tarayıcı önbelleğinde).
+    // Yalnız son yayından sonra admin'de yüklenen medya Firestore'dan indirilir.
+    const deployed = await mediaReq;
     const map = {};
     await Promise.all(ids.map(async (id) => {
+      if (deployed[id]) { map[id] = deployed[id]; return; }
       try {
         const d = (await getDoc(api, cfg.projectId, `media/${id}`)).data || '';
         // PDF gibi dosyalar yeni sekmede açılabilsin diye blob adresine çevrilir.
@@ -40,7 +49,7 @@ async function getDoc(api, pid, path) {
     }));
     const c = resolveMedia(bundle, map);
     // Videolar Firestore'da değil, yayında üretilen /videos.json'da (YouTube RSS).
-    try { c.videos = await (await fetch('/videos.json', { cache: 'no-store' })).json(); } catch { c.videos = []; }
+    c.videos = await videosReq;
     let path = location.pathname;
     if (path === '/blog/post.html') path = '/blog/';
     const { html } = renderPath(c, path, { origin: location.origin, version: bundle.version });

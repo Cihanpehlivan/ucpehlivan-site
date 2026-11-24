@@ -10,9 +10,15 @@ on:
           - onizleme
           - canli
         default: onizleme
-  # Her sabah 07:00 (TR): yeni YouTube videosu veya admin'de kaydedilmiş yeni içerik varsa canlıyı yeniler.
+  # Her saat başı: yeni YouTube videosu veya admin'de kaydedilmiş yeni içerik varsa canlıyı yeniler
+  # (değişiklik yoksa yükleme yapmaz). Admin'de Kaydet en geç ~1 saatte statik sayfaya geçer.
   schedule:
-    - cron: '0 4 * * *'
+    - cron: '0 * * * *'
+
+# Elle ve zamanlı çalışma üst üste binmesin: yayınlar sırayla yapılır.
+concurrency:
+  group: yayinla
+  cancel-in-progress: false
 
 jobs:
   yayinla:
