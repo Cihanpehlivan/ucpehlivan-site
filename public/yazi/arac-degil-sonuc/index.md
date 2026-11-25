@@ -61,4 +61,4 @@ Bir fikri ürüne çevirmeden önce şu üç soruyu sor:
 
 ---
 
-Siz yazılım mı satıyorsunuz, yoksa yazılımla ortaya çıkan işi mi?
+Araçlar değişecek, modeller büyüyecek. Değişmeyen şey, işi sonuna kadar götüren kişinin değeri.

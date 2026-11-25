@@ -193,8 +193,8 @@
           "checkHint": "“Evet” dediklerini işaretle",
           "verdict": { "yes": "Ürünü kurma. Yazılımı kendin kullan, nihai işi sat.", "wait": "Evet dediklerin" },
           "need": [0, 1, 2] },
-        { "type": "closing", "paragraphs": ["Siz yazılım mı satıyorsunuz, yoksa yazılımla ortaya çıkan işi mi?"],
-          "linkedin": { "label": "LinkedIn'de yazın", "href": "https://www.linkedin.com/in/umutcihanpehlivan/" } },
+        { "type": "closing", "paragraphs": ["Araçlar değişecek, modeller büyüyecek. Değişmeyen şey, işi sonuna kadar götüren kişinin değeri."],
+          "linkedin": { "label": "LinkedIn'de takip et", "href": "https://www.linkedin.com/in/umutcihanpehlivan/" } },
         { "type": "share" }
       ]
     }

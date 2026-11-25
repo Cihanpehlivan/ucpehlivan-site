@@ -376,7 +376,7 @@ Not eklerken **Açık işler** listesini de güncelle: biten işi sil, yeni aç�
 | Marka: yasak biçimler (sol çizgili kutular `.yz-example`, `.yz-whybox`, `.yz-lesson`, `.yb-o`, `.yb-t-risk`; `.yz-claim` gölgesi; bölüm şeridi gradient'i) | Sahibi karar verirse Claude | Düzen değişikliği sayılır, ayrı iş |
 
 ### 2026-11-26 — Pasif yazıya “yazılımı değil işi sat” vurgusu (Windows, Git + Node)
-- **Yapılan:** `content/arac-degil-sonuc.json`: 01, 04, 05, 06, 07. bölümlere vurgu (yazılım ucuzladı, değer ortaya çıkan işte; yazılım değil hizmet satmak önem kazanıyor; 06’da büyük cümle “Yazılımı kendiniz kullanın. Ortaya çıkan nihai işi satın.”). Özet son cümlesi, meta açıklama (150), FAQ (1., 4. eşitlendi + yeni soru), soru kuralı/sonucu, kapanış sorusu, `updated` 2026-11-26. `build-yazi-blok.mjs` ile `index.html` + `index.md` üretildi, yerelde kontrol edildi.
+- **Yapılan:** `content/arac-degil-sonuc.json`: 01, 04, 05, 06, 07. bölümlere vurgu (yazılım ucuzladı, değer ortaya çıkan işte; yazılım değil hizmet satmak önem kazanıyor; 06’da büyük cümle “Yazılımı kendiniz kullanın. Ortaya çıkan nihai işi satın.”). Özet son cümlesi, meta açıklama (150), FAQ (1., 4. eşitlendi + yeni soru), soru kuralı/sonucu, kapanış soru yerine cümle (“Araçlar değişecek, modeller büyüyecek…”), buton “LinkedIn’de takip et”, `updated` 2026-11-26. `build-yazi-blok.mjs` ile `index.html` + `index.md` üretildi, yerelde kontrol edildi.
 - **Karar:** Hizmet vurgusu genel gözlem/okura tavsiye olarak yazılır; sahibinin hizmet sattığı izlenimi verilmez (§2).
 - **Açık kalan:** Yazı admin’de hâlâ pasif (sayfa canlıda güncellenir, listelerde görünmez). Kapak/og görseli değişmedi.
 - **Sonraki adım:** Sahibi yazıyı yayına almak isterse admin’de aktif et; LinkedIn özeti yeni vurguyla yazılabilir.
