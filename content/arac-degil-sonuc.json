@@ -1,20 +1,20 @@
 {
   "format": "blok",
-  "_not": "Blok biçimli interaktif yazı. Üretim: scripts/build-yazi-blok.mjs (Node) veya scripts/yazi-blok.mjs tarayıcıda. Tez (sahibi, 2026-11-19): Yapay zeka modelleri (LLM'ler) zaten birer araç ve her SaaS'a rakip; onlarla yarışan uygulama kurmak yerine onları işin adımlarında, sonuca ulaşmak için kullanmak. Rakibimiz yapay zeka şirketleri olamaz. Köşeli parantezli yer tutucu (DÜZENLE, SÜRE, ÖRNEK) kalırsa canlıya alınmaz (yayinla.yml).",
+  "_not": "Blok biçimli interaktif yazı. Üretim: scripts/build-yazi-blok.mjs (Node) veya scripts/yazi-blok.mjs tarayıcıda. Tez (sahibi, 2026-11-19): Yapay zeka modelleri (LLM'ler) zaten birer araç ve her SaaS'a rakip; onlarla yarışan uygulama kurmak yerine onları işin adımlarında, sonuca ulaşmak için kullanmak. Rakibimiz yapay zeka şirketleri olamaz. Ek vurgu (sahibi, 2026-11-26): Yazılım satmaktan çok, yazılımla ortaya çıkan işi (hizmeti) satmak önem kazanıyor. Yazılımı kendin kullan, nihai işi sat. Genel gözlem olarak yazılır; sahibinin hizmet sattığı izlenimi verilmez (CLAUDE.md §2). Köşeli parantezli yer tutucu (DÜZENLE, SÜRE, ÖRNEK) kalırsa canlıya alınmaz (yayinla.yml).",
   "meta": {
     "path": "/yazi/arac-degil-sonuc/",
     "title": "Yapay Zekayla Araç Yapmak Kolaylaştı. Asıl Değer Hâlâ Sonuçta.",
     "seoTitle": "Araç Yapmak Kolay, Asıl Değer Sonuçta",
-    "description": "Yapay zeka modelleri artık birer araç ve her SaaS’a rakip. Onlarla yarışan uygulama kurmak yerine onları işin içinde kullanıp sonuca ulaşmayı seçiyorum.",
+    "description": "Yapay zeka modelleri artık birer araç ve her SaaS’a rakip. Değer, yazılımda değil, yazılımla ortaya çıkan işte. Yazılımı kendin kullan, nihai işi sat.",
     "ogImage": "/yazi/arac-degil-sonuc/og.png",
     "ogImageAlt": "Araç değil, sonuç.",
     "published": "2026-11-19",
-    "updated": "2026-11-19",
+    "updated": "2026-11-26",
     "readingMinutes": 4,
     "kicker": "Sahadan not",
     "summaryLabel": "Kısaca",
     "summary": [
-      "Yapay zeka modelleri (LLM'ler) artık kendileri birer araç. Her yeni sürümde, ayrı bir SaaS ürününün yaptığı işi doğrudan yapabiliyorlar. Bu yüzden onlarla yarışan bir uygulama kurmak yerine, onları işin içinde kullanıp sonuca ulaşmayı seçiyorum. Rakibimizi yapay zeka şirketleri yapamayız."
+      "Yapay zeka modelleri (LLM'ler) artık kendileri birer araç. Her yeni sürümde, ayrı bir SaaS ürününün yaptığı işi doğrudan yapabiliyorlar. Bu yüzden onlarla yarışan bir uygulama kurmak yerine, onları işin içinde kullanıp sonuca ulaşmayı seçiyorum. Yazılım satmak değil, yazılımla ortaya çıkan işi satmak önem kazanıyor."
     ],
     "cover": {
       "src": "/yazi/arac-degil-sonuc/kapak-3.webp",
@@ -27,10 +27,11 @@
     "share": { "label": "Bu yazıyı paylaş", "linkedin": "LinkedIn'de paylaş", "x": "X'te paylaş", "copy": "Linki kopyala", "native": "Paylaş" },
     "_faq_not": "Yalnız yapılandırılmış veri (FAQPage). Cevaplar yazıda görünen cümlelerdir. Metin değişirse burayı da eşitle.",
     "faq": [
-      { "q": "Yapay zeka modelleriyle yarışan bir SaaS ürünü kurmak mantıklı mı?", "a": "Yapay zeka modelleri (LLM'ler) artık kendileri birer araç. Her yeni sürümde, ayrı bir SaaS ürününün yaptığı işi doğrudan yapabiliyorlar. Bu yüzden onlarla yarışan bir uygulama kurmak yerine, onları işin içinde kullanıp sonuca ulaşmayı seçiyorum. Rakibimizi yapay zeka şirketleri yapamayız." },
+      { "q": "Yapay zeka modelleriyle yarışan bir SaaS ürünü kurmak mantıklı mı?", "a": "Yapay zeka modelleri (LLM'ler) artık kendileri birer araç. Her yeni sürümde, ayrı bir SaaS ürününün yaptığı işi doğrudan yapabiliyorlar. Bu yüzden onlarla yarışan bir uygulama kurmak yerine, onları işin içinde kullanıp sonuca ulaşmayı seçiyorum. Yazılım satmak değil, yazılımla ortaya çıkan işi satmak önem kazanıyor." },
+      { "q": "Yapay zeka döneminde yazılım mı satmak daha önemli, hizmet mi?", "a": "Yazılım her gün ucuzluyor. Yazılımla ortaya çıkan iş ucuzlamıyor. Bu yüzden yazılım satmaktan çok, hizmet satmak önem kazanıyor. Yazılımı kendiniz kullanın ve ortaya çıkan nihai işi satın." },
       { "q": "Kendi işim için yaptığım bir aracı ürüne çevirmek neden zor?", "a": "Araç benim çalışma şeklime göre kuruldu. Başka biri kullansın diye kurulum, açıklama ve destek gerekir. Bu iş, aracın kendisinden daha büyük." },
       { "q": "Yapay zeka modellerinin yeni sürümleri, model üstüne kurulan uygulamaları nasıl etkiliyor?", "a": "Bugün özel olan bir uygulama, yarın modelin sıradan bir özelliği olabilir. Uygulama ayrı bir ürünse, bu kötü haber: Rakibi, her sürümde güçlenen yapay zeka şirketleri olur. Model işin içindeyse, iyi haber: Model geliştikçe iş de kolaylaşıyor." },
-      { "q": "Bir yapay zeka fikrini ürüne çevirmeden önce hangi sorular sorulmalı?", "a": "Bir sonraki model sürümü bunu kendisi yapabilir mi? Asıl değer ürünün kendisinde değil, ortaya çıkan sonuçta mı? Rakibin, yapay zeka şirketinin kendisi mi olur? Üçüne de “evet” diyorsan ürünü kurma. Modeli işin içinde kullan, sonuca odaklan." }
+      { "q": "Bir yapay zeka fikrini ürüne çevirmeden önce hangi sorular sorulmalı?", "a": "Bir sonraki model sürümü bunu kendisi yapabilir mi? Asıl değer ürünün kendisinde değil, ortaya çıkan sonuçta mı? Rakibin, yapay zeka şirketinin kendisi mi olur? Üçüne de “evet” diyorsan ürünü kurma. Yazılımı kendin kullan, ortaya çıkan nihai işi sat." }
     ]
   },
   "ui": {
@@ -49,7 +50,8 @@
         { "type": "summary" },
         { "type": "prose", "paragraphs": [
           "Her gün yapay zekayı işimde kullanıyorum. Son aylarda bir şey netleşti: Yapay zeka modelleri artık bir araç yapmak için kullanılan bir altyapı değil. Kendileri birer araç.",
-          "Tekrar eden bir iş için eskiden ayrı bir uygulama gerekirdi. Bugün aynı işi bir yapay zeka modeline doğru bağlamla anlatmak çoğu zaman yetiyor. Veriyi alıyor, düzenliyor, özetini yazıyor. Araç yapmak birkaç saat sürüyor. Bazen hiç gerekmiyor."
+          "Tekrar eden bir iş için eskiden ayrı bir uygulama gerekirdi. Bugün aynı işi bir yapay zeka modeline doğru bağlamla anlatmak çoğu zaman yetiyor. Veriyi alıyor, düzenliyor, özetini yazıyor. Araç yapmak birkaç saat sürüyor. Bazen hiç gerekmiyor.",
+          "Yazılım bu kadar kolay ve ucuz üretilince, yazılımın kendisinin değeri düşüyor. Değeri düşmeyen şey, yazılımla ortaya çıkan iş."
         ] },
         { "type": "flow", "label": "Tekrar eden bir iş", "options": [
           { "key": "elle", "label": "Ayrı uygulama", "who": "Uygulama" },
@@ -120,7 +122,8 @@
             { "tone": "good", "label": "Model işin içindeyse", "before": "İşin bir adımı", "after": "Bir adım eksik, iş daha kolay" }
           ] },
         { "type": "prose", "paragraphs": [
-          "Bugün özel olan bir uygulama, yarın modelin sıradan bir özelliği olabilir. Uygulama ayrı bir ürünse, bu kötü haber: Rakibi, her sürümde güçlenen yapay zeka şirketleri olur. Model işin içindeyse, iyi haber: Model geliştikçe iş de kolaylaşıyor."
+          "Bugün özel olan bir uygulama, yarın modelin sıradan bir özelliği olabilir. Uygulama ayrı bir ürünse, bu kötü haber: Rakibi, her sürümde güçlenen yapay zeka şirketleri olur. Model işin içindeyse, iyi haber: Model geliştikçe iş de kolaylaşıyor.",
+          "Yazılım satan, her yeni sürümde modelle yarışıyor. Yazılımı kullanıp ortaya çıkan işi satan ise her yeni sürümden kazanıyor."
         ] }
       ]
     },
@@ -144,7 +147,10 @@
             { "task": "İçerik girişi", "status": "Tamam", "tag": "", "tagLabel": "", "why": "" },
             { "task": "Ödeme adımı", "status": "Başlamadı", "tag": "onemli", "tagLabel": "Bu ay önemli", "why": "Ay sonu teslimin ön koşulu." }
           ],
-          "caption": { "arac": "Model satırları sıralıyor. Hepsi aynı ağırlıkta.", "ben": "Aradaki boşluğu işi bilen kişi dolduruyor." } }
+          "caption": { "arac": "Model satırları sıralıyor. Hepsi aynı ağırlıkta.", "ben": "Aradaki boşluğu işi bilen kişi dolduruyor." } },
+        { "type": "prose", "paragraphs": [
+          "Karşı tarafın istediği de rapor yazan bir yazılım değil. İstediği şey, doğru okunmuş bir rapor. Bu bir yazılım değil, bir hizmet."
+        ] }
       ]
     },
     {
@@ -155,8 +161,10 @@
       "blocks": [
         { "type": "prose", "paragraphs": [
           "Yapay zeka modelleriyle yarışan bir uygulama kurmak, her yeni sürümde yeniden yarışmak demek. Rakibimizi yapay zeka şirketleri yapamayız.",
-          "Vardığım kanaat şu: Modeli rakip değil, araç olarak görmek. Onu işin adımlarında, sonuca ulaşmak için kullanmak. Böylece model her geliştiğinde iş de bir adım kolaylaşıyor."
+          "Vardığım kanaat şu: Modeli rakip değil, araç olarak görmek. Onu işin adımlarında, sonuca ulaşmak için kullanmak. Böylece model her geliştiğinde iş de bir adım kolaylaşıyor.",
+          "Bu yüzden yazılım satmaktan çok, hizmet satmak önem kazanıyor. Yazılım herkesin elinde. Fark, onunla ortaya çıkan işte."
         ] },
+        { "type": "prose", "big": true, "paragraphs": ["Yazılımı kendiniz kullanın. Ortaya çıkan nihai işi satın."] },
         { "type": "outcome", "label": "Nereden bakıyorsun?", "options": [
           { "key": "arka", "label": "Arka plan" },
           { "key": "ekip", "label": "Ekibin gördüğü" }
@@ -180,12 +188,12 @@
             "Asıl değer ürünün kendisinde değil, ortaya çıkan sonuçta mı?",
             "Rakibin, yapay zeka şirketinin kendisi mi olur?"
           ],
-          "rule": "Üçüne de “evet” diyorsan ürünü kurma. Modeli işin içinde kullan, sonuca odaklan.",
+          "rule": "Üçüne de “evet” diyorsan ürünü kurma. Yazılımı kendin kullan, ortaya çıkan nihai işi sat.",
           "tryLabel": "Kendi fikrin için dene",
           "checkHint": "“Evet” dediklerini işaretle",
-          "verdict": { "yes": "Ürünü kurma, modeli işin içinde kullan.", "wait": "Evet dediklerin" },
+          "verdict": { "yes": "Ürünü kurma. Yazılımı kendin kullan, nihai işi sat.", "wait": "Evet dediklerin" },
           "need": [0, 1, 2] },
-        { "type": "closing", "paragraphs": ["Siz bir yapay zeka modelinin etrafına ürün mü kuruyorsunuz, yoksa onu işin içinde mi kullanıyorsunuz?"],
+        { "type": "closing", "paragraphs": ["Siz yazılım mı satıyorsunuz, yoksa yazılımla ortaya çıkan işi mi?"],
           "linkedin": { "label": "LinkedIn'de yazın", "href": "https://www.linkedin.com/in/umutcihanpehlivan/" } },
         { "type": "share" }
       ]

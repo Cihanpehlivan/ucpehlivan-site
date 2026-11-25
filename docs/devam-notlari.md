@@ -2,6 +2,12 @@
 
 CLAUDE.md §11'de yalnız son 3 not durur. Daha eski notlar buraya, **en üste** taşınır (yeniden eskiye). Güncel açık işler CLAUDE.md §11 › "Açık işler" listesindedir; buradaki "Açık kalan" satırları o günün durumudur.
 
+### 2026-11-24 — Pasif yazı bir an görünüp kayboluyordu (Windows, Git + Node)
+- **Yapılan:** Sahibi `arac-degil-sonuc`'u admin'de pasife aldı; site açılınca yazı görünüp kayboluyordu. Neden: Kaydet yalnız Firestore `site/public`'i (sürüm …7830167, 1 yazı) yeniler; canlı statik HTML eski yayındaydı (…0562404, 2 yazı); `hydrate.js` sürüm farkını görüp sayfayı yeniden çiziyordu. Zamanlı yayın yalnız `videos.json`'a baktığı için canlıyı yenilememişti. Düzeltme: `yayinla.yml` zamanlı çalışmada canlı `/` ile yeni `public/index.html`'in `ucp-version`'ını da karşılaştırır, farklıysa yükler (`8c2c965`). Önizleme ve canlı yayın çalıştırıldı: `/` ve `/blog/` sürüm …7830167, tek yazı, site haritasında `arac-degil-sonuc` yok.
+- **Karar:** Admin'de içerik değişince canlı en geç ertesi sabah 07:00'de statik sayfaya geçer; hemen istenirse `yayinla.yml hedef=canli`.
+- **Açık kalan:** `/yazi/arac-degil-sonuc/` sayfası ve `/blog/arac-degil-sonuc` 301'i hâlâ yayında (pasif = yalnız listelerden çıkar). Tamamen kaldırma sahibinin kararı. Zamanlı çalışmanın yeni adımı gerçek çalışmada henüz görülmedi. `gh workflow run` bir kez HTTP 500 verdi, tekrar deneyince çalıştı.
+- **Sonraki adım:** Yarın sabahki zamanlı çalışmanın log'unda "Video listesi ve içerik aynı, yükleme yok." satırına bak.
+
 ### 2026-11-22 — SEO turu (Windows, Git + Node)
 - **Yapılan:** Canlı site tarandı (temel sağlam: canonical, sitemap, LD, OG, 301, admin noindex). Uygulanan: `meta.seoTitle` (`<title>` ≤60; `og:title` ve H1 tam başlık: `layout` › `ogTitle`), açıklamalar ≤155, `/blog/` açıklaması `BLOG_DESC_EXTRA` ile 151; site haritasında kapak `<image:image>` (`/media/<id>.webp`); Person `alumniOf`; `/index.html`, `/blog/index.html`, `/yazi/:ad/index.html` → 301; IndexNow (`public/ea58339bf86fb6753cfb4a481016fe5f.txt`, `yayinla.yml` canlıda bildirir; ilk bildirim 202). `ASSET_V` 22→23. `fdf21b7` canlıda, doğrulandı.
 - **Karar:** Arama başlığı kısa, paylaşım başlığı tam. Metinleri sahibi onayladı.

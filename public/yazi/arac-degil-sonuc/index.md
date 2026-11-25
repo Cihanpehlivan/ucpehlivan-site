@@ -5,11 +5,13 @@ Kaynak: https://ucpehlivan.web.app/yazi/arac-degil-sonuc/
 
 ![Koyu zeminde “Araç değil, sonuç.” yazısı. Altında “Araç” başlıklı üç uygulama penceresinden bir okla üç onay işaretli ve tablolu “Sonuç” sayfasına geçiş. Sağda elinde kahveyle sayfayı gösteren bıyıklı maskot.](https://ucpehlivan.web.app/yazi/arac-degil-sonuc/kapak-3.webp)
 
-**Kısaca:** Yapay zeka modelleri (LLM'ler) artık kendileri birer araç. Her yeni sürümde, ayrı bir SaaS ürününün yaptığı işi doğrudan yapabiliyorlar. Bu yüzden onlarla yarışan bir uygulama kurmak yerine, onları işin içinde kullanıp sonuca ulaşmayı seçiyorum. Rakibimizi yapay zeka şirketleri yapamayız.
+**Kısaca:** Yapay zeka modelleri (LLM'ler) artık kendileri birer araç. Her yeni sürümde, ayrı bir SaaS ürününün yaptığı işi doğrudan yapabiliyorlar. Bu yüzden onlarla yarışan bir uygulama kurmak yerine, onları işin içinde kullanıp sonuca ulaşmayı seçiyorum. Yazılım satmak değil, yazılımla ortaya çıkan işi satmak önem kazanıyor.
 
 Her gün yapay zekayı işimde kullanıyorum. Son aylarda bir şey netleşti: Yapay zeka modelleri artık bir araç yapmak için kullanılan bir altyapı değil. Kendileri birer araç.
 
 Tekrar eden bir iş için eskiden ayrı bir uygulama gerekirdi. Bugün aynı işi bir yapay zeka modeline doğru bağlamla anlatmak çoğu zaman yetiyor. Veriyi alıyor, düzenliyor, özetini yazıyor. Araç yapmak birkaç saat sürüyor. Bazen hiç gerekmiyor.
+
+Yazılım bu kadar kolay ve ucuz üretilince, yazılımın kendisinin değeri düşüyor. Değeri düşmeyen şey, yazılımla ortaya çıkan iş.
 
 ## Ürüne çevirsem mi?
 
@@ -27,15 +29,23 @@ Bir yapay zeka modelinin etrafına ayrı bir adım, ayrı bir ekran kurmak bugü
 
 Bugün özel olan bir uygulama, yarın modelin sıradan bir özelliği olabilir. Uygulama ayrı bir ürünse, bu kötü haber: Rakibi, her sürümde güçlenen yapay zeka şirketleri olur. Model işin içindeyse, iyi haber: Model geliştikçe iş de kolaylaşıyor.
 
+Yazılım satan, her yeni sürümde modelle yarışıyor. Yazılımı kullanıp ortaya çıkan işi satan ise her yeni sürümden kazanıyor.
+
 ## 3. Hiçbir araç işin tamamını çözmüyor
 
 Model raporu çıkarıyor. Ama hangi satırın o ay önemli olduğunu bilmiyor. Hangi gecikmenin risk, hangisinin normal olduğunu da bilmiyor. Aradaki boşluğu işi bilen kişi dolduruyor. Değer, o boşluğun yanında durmakta.
+
+Karşı tarafın istediği de rapor yazan bir yazılım değil. İstediği şey, doğru okunmuş bir rapor. Bu bir yazılım değil, bir hizmet.
 
 ## Sonuç: Rakip değil, araç
 
 Yapay zeka modelleriyle yarışan bir uygulama kurmak, her yeni sürümde yeniden yarışmak demek. Rakibimizi yapay zeka şirketleri yapamayız.
 
 Vardığım kanaat şu: Modeli rakip değil, araç olarak görmek. Onu işin adımlarında, sonuca ulaşmak için kullanmak. Böylece model her geliştiğinde iş de bir adım kolaylaşıyor.
+
+Bu yüzden yazılım satmaktan çok, hizmet satmak önem kazanıyor. Yazılım herkesin elinde. Fark, onunla ortaya çıkan işte.
+
+Yazılımı kendiniz kullanın. Ortaya çıkan nihai işi satın.
 
 Ekibin gördüğü şey araç değil. Gördükleri şey sonuç: zamanında çıkan rapor, daha az hata, daha net bir plan.
 
@@ -47,8 +57,8 @@ Bir fikri ürüne çevirmeden önce şu üç soruyu sor:
 2. Asıl değer ürünün kendisinde değil, ortaya çıkan sonuçta mı?
 3. Rakibin, yapay zeka şirketinin kendisi mi olur?
 
-Üçüne de “evet” diyorsan ürünü kurma. Modeli işin içinde kullan, sonuca odaklan.
+Üçüne de “evet” diyorsan ürünü kurma. Yazılımı kendin kullan, ortaya çıkan nihai işi sat.
 
 ---
 
-Siz bir yapay zeka modelinin etrafına ürün mü kuruyorsunuz, yoksa onu işin içinde mi kullanıyorsunuz?
+Siz yazılım mı satıyorsunuz, yoksa yazılımla ortaya çıkan işi mi?
