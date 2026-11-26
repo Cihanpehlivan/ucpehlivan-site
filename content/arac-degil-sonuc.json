@@ -6,7 +6,7 @@
     "title": "Yapay Zekayla Araç Yapmak Kolaylaştı. Asıl Değer Hâlâ Sonuçta.",
     "seoTitle": "Araç Yapmak Kolay, Asıl Değer Sonuçta",
     "description": "Yapay zeka modelleri artık birer araç ve her SaaS’a rakip. Değer, yazılımda değil, yazılımla ortaya çıkan işte. Yazılımı kendin kullan, nihai işi sat.",
-    "ogImage": "/yazi/arac-degil-sonuc/og-3.png",
+    "ogImage": "/yazi/arac-degil-sonuc/og-4.png",
     "ogImageAlt": "Araç değil, sonuç.",
     "published": "2026-11-27",
     "updated": "2026-11-27",
@@ -17,10 +17,10 @@
       "Yapay zeka modelleri (LLM'ler) artık kendileri birer araç. Her yeni sürümde, ayrı bir SaaS ürününün yaptığı işi doğrudan yapabiliyorlar. Bu yüzden onlarla yarışan bir uygulama kurmak yerine, onları işin içinde kullanıp sonuca ulaşmayı seçiyorum. Yazılım satmak değil, yazılımla ortaya çıkan işi satmak önem kazanıyor."
     ],
     "cover": {
-      "src": "/yazi/arac-degil-sonuc/kapak-5.webp",
+      "src": "/yazi/arac-degil-sonuc/kapak-6.webp",
       "width": 1536,
       "height": 864,
-      "bg": "#080D14",
+      "bg": "#080E16",
       "alt": "Koyu zeminde bıyıklı maskot iki pencere tutuyor: solda kırmızı çarpıyla üstü çizilmiş bir uygulama arayüzü, sağda yükselen grafik ve yeşil onay işaretli bir sonuç sayfası. Altta büyük harflerle “Araç değil, sonuç.” yazısı."
     },
     "crumbs": { "label": "Sayfa yolu", "home": "Ana sayfa", "blog": "Yazılar" },
