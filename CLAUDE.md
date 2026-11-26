@@ -369,12 +369,16 @@ Not eklerken **Açık işler** listesini de güncelle: biten işi sil, yeni aç�
 | Normal blog yazısı, kategori filtresi | Claude | Ekrana gelince `ui-kit`'e ekle (`template_only`). Normal yazı şablonuna (`renderPost`) da görünür sayfa yolu + paylaşım satırı ekle (yalnız interaktif yazıda var); `main.css` + `ASSET_V` + derleme gerekir (Mac). |
 | Sonraki dönem: ayrı Hakkımda sayfası (`/hakkimda/`) + yazı sonunda yazar kutusu | Sahibi karar verdi: sonra | Person verisinin merkezi olur; "kim yazdı" sorusu (GEO) |
 | LinkedIn paylaşımı · X hesabı · pasif bölüm fikirleri (§10) | Sahibi | YouTube 2026-11-22'de eklendi |
-| Pasif yazı `/yazi/arac-degil-sonuc/` sayfası ve 301 hâlâ yayında | Sahibi karar verirse Claude | Pasif = yalnız listelerden çıkar. Tamamen kaldırmak silme işi (onay). |
 | Repo herkese açık: private repo / `CLAUDE.local.md` kararı | Sahibi | |
 | Google Analytics var, çerez onay bandı yok | Sahibi | KVKK açısından bakılmalı (SEO değil) |
 | Marka: maskot 2x kaynak (480×590), kökteki `[1]` adlı marka dosyaları, hero 4 satır | Sahibi | 2026-11-22 marka katmanı notu |
 | Marka: yasak biçimler (sol çizgili kutular `.yz-example`, `.yz-whybox`, `.yz-lesson`, `.yb-o`, `.yb-t-risk`; `.yz-claim` gölgesi; bölüm şeridi gradient'i) | Sahibi karar verirse Claude | Düzen değişikliği sayılır, ayrı iş |
 
+### 2026-11-26 — “Araç değil sonuç” yazısı yayına alındı (Windows, Git + Node)
+- **Yapılan:** `content/arac-degil-sonuc.json`: `published` ve `updated` 2026-11-27 (ikisi eşit olunca “Güncellendi” satırı çıkmaz); sayfa ve `index.md` yeniden üretildi, push `9a41d78`, kontrol + yayın başarılı. Admin’de (Claude in Chrome) durum Taslak → Yayında; kart tarihi zaten 2026-11-27. /blog/’da iki yazı görünüyor.
+- **Karar:** Yayın tarihi sahibinin isteğiyle bir gün ileri (27 Kasım) yazıldı.
+- **Açık kalan:** Statik HTML (ana sayfa, /blog/, sitemap, feed) bir sonraki zamanlı yayında Firestore’dan yenilenir. Kaydet sonrası hemen sekme değiştirince yine `confirm` penceresi açıldı; kayıt yine de gitti.
+- **Sonraki adım:** LinkedIn özeti + link; Search Console’da `/yazi/arac-degil-sonuc/` dizine ekleme isteği.
 ### 2026-11-26 — Videolar bölümünde Shorts gösterilmiyor (Windows, Git + Node)
 - **Yapılan:** Yeni Short (BSacQCV4DpI) canlı `videos.json`'a girmişti. `scripts/youtube.mjs` artık önce `UULF…` (yalnız normal videolar) RSS'ini okur. Okunamazsa `UU…`/kanal RSS'i okunur ve `UUSH…` (Shorts) listesindekiler + başlık/açıklamasında `#shorts` geçenler elenir; yedek `videos.json` da `#shorts` ile süzülür. İki yol yerelde denendi: yalnız HNUQM67acj8 kalıyor. (`/shorts/<id>` yönlendirme kontrolü bu ortamda her videoya 303 verdiği için kullanılmadı.)
 - **Karar:** Sitede Shorts yok; yalnız normal videolar (sahibinin isteği).
@@ -385,8 +389,3 @@ Not eklerken **Açık işler** listesini de güncelle: biten işi sil, yeni aç�
 - **Karar:** Hizmet vurgusu genel gözlem/okura tavsiye olarak yazılır; sahibinin hizmet sattığı izlenimi verilmez (§2).
 - **Açık kalan:** Yazı admin’de hâlâ pasif (sayfa canlıda güncellenir, listelerde görünmez). Kapak/og görseli değişmedi.
 - **Sonraki adım:** Sahibi yazıyı yayına almak isterse admin’de aktif et; LinkedIn özeti yeni vurguyla yazılabilir.
-### 2026-11-24 — YouTube videosu sitede görünmüyordu (Windows, Git + Node)
-- **Yapılan:** İlk video (HNUQM67acj8, Short) yüklendi ama canlı `videos.json` boştu. Neden: YouTube kanal RSS’i (`channel_id`) bu kanalda boş dönüyor; “Yüklenenler” RSS’i (`playlist_id=UU…`) videoyu gösteriyor. `scripts/youtube.mjs` önce UU listesini, sonra kanal RSS’ini dener; ikisi de okunamazsa yayındaki `videos.json` (`e285d23`). Önizleme ve canlı yayınlandı: log “1 video (rss (yüklenenler))”, canlı `videos.json`’da video var.
-- **Admin (aynı gün, Claude in Chrome):** Videolar sekmesi seed değerleriyle dolduruldu (YouTube · Videolar · açıklama · 3 · Kanala git · kanal adresi). Düzen listesinde Videolar yoktu: “+ Yeni ekle” ile eklendi, Yazılar’ın altına taşındı, açık kaydedildi. Canlıda bölüm ve menü linki görünüyor. **Dikkat:** kaydetmeden sekme değiştirince `confirm` penceresi açılır ve Chrome eklentisi sayfaya ulaşamaz; önce Kaydet.
-- **Açık kalan:** Statik HTML zamanlı yayında (en geç ~1 saat) güncellenir.
-- **Sonraki adım:** Telefonda Videolar bölümüne bak; `ui-kit`’te video öğeleri zaten var.
