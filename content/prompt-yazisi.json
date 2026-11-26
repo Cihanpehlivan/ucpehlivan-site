@@ -5,7 +5,7 @@
     "title": "Prompt Mühendisliği Diye Bir Meslek Hiç Olmadı",
     "seoTitle": "Prompt Mühendisliği Bir Meslek Değil",
     "description": "Prompt mühendisliği yeni bir meslek değil, iyi brief yazmanın yeni adı. Modele adım adım tarif değil, hedef ve sınır ver. Bir PM’den interaktif okuma.",
-    "ogImage": "/yazi/prompt-muhendisligi/og.png",
+    "ogImage": "/yazi/prompt-muhendisligi/og-2.png",
     "ogImageAlt": "Prompt mühendisliği diye bir meslek hiç olmadı.",
     "published": "2026-11-24",
     "updated": "2026-11-24",
@@ -16,7 +16,7 @@
       "Rol vermek, uzun brief ve her şeyi tek mesaja sığdırmak artık işe yaramıyor. Yerine somut malzeme, kısa ve net metin, hazır proje bağlamı ver.",
       "Kopyalanabilir şablon: **Hedef + Elindekiler + Sınırlar**, sonunda “Talimatımda bir hata görürsen önce bana söyle.”"
     ],
-    "cover": { "src": "/yazi/prompt-muhendisligi/kapak-meslek.webp", "width": 1536, "height": 864, "bg": "#11162C", "alt": "Koyu zeminde “Prompt mühendisliği diye bir meslek hiç olmadı” yazısı. Altta üstü çizili “Prompt mühendisi” etiketi. Sağda elinde kahveyle etiketi gösteren, kaşını kaldırmış bıyıklı maskot." },
+    "cover": { "src": "/yazi/prompt-muhendisligi/kapak-meslek-2.webp", "width": 1536, "height": 864, "bg": "#040A15", "alt": "Koyu zeminde solda büyük harflerle “Prompt mühendisliği diye bir meslek hiç olmadı.” yazısı; ortada kırmızı çarpıyla üstü çizilmiş uzun bir prompt kâğıdı. Sağda bıyıklı maskot elindeki kısa listeyi gösteriyor: hedef, sınır ve yön simgeleri, köşede yeşil onay." },
     "crumbs": { "label": "Sayfa yolu", "home": "Ana sayfa", "blog": "Yazılar" },
     "share": { "label": "Bu yazıyı paylaş", "linkedin": "LinkedIn'de paylaş", "x": "X'te paylaş", "copy": "Linki kopyala", "native": "Paylaş" },
     "_faq_not":"Yalnız yapılandırılmış veri (FAQPage) için. Soru = bölüm lede'i; cevap = yazıda görünen cümleler (Google cevabın sayfada görünmesini ister). Metni değiştirirsen yazıdaki karşılığıyla aynı tut.",

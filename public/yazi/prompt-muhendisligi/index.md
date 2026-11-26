@@ -3,7 +3,7 @@
 Umut Cihan Pehlivan · 24 Kasım 2026 · 7 dk okuma  
 Kaynak: https://ucpehlivan.web.app/yazi/prompt-muhendisligi/
 
-![Koyu zeminde “Prompt mühendisliği diye bir meslek hiç olmadı” yazısı. Altta üstü çizili “Prompt mühendisi” etiketi. Sağda elinde kahveyle etiketi gösteren, kaşını kaldırmış bıyıklı maskot.](https://ucpehlivan.web.app/yazi/prompt-muhendisligi/kapak-meslek.webp)
+![Koyu zeminde solda büyük harflerle “Prompt mühendisliği diye bir meslek hiç olmadı.” yazısı; ortada kırmızı çarpıyla üstü çizilmiş uzun bir prompt kâğıdı. Sağda bıyıklı maskot elindeki kısa listeyi gösteriyor: hedef, sınır ve yön simgeleri, köşede yeşil onay.](https://ucpehlivan.web.app/yazi/prompt-muhendisligi/kapak-meslek-2.webp)
 
 > Prompt mühendisliği yeni bir meslek değil, iyi brief yazmanın yeni adı. Modele adım adım tarif değil, hedef ve sınır ver. Bir PM’den interaktif okuma.
 
