@@ -2,6 +2,11 @@
 
 CLAUDE.md §11'de yalnız son 3 not durur. Daha eski notlar buraya, **en üste** taşınır (yeniden eskiye). Güncel açık işler CLAUDE.md §11 › "Açık işler" listesindedir; buradaki "Açık kalan" satırları o günün durumudur.
 
+### 2026-11-26 — Pasif yazıya “yazılımı değil işi sat” vurgusu (Windows, Git + Node)
+- **Yapılan:** `content/arac-degil-sonuc.json`: 01, 04, 05, 06, 07. bölümlere vurgu (yazılım ucuzladı, değer ortaya çıkan işte; yazılım değil hizmet satmak önem kazanıyor; 06’da büyük cümle “Yazılımı kendiniz kullanın. Ortaya çıkan nihai işi satın.”). Özet son cümlesi, meta açıklama (150), FAQ (1., 4. eşitlendi + yeni soru), soru kuralı/sonucu, kapanış soru yerine cümle (“Araçlar değişecek, modeller büyüyecek…”), buton “LinkedIn’de takip et”, `updated` 2026-11-26. `build-yazi-blok.mjs` ile `index.html` + `index.md` üretildi, yerelde kontrol edildi.
+- **Karar:** Hizmet vurgusu genel gözlem/okura tavsiye olarak yazılır; sahibinin hizmet sattığı izlenimi verilmez (§2).
+- **Açık kalan:** Yazı admin’de hâlâ pasif (sayfa canlıda güncellenir, listelerde görünmez). Kapak/og görseli değişmedi.
+- **Sonraki adım:** Sahibi yazıyı yayına almak isterse admin’de aktif et; LinkedIn özeti yeni vurguyla yazılabilir.
 ### 2026-11-24 — YouTube videosu sitede görünmüyordu (Windows, Git + Node)
 - **Yapılan:** İlk video (HNUQM67acj8, Short) yüklendi ama canlı `videos.json` boştu. Neden: YouTube kanal RSS’i (`channel_id`) bu kanalda boş dönüyor; “Yüklenenler” RSS’i (`playlist_id=UU…`) videoyu gösteriyor. `scripts/youtube.mjs` önce UU listesini, sonra kanal RSS’ini dener; ikisi de okunamazsa yayındaki `videos.json` (`e285d23`). Önizleme ve canlı yayınlandı: log “1 video (rss (yüklenenler))”, canlı `videos.json`’da video var.
 - **Admin (aynı gün, Claude in Chrome):** Videolar sekmesi seed değerleriyle dolduruldu (YouTube · Videolar · açıklama · 3 · Kanala git · kanal adresi). Düzen listesinde Videolar yoktu: “+ Yeni ekle” ile eklendi, Yazılar’ın altına taşındı, açık kaydedildi. Canlıda bölüm ve menü linki görünüyor. **Dikkat:** kaydetmeden sekme değiştirince `confirm` penceresi açılır ve Chrome eklentisi sayfaya ulaşamaz; önce Kaydet.

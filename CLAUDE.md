@@ -374,6 +374,11 @@ Not eklerken **Açık işler** listesini de güncelle: biten işi sil, yeni aç�
 | Marka: maskot 2x kaynak (480×590), kökteki `[1]` adlı marka dosyaları, hero 4 satır | Sahibi | 2026-11-22 marka katmanı notu |
 | Marka: yasak biçimler (sol çizgili kutular `.yz-example`, `.yz-whybox`, `.yz-lesson`, `.yb-o`, `.yb-t-risk`; `.yz-claim` gölgesi; bölüm şeridi gradient'i) | Sahibi karar verirse Claude | Düzen değişikliği sayılır, ayrı iş |
 
+### 2026-11-27 — “Araç değil sonuç” yazısına yeni kapak (Windows, Git + Node)
+- **Yapılan:** Sahibinin görseli (1672×941) headless Chrome canvas ile `kapak-4.webp` (1536×864, q0.8, 222 KB) ve `og-2.png` (1200×630, kapak yüksekliğe sığar, yanlar `#080D14`) yapıldı. `content/arac-degil-sonuc.json`: cover src/bg/alt, ogImage; sayfa + `index.md` yeniden üretildi; `ui-kit/tokens.json` kapak adı. Push `3ba0d84`, kontrol + yayın başarılı. Admin: Kapak görseli `/yazi/arac-degil-sonuc/kapak-4.webp` (önceden `media:IWHAUrQOuZppmUTJ3lvS`), renk `#080D14`. Canlıda /blog/ kartı ve og:image yeni.
+- **Karar:** Yayındaki görsel değişince yeni dosya adı (önbellek 7 gün).
+- **Açık kalan:** Eski `kapak.webp`, `kapak-2.webp`, `kapak-3.webp`, `og.png` klasörde duruyor (silmek onay ister). LinkedIn önizlemesi eskiyse Post Inspector ile yenile.
+- **Sonraki adım:** LinkedIn özeti + link; Search Console dizine ekleme.
 ### 2026-11-26 — “Araç değil sonuç” yazısı yayına alındı (Windows, Git + Node)
 - **Yapılan:** `content/arac-degil-sonuc.json`: `published` ve `updated` 2026-11-27 (ikisi eşit olunca “Güncellendi” satırı çıkmaz); sayfa ve `index.md` yeniden üretildi, push `9a41d78`, kontrol + yayın başarılı. Admin’de (Claude in Chrome) durum Taslak → Yayında; kart tarihi zaten 2026-11-27. /blog/’da iki yazı görünüyor.
 - **Karar:** Yayın tarihi sahibinin isteğiyle bir gün ileri (27 Kasım) yazıldı.
@@ -384,8 +389,3 @@ Not eklerken **Açık işler** listesini de güncelle: biten işi sil, yeni aç�
 - **Karar:** Sitede Shorts yok; yalnız normal videolar (sahibinin isteği).
 - **Açık kalan:** Push sonrası bir sonraki yayında canlı `videos.json` düzelir.
 - **Sonraki adım:** Canlıda Videolar bölümünde Short olmadığına bak.
-### 2026-11-26 — Pasif yazıya “yazılımı değil işi sat” vurgusu (Windows, Git + Node)
-- **Yapılan:** `content/arac-degil-sonuc.json`: 01, 04, 05, 06, 07. bölümlere vurgu (yazılım ucuzladı, değer ortaya çıkan işte; yazılım değil hizmet satmak önem kazanıyor; 06’da büyük cümle “Yazılımı kendiniz kullanın. Ortaya çıkan nihai işi satın.”). Özet son cümlesi, meta açıklama (150), FAQ (1., 4. eşitlendi + yeni soru), soru kuralı/sonucu, kapanış soru yerine cümle (“Araçlar değişecek, modeller büyüyecek…”), buton “LinkedIn’de takip et”, `updated` 2026-11-26. `build-yazi-blok.mjs` ile `index.html` + `index.md` üretildi, yerelde kontrol edildi.
-- **Karar:** Hizmet vurgusu genel gözlem/okura tavsiye olarak yazılır; sahibinin hizmet sattığı izlenimi verilmez (§2).
-- **Açık kalan:** Yazı admin’de hâlâ pasif (sayfa canlıda güncellenir, listelerde görünmez). Kapak/og görseli değişmedi.
-- **Sonraki adım:** Sahibi yazıyı yayına almak isterse admin’de aktif et; LinkedIn özeti yeni vurguyla yazılabilir.
