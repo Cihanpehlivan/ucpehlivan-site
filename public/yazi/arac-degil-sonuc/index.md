@@ -1,6 +1,6 @@
 # Yapay Zekayla Araç Yapmak Kolaylaştı. Asıl Değer Hâlâ Sonuçta.
 
-Umut Cihan Pehlivan · 19 Kasım 2026 · 4 dk okuma  
+Umut Cihan Pehlivan · 27 Kasım 2026 · 4 dk okuma  
 Kaynak: https://ucpehlivan.web.app/yazi/arac-degil-sonuc/
 
 ![Koyu zeminde “Araç değil, sonuç.” yazısı. Altında “Araç” başlıklı üç uygulama penceresinden bir okla üç onay işaretli ve tablolu “Sonuç” sayfasına geçiş. Sağda elinde kahveyle sayfayı gösteren bıyıklı maskot.](https://ucpehlivan.web.app/yazi/arac-degil-sonuc/kapak-3.webp)
