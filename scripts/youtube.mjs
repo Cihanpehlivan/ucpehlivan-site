@@ -16,29 +16,50 @@ export function parseFeed(xml) {
   })).filter((v) => /^[\w-]{6,}$/.test(v.id) && v.title);
 }
 
-// Önce "Yüklenenler" listesinin RSS'i (UU…): kanal RSS'i (channel_id) yeni kanalda/Shorts'ta
-// boş dönebiliyor (2026-11-24: kanal RSS'i boş, UU listesi videoyu gösteriyordu).
-// İkisi de boşsa boş liste; ikisi de okunamazsa yayındaki videos.json kullanılır
-// (geçici YouTube hatası bölümü boşaltmasın).
+// Shorts sitede gösterilmez (sahibinin kararı, 2026-11-26).
+// YouTube her kanal için hazır listeler tutar: UU = tüm yüklenenler, UULF = yalnız normal
+// videolar, UUSH = yalnız Shorts. Önce UULF okunur. Okunamazsa UU / kanal RSS'i okunur ve
+// UUSH listesindeki (veya başlığında #shorts geçen) videolar elenir.
+// UU'ya geçiş nedeni (2026-11-24): kanal RSS'i (channel_id) yeni kanalda boş dönebiliyor.
+// Hepsi okunamazsa yayındaki videos.json kullanılır (geçici YouTube hatası bölümü boşaltmasın).
+const feedUrl = (q) => `https://www.youtube.com/feeds/videos.xml?${q}`;
+const list = (prefix) => feedUrl(`playlist_id=${prefix}${YT_CHANNEL_ID.slice(2)}`);
+const isShortTitle = (v) => /#shorts?/i.test(`${v.title} ${v.description}`);
+
+async function readFeed(url) {
+  const r = await fetch(url);
+  if (!r.ok) throw new Error(String(r.status));
+  return parseFeed(await r.text());
+}
+
+async function shortIds() {
+  try { return new Set((await readFeed(list('UUSH'))).map((v) => v.id)); } catch { return new Set(); }
+}
+
 export async function fetchVideos() {
   const feeds = [
-    `https://www.youtube.com/feeds/videos.xml?playlist_id=UU${YT_CHANNEL_ID.slice(2)}`,
-    `https://www.youtube.com/feeds/videos.xml?channel_id=${YT_CHANNEL_ID}`,
+    [list('UULF'), 'rss (videolar, Shorts hariç)'],
+    [list('UU'), 'rss (yüklenenler, Shorts elendi)'],
+    [feedUrl(`channel_id=${YT_CHANNEL_ID}`), 'rss (kanal, Shorts elendi)'],
   ];
-  let err = null, okEmpty = false;
-  for (const url of feeds) {
+  let err = null, okEmpty = false, shorts = null;
+  for (const [url, source] of feeds) {
     try {
-      const r = await fetch(url);
-      if (!r.ok) throw new Error(String(r.status));
-      const videos = parseFeed(await r.text());
-      if (videos.length) return { videos, source: url.includes('playlist_id') ? 'rss (yüklenenler)' : 'rss (kanal)' };
+      let videos = await readFeed(url);
+      if (!url.includes('UULF')) {
+        shorts ??= await shortIds();
+        videos = videos.filter((v) => !shorts.has(v.id));
+      }
+      videos = videos.filter((v) => !isShortTitle(v));
+      if (videos.length) return { videos, source };
       okEmpty = true;
+      if (url.includes('UULF')) break; // UULF okundu ve boş: gerçekten normal video yok
     } catch (e) { err = e; }
   }
-  if (okEmpty) return { videos: [], source: 'rss (boş)' };
+  if (okEmpty) return { videos: [], source: 'rss (Shorts dışında video yok)' };
   try {
     const r = await fetch(FALLBACK);
-    if (r.ok) return { videos: await r.json(), source: `yayındaki videos.json (RSS: ${err.message})` };
+    if (r.ok) return { videos: (await r.json()).filter((v) => !isShortTitle(v)), source: `yayındaki videos.json (RSS: ${err.message})` };
   } catch {}
   return { videos: [], source: `yok (RSS: ${err.message})` };
 }
