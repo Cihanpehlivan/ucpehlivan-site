@@ -3,7 +3,7 @@
 Umut Cihan Pehlivan · 27 Kasım 2026 · 4 dk okuma  
 Kaynak: https://ucpehlivan.web.app/yazi/arac-degil-sonuc/
 
-![Koyu zeminde bıyıklı maskot iki pencere tutuyor: solda kırmızı çarpıyla üstü çizilmiş bir uygulama arayüzü, sağda yükselen grafik ve yeşil onay işaretli bir sonuç sayfası. Altta büyük harflerle “Araç değil, sonuç.” yazısı.](https://ucpehlivan.web.app/yazi/arac-degil-sonuc/kapak-4.webp)
+![Koyu zeminde bıyıklı maskot iki pencere tutuyor: solda kırmızı çarpıyla üstü çizilmiş bir uygulama arayüzü, sağda yükselen grafik ve yeşil onay işaretli bir sonuç sayfası. Altta büyük harflerle “Araç değil, sonuç.” yazısı.](https://ucpehlivan.web.app/yazi/arac-degil-sonuc/kapak-5.webp)
 
 **Kısaca:** Yapay zeka modelleri (LLM'ler) artık kendileri birer araç. Her yeni sürümde, ayrı bir SaaS ürününün yaptığı işi doğrudan yapabiliyorlar. Bu yüzden onlarla yarışan bir uygulama kurmak yerine, onları işin içinde kullanıp sonuca ulaşmayı seçiyorum. Yazılım satmak değil, yazılımla ortaya çıkan işi satmak önem kazanıyor.
 
